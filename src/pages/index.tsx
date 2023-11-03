@@ -5,6 +5,7 @@ import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
 import svgs from '@/constants/svgs';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -14,7 +15,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
         <NavPanel className='sticky top-0 h-screen collapse lg:visible' />
         <main className="content relative flex-1">
           <section className='relative banner'>
-            <Image loading='eager' width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
+            <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
             <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
               <div className="flex-1 flex flex-col justify-center lg:text-61xl xl:text-111xl">
                 <h1>
