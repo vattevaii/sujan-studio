@@ -5,8 +5,15 @@ import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
 import svgs from '@/constants/svgs';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
+import { Typewriter } from 'react-simple-typewriter';
+
+const BannerTypewriter = dynamic(() => import("@/components/Banner/BannerTypewriter"), {
+  ssr: false,
+  loading: () => <b>Image</b>
+})
 
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -15,13 +22,12 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
         <NavPanel className='sticky top-0 h-screen collapse lg:visible' />
         <div className="flex-1">
           <main className="content relative flex-1">
-            <section className='relative banner'>
+            <section id="banner" className='relative banner'>
               <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
               <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
                 <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                   <h1>
-                    <b>Image</b>
-                    <span className="font-extralight">|</span>
+                    <BannerTypewriter />
                     <b> is Everything,</b>
                   </h1>
                   <b >We Deliver.</b>
