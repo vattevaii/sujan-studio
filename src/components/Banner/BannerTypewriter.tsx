@@ -35,10 +35,12 @@ export default function BannerTypewriter({ }: Props) {
     useEffect(() => {
         console.log("Updating current word " + words[currentWordIdx]);
         if (typewriter.current) {
-            typewriter.current.style.width = measuredLength[currentWordIdx] + 0.2 + "em";
+            typewriter.current.style.width = measuredLength[currentWordIdx] + 0.5 + "em";
         }
     }, [currentWordIdx]);
     return (
-        <b ref={typewriter} className='transition-[width] duration-700 inline-block'>{text}</b>
+        <>
+        <b ref={typewriter} className='transition-[width] duration-700 inline-block'>{text}<span className='animate animate-cursor'>|</span></b>
+        </>
     )
 }

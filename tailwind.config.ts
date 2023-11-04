@@ -11,11 +11,16 @@ const config: Config = {
       keyframes: {
         "move45degarrow": {
           '0%, 40%, 70%, 100%': { transform: 'translate(0,0)' },
-          '50%, 60%': { transform: 'translate(0.5rem, -0.5rem)' }
+          '50%, 60%, 80%, 90%': { transform: 'translate(0.5rem, -0.5rem)' }
+        },
+        "blink": {
+          "50%,80%": {opacity: "0"},
+          "0%": {opacity: "1"}
         }
       },
       animation: {
         "arrow-move": "move45degarrow 2s linear infinite",
+        "cursor": "blink 0.6s infinite step-end"
       },
       colors: {
         "project": {

@@ -1,3 +1,4 @@
+import BannerCountUpTo from '@/components/Banner/BannerCountUpto';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
 import NavPanel from '@/components/NavPanel';
 import Services from '@/components/Services';
@@ -34,7 +35,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                 </div>
                 <div className="absolute bottom-5 flex flex-row items-stretch justify-start gap-[10px] lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
                   <div className="flex flex-col items-start justify-end">
-                    <b className="leading-[1.2em]">14</b>
+                    <BannerCountUpTo count={14} duration={0.5} />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                       <p className="m-0">{`years of `}</p>
                       <p className="m-0">Visual Excellence</p>
@@ -42,7 +43,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                   </div>
                   <hr className='h-auto border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
-                    <b className="leading-[1.2em]">100+</b>
+                    <BannerCountUpTo count={100} start={80} duration={1.5} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                       <p className="m-0">Happy</p>
                       <p className="m-0">Customers</p>
@@ -50,7 +51,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                   </div>
                   <hr className='h-auto border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
-                    <b className="leading-[1.2em]">5+</b>
+                    <BannerCountUpTo count={5} duration={1} append='+'/>
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                       <p className="m-0">Design</p>
                       <p className="m-0">Awards</p>
