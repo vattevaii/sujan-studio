@@ -10,14 +10,14 @@ import Image from 'next/image';
 
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div>
-      <div className="flex relative w-full text-left text-41xl text-light-grey font-source-sans-3 overflow-hidden">
+    <>
+      <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
         <NavPanel className='sticky top-0 h-screen collapse lg:visible' />
         <main className="content relative flex-1">
           <section className='relative banner'>
             <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
             <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-              <div className="flex-1 flex flex-col justify-center lg:text-61xl xl:text-111xl">
+              <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                 <h1>
                   <b>Image</b>
                   <span className="font-extralight">|</span>
@@ -89,9 +89,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
               </div>
             </div>
           </section>
-
-
-          <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
+          {/* <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
             <div className="flex flex-col items-center justify-start gap-4 md:gap-8 text-center text-project-100 p-4 md:p-8">
               <div className="text-center text-project-100 mb-8 md:mb-12">
                 <h2 className="font-semibold text-21xl lg:text-41xl">What We Do?</h2>
@@ -100,9 +98,9 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                 {whatWeDoData.map((data, idx) => <SimpleCard key={idx} {...data} />)}
               </div>
             </div>
-          </section>
-          <section className="ceo-talk flex flex-col-reverse lg:flex-row bg-light-grey py-8 md:py-12 lg:py-16">
-            <article className="lg:w-1/2 text-project-100">
+          </section> */}
+          <section className="ceo-talk flex flex-col-reverse lg:flex-row bg-light-grey">
+            <article className="lg:w-1/2 text-project-100 py-5">
               <div className='relative overflow-clip py-10 lg:p-0'>
                 <Image
                   width="400"
@@ -157,33 +155,37 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
           </section>
         </main>
       </div>
-      <section className="footer bg-black text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
-        <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
-          <div className="mb-6 flex flex-col md:flex-row items-start md:items-end">
-            <h2 className='text-21xl  w-1/2 font-semibold xl:text-61xl'>
-              <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
-            </h2>
-            <div className="flex-grow"></div>
-            <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
-              <p className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</p>
-              <Image
-                width={40}
-                height={40}
-                src={svgs.brandSvgs.logo.src}
-                alt="Arrow Icon"
-                className="w-6 h-6 overflow-hidden"
-              />
+      <footer id="footer">
+        <section className="footer bg-black text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
+          <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
+            <div className="mb-6 flex flex-col md:flex-row items-start md:items-end">
+              <h2 className='text-21xl  w-1/2 font-semibold xl:text-61xl'>
+                <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
+              </h2>
+              <div className="flex-grow"></div>
+              <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
+                <p className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</p>
+                <Image
+                  width={40}
+                  height={40}
+                  src={svgs.brandSvgs.logo.src}
+                  alt="Arrow Icon"
+                  className="w-6 h-6 overflow-hidden"
+                />
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
             </div>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
+        </section>
+        <section>
+          <div className="text-sm leading-[1.5em] font-medium font-raleway opacity-[0.5] py-8">
+            <p className='mx-auto w-fit'>© 2023 Sujan Studio. All rights reserved</p>
           </div>
-        </div>
-      </section>
-      <div className="text-sm leading-[1.5em] font-medium font-raleway opacity-[0.5] py-8">
-        <p className='mx-auto w-fit'>© 2023 Sujan Studio. All rights reserved</p>
-      </div>
-    </div>
+        </section>
+      </footer>
+    </>
   );
 };
 
