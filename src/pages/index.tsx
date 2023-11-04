@@ -178,7 +178,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
               </h2>
               <div className="flex-grow"></div>
               <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
-                <p className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</p>
+                <a href="#" className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</a>
                 <Image
                   width={40}
                   height={40}

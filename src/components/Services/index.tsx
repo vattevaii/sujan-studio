@@ -10,9 +10,10 @@ type Props = { services: Service[] };
 
 function Service({ service }: { service: Service }) {
     return <div className="w-full relative text-xl md:text-21xl xl:text-41xl">
-        <div className='absolute group py-[1em] flex flex-col items-center justify-between bg-gradient-to-r from-overlay-from to-overlay-to top-0 left-0 z-10 cursor-pointer w-full h-full transition-opacity duration-[500ms] opacity-0 hover:opacity-100'>
+        <div className='absolute group py-[1em] flex flex-col items-center justify-between bg-gradient-to-r from-overlay-from to-overlay-to top-0 left-0 z-10 cursor-pointer w-full h-full transition-opacity duration-[500ms] opacity-0 hover:opacity-100 active:opacity-100 focus:opacity-100 focus-within:opacity-100'>
             <h3 className='delay-250 duration-300 transition-transform translate-y-6 group-hover:translate-y-0'>{service.text}</h3>
-            <button className='h-16 lg:h-20 w-auto group'>
+            <button className='relative h-16 lg:h-20 w-auto' aria-label={`Click to reveal more information about ${service.text} photography service`}>
+                <div className="absolute whitespace-nowrap -left-full -top-7 text-xs invisible group-focus-within:visible bg-divider">Learn more about {service.text} photography services.</div>
                 <svg width="100%" height="100%" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_b_30_323)">
                         <rect width="120" height="120" rx="60" fill="#B7B7B7" fillOpacity="0.21" />
