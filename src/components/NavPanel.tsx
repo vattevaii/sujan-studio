@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react'
 import SvgIcon from './SvgIcon'
 import svgs from '@/constants/svgs'
+import Image from 'next/image'
 
 type Props = {}
 
@@ -18,11 +19,11 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
 export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
     return (
         <aside className={className + " bg-project-100 sticky py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway"}>
-            <a href="#" className="brand-logo">
-                <SvgIcon
+            <a href="#" className="brand-logo w-[3/4]">
+                <Image width="300" height="300"
+                    className="relative w-full h-auto overflow-hidden shrink-0"
                     src={svgs.brandSvgs.logo.src}
                     alt={svgs.brandSvgs.logo.alt}
-                    className="relative w-10 h-10 overflow-hidden shrink-0"
                 />
             </a>
             <nav className="flex flex-col items-start justify-start gap-[40px]">
