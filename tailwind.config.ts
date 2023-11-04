@@ -16,6 +16,7 @@ const config: Config = {
         "divider":"#5F789729",
         "light-grey": "#dceafd",
         "white": "#fff",
+        "darkbg": "#000815",
         "stroke": "rgba(95, 120, 151, 0.3)",
         "overlay-from": "rgba(2, 17, 41, 0.50)",
         "overlay-to":"rgba(2, 17, 41, 0.50) 100%)",

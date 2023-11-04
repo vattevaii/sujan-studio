@@ -13,192 +13,192 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
     <>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
         <NavPanel className='sticky top-0 h-screen collapse lg:visible' />
-        <main className="content relative flex-1">
-          <section className='relative banner'>
-            <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
-            <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-              <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
-                <h1>
-                  <b>Image</b>
-                  <span className="font-extralight">|</span>
-                  <b> is Everything,</b>
-                </h1>
-                <b >We Deliver.</b>
-              </div>
-              <div className="absolute bottom-5 flex flex-row items-stretch justify-start gap-[10px] lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
-                <div className="flex flex-col items-start justify-end">
-                  <b className="leading-[1.2em]">14</b>
-                  <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                    <p className="m-0">{`years of `}</p>
-                    <p className="m-0">Visual Excellence</p>
-                  </div>
+        <div className="flex-1">
+          <main className="content relative flex-1">
+            <section className='relative banner'>
+              <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
+              <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
+                <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
+                  <h1>
+                    <b>Image</b>
+                    <span className="font-extralight">|</span>
+                    <b> is Everything,</b>
+                  </h1>
+                  <b >We Deliver.</b>
                 </div>
-                <hr className='h-auto border-l border-divider' />
-                <div className="flex flex-col items-start justify-end">
-                  <b className="leading-[1.2em]">100+</b>
-                  <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                    <p className="m-0">Happy</p>
-                    <p className="m-0">Customers</p>
-                  </div>
-                </div>
-                <hr className='h-auto border-l border-divider' />
-                <div className="flex flex-col items-start justify-end">
-                  <b className="leading-[1.2em]">5+</b>
-                  <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                    <p className="m-0">Design</p>
-                    <p className="m-0">Awards</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className='relative services grid grid-cols-2 grid-rows-2'>
-            <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
-          </section>
-          <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
-            <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
-              <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
-              <hr className='w-[80%] border-t border-divider' />
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-28">
-                {chooseUsData.map((data, idx) =>
-                  <div key={idx} className='grid max-w-sm items-start text-left grid-rows-[60px_1fr]'>
-                    <h3 className='self-center col-start-2 font-medium text-xl'>{data.title}</h3>
-                    <div className='self-end col-start-1 row-start-1 w-[90px]'>
-                      <Image className='w-[50px] h-[50px]' width={50} height={50} src={data.imageSrc} alt='' />
+                <div className="absolute bottom-5 flex flex-row items-stretch justify-start gap-[10px] lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
+                  <div className="flex flex-col items-start justify-end">
+                    <b className="leading-[1.2em]">14</b>
+                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                      <p className="m-0">{`years of `}</p>
+                      <p className="m-0">Visual Excellence</p>
                     </div>
-                    <p className='col-start-2 row-start-2 text-base text-project-200'>{data.description}</p>
-                  </div>)}
-              </div>
-            </div>
-          </section>
-          <section className="reviews">
-            <div className="relative text-center text-11xl">
-              <Image width={30} height={30} className="absolute top-0 w-full h-full -z-[1] object-cover" alt="" src="/jpegs/mainSection.jpg" />
-              <div className="flex flex-col items-center justify-start">
-                <div className="p-[5rem] flex flex-col items-center">
-                  <p className="font-medium inline-block">&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;</p>
-                  <div className="flex flex-row items-center justify-start gap-[20px] text-5xl font-raleway">
-                    <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/Service.jpg" />
-                    <div className="flex flex-col items-start justify-start gap-[10px]">
-                      <div className="font-medium">Caitlyn Mathews</div>
-                      <div className="text-base">Company Name</div>
+                  </div>
+                  <hr className='h-auto border-l border-divider' />
+                  <div className="flex flex-col items-start justify-end">
+                    <b className="leading-[1.2em]">100+</b>
+                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                      <p className="m-0">Happy</p>
+                      <p className="m-0">Customers</p>
+                    </div>
+                  </div>
+                  <hr className='h-auto border-l border-divider' />
+                  <div className="flex flex-col items-start justify-end">
+                    <b className="leading-[1.2em]">5+</b>
+                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                      <p className="m-0">Design</p>
+                      <p className="m-0">Awards</p>
                     </div>
                   </div>
                 </div>
-                <div className="py-4 flex flex-row items-start justify-start gap-[10px]">
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  <div className="relative rounded-3xs bg-light-grey h-2.5 opacity-[0.5]" />
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+              </div>
+            </section>
+            <section className='relative services grid grid-cols-2 grid-rows-2'>
+              <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
+            </section>
+            <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
+              <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+                <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
+                <hr className='w-[80%] border-t border-divider' />
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-28">
+                  {chooseUsData.map((data, idx) =>
+                    <div key={idx} className='grid max-w-sm items-start text-left grid-rows-[60px_1fr]'>
+                      <h3 className='self-center col-start-2 font-medium text-xl'>{data.title}</h3>
+                      <div className='self-end col-start-1 row-start-1 w-[90px]'>
+                        <Image className='w-[50px] h-[50px]' width={50} height={50} src={data.imageSrc} alt='' />
+                      </div>
+                      <p className='col-start-2 row-start-2 text-base text-project-200'>{data.description}</p>
+                    </div>)}
                 </div>
               </div>
-            </div>
-          </section>
-          <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
-            <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
-              <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">What We Do?</h2>
-              <hr className='w-[80%] border-t border-divider' />
-              <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-                {whatWeDoData.map((data, idx) => 
-                <div key={idx} className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'>
-                  <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
-                  <div className='row-start-1'>
-                    <Image className='w-[50px] h-[50px] mx-auto' width={50} height={50} src={data.imageSrc} alt='' />
+            </section>
+            <section className="reviews">
+              <div className="relative text-center text-11xl">
+                <Image width={30} height={30} className="absolute top-0 w-full h-full -z-[1] object-cover" alt="" src="/jpegs/mainSection.jpg" />
+                <div className="flex flex-col items-center justify-start">
+                  <article className="p-[5rem] flex flex-col-reverse items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
+                    <div className="flex flex-row items-center justify-start gap-[20px] text-5xl font-raleway">
+                      <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/Service.jpg" />
+                      <div className="flex flex-col items-start justify-start gap-[10px]">
+                        <div className="font-medium">Caitlyn Mathews</div>
+                        <div className="text-base">Company Name</div>
+                      </div>
+                    </div>
+                    <p className="font-medium inline-block">&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;</p>
+                  </article>
+                  <div className="py-4 flex flex-row items-start justify-start gap-[10px]">
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+                    <div className="relative rounded-3xs bg-light-grey h-2.5 opacity-[0.5]" />
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
+                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
                   </div>
-                  <p className='text-base text-project-200'>{data.description}</p>
-                </div>)}
+                </div>
               </div>
-            </div>
-          </section>
-          <section className="ceo-talk flex flex-col-reverse lg:flex-row bg-light-grey">
-            <article className="lg:w-1/2 text-project-100 py-5">
-              <div className='relative overflow-clip py-10 lg:p-0'>
+            </section>
+            <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
+              <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+                <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">What We Do?</h2>
+                <hr className='w-[80%] border-t border-divider' />
+                <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+                  {whatWeDoData.map((data, idx) =>
+                    <div key={idx} className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'>
+                      <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
+                      <div className='row-start-1'>
+                        <Image className='w-[50px] h-[50px] mx-auto' width={50} height={50} src={data.imageSrc} alt='' />
+                      </div>
+                      <p className='text-base text-project-200'>{data.description}</p>
+                    </div>)}
+                </div>
+              </div>
+            </section>
+            <section className="ceo-talk flex flex-col-reverse lg:flex-row bg-light-grey">
+              <article className="lg:w-1/2 text-project-100 py-5">
+                <div className='relative overflow-clip py-10 lg:p-0'>
+                  <Image
+                    width="400"
+                    height="800"
+                    src="/jpegs/Service.jpg"
+                    alt=""
+                    className="absolute lg:invisible top-0 w-full h-auto -z-1 object-cover"
+                  />
+                  <h2 className="relative z-0 pl-16 pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
+                    Capturing Life&apos;s Moments with Heart and Expertise: A Message from Our CEO
+                  </h2>
+                </div>
+                <div className="pl-16 pr-20 text-base md:text-xl lg:text-2xl font-raleway text-project-200">
+                  <p>
+                    As the CEO of Sujan Studio, I understand that choosing the right
+                    photographer can be a daunting task, but I assure you that we are here
+                    to make your decision an easy one. Our team of experienced photographers
+                    are passionate about creating breathtaking images that tell your unique
+                    story. Whether it&lbquo;s your wedding day, a special family moment, or a
+                    corporate event, we pride ourselves on capturing those perfect shots
+                    that will be cherished for a lifetime.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    But it&lbquo;s not just our technical expertise that sets us apart. At Sujan
+                    Studio, we understand that photography is about more than just taking
+                    pictures - it&lbquo;s about capturing emotions, memories, and experiences.
+                    That&lbquo;s why we take the time to get to know our clients, to understand
+                    their vision and to create a comfortable and relaxed environment where
+                    those natural and authentic moments can shine.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    Located in the heart of Adelaide, we offer a range of photography
+                    services tailored to your specific needs. From our stunning studio space
+                    to on-location shoots, we have the expertise and equipment to create
+                    beautiful images that exceed your expectations.
+                  </p>
+                </div>
+              </article>
+              <aside className='lg:w-1/2'>
                 <Image
                   width="400"
                   height="800"
-
                   src="/jpegs/Service.jpg"
-                  alt=""
-                  className="absolute lg:invisible top-0 w-full h-auto -z-1 object-cover"
+                  alt="CEO Picture"
+                  className="w-full hidden lg:block h-80 lg:w-auto lg:h-full object-cover"
                 />
-                <h2 className="relative z-0 pl-16 pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
-                  Capturing Life&apos;s Moments with Heart and Expertise: A Message from Our CEO
-                </h2>
+              </aside>
+            </section>
+          </main>
+          <footer id="footer bg-darkbg">
+            <section className="footer text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
+              <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
+                <div className="mb-6 flex flex-col md:flex-row items-start md:items-end">
+                  <h2 className='text-21xl  w-1/2 font-semibold xl:text-61xl'>
+                    <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
+                  </h2>
+                  <div className="flex-grow"></div>
+                  <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
+                    <a href="#" className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</a>
+                    <Image
+                      width={40}
+                      height={40}
+                      src={svgs.brandSvgs.logo.src}
+                      alt="Arrow Icon"
+                      className="w-6 h-6 overflow-hidden"
+                    />
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
+                </div>
               </div>
-              <div className="pl-16 pr-20 text-base md:text-xl lg:text-2xl font-raleway text-project-200">
-                <p>
-                  As the CEO of Sujan Studio, I understand that choosing the right
-                  photographer can be a daunting task, but I assure you that we are here
-                  to make your decision an easy one. Our team of experienced photographers
-                  are passionate about creating breathtaking images that tell your unique
-                  story. Whether it&lbquo;s your wedding day, a special family moment, or a
-                  corporate event, we pride ourselves on capturing those perfect shots
-                  that will be cherished for a lifetime.
-                </p>
-                <p>&nbsp;</p>
-                <p>
-                  But it&lbquo;s not just our technical expertise that sets us apart. At Sujan
-                  Studio, we understand that photography is about more than just taking
-                  pictures - it&lbquo;s about capturing emotions, memories, and experiences.
-                  That&lbquo;s why we take the time to get to know our clients, to understand
-                  their vision and to create a comfortable and relaxed environment where
-                  those natural and authentic moments can shine.
-                </p>
-                <p>&nbsp;</p>
-                <p>
-                  Located in the heart of Adelaide, we offer a range of photography
-                  services tailored to your specific needs. From our stunning studio space
-                  to on-location shoots, we have the expertise and equipment to create
-                  beautiful images that exceed your expectations.
-                </p>
+            </section>
+            <section>
+              <div className="text-sm leading-[1.5em] font-medium font-raleway opacity-[0.5] py-8">
+                <p className='mx-auto w-fit'>© 2023 Sujan Studio. All rights reserved</p>
               </div>
-            </article>
-            <aside className='lg:w-1/2'>
-              <Image
-                width="400"
-                height="800"
-
-                src="/jpegs/Service.jpg"
-                alt="CEO Picture"
-                className="w-full hidden lg:block h-80 lg:w-auto lg:h-full object-cover"
-              />
-            </aside>
-          </section>
-        </main>
+            </section>
+          </footer>
+        </div>
       </div>
-      <footer id="footer">
-        <section className="footer bg-black text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
-          <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
-            <div className="mb-6 flex flex-col md:flex-row items-start md:items-end">
-              <h2 className='text-21xl  w-1/2 font-semibold xl:text-61xl'>
-                <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
-              </h2>
-              <div className="flex-grow"></div>
-              <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
-                <a href="#" className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</a>
-                <Image
-                  width={40}
-                  height={40}
-                  src={svgs.brandSvgs.logo.src}
-                  alt="Arrow Icon"
-                  className="w-6 h-6 overflow-hidden"
-                />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-              {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
-            </div>
-          </div>
-        </section>
-        <section>
-          <div className="text-sm leading-[1.5em] font-medium font-raleway opacity-[0.5] py-8">
-            <p className='mx-auto w-fit'>© 2023 Sujan Studio. All rights reserved</p>
-          </div>
-        </section>
-      </footer>
     </>
   );
 };
