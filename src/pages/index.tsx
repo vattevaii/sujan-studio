@@ -55,11 +55,19 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
           <section className='relative services grid grid-cols-2 grid-rows-2'>
             <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
           </section>
-          <section className="choose-us bg-light-grey">
-            <div className="flex flex-col items-center justify-start gap-4 md:gap-8 text-center text-project-100 p-4 md:p-8">
-              <div className="font-semibold text-21xl lg:text-41xl">Why Choose Us?</div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-                {chooseUsData.map((data, idx) => <SimpleCard key={idx} {...data} />)}
+          <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
+            <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+              <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
+              <hr className='w-[80%] border-t border-divider' />
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-28">
+                {chooseUsData.map((data, idx) =>
+                  <div key={idx} className='grid max-w-sm items-start text-left grid-rows-[60px_1fr]'>
+                    <h3 className='self-center col-start-2 font-medium text-xl'>{data.title}</h3>
+                    <div className='self-end col-start-1 row-start-1 w-[90px]'>
+                      <Image className='w-[50px] h-[50px]' width={50} height={50} src={data.imageSrc} alt='' />
+                    </div>
+                    <p className='col-start-2 row-start-2 text-base text-project-200'>{data.description}</p>
+                  </div>)}
               </div>
             </div>
           </section>
@@ -89,16 +97,22 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
               </div>
             </div>
           </section>
-          {/* <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
-            <div className="flex flex-col items-center justify-start gap-4 md:gap-8 text-center text-project-100 p-4 md:p-8">
-              <div className="text-center text-project-100 mb-8 md:mb-12">
-                <h2 className="font-semibold text-21xl lg:text-41xl">What We Do?</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-                {whatWeDoData.map((data, idx) => <SimpleCard key={idx} {...data} />)}
+          <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
+            <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+              <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">What We Do?</h2>
+              <hr className='w-[80%] border-t border-divider' />
+              <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+                {whatWeDoData.map((data, idx) => 
+                <div key={idx} className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'>
+                  <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
+                  <div className='row-start-1'>
+                    <Image className='w-[50px] h-[50px] mx-auto' width={50} height={50} src={data.imageSrc} alt='' />
+                  </div>
+                  <p className='text-base text-project-200'>{data.description}</p>
+                </div>)}
               </div>
             </div>
-          </section> */}
+          </section>
           <section className="ceo-talk flex flex-col-reverse lg:flex-row bg-light-grey">
             <article className="lg:w-1/2 text-project-100 py-5">
               <div className='relative overflow-clip py-10 lg:p-0'>
@@ -196,64 +210,64 @@ export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseU
         {
           title: 'Industry Experts',
           description: 'Our team comprises industry experts with years of experience and a deep understanding of the field, ensuring top-notch quality in every project.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg.industryExpert.src,
         },
         {
           title: '24/7 Support',
           description: 'Our dedicated support team is available round the clock to assist you, addressing any concerns or questions whenever you need them.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg["24/7"].src,
         },
         {
           title: 'Award Winning',
           description: 'Our work speaks for itself, having received recognition and awards for excellence in our industry.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg.awardWinning.src,
         },
         {
           title: 'Guaranteed Works',
           description: 'We stand by our work with a guarantee, ensuring that you receive results that meet or exceed your expectations.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg.guaranteedWorks.src,
         },
         {
           title: 'Best Price',
           description: 'We offer competitive pricing without compromising on quality, so you can get the best value for your investment.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg.bestPrice.src,
         },
         {
           title: 'Free Consultation',
           description: 'We provide a free consultation to understand your needs and tailor our services to meet your specific requirements.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.chooseUsSvg.freeConsultation.src,
         },
       ],
       whatWeDoData: [
         {
           title: 'Weddings & Events',
           description: 'Your love story is one of a kind – let our wedding photography service capture the magic and romance of your special day, creating timeless memories that will last a lifetime.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.weddings.src,
         },
         {
           title: 'Commercials & Real Estate',
           description: 'Visuals are everything in today’s world of business - let our commercial photography service help you stand out from the crowd with captivating images that tell your brand’s story and elevate your marketing to the next level.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.commercials.src,
         },
         {
           title: 'Business & Corporate',
           description: 'We capture the essence and personality of your brand, creating images that showcase your team, facilities, products, and services in a way that exudes professionalism, quality, and success.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.business.src,
         },
         {
           title: 'Automotives & Rendering',
           description: 'Our automotive photography service is dedicated to capturing the sleek lines, impressive features, and unique character of your ride, creating images that will make you fall in love with it all over again.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.automotives.src,
         },
         {
           title: 'Product & Fashion',
           description: 'Our product photography service is all about capturing the essence and beauty of your merchandise, creating images that will make them irresistible to customers and help drive your sales to the next level.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.product.src,
         },
         {
           title: 'Family & Portraits',
           description: 'Family is where life begins and love never ends – our family photography service is dedicated to capturing those precious moments that you will cherish for a lifetime.',
-          imageSrc: svgs.navSvgs.portfolio.src,
+          imageSrc: svgs.whatWeDoSvgs.family.src,
         },
       ],
       locations: [
