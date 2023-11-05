@@ -211,6 +211,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
           </footer>
         </div>
       </div>
+      <script>0</script>
     </>
   );
 };
