@@ -2,11 +2,12 @@ import React, { HTMLAttributes } from 'react'
 import SvgIcon from './SvgIcon'
 import svgs from '@/constants/svgs'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {}
 
 const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: string } }) => {
-    return <a href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200" aria-label={icon.alt}>
+    return <Link href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200" aria-label={icon.alt}>
         <SvgIcon
             width={30}
             height={30}
@@ -16,7 +17,7 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
             className="relative w-5 h-5 overflow-hidden shrink-0"
         />
         {name ? <span className="relative leading-[20px] font-medium">{name}</span> : <span className='absolute h-0 invisible'>{icon.alt}</span>}
-    </a>
+    </Link>
 }
 
 export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
