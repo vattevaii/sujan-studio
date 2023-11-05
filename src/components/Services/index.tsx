@@ -30,8 +30,8 @@ function Service({ service }: { service: Service }) {
                 </svg>
             </button>
         </div>
-        <Image width={8000} height={1000} className="invisible w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
-        <Image width={8000} height={1000} className="absolute top-0 left-0 w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
+        <Image sizes="50vw" className="invisible w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
+        <Image sizes="50vw" className="absolute top-0 left-0 w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
     </div>
 }
 
