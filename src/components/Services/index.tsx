@@ -37,6 +37,7 @@ function Service({ service }: { service: Service }) {
 
 export default function Services({ services }: Props) {
     return (<>
+        <h2 className="absolute invisible h-0">Our Services</h2>
         {services.map((service, idx) => <Service key={idx} service={service} />)}
     </>)
 }
