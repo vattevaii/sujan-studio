@@ -5,11 +5,10 @@ import Script from 'next/script'
 export default function App({ Component, pageProps }: AppProps) {
   return <>
     <Script
-
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
     />
 
-    <Script id="googleTagManager">
+    <Script id="googleTagManager" strategy='afterInteractive'>
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -20,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script>
     {/* <!-- Google Tag Manager --> */}
-    <Script id="gtagmanager">
+    <Script id="gtagmanager" strategy='afterInteractive'>
       {`
         (function(w,d,s,l,i){
           w[l] = w[l] || [];
