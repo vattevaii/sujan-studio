@@ -15,7 +15,7 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
             alt={""}
             className="relative w-5 h-5 overflow-hidden shrink-0"
         />
-        {name ? <span className="relative leading-[20px] font-medium">{name}</span> : <></>}
+        {name ? <span className="relative leading-[20px] font-medium">{name}</span> : <span className='absolute h-0 invisible'>{icon.alt}</span>}
     </a>
 }
 
