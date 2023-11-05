@@ -3,8 +3,14 @@ import type { AppProps } from 'next/app'
 import Script from 'next/script'
 import { Raleway, Source_Sans_3 } from 'next/font/google';
 
-const raleway = Raleway({ subsets: ['latin'] });
-const source_sans = Source_Sans_3({ subsets: ['latin'] });
+const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ["200", "500", "600", "700"],
+});
+const source_sans = Source_Sans_3({
+  subsets: ['latin'],
+  weight: ["400", "500"]
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
