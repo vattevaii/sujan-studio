@@ -6,7 +6,7 @@ import Image from 'next/image'
 type Props = {}
 
 const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: string } }) => {
-    return <a href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200">
+    return <a href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200" aria-label={icon.alt}>
         <SvgIcon
             width={30}
             height={30}
