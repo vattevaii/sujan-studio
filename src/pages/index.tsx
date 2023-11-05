@@ -26,7 +26,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
         <meta name="description" content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured." />
       </Head>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
-        <NavPanel className='sticky top-0 h-screen collapse w-0 lg:w-auto lg:visible' />
+        <NavPanel className='sticky top-0 h-screen hidden w-0 lg:w-auto lg:flex' />
         <div className="flex-1">
           <main className="content relative flex-1">
             <section id="banner" className='relative banner'>
