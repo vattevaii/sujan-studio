@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTypewriter } from 'react-simple-typewriter'
 
 type Props = {}
@@ -12,7 +12,6 @@ function measureText(string: string) {
         .reduce((cur, acc) => acc + cur) * avg
 }
 const measuredLength = words.map(word => measureText(word));
-console.log(measuredLength)
 export default function BannerTypewriter({ }: Props) {
     const [currentWordIdx, setCurrentWordIdx] = useState(0);
     const typewriter = useRef<HTMLElement | null>(null);
@@ -39,8 +38,10 @@ export default function BannerTypewriter({ }: Props) {
         }
     }, [currentWordIdx]);
     return (
-        <>
-        <b ref={typewriter} className='transition-[width] duration-700 inline-block'>{text}<span className='animate animate-cursor'>|</span></b>
-        </>
+        
+        <b ref={typewriter} className='transition-[width] duration-700 inline-block'>
+            {text}<span className='animate animate-cursor'>|</span>
+        </b>
+        
     )
 }

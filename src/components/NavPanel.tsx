@@ -6,10 +6,13 @@ import Image from 'next/image'
 type Props = {}
 
 const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: string } }) => {
-    return <a href="#" className="flex flex-row items-center justify-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200">
+    return <a href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200">
         <SvgIcon
+            width={30}
+            height={30}
             src={icon.src}
-            alt={icon.alt}
+            priority={true}
+            alt={""}
             className="relative w-5 h-5 overflow-hidden shrink-0"
         />
         {name ? <span className="relative leading-[20px] font-medium">{name}</span> : <></>}
@@ -21,6 +24,7 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
         <aside className={className + " bg-project-100 sticky py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway"}>
             <a href="#" className="brand-logo w-[3/4]">
                 <Image width="300" height="300"
+                    priority={true}
                     className="relative w-full h-auto overflow-hidden shrink-0"
                     src={svgs.brandSvgs.logo.src}
                     alt={svgs.brandSvgs.logo.alt}
@@ -63,7 +67,7 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
                     </li>
                 </ul>
                 <hr className="border-t border-divider w-full" />
-                <div className='social-icons flex gap-4'>
+                <div className='social-icons flex justify-between'>
                     <NavItem icon={svgs.mediaSvgs.facebook} />
                     <NavItem icon={svgs.mediaSvgs.instagram} />
                     <NavItem icon={svgs.mediaSvgs.linkedin} />

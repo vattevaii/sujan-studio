@@ -24,7 +24,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
         <div className="flex-1">
           <main className="content relative flex-1">
             <section id="banner" className='relative banner'>
-              <Image priority={true} width={8000} height={1000} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
+              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
               <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
                 <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                   <h1>
@@ -51,7 +51,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                   </div>
                   <hr className='h-auto border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
-                    <BannerCountUpTo count={5} duration={1} append='+'/>
+                    <BannerCountUpTo count={5} duration={1} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                       <p className="m-0">Design</p>
                       <p className="m-0">Awards</p>
@@ -177,21 +177,20 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
           <footer id="footer bg-darkbg">
             <section className="footer text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
               <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
-                <div className="mb-6 flex flex-col md:flex-row items-start md:items-end">
-                  <h2 className='text-21xl  w-1/2 font-semibold xl:text-61xl'>
+                <div className="mb-6 flex flex-wrap justify-between flex-col md:flex-row items-start md:items-end">
+                  <h2 className='flex-1 text-21xl font-semibold xl:text-61xl'>
                     <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
                   </h2>
-                  <div className="flex-grow"></div>
-                  <div className="flex leading-[2.7em] items-center gap-2 text-xl md:text-5xl font-raleway">
-                    <a href="#" className="relative text-xl xl:text-5xl">sujanstudio@gmail.com</a>
-                    <Image
-                      width={40}
-                      height={40}
-                      src={svgs.brandSvgs.logo.src}
-                      alt="Arrow Icon"
-                      className="w-6 h-6 overflow-hidden"
-                    />
-                  </div>
+                  <a href="#" className="flex items-center relative text-xl xl:text-5xl leading-[3em] font-raleway">
+                    <>sujanstudio@gmail.com
+                      <span>
+                        <svg width="40px" height="40px" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M50 48V52H67.18L48 71.18L50.82 74L70 54.82V72H74V48H50Z" fill="white" />
+                        </svg>
+                      </span>
+                    </>
+                  </a>
+
                 </div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                   {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
