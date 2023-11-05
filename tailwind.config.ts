@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        // @ts-expect-error
+        screen: ['100vh', '100dvh'],
+      },
       keyframes: {
         "move45degarrow": {
           '0%, 40%, 70%, 100%': { transform: 'translate(0,0)' },

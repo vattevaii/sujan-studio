@@ -30,7 +30,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
         <div className="flex-1">
           <main className="content relative flex-1">
             <section id="banner" className='relative banner'>
-              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-[calc(100dvh, 100vh)] object-cover" alt="" src="/jpegs/mainSection.jpg" />
+              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
               <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
                 <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                   <h1>
