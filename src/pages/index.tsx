@@ -49,7 +49,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                   </div>
                   <hr className='h-auto border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
-                    <BannerCountUpTo count={100} start={80} duration={1.5} append='+' />
+                    <BannerCountUpTo count={500} start={400} duration={1.5} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                       <p className="m-0">Happy</p>
                       <p className="m-0">Customers</p>
@@ -59,7 +59,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
                   <div className="flex flex-col items-start justify-end">
                     <BannerCountUpTo count={5} duration={1} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                      <p className="m-0">Design</p>
+                      <p className="m-0">Photography</p>
                       <p className="m-0">Awards</p>
                     </div>
                   </div>
