@@ -6,6 +6,7 @@ import { Raleway, Source_Sans_3 } from 'next/font/google';
 const raleway = Raleway({
   subsets: ['latin'],
   weight: ["200", "500", "600", "700"],
+  
 });
 const source_sans = Source_Sans_3({
   subsets: ['latin'],
