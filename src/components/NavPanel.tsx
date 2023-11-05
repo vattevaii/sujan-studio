@@ -27,8 +27,8 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
                 <Image width="300" height="300"
                     priority={true}
                     className="relative w-full h-auto overflow-hidden shrink-0"
-                    src={svgs.brandSvgs.logo.src}
-                    alt={svgs.brandSvgs.logo.alt}
+                    src="/webp/logo.webp"
+                    alt={"Sujan Studio"}
                 />
             </a>
             <nav className="flex flex-col items-start justify-start gap-[40px]">
