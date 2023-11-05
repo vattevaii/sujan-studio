@@ -19,6 +19,11 @@ const BannerTypewriter = dynamic(() => import("@/components/Banner/BannerTypewri
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sujan Studios - Professional Photography Services in Adelaide & Beyond</title>
+        <meta name="description" content="Discover Sujan Studios, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured." />
+      </Head>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
         <NavPanel className='sticky top-0 h-screen collapse lg:visible' />
         <div className="flex-1">
