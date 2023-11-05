@@ -1,9 +1,19 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import Script from 'next/script'
+import { Raleway, Source_Sans_3 } from 'next/font/google';
+
+const raleway = Raleway({ subsets: ['latin'] });
+const source_sans = Source_Sans_3({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
+    <style jsx global>{`
+        :root {
+          --raleway-font: ${raleway.style.fontFamily};
+          --sourcesans-font: ${source_sans.style.fontFamily};
+        }
+      `}</style>
     <Script strategy='afterInteractive'
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
     />

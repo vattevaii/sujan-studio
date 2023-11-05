@@ -41,8 +41,8 @@ const config: Config = {
       },
       spacing: {},
       fontFamily: {
-        "raleway": "Raleway",
-        "source-sans-3": ['"Source Sans 3"', 'ui-sans-serif', 'system-ui']
+        "raleway": "var(--raleway-font)",
+        "source-sans-3": "var(--sourcesans-font)"
       },
       borderRadius: {
         "3xs": "10px"
