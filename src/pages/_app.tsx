@@ -4,11 +4,11 @@ import Script from 'next/script'
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
-    <Script
+    <Script strategy='afterInteractive'
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
     />
 
-    <Script id="googleTagManager" strategy='afterInteractive'>
+    <Script id="googleTagManager" strategy='lazyOnload'>
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script>
     {/* <!-- Google Tag Manager --> */}
-    <Script id="gtagmanager" strategy='afterInteractive'>
+    <Script id="gtagmanager" strategy='lazyOnload'>
       {`
         (function(w,d,s,l,i){
           w[l] = w[l] || [];
