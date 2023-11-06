@@ -7,11 +7,12 @@ export default function Document() {
       <Head>
         <Script id="change-meta-viewport" strategy='beforeInteractive'>
           {`
-            (function(){
+            window.onload = function(){
               if(screen.width < 560){
                 var mvp = document.getElementById('my-viewport');
                 mvp.setAttribute('content', 'width=560');
-              }})()
+              }
+            }
           `}
         </Script>
       </Head>
