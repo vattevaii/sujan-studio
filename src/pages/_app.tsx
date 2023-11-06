@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import Script from 'next/script'
+// import Script from 'next/script'
 import { Raleway, Source_Sans_3 } from 'next/font/google';
 
 const raleway = Raleway({
@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
     /> */}
 
-    <Script id="googleTagManager" strategy='lazyOnload'>
+    {/* <Script id="googleTagManager" strategy='lazyOnload'>
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script>
     {/* <!-- Google Tag Manager --> */}
-    <Script id="gtagmanager" strategy='lazyOnload'>
+    {/* <Script id="gtagmanager" strategy='lazyOnload'>
       {`
         (function(w,d,s,l,i){
           w[l] = w[l] || [];
@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
         })
         (window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GOOGLE_TAG_M}');
       `}
-    </Script>
+    </Script> */}
     {/* <!-- End Google Tag Manager --> */}
     <Component {...pageProps} />
   </>
