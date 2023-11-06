@@ -5,7 +5,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="viewport" id="my-viewport" content="width=device-width, initial-scale=1.0" />
         <Script id="change-meta-viewport" strategy='beforeInteractive'>
           {`
             (function(){
