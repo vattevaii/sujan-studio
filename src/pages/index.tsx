@@ -5,18 +5,19 @@ import Services from '@/components/Services';
 import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
 import svgs from '@/constants/svgs';
+import { measureTextWidth } from '@/utils/measureTextWidth';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Typewriter } from 'react-simple-typewriter';
 
 const BannerTypewriter = dynamic(() => import("@/components/Banner/BannerTypewriter"), {
   ssr: false,
   loading: () => <b>Image</b>
 })
 
-const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const bannerTypeWriterProps = {items: typewriter.text, itemsWidth: typewriter.widths}
   return (
     <>
       <Head>
@@ -33,7 +34,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
               <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
                 <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                   <h1>
-                    <BannerTypewriter />
+                    <BannerTypewriter {...bannerTypeWriterProps} />
                     <b> is Everything,</b>
                   </h1>
                   <b >We Deliver.</b>
@@ -215,7 +216,8 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData }: InferGetStaticPro
   );
 };
 
-export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[] }> = () => {
+export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: {typewriter: {text:string[],widths: number[]}} }> = () => {
+  const bannerTextItems = ["Image", "Video", "Audience"];
   return {
     props: {
       chooseUsData: [
@@ -311,7 +313,13 @@ export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseU
           postalCode: '4051',
           phoneNumber: '08-8427-1817',
         },
-      ]
+      ],
+      banner: {
+        typewriter: {
+          text:bannerTextItems,
+          widths: measureTextWidth(bannerTextItems),
+        }
+      }
     }
   }
 }
