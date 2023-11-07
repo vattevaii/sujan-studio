@@ -1,5 +1,5 @@
 import BannerCountUpTo from '@/components/Banner/BannerCountUpto';
-import { BannerTypeWriterProps } from '@/components/Banner/BannerTypewriter';
+import BannerTypewriter, { BannerTypeWriterProps } from '@/components/Banner/BannerTypewriter';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
 import NavPanel from '@/components/NavPanel';
 import Services from '@/components/Services';
@@ -11,11 +11,6 @@ import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
-
-const BannerTypewriter = dynamic(() => import("@/components/Banner/BannerTypewriter"), {
-  ssr: false,
-  loading: () => <b>Image</b>
-})
 
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
