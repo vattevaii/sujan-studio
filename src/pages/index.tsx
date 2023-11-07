@@ -1,4 +1,5 @@
 import BannerCountUpTo from '@/components/Banner/BannerCountUpto';
+import { BannerTypeWriterProps } from '@/components/Banner/BannerTypewriter';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
 import NavPanel from '@/components/NavPanel';
 import Services from '@/components/Services';
@@ -17,7 +18,6 @@ const BannerTypewriter = dynamic(() => import("@/components/Banner/BannerTypewri
 })
 
 const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const bannerTypeWriterProps = {items: typewriter.text, itemsWidth: typewriter.widths}
   return (
     <>
       <Head>
@@ -34,7 +34,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter 
               <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
                 <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
                   <h1>
-                    <BannerTypewriter {...bannerTypeWriterProps} />
+                    <BannerTypewriter {...typewriter} />
                     <b> is Everything,</b>
                   </h1>
                   <b >We Deliver.</b>
@@ -216,8 +216,9 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter 
   );
 };
 
-export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: {typewriter: {text:string[],widths: number[]}} }> = () => {
+export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: {typewriter: BannerTypeWriterProps} }> = () => {
   const bannerTextItems = ["Image", "Video", "Audience"];
+  const banner: {typewriter: BannerTypeWriterProps} = {typewriter: {items:bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems)}};
   return {
     props: {
       chooseUsData: [
@@ -314,12 +315,7 @@ export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseU
           phoneNumber: '08-8427-1817',
         },
       ],
-      banner: {
-        typewriter: {
-          text:bannerTextItems,
-          widths: measureTextWidth(bannerTextItems),
-        }
-      }
+      banner: banner
     }
   }
 }

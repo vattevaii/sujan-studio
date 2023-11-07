@@ -11,8 +11,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 //     .reduce((cur, acc) => acc + cur) * avg
 // }
 
-type Props = {items: string[], itemsWidth: number[]}
-export default function BannerTypewriter({ items,itemsWidth }: Props) {
+export type BannerTypeWriterProps = {items: string[], itemsWidth: number[]}
+export default function BannerTypewriter({ items,itemsWidth }: BannerTypeWriterProps) {
     const measuredLength = itemsWidth;
     const [currentWordIdx, setCurrentWordIdx] = useState(0);
     const typewriter = useRef<HTMLElement | null>(null);
