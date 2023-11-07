@@ -1,5 +1,6 @@
+import useIntersectionObserver from '@/packages/use-intersection-observer';
 import Image from 'next/image';
-import React from 'react'
+import React, { useState } from 'react'
 
 type Service = {
     src: string,
@@ -9,7 +10,18 @@ type Service = {
 type Props = { services: Service[] };
 
 function Service({ service }: { service: Service }) {
-    return <div className="w-full relative text-xl md:text-21xl xl:text-41xl">
+    const [visibleImg, setVisibleImg] = useState(false);
+    const handleOnScreen = () => {
+        setTimeout(() => {
+            console.log("Image is visible on screen")
+            setVisibleImg(true);
+        }, 1)
+    }
+    const itemRef = useIntersectionObserver<HTMLDivElement>({
+        handleIntersect: handleOnScreen,
+        threshold: 1
+    });
+    return <div ref={itemRef} className="w-full relative text-xl md:text-21xl xl:text-41xl">
         <div className='absolute group py-[1em] flex flex-col items-center justify-between bg-overlay-from top-0 left-0 z-10 cursor-pointer w-full h-full transition-opacity duration-[500ms] opacity-0 hover:opacity-100 active:opacity-100 focus:opacity-100 focus-within:opacity-100'>
             <h3 className='delay-250 duration-300 transition-transform translate-y-6 group-hover:translate-y-0'>{service.text}</h3>
             <button className='relative h-16 lg:h-20 w-auto' aria-label={`Click to reveal more information about ${service.text} photography service`}>
@@ -30,8 +42,8 @@ function Service({ service }: { service: Service }) {
                 </svg>
             </button>
         </div>
-        <Image width={500} height={300} sizes="50vw" className="invisible w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
-        <Image width={500} height={300} sizes="50vw" className="absolute top-0 left-0 w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
+        <Image width={30} height={30} sizes={"100px"} className="w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
+        <Image width={500} height={300} sizes="50vw" className={(visibleImg ? "" : "hidden") + " absolute top-0 left-0 w-full h-auto object-cover"} alt="" src="/jpegs/Service.jpg" />
     </div>
 }
 

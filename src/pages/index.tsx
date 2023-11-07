@@ -13,7 +13,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -114,13 +114,21 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter 
                 <hr className='w-[80%] border-t border-divider' />
                 <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
                   {whatWeDoData.map((data, idx) =>
-                    <div key={idx} className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'>
-                      <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
+                    <div key={idx} className='grid gap-[20px] grid-rows-[auto_auto_1fr]'
+                    // className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'
+                    >
+                      {/* <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
                       <div className='row-start-1'>
                         <Image className='w-[50px] h-[50px] mx-auto' width={50} height={50} src={data.imageSrc} alt='' />
                       </div>
-                      <p className='text-base text-project-200'>{data.description}</p>
-                    </div>)}
+                      <p className='text-base text-project-200'>{data.description}</p> */}
+                      <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
+                      <div className='row-start-1'>
+                        <Image width="366" alt="" height="460" src={'/jpegs/mainSection.jpg'} className='max-w-366 h-auto aspect-[366/460]' />
+                      </div>
+                    </div>
+
+                  )}
                 </div>
               </div>
             </section>
@@ -213,9 +221,9 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter 
   );
 };
 
-export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: {typewriter: BannerTypeWriterProps} }> = () => {
+export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: { typewriter: BannerTypeWriterProps } }> = () => {
   const bannerTextItems = ["Image", "Video", "Audience"];
-  const banner: {typewriter: BannerTypeWriterProps} = {typewriter: {items:bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems)}};
+  const banner: { typewriter: BannerTypeWriterProps } = { typewriter: { items: bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems) } };
   return {
     props: {
       chooseUsData: [

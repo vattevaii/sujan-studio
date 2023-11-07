@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Script from 'next/script'
 import { Raleway, Source_Sans_3 } from 'next/font/google';
 import Head from 'next/head';
+import { IntersectionProvider } from '@/packages/use-intersection-observer';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -54,6 +55,8 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script> */}
     {/* <!-- End Google Tag Manager --> */}
-    <Component {...pageProps} />
+    <IntersectionProvider>
+      <Component {...pageProps} />
+    </IntersectionProvider>
   </>
 }
