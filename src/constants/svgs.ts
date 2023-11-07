@@ -97,7 +97,7 @@ const chooseUsSvg = {
     }
 }
 const whatWeDoSvgs = {
-    weddings:{
+    weddings: {
         src: "/svgs/Vector.svg",
         alt: "Weddings"
     },
@@ -122,13 +122,25 @@ const whatWeDoSvgs = {
         alt: "Family"
     }
 }
+
+const callToActionSvgs = {
+    bookUs: {
+        src: "/svgs/ph phone-call.svg",
+        alt: "Book Us Now"
+    },
+    getEstimate: {
+        src: "/svgs/cost-estimate.svg",
+        alt: "Get Estimate"
+    }
+}
 const svgs = {
     actionsSvg,
     mediaSvgs,
     navSvgs,
     brandSvgs,
     chooseUsSvg,
-    whatWeDoSvgs
+    whatWeDoSvgs, 
+    callToActionSvgs
 }
 
 export default svgs;

@@ -1,4 +1,4 @@
-import { useTypewriter } from '@/modules/react-simple-typewriter/hooks/useTypeWriter';
+import { useTypewriter } from '@/packages/react-simple-typewriter/hooks/useTypeWriter';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 // const words = ["Image", "Video", "Audience"];

@@ -6,6 +6,7 @@ import Services from '@/components/Services';
 import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
 import svgs from '@/constants/svgs';
+import ActionButtons from '@/modules/CallToAction/ActionButtons';
 import { measureTextWidth } from '@/utils/measureTextWidth';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
@@ -22,6 +23,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData,banner:{ typewriter 
       </Head>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
         <NavPanel className='sticky top-0 h-screen hidden w-0 lg:w-auto lg:flex' />
+        <ActionButtons />
         <div className="flex-1">
           <main className="content relative flex-1">
             <section id="banner" className='relative banner'>
