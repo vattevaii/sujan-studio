@@ -3,7 +3,8 @@ import BannerTypewriter, { BannerTypeWriterProps } from '@/components/Banner/Ban
 import ChooseUsCard from '@/components/Cards/ChooseUsCard';
 import WhatWeDoCard from '@/components/Cards/WhatWeDoCard';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
-import NavPanel, { MobileNavPanel } from '@/components/NavPanel';
+import MobileNavPanel from '@/components/Navbar.tsx/MovileNavPanel';
+import NavPanel from '@/components/Navbar.tsx/NavPanel';
 import Services, { ServiceItem } from '@/components/Services';
 import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
@@ -24,7 +25,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
         <meta name="description" content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured." />
       </Head>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
-        <MobileNavPanel className='fixed top-0 left-0 z-10' />
+        <MobileNavPanel className='fixed top-0 left-0 z-10 lg:hidden' />
         <NavPanel className='sticky top-0 h-screen hidden w-0 lg:w-auto lg:flex' />
         <ActionButtons />
         <div className="flex-1">
@@ -204,10 +205,10 @@ export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations
   return {
     props: {
       services: [
-        { href: "/", src: "/jpegs/Real Estate.jpg", text: "Real State" },
+        { href: "/", src: "/jpegs/RealEstate.jpg", text: "Real State" },
         { href: "/", src: "/jpegs/Weddings.jpg", text: "Weddings" },
-        { href: "/", src: "/jpegs/Family and Events.jpg", text: "Family & Events" },
-        { href: "/", src: "/jpegs/Coorporate Events.jpg", text: "Corporate Events" },
+        { href: "/", src: "/jpegs/FamilyAndEvents.jpg", text: "Family & Events" },
+        { href: "/", src: "/jpegs/CoorporateEvents.jpg", text: "Corporate Events" },
       ],
       chooseUsData: [
         {

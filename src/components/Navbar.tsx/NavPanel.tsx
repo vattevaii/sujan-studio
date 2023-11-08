@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react'
-import SvgIcon from './SvgIcon'
+import SvgIcon from '../SvgIcon'
 import svgs from '@/constants/svgs'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,20 +18,6 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
         />
         {name ? <span className="relative leading-[20px] font-medium">{name}</span> : <span className='absolute h-0 invisible'>{icon.alt}</span>}
     </Link>
-}
-
-export const MobileNavPanel = ({ className = "" }: HTMLAttributes<HTMLElement>) => {
-    return <div className={className + " bg-project-100 h-24 w-full px-8 py-4 flex justify-between items-center"}>
-        <a href="#" className="brand-logo w-[3/4] h-full">
-            <Image width="300" height="300"
-                priority={true}
-                className="relative w-auto h-full overflow-hidden shrink-0"
-                src="/webp/logo.webp"
-                alt={"Sujan Studio"}
-            />
-        </a>
-        <button>Open Navbar</button>
-    </div>
 }
 
 export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
