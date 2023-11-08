@@ -84,7 +84,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
                 <div className="flex flex-col items-center justify-start">
                   <article className="p-8 md:p-20 flex flex-col-reverse gap-5 md:gap-10 items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-md lg:text-5xl font-raleway">
-                      <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/Service.jpg" />
+                      <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/WeddingItem.jpg" />
                       <div className="flex flex-col items-start justify-start gap-[10px]">
                         <div className="font-medium">Caitlyn Mathews</div>
                         <div className="text-xs lg:text-base">Company Name</div>
@@ -148,14 +148,16 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
                   beautiful images that exceed your expectations.
                 </p>
               </div>
-              <div className='row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 h-full min-w-[40%]'>
-                <Image
-                  width="400"
-                  height="800"
-                  src="/jpegs/mainSection.jpg"
-                  alt="CEO Picture"
-                  className="w-full h-auto object-cover"
-                />
+              <div className='row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-min lg:w-full h-full min-w-[50%]'>
+                <div className="aspect-[35/42]">
+                  <Image
+                    width="400"
+                    height="800"
+                    src="/jpegs/Sujan.jpg"
+                    alt="CEO Picture"
+                    className="w-full lg:h-full object-cover"
+                  />
+                </div>
               </div>
             </section>
           </main>
