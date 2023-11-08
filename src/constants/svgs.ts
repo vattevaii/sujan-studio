@@ -1,135 +1,164 @@
+import Icon_Logo from"@/images/svgs/Sujan_Studio.svg"
+import Icon_Tabler from"@/images/svgs/tabler_photo.svg"
+import Icon_Bookmark from"@/images/svgs/iconoir_bookmark-book.svg"
+import Icon_News from"@/images/svgs/iconamoon_news.svg"
+import Icon_Cash from"@/images/svgs/streamline_money-cash-bag-dollar-bag-payment-cash-money-finance.svg"
+import Icon_Photography from"@/images/svgs/streamline_image-camera-1-photos-picture-camera-photography-photo-pictures.svg"
+import Icon_Message from"@/images/svgs/tabler_message.svg"
+import Icon_Shop from"@/images/svgs/solar_shop-linear.svg"
+import Icon_User from"@/images/svgs/ph_user-bold.svg"
+import Icon_Search from"@/images/svgs/ri_search-line.svg"
+import Icon_Shopping from"@/images/svgs/heroicons_shopping-bag.svg"
+import Icon_Phone from"@/images/svgs/ph phone-call.svg"
+import Icon_Facebook from"@/images/svgs/facebook.svg"
+import Icon_Instagram from"@/images/svgs/instagram.svg"
+import Icon_Linkedin from"@/images/svgs/linkedin.svg"
+import Icon_Youtube from"@/images/svgs/youtube.svg"
+import Icon_Calls from"@/images/svgs/24-hours-calls-svgrepo-com 1.svg"
+import Icon_Camera from"@/images/svgs/photographer-camera-lens-svgrepo-com 1.svg"
+import Icon_Medal from"@/images/svgs/medal-fill-svgrepo-com.svg"
+import Icon_Discount from"@/images/svgs/discount-shape-svgrepo-com.svg"
+import Icon_Check from"@/images/svgs/badge-check-svgrepo-com.svg"
+import Icon_Support from"@/images/svgs/support-svgrepo-com.svg"
+import Icon_Vector from"@/images/svgs/Vector.svg"
+import Icon_Business from"@/images/svgs/business-svgrepo-com 1.svg"
+import Icon_Dress from"@/images/svgs/dress-svgrepo-com.svg"
+import Icon_RealState from"@/images/svgs/real-estate-agency-svgrepo-com.svg"
+import Icon_Car from"@/images/svgs/car-svgrepo-com.svg"
+import Icon_Family from"@/images/svgs/family-avatars-svgrepo-com.svg"
+import Icon_CostEstimate from"@/images/svgs/cost-estimate.svg"
 const brandSvgs = {
     logo: {
-        src: "/svgs/Sujan_Studio.svg",
+        src: Icon_Logo,
         alt: "Sujan Studio"
     }
 }
 const navSvgs = {
     portfolio: {
-        src: "/svgs/tabler_photo.svg",
+        src: Icon_Tabler,
         alt: "Our Portfolio"
     },
     story: {
-        src: "/svgs/iconoir_bookmark-book.svg",
+        src: Icon_Bookmark,
         alt: "Our Story"
     },
     news: {
-        src: "/svgs/iconamoon_news.svg",
+        src: Icon_News,
         alt: "Our News"
     },
     packages: {
-        src: "/svgs/streamline_money-cash-bag-dollar-bag-payment-cash-money-finance.svg",
+        src: Icon_Cash,
         alt: "Packages"
     },
     book: {
-        src: "/svgs/streamline_image-camera-1-photos-picture-camera-photography-photo-pictures.svg",
+        src: Icon_Photography,
         alt: "Book a Photographer"
     },
     message: {
-        src: "/svgs/tabler_message.svg",
+        src: Icon_Message,
         alt: "Contact Us"
     },
     shop: {
-        src: "/svgs/solar_shop-linear.svg",
+        src: Icon_Shop,
         alt: "My Shop"
     }
 }
 const actionsSvg = {
     auth: {
-        src: "/svgs/ph_user-bold.svg",
+        src: Icon_User,
         alt: "Login/Register"
     },
     search: {
-        src: "/svgs/ri_search-line.svg",
+        src: Icon_Search,
         alt: "Search"
     },
     shop: {
-        src: "/svgs/heroicons_shopping-bag.svg",
+        src: Icon_Shopping,
         alt: "Cart"
     },
     phone: {
-        src: "/svgs/ph phone-call.svg",
+        src: Icon_Phone,
         alt: "Contact Us"
     }
 }
 const mediaSvgs = {
     facebook: {
-        src: "/svgs/facebook.svg",
+        src: Icon_Facebook,
         alt: "Find us on Facebook"
     },
     instagram: {
-        src: "/svgs/instagram.svg",
+        src: Icon_Instagram,
         alt: "Find us on Instagram"
     },
     linkedin: {
-        src: "/svgs/linkedin.svg",
+        src: Icon_Linkedin,
         alt: "Find us on LinkedIn"
     },
     youtube: {
-        src: "/svgs/youtube.svg",
+        src: Icon_Youtube,
         alt: "Find us on YouTube"
     }
 }
 const chooseUsSvg = {
     "24/7": {
-        src: "/svgs/24-hours-calls-svgrepo-com 1.svg",
+        src: Icon_Calls,
         alt: "Choose Us"
     },
     industryExpert: {
-        src: "/svgs/photographer-camera-lens-svgrepo-com 1.svg",
+        src: Icon_Photography,
         alt: "Industry Experts"
     },
     awardWinning: {
-        src: "/svgs/medal-fill-svgrepo-com.svg",
+        src: Icon_Medal,
         alt: "Award Winning"
     },
     bestPrice: {
-        src: "/svgs/discount-shape-svgrepo-com.svg",
+        src: Icon_Discount,
         alt: "Best Price",
     },
     guaranteedWorks: {
-        src: "/svgs/badge-check-svgrepo-com.svg",
+        src: Icon_Check,
         alt: "Guaranteed Works"
     },
     freeConsultation: {
-        src: "/svgs/support-svgrepo-com.svg",
+        src: Icon_Support,
         alt: "Free Consultation",
     }
 }
 const whatWeDoSvgs = {
     weddings: {
-        src: "/svgs/Vector.svg",
+        src: Icon_Vector,
         alt: "Weddings"
     },
     business: {
-        src: "/svgs/business-svgrepo-com 1.svg",
+        src: Icon_Business,
         alt: "Business"
     },
     product: {
-        src: "/svgs/dress-svgrepo-com.svg",
+        src: Icon_Dress,
         alt: "Product"
     },
     commercials: {
-        src: "/svgs/real-estate-agency-svgrepo-com.svg",
+        src: Icon_RealState,
         alt: "Commercial"
     },
     automotives: {
-        src: "/svgs/car-svgrepo-com.svg",
+        src: Icon_Car,
         alt: "Automotives"
     },
     family: {
-        src: "/svgs/family-avatars-svgrepo-com.svg",
+        src: Icon_Family,
         alt: "Family"
     }
 }
 
 const callToActionSvgs = {
     bookUs: {
-        src: "/svgs/ph phone-call.svg",
+        src: Icon_Phone,
         alt: "Book Us Now"
     },
     getEstimate: {
-        src: "/svgs/cost-estimate.svg",
+        src: Icon_CostEstimate,
         alt: "Get Estimate"
     }
 }

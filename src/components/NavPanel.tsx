@@ -12,7 +12,7 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
             width={30}
             height={30}
             src={icon.src}
-            priority={true}
+            priority={false}
             alt={""}
             className="relative w-5 h-5 overflow-hidden shrink-0"
         />

@@ -65,7 +65,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                 </div>
               </div>
             </section>
-            <section className='services relative overflow-x-hidden grid grid-cols-1 min-[460px]:grid-cols-2 grid-rows-2'>
+            <section className='services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2'>
               <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
             </section>
             <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
@@ -82,7 +82,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
               <div className="relative text-center text-xl lg:text-11xl">
                 <Image width={30} height={30} className="absolute top-0 w-full h-full -z-[1] object-cover" alt="" src="/jpegs/mainSection.jpg" />
                 <div className="flex flex-col items-center justify-start">
-                  <article className="p-8 md:p-20 flex flex-col-reverse gap-5 items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
+                  <article className="p-8 md:p-20 flex flex-col-reverse gap-5 md:gap-10 items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-md lg:text-5xl font-raleway">
                       <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/Service.jpg" />
                       <div className="flex flex-col items-start justify-start gap-[10px]">
