@@ -2,14 +2,14 @@ import useIntersectionObserver from '@/packages/use-intersection-observer';
 import Image from 'next/image';
 import React, { useState } from 'react'
 
-type Service = {
+export type ServiceItem = {
     src: string,
     text: string,
     href: string
 }
-type Props = { services: Service[] };
+type Props = { services: ServiceItem[] };
 
-function Service({ service }: { service: Service }) {
+function Service({ service }: { service: ServiceItem }) {
     const [visibleImg, setVisibleImg] = useState(false);
     const handleOnScreen = () => {
         setTimeout(() => {
@@ -25,7 +25,7 @@ function Service({ service }: { service: Service }) {
         <div className='absolute group py-[1em] pointer-coarse:px-5 flex flex-col pointer-coarse:flex-row 
             items-center pointer-coarse:items-end justify-between pointer-coarse:justify-between
             bg-overlay-from pointer-coarse:bg-transparent pointer-coarse:bg-gradient-to-t pointer-coarse:from-slate-900 pointer-coarse:to-transparent pointer-coarse:to-[3%]
-            top-0 left-0 z-10 pointer-fine:cursor-pointer w-full h-full backdrop-blur-[1px]
+            top-0 left-0 z-10 pointer-fine:cursor-pointer w-full h-full pointer-fine:backdrop-blur-[1px]
             transition-opacity duration-[500ms] opacity-0 pointer-coarse:opacity-100 hover:opacity-100 active:opacity-100 focus:opacity-100 focus-within:opacity-100'>
             <h3 className='delay-250 duration-300 transition-transform translate-y-6 pointer-coarse:translate-y-0 group-hover:translate-y-0'>{service.text}</h3>
             <button className='relative h-12 lg:h-20 w-auto pointer-coarse:translate-y-3/4' aria-label={`Click to reveal more information about ${service.text} photography service`}>
@@ -46,8 +46,8 @@ function Service({ service }: { service: Service }) {
                 </svg>
             </button>
         </div>
-        <Image width={30} height={30} sizes={"100px"} className="w-full h-auto object-cover" alt="" src="/jpegs/Service.jpg" />
-        <Image width={500} height={300} sizes="(max-width:560px)100vw,50vw" className={(visibleImg ? "" : "hidden") + " absolute top-0 left-0 w-full h-auto object-cover"} alt="" src="/jpegs/Service.jpg" />
+        <Image width={30} height={30} sizes={"100px"} className="w-full h-auto object-cover" alt="" src={service.src} />
+        <Image width={500} height={300} sizes="(max-width:560px)100vw,50vw" className={(visibleImg ? "" : "hidden") + " absolute top-0 left-0 w-full h-auto object-cover"} alt="" src={service.src} />
     </div>
 }
 

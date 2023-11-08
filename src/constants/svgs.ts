@@ -105,7 +105,7 @@ const chooseUsSvg = {
         alt: "Choose Us"
     },
     industryExpert: {
-        src: Icon_Photography,
+        src: Icon_Camera,
         alt: "Industry Experts"
     },
     awardWinning: {

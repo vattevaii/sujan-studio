@@ -4,7 +4,7 @@ import ChooseUsCard from '@/components/Cards/ChooseUsCard';
 import WhatWeDoCard from '@/components/Cards/WhatWeDoCard';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
 import NavPanel from '@/components/NavPanel';
-import Services from '@/components/Services';
+import Services, { ServiceItem } from '@/components/Services';
 import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
 import svgs from '@/constants/svgs';
@@ -15,7 +15,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
 
-const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: { typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -66,13 +66,13 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
               </div>
             </section>
             <section className='services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2'>
-              <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
+              <Services services={services} />
             </section>
             <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
               <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
                 <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
                 <hr className='w-[80%] border-t border-divider' />
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-28">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 3xl:gap-28">
                   {chooseUsData.map((data, idx) =>
                     <ChooseUsCard key={idx} data={data} />)}
                 </div>
@@ -152,7 +152,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                 <Image
                   width="400"
                   height="800"
-                  src="/jpegs/Service.jpg"
+                  src="/jpegs/mainSection.jpg"
                   alt="CEO Picture"
                   className="w-full h-auto object-cover"
                 />
@@ -195,11 +195,17 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
   );
 };
 
-export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: { typewriter: BannerTypeWriterProps } }> = () => {
+export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: { typewriter: BannerTypeWriterProps } }> = () => {
   const bannerTextItems = ["Image", "Video", "Audience"];
   const banner: { typewriter: BannerTypeWriterProps } = { typewriter: { items: bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems) } };
   return {
     props: {
+      services: [
+        { href: "/", src: "/jpegs/Real Estate.jpg", text: "Real State" },
+        { href: "/", src: "/jpegs/Weddings.jpg", text: "Weddings" },
+        { href: "/", src: "/jpegs/Family and Events.jpg", text: "Family & Events" },
+        { href: "/", src: "/jpegs/Coorporate Events.jpg", text: "Corporate Events" },
+      ],
       chooseUsData: [
         {
           title: 'Industry Experts',
@@ -236,32 +242,32 @@ export const getStaticProps: GetStaticProps<{ locations: LocationItem[], chooseU
         {
           title: 'Weddings & Events',
           description: 'Your love story is one of a kind – let our wedding photography service capture the magic and romance of your special day, creating timeless memories that will last a lifetime.',
-          imageSrc: svgs.whatWeDoSvgs.weddings.src,
+          imageSrc: '/jpegs/WeddingItem.jpg',
         },
         {
           title: 'Commercials & Real Estate',
           description: 'Visuals are everything in today’s world of business - let our commercial photography service help you stand out from the crowd with captivating images that tell your brand’s story and elevate your marketing to the next level.',
-          imageSrc: svgs.whatWeDoSvgs.commercials.src,
+          imageSrc: '/jpegs/RealStateItem.jpg',
         },
         {
           title: 'Business & Corporate',
           description: 'We capture the essence and personality of your brand, creating images that showcase your team, facilities, products, and services in a way that exudes professionalism, quality, and success.',
-          imageSrc: svgs.whatWeDoSvgs.business.src,
+          imageSrc:'/jpegs/BusinessItem.jpg',
         },
         {
           title: 'Automotives & Rendering',
           description: 'Our automotive photography service is dedicated to capturing the sleek lines, impressive features, and unique character of your ride, creating images that will make you fall in love with it all over again.',
-          imageSrc: svgs.whatWeDoSvgs.automotives.src,
+          imageSrc: '/jpegs/CarItem.jpg',
         },
         {
           title: 'Product & Fashion',
           description: 'Our product photography service is all about capturing the essence and beauty of your merchandise, creating images that will make them irresistible to customers and help drive your sales to the next level.',
-          imageSrc: svgs.whatWeDoSvgs.product.src,
+          imageSrc: '/jpegs/ProductItem.jpg',
         },
         {
           title: 'Family & Portraits',
           description: 'Family is where life begins and love never ends – our family photography service is dedicated to capturing those precious moments that you will cherish for a lifetime.',
-          imageSrc: svgs.whatWeDoSvgs.family.src,
+          imageSrc: '/jpegs/FamilyItem.jpg',
         },
       ],
       locations: [

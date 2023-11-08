@@ -17,8 +17,10 @@ export default function WhatWeDoCard({ data }: Props) {
                       <p className='text-base text-project-200'>{data.description}</p> */}
             <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
             <div className='relative row-start-1 bg-pink-50 rounded-md'>
-                <Image width="366" alt="" height="460" src={data.imageSrc} className='invisible max-w-366 h-auto aspect-[350/200] lg:aspect-[366/460] rounded-[inherit]' />
-                <Image width="366" alt="" height="460" src={data.imageSrc} className='absolute top-0 left-0 max-w-366 h-auto aspect-[350/200] lg:aspect-[366/460] rounded-[inherit]' />
+                <div className='aspect-[350/200] lg:aspect-[366/400] rounded-md'>
+                    <Image width="366" alt="" height="460" src={data.imageSrc} className='invisible h-full w-auto object-cover rounded-[inherit]' />
+                    <Image width="366" alt="" height="460" src={data.imageSrc} className='absolute top-0 left-0 h-full w-auto object-cover rounded-[inherit]' />
+                </div>
                 <div className="absolute flex flex-col justify-center items-center gap-2 md:gap-4 text-lg md:text-xl font-raleway text-light-grey pointer-coarse:hidden group py-[1em] left-0 top-0 w-full h-full bg-overlay-from transition-opacity duration-300 opacity-0 hover:opacity-100 backdrop-blur-[1px]">
                     {/* <div className="blurred-bg absolute w-full h-full bg-overlay-from blur-3xl" /> */}
                     <button className='h-16 w-16 text-overlay-from'>
