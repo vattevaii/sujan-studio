@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <Script id="change-meta-viewport" strategy='beforeInteractive'>
+        {/* <Script id="change-meta-viewport" strategy='beforeInteractive'>
           {`
             window.onload = function(){
               if(screen.width > 560){
@@ -14,7 +14,7 @@ export default function Document() {
               }
             }
           `}
-        </Script>
+        </Script> */}
       </Head>
       <body>
         <noscript>

@@ -77,6 +77,7 @@ const config: Config = {
   },
   plugins: [
     require("@tailwindcss/container-queries"),
+    require("tailwindcss-touch")(),
   ],
 }
 

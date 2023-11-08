@@ -1,5 +1,7 @@
 import BannerCountUpTo from '@/components/Banner/BannerCountUpto';
 import BannerTypewriter, { BannerTypeWriterProps } from '@/components/Banner/BannerTypewriter';
+import ChooseUsCard from '@/components/Cards/ChooseUsCard';
+import WhatWeDoCard from '@/components/Cards/WhatWeDoCard';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
 import NavPanel from '@/components/NavPanel';
 import Services from '@/components/Services';
@@ -27,16 +29,16 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
         <div className="flex-1">
           <main className="content relative flex-1">
             <section id="banner" className='relative banner'>
-              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-screen object-cover" alt="" src="/jpegs/mainSection.jpg" />
-              <div className="flex flex-col w-full h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-                <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl">
+              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-full object-cover" alt="" src="/jpegs/mainSection.jpg" />
+              <div className="flex flex-col w-full min-h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
+                <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl translate-y-7">
                   <h1>
                     <BannerTypewriter {...typewriter} />
                     <b> is Everything,</b>
                   </h1>
                   <b >We Deliver.</b>
                 </div>
-                <div className="absolute bottom-5 flex flex-row items-stretch justify-start gap-[10px] lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
+                <div className="bottom-5 flex flex-col sm:flex-row  items-stretch gap-2 sm:gap-4 lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
                   <div className="flex flex-col items-start justify-end">
                     <BannerCountUpTo count={14} duration={0.5} />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
@@ -44,7 +46,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                       <p className="m-0">Visual Excellence</p>
                     </div>
                   </div>
-                  <hr className='h-auto border-l border-divider' />
+                  <hr className='h-auto w-0 border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
                     <BannerCountUpTo count={500} start={400} duration={1.5} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
@@ -52,7 +54,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                       <p className="m-0">Customers</p>
                     </div>
                   </div>
-                  <hr className='h-auto border-l border-divider' />
+                  <hr className='h-auto w-0 border-l border-divider' />
                   <div className="flex flex-col items-start justify-end">
                     <BannerCountUpTo count={5} duration={1} append='+' />
                     <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
@@ -63,7 +65,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                 </div>
               </div>
             </section>
-            <section className='relative services grid grid-cols-2 grid-rows-2'>
+            <section className='services relative overflow-x-hidden grid grid-cols-1 min-[460px]:grid-cols-2 grid-rows-2'>
               <Services services={[{ href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" }, { href: "/", src: "/", text: "Real State" },]} />
             </section>
             <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
@@ -72,26 +74,20 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                 <hr className='w-[80%] border-t border-divider' />
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 xl:gap-28">
                   {chooseUsData.map((data, idx) =>
-                    <div key={idx} className='grid max-w-sm items-start text-left grid-rows-[60px_1fr]'>
-                      <h3 className='self-center col-start-2 font-medium text-xl'>{data.title}</h3>
-                      <div className='self-end col-start-1 row-start-1 w-[90px]'>
-                        <Image className='w-[50px] h-[50px]' width={50} height={50} src={data.imageSrc} alt='' />
-                      </div>
-                      <p className='col-start-2 row-start-2 text-base text-project-200'>{data.description}</p>
-                    </div>)}
+                    <ChooseUsCard key={idx} data={data} />)}
                 </div>
               </div>
             </section>
             <section className="reviews">
-              <div className="relative text-center text-11xl">
+              <div className="relative text-center text-xl lg:text-11xl">
                 <Image width={30} height={30} className="absolute top-0 w-full h-full -z-[1] object-cover" alt="" src="/jpegs/mainSection.jpg" />
                 <div className="flex flex-col items-center justify-start">
-                  <article className="p-[5rem] flex flex-col-reverse items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
-                    <div className="flex flex-row items-center justify-start gap-[20px] text-5xl font-raleway">
+                  <article className="p-8 md:p-20 flex flex-col-reverse gap-5 items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
+                    <div className="flex flex-row items-center justify-start gap-[20px] text-md lg:text-5xl font-raleway">
                       <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/Service.jpg" />
                       <div className="flex flex-col items-start justify-start gap-[10px]">
                         <div className="font-medium">Caitlyn Mathews</div>
-                        <div className="text-base">Company Name</div>
+                        <div className="text-xs lg:text-base">Company Name</div>
                       </div>
                     </div>
                     <p className="font-medium inline-block">&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;</p>
@@ -114,20 +110,7 @@ const NewWebsite = ({ locations, chooseUsData, whatWeDoData, banner: { typewrite
                 <hr className='w-[80%] border-t border-divider' />
                 <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
                   {whatWeDoData.map((data, idx) =>
-                    <div key={idx} className='grid gap-[20px] grid-rows-[auto_auto_1fr]'
-                    // className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'
-                    >
-                      {/* <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
-                      <div className='row-start-1'>
-                        <Image className='w-[50px] h-[50px] mx-auto' width={50} height={50} src={data.imageSrc} alt='' />
-                      </div>
-                      <p className='text-base text-project-200'>{data.description}</p> */}
-                      <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
-                      <div className='row-start-1'>
-                        <Image width="366" alt="" height="460" src={'/jpegs/mainSection.jpg'} className='max-w-366 h-auto aspect-[366/460]' />
-                      </div>
-                    </div>
-
+                    <WhatWeDoCard key={idx} data={data} />
                   )}
                 </div>
               </div>
