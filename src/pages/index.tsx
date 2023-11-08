@@ -3,7 +3,7 @@ import BannerTypewriter, { BannerTypeWriterProps } from '@/components/Banner/Ban
 import ChooseUsCard from '@/components/Cards/ChooseUsCard';
 import WhatWeDoCard from '@/components/Cards/WhatWeDoCard';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
-import NavPanel from '@/components/NavPanel';
+import NavPanel, { MobileNavPanel } from '@/components/NavPanel';
 import Services, { ServiceItem } from '@/components/Services';
 import SimpleCard, { SimpleCardProps } from '@/components/SimpleCard';
 import SvgIcon from '@/components/SvgIcon';
@@ -24,6 +24,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
         <meta name="description" content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured." />
       </Head>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
+        <MobileNavPanel className='fixed top-0 left-0 z-10' />
         <NavPanel className='sticky top-0 h-screen hidden w-0 lg:w-auto lg:flex' />
         <ActionButtons />
         <div className="flex-1">

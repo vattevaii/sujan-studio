@@ -20,6 +20,20 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
     </Link>
 }
 
+export const MobileNavPanel = ({ className = "" }: HTMLAttributes<HTMLElement>) => {
+    return <div className={className + " bg-project-100 h-24 w-full px-8 py-4 flex justify-between items-center"}>
+        <a href="#" className="brand-logo w-[3/4] h-full">
+            <Image width="300" height="300"
+                priority={true}
+                className="relative w-auto h-full overflow-hidden shrink-0"
+                src="/webp/logo.webp"
+                alt={"Sujan Studio"}
+            />
+        </a>
+        <button>Open Navbar</button>
+    </div>
+}
+
 export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
     return (
         <aside className={className + " bg-project-100 sticky py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway"}>
