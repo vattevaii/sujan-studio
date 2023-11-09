@@ -1,5 +1,5 @@
-import BannerCountUpTo from '@/components/Banner/BannerCountUpto';
-import BannerTypewriter, { BannerTypeWriterProps } from '@/components/Banner/BannerTypewriter';
+import BannerCountUpTo from '@/components/PageSections/Banner/components/BannerCountUpto';
+import BannerTypewriter, { BannerTypeWriterProps } from '@/components/PageSections/Banner/components/BannerTypewriter';
 import ChooseUsCard from '@/components/Cards/ChooseUsCard';
 import WhatWeDoCard from '@/components/Cards/WhatWeDoCard';
 import LocationCard, { LocationItem } from '@/components/LocationCard';
@@ -15,8 +15,10 @@ import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Image from 'next/image';
+import Banner, { BannerProps } from '@/components/PageSections/Banner/Banner';
+import ReviewSlider, { ReviewItem } from '@/components/PageSections/UserReviews/ReviewSlider';
 
-const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: { typewriter } }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, bannerData, reviews }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Head>
@@ -30,43 +32,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
         <ActionButtons />
         <div className="flex-1">
           <main className="content relative flex-1">
-            <section id="banner" className='relative banner'>
-              <Image priority={true} width={100} height={400} className="absolute top-0 -z-[1] w-full h-full object-cover" alt="" src="/jpegs/mainSection.jpg" />
-              <div className="flex flex-col w-full min-h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-                <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl translate-y-7">
-                  <h1>
-                    <BannerTypewriter {...typewriter} />
-                    <b> is Everything,</b>
-                  </h1>
-                  <b >We Deliver.</b>
-                </div>
-                <div className="bottom-5 flex flex-col sm:flex-row  items-stretch gap-2 sm:gap-4 lg:gap-[40px] text-21xl lg:text-41xl xl:text-61xl">
-                  <div className="flex flex-col items-start justify-end">
-                    <BannerCountUpTo count={14} duration={0.5} />
-                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                      <p className="m-0">{`years of `}</p>
-                      <p className="m-0">Visual Excellence</p>
-                    </div>
-                  </div>
-                  <hr className='h-auto w-0 border-l border-divider' />
-                  <div className="flex flex-col items-start justify-end">
-                    <BannerCountUpTo count={500} start={400} duration={1.5} append='+' />
-                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                      <p className="m-0">Happy</p>
-                      <p className="m-0">Customers</p>
-                    </div>
-                  </div>
-                  <hr className='h-auto w-0 border-l border-divider' />
-                  <div className="flex flex-col items-start justify-end">
-                    <BannerCountUpTo count={5} duration={1} append='+' />
-                    <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                      <p className="m-0">Photography</p>
-                      <p className="m-0">Awards</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <Banner {...bannerData} />
             <section className='services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2'>
               <Services services={services} />
             </section>
@@ -81,30 +47,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
               </div>
             </section>
             <section className="reviews">
-              <div className="relative text-center text-xl lg:text-11xl">
-                <Image width={30} height={30} className="absolute top-0 w-full h-full -z-[1] object-cover" alt="" src="/jpegs/mainSection.jpg" />
-                <div className="flex flex-col items-center justify-start">
-                  <article className="p-8 md:p-20 flex flex-col-reverse gap-5 md:gap-10 items-center" aria-label='Review by Caitlyn Mathews from Company Name'>
-                    <div className="flex flex-row items-center justify-start gap-[20px] text-md lg:text-5xl font-raleway">
-                      <Image width={20} height={20} className="w-16 h-16 bg-black rounded-[100px] object-cover" alt="" src="/jpegs/WeddingItem.jpg" />
-                      <div className="flex flex-col items-start justify-start gap-[10px]">
-                        <div className="font-medium">Caitlyn Mathews</div>
-                        <div className="text-xs lg:text-base">Company Name</div>
-                      </div>
-                    </div>
-                    <p className="font-medium inline-block">&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;</p>
-                  </article>
-                  <div className="py-4 flex flex-row items-start justify-start gap-[10px]">
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                    <div className="relative rounded-3xs bg-light-grey h-2.5 opacity-[0.5]" />
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                    <div className="relative rounded-[50%] bg-light-grey w-2.5 h-2.5 opacity-[0.2]" />
-                  </div>
-                </div>
-              </div>
+              <ReviewSlider reviews={ reviews } className='h-64 md:h-72 lg:h-96' />
             </section>
             <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
               <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
@@ -118,8 +61,8 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
               </div>
             </section>
             <section className="ceo-talk px-10 lg:px-0 grid gap-y-5 grid-rows-[min-content_auto] lg:flex-row bg-light-grey text-project-100 min-h-screen pb-6">
-              <div className='relative row-start-1 overflow-clip lg:py-10 lg:p-0 max-h-fit'>
-                <h2 className="relative z-0 lg:pl-16 lg:pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
+              <div className='relative row-start-1 overflow-clip lg:py-0 lg:p-0 max-h-fit'>
+                <h2 className="relative text-center lg:text-left z-0 lg:pl-16 lg:pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
                   Capturing Life&apos;s Moments with Heart and Expertise: A Message from Our CEO
                 </h2>
               </div>
@@ -150,7 +93,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
                   beautiful images that exceed your expectations.
                 </p>
               </div>
-              <div className='row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-min lg:w-full h-full min-w-[50%]'>
+              <div className='row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-fit sm:w-min lg:w-full h-full min-w-[50%]'>
                 <div className="aspect-[35/42]">
                   <Image
                     width="400"
@@ -199,9 +142,9 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, banner: {
   );
 };
 
-export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], banner: { typewriter: BannerTypeWriterProps } }> = () => {
+export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations: LocationItem[], chooseUsData: SimpleCardProps[], whatWeDoData: SimpleCardProps[], bannerData: BannerProps, reviews: ReviewItem[] }> = () => {
   const bannerTextItems = ["Image", "Video", "Audience"];
-  const banner: { typewriter: BannerTypeWriterProps } = { typewriter: { items: bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems) } };
+  const banner: BannerProps = { typewriter: { items: bannerTextItems, itemsWidth: measureTextWidth(bannerTextItems) } };
   return {
     props: {
       services: [
@@ -256,7 +199,7 @@ export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations
         {
           title: 'Business & Corporate',
           description: 'We capture the essence and personality of your brand, creating images that showcase your team, facilities, products, and services in a way that exudes professionalism, quality, and success.',
-          imageSrc:'/jpegs/BusinessItem.jpg',
+          imageSrc: '/jpegs/BusinessItem.jpg',
         },
         {
           title: 'Automotives & Rendering',
@@ -304,7 +247,51 @@ export const getStaticProps: GetStaticProps<{ services: ServiceItem[], locations
           phoneNumber: '08-8427-1817',
         },
       ],
-      banner: banner
+      reviews: [
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText: "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;"
+        },
+      ],
+      bannerData: banner
     }
   }
 }
