@@ -7,7 +7,7 @@ type Props = {}
 const icons = svgs.callToActionSvgs;
 export default function ActionButtons({ }: Props) {
     return (
-        <div className='flex flex-col-reverse gap-3 fixed z-[100] bottom-0 right-0 m-5'>
+        <div className='flex flex-col-reverse gap-3 fixed z-10 bottom-0 right-0 m-5'>
             <TooltipWrapper>
                 <TooltipTrigger>
                     <div className="rounded-full p-4 bg-white">

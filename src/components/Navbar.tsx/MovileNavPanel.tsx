@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { HTMLAttributes } from "react";
 
-const MobileNavPanel = ({ className = "" }: HTMLAttributes<HTMLElement>) => {
+type Props = HTMLAttributes<HTMLElement> & {
+    openNavbar: () => void;
+}
+
+const MobileNavPanel = ({ className = "", openNavbar }: Props) => {
     return <div className={className + " bg-project-100 h-24 w-full px-8 py-4 flex justify-between items-center"}>
         <a href="#" className="brand-logo w-[3/4] h-full">
             <Image width="300" height="300"
@@ -11,7 +15,7 @@ const MobileNavPanel = ({ className = "" }: HTMLAttributes<HTMLElement>) => {
                 alt={"Sujan Studio"}
             />
         </a>
-        <button>Open Navbar</button>
+        <button onClick={openNavbar}>Open Navbar</button>
     </div>
 }
 
