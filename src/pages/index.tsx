@@ -106,7 +106,7 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, bannerDat
               </div>
             </section>
           </main>
-          <footer id="footer bg-darkbg">
+          <footer id="footer" className="bg-darkbg">
             <section className="footer text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
               <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
                 <div className="mb-6 flex flex-wrap justify-between flex-col md:flex-row items-start md:items-end">
