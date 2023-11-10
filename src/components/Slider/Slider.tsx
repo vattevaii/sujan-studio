@@ -85,7 +85,7 @@ export const Slider = ({ children }: { children: React.ReactNode[] }) => {
         <>
             <div className="relative h-full">
                 {clonedSlides.map((child, idx) =>
-                    <div key={idx - 1} className={"absolute grid place-items-center h-full w-full transition-transform"}
+                    <div key={idx - 1} className={"absolute grid place-items-center h-full w-full transition-transform duration-300"}
                         style={{
                             transform: `translateX(${(idx - activeIdx - 1) * 100}%)`
                         }}>

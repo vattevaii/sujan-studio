@@ -16,7 +16,7 @@ export default function WhatWeDoCard({ data }: Props) {
         else goToEstimatePage();
     }
     return (
-        <div className='h-min grid gap-1 lg:gap-4 grid-rows-[auto_auto] cursor-pointer group' onClick={getEstimate}
+        <div className='w-full h-min grid gap-1 lg:gap-4 grid-rows-[auto_auto] cursor-pointer group' onClick={getEstimate}
         // className='grid gap-[20px] rounded-xl border border-divider p-5 items-start max-w-xs text-center grid-rows-[auto_auto_1fr]'
         >
             {/* <h3 className='row-start-2 font-medium text-xl'>{data.title}</h3>
