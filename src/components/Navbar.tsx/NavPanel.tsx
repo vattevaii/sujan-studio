@@ -22,7 +22,7 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
 
 export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
     return (
-        <aside className={className + " bg-project-100 py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway"}>
+        <aside className={className + " bg-project-100 py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway overflow-scroll scrollbar-thin scrollbar-thumb-[#fff3]"}>
             <a href="#" className="brand-logo w-[3/4]">
                 <Image width="300" height="300"
                     priority={true}
@@ -31,7 +31,7 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
                     alt={"Sujan Studio"}
                 />
             </a>
-            <nav className="flex flex-col items-start justify-start gap-[40px]">
+            <nav className="flex flex-col items-start justify-start flex-1 gap-4">
                 <ul className="flex flex-col items-start justify-start gap-[10px]">
                     <li>
                         <NavItem name="Our Portfolio" icon={svgs.navSvgs.portfolio} />
@@ -55,7 +55,9 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
                         <NavItem name="My Shop" icon={svgs.navSvgs.shop} />
                     </li>
                 </ul>
-                <hr className="border-t border-divider w-full" />
+                <div className='grid place-items-center flex-1 w-full'>
+                    <hr className="border-t border-divider w-full" />
+                </div>
                 <ul className="flex flex-col items-start justify-start gap-[10px]">
                     <li>
                         <NavItem name="Login/Register" icon={svgs.actionsSvg.auth} />
@@ -67,7 +69,9 @@ export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>
                         <NavItem name="Cart" icon={svgs.actionsSvg.shop} />
                     </li>
                 </ul>
-                <hr className="border-t border-divider w-full" />
+                <div className='grid place-items-center flex-1 w-full'>
+                    <hr className="border-t  border-divider w-full" />
+                </div>
                 <div className='social-icons flex justify-between'>
                     <NavItem icon={svgs.mediaSvgs.facebook} />
                     <NavItem icon={svgs.mediaSvgs.instagram} />

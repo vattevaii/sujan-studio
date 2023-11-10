@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        around: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),0 0px 20px 5px rgb(0 0 0 / 0.1) "
+      },
       height: {
         // @ts-expect-error
         screen: ['100vh', '100svh'],
@@ -78,6 +81,7 @@ const config: Config = {
   plugins: [
     require("@tailwindcss/container-queries"),
     require("tailwindcss-touch")(),
+    require("tailwind-scrollbar"),
   ],
 }
 

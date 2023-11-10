@@ -27,7 +27,7 @@ export default function Banner({ typewriter }: BannerProps) {
                             <p className="m-0">Visual Excellence</p>
                         </div>
                     </div>
-                    <hr className='h-auto w-[125%] border-l border-divider' />
+                    <hr className='h-auto w-[125%] sm:w-0 border-l border-divider' />
                     <div className="flex flex-col items-start justify-end w-max">
                         <BannerCountUpTo count={500} start={400} duration={1.5} append='+' />
                         <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
@@ -35,7 +35,7 @@ export default function Banner({ typewriter }: BannerProps) {
                             <p className="m-0">Customers</p>
                         </div>
                     </div>
-                    <hr className='h-auto w-[125%] border-l border-divider' />
+                    <hr className='h-auto w-[125%] sm:w-0 border-l border-divider' />
                     <div className="flex flex-col items-start justify-end w-max">
                         <BannerCountUpTo count={5} duration={1} append='+' />
                         <div className="text-xl leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">

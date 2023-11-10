@@ -52,9 +52,9 @@ export const SliderProvider = ({ children, autoplay = false, autoplayDuration = 
         if (autoplay) interval = setInterval(() => {
             next()
         }, autoplayDuration * 1000);
-        if(!autoplay && interval !== null) clearInterval(interval);
+        if (!autoplay && interval !== null) clearInterval(interval);
         return () => {
-            if(interval) clearInterval(interval);
+            if (interval) clearInterval(interval);
         }
     }, [autoplay, autoplayDuration])
     return <SliderContext.Provider value={{ activeIdx, prevIdx, nextIdx, slideCount, setSlideCount, next, prev, showSlider }}>
@@ -118,11 +118,10 @@ export const SliderPrev = () => {
             <g filter="url(#a)">
                 <rect width={50} height={50} fill="#B7B7B7" fillOpacity={0.21} rx={25} />
             </g>
-            <path
-                className='group-hover:animate-arrow-move'
-                fill="#fff"
-                d="M19.154 18v2.308h9.911L18 31.373 19.627 33l11.065-11.065v9.911H33V18H19.154Z"
-            />
+            <g stroke="#fff" strokeWidth={2} className='-scale-x-[1]'>
+                <line x1={20} y1={15} x2={30} y2={25} />
+                <line x1={30} y1={25} x2={20} y2={35} />
+            </g>
             <defs>
                 <filter
                     id="a"
@@ -162,11 +161,10 @@ export const SliderNext = () => {
             <g filter="url(#a)">
                 <rect width={50} height={50} fill="#B7B7B7" fillOpacity={0.21} rx={25} />
             </g>
-            <path
-                className='group-hover:animate-arrow-move'
-                fill="#fff"
-                d="M19.154 18v2.308h9.911L18 31.373 19.627 33l11.065-11.065v9.911H33V18H19.154Z"
-            />
+            <g stroke="#fff" strokeWidth={2}>
+                <line x1={20} y1={15} x2={30} y2={25} />
+                <line x1={30} y1={25} x2={20} y2={35} />
+            </g>
             <defs>
                 <filter
                     id="a"
