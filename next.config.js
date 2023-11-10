@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
+    unoptimized: false
   }
 }
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
