@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = {}
 const imageLoader:ImageLoader = ({ width }) => {
-    return `http://placekitten.com/${width}/${width}`
+    return `https://placekitten.com/${width}/${width}`
 }
 
 export default function PlaceHolderImage(props: ImageProps) {
