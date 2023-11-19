@@ -2,12 +2,12 @@ import React, { HTMLAttributes } from 'react'
 import SvgIcon from '../SvgIcon'
 import svgs from '@/constants/svgs'
 import Image from 'next/image'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 
 type Props = {}
 
-const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: string } }) => {
-    return <Link href="#" className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200" aria-label={icon.alt}>
+const NavItem = ({ name, icon, href }: { name?: string, icon: { src: string, alt: string } } & LinkProps) => {
+    return <Link href={href} className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200" aria-label={icon.alt}>
         <SvgIcon
             width={30}
             height={30}
@@ -20,63 +20,110 @@ const NavItem = ({ name, icon }: { name?: string, icon: { src: string, alt: stri
     </Link>
 }
 
-export default function NavPanel({ className = "" }: HTMLAttributes<HTMLElement>) {
+export default function NavPanel({ className = "", activeRoute }: HTMLAttributes<HTMLElement> & { activeRoute: string }) {
+    console.log("Route: ", activeRoute)
     return (
-        <aside className={className + " bg-project-100 py-[30px] px-[31px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway overflow-scroll scrollbar-thin scrollbar-thumb-[#fff3]"}>
-            <a href="#" className="brand-logo w-[3/4]">
+        <aside className={className + " bg-project-100 py-[30px] flex flex-col items-center justify-start gap-[30px] text-base font-raleway overflow-scroll scrollbar-thin scrollbar-thumb-[#fff3]"}>
+            <Link href="/" className="brand-logo w-[3/4] px-[31px]">
                 <Image width="300" height="300"
                     priority={true}
                     className="relative w-full h-auto overflow-hidden shrink-0"
                     src="/webp/logo.webp"
                     alt={"Sujan Studio"}
                 />
-            </a>
+            </Link>
             <nav className="flex flex-col items-start justify-start flex-1 gap-4">
                 <ul className="flex flex-col items-start justify-start gap-[10px]">
-                    <li>
-                        <NavItem name="Our Portfolio" icon={svgs.navSvgs.portfolio} />
+                    {[{
+                        route: "portfolio",
+                        name: "Our Portfolio",
+                        icon: svgs.navSvgs.portfolio,
+                    }, {
+                        route: "our-story",
+                        name: "Our Story",
+                        icon: svgs.navSvgs.story,
+                    }, {
+                        route: "news",
+                        name: "Our News",
+                        icon: svgs.navSvgs.news,
+                    }, {
+                        route: "book-photographer",
+                        name: "Book a Photographer",
+                        icon: svgs.navSvgs.book,
+                    }, {
+                        route: "contact-us",
+                        name: "Contact Us",
+                        icon: svgs.navSvgs.message,
+                    }, {
+                        route: "my-shop",
+                        name: "My Shop",
+                        icon: svgs.navSvgs.shop,
+                    }].map(item =>
+                        <li key={item.route} className={(activeRoute === item.route ? "bg-light-grey" : "bg-transparent") + " bg-opacity-10 w-full px-[31px]"}>
+                            <NavItem href={"/" + item.route} name={item.name} icon={item.icon} />
+                        </li>
+                    )}
+                    {/* <li className={activeRoute === "portfolio" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="/portfolio" name="Our Portfolio" icon={svgs.navSvgs.portfolio} />
                     </li>
-                    <li>
-                        <NavItem name="Our Story" icon={svgs.navSvgs.story} />
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="Our Story" icon={svgs.navSvgs.story} />
                     </li>
-                    <li>
-                        <NavItem name="Our News" icon={svgs.navSvgs.news} />
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="Our News" icon={svgs.navSvgs.news} />
                     </li>
-                    <li>
-                        <NavItem name="Packages" icon={svgs.navSvgs.packages} />
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="Packages" icon={svgs.navSvgs.packages} />
                     </li>
-                    <li>
-                        <NavItem name="Book A Photographer" icon={svgs.navSvgs.book} />
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="Book A Photographer" icon={svgs.navSvgs.book} />
                     </li>
-                    <li>
-                        <NavItem name="Contact Us" icon={svgs.navSvgs.message} />
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="Contact Us" icon={svgs.navSvgs.message} />
                     </li>
-                    <li>
-                        <NavItem name="My Shop" icon={svgs.navSvgs.shop} />
-                    </li>
+                    <li className={activeRoute === "#" ? "bg-light-grey" : "bg-transparent"}>
+                        <NavItem href="#" name="My Shop" icon={svgs.navSvgs.shop} />
+                    </li> */}
                 </ul>
-                <div className='grid place-items-center flex-1 w-full'>
+                <div className='grid place-items-center flex-1 w-full px-[31px]'>
                     <hr className="border-t border-divider w-full" />
                 </div>
                 <ul className="flex flex-col items-start justify-start gap-[10px]">
-                    <li>
-                        <NavItem name="Login/Register" icon={svgs.actionsSvg.auth} />
+                    {[{
+                        route: "login",
+                        name: "Login/Register",
+                        icon: svgs.actionsSvg.auth,
+                    }, {
+                        route: "search",
+                        name: "Search",
+                        icon: svgs.actionsSvg.search,
+                    }, {
+                        route: "cart",
+                        name: "Cart",
+                        icon: svgs.actionsSvg.shop,
+                    },].map(item =>
+                        <li key={item.route} className={(activeRoute === item.route ? "bg-light-grey" : "bg-transparent") + " bg-opacity-10 w-full px-[31px]"}>
+                            <NavItem href={"/" + item.route} name={item.name} icon={item.icon} />
+                        </li>
+                    )}
+                    {/* <li>
+                        <NavItem href="#" name="Login/Register" icon={svgs.actionsSvg.auth} />
                     </li>
                     <li>
-                        <NavItem name="Search" icon={svgs.actionsSvg.search} />
+                        <NavItem href="#" name="Search" icon={svgs.actionsSvg.search} />
                     </li>
                     <li>
-                        <NavItem name="Cart" icon={svgs.actionsSvg.shop} />
-                    </li>
+                        <NavItem href="#" name="Cart" icon={svgs.actionsSvg.shop} />
+                    </li> */}
                 </ul>
-                <div className='grid place-items-center flex-1 w-full'>
+                <div className='grid place-items-center flex-1 w-full px-[31px]'>
                     <hr className="border-t  border-divider w-full" />
                 </div>
-                <div className='social-icons flex justify-between'>
-                    <NavItem icon={svgs.mediaSvgs.facebook} />
-                    <NavItem icon={svgs.mediaSvgs.instagram} />
-                    <NavItem icon={svgs.mediaSvgs.linkedin} />
-                    <NavItem icon={svgs.mediaSvgs.youtube} />
+                <div className='social-icons flex justify-between px-[31px]'>
+                    <NavItem href="#" icon={svgs.mediaSvgs.facebook} />
+                    <NavItem href="#" icon={svgs.mediaSvgs.instagram} />
+                    <NavItem href="#" icon={svgs.mediaSvgs.linkedin} />
+                    <NavItem href="#" icon={svgs.mediaSvgs.youtube} />
                 </div>
             </nav >
         </aside >

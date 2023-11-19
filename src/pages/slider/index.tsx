@@ -1,4 +1,4 @@
-import { Slider, SliderNavigation, SliderNext, SliderPagination, SliderPrev, SliderProvider } from "@/components/Slider/Slider"
+import { Slider, SliderNext, SliderPagination, SliderPrev, SliderProvider } from "@/components/Slider/Slider"
 import Image from "next/image"
 
 type Props = {}
@@ -36,4 +36,10 @@ export default function NewPage({ }: Props) {
             </div>
         </SliderProvider>
     )
+}
+
+export function getServerSideProps() {
+    return {
+        notFound: true
+    }
 }

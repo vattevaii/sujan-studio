@@ -109,7 +109,7 @@ export const SliderNavigation = () => {
 
 export const SliderPrev = () => {
     const { prev } = useSliderContext();
-    return <button className='absolute top-1/2 left-5 -translate-y-1/2 w-10 h-10' onClick={prev}>
+    return <button className='absolute top-1/2 left-5 -translate-y-1/2 rotate-180 w-10 h-10 hover:bg-black rounded-full' onClick={prev}>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox='0 0 50 50'
@@ -118,7 +118,7 @@ export const SliderPrev = () => {
             <g filter="url(#a)">
                 <rect width={50} height={50} fill="#B7B7B7" fillOpacity={0.21} rx={25} />
             </g>
-            <g stroke="#fff" strokeWidth={2} className='-scale-x-[1]'>
+            <g stroke="#fff" strokeWidth={2}>
                 <line x1={20} y1={15} x2={30} y2={25} />
                 <line x1={30} y1={25} x2={20} y2={35} />
             </g>
@@ -152,7 +152,7 @@ export const SliderPrev = () => {
 
 export const SliderNext = () => {
     const { next } = useSliderContext();
-    return <button className='absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10' onClick={next}>
+    return <button className='absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10  hover:bg-black rounded-full' onClick={next}>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox='0 0 50 50'

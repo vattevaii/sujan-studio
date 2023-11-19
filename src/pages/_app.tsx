@@ -4,6 +4,9 @@ import Script from 'next/script'
 import { Raleway, Source_Sans_3 } from 'next/font/google';
 import Head from 'next/head';
 import { IntersectionProvider } from '@/packages/use-intersection-observer';
+import { useRouter } from 'next/router';
+import CustomerLayout from '@/components/Layouts/Customer';
+import AdminLayout from '@/components/Layouts/Admin';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -12,10 +15,13 @@ const raleway = Raleway({
 });
 const source_sans = Source_Sans_3({
   subsets: ['latin'],
-  weight: ["400", "500"]
+  weight: ["400", "500","700"]
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const firstPath = router.asPath.split('/')[1] || "";
+  const Layout = firstPath !== "admin" ? CustomerLayout : AdminLayout;
   return <>
     <Head>
       <meta name="viewport" id="my-viewport" content="width=430" />
@@ -57,7 +63,9 @@ export default function App({ Component, pageProps }: AppProps) {
     </Script> */}
     {/* <!-- End Google Tag Manager --> */}
     <IntersectionProvider>
-      <Component {...pageProps} />
+      <Layout locations={pageProps.locations} route={firstPath}>
+        <Component {...pageProps} />
+      </Layout>
     </IntersectionProvider>
   </>
 }

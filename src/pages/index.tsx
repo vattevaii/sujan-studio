@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Banner, { BannerProps } from '@/components/PageSections/Banner/Banner';
 import ReviewSlider, { ReviewItem } from '@/components/PageSections/UserReviews/ReviewSlider';
 import Navbar from '@/components/Navbar.tsx/Navbar';
+import CEOMessage from '@/components/PageSections/CEOMessage';
 
 const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, bannerData, reviews }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -21,117 +22,36 @@ const NewWebsite = ({ services, locations, chooseUsData, whatWeDoData, bannerDat
         <title>Professional Photography Services in Adelaide & Beyond | Sujan Studio</title>
         <meta name="description" content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured." />
       </Head>
-      <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
-        <Navbar />
-        <ActionButtons />
-        <div className="flex-1">
-          <main className="content relative flex-1">
-            <Banner {...bannerData} />
-            <section className='services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2'>
-              <Services services={services} />
-            </section>
-            <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
-              <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
-                <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
-                <hr className='w-[80%] border-t border-divider' />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 3xl:gap-28">
-                  {chooseUsData.map((data, idx) =>
-                    <ChooseUsCard key={idx} data={data} />)}
-                </div>
-              </div>
-            </section>
-            <section className="reviews">
-              <ReviewSlider reviews={ reviews } className='h-64 md:h-72 lg:h-96' />
-            </section>
-            <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
-              <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
-                <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">What We Do?</h2>
-                <hr className='w-[80%] border-t border-divider' />
-                <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
-                  {whatWeDoData.map((data, idx) =>
-                    <WhatWeDoCard key={idx} data={data} />
-                  )}
-                </div>
-              </div>
-            </section>
-            <section className="ceo-talk px-10 lg:px-0 grid gap-y-5 grid-rows-[min-content_auto] lg:flex-row bg-light-grey text-project-100 min-h-screen pb-6">
-              <div className='relative row-start-1 overflow-clip lg:py-0 lg:p-0 max-h-fit'>
-                <h2 className="relative text-center lg:text-left z-0 lg:pl-16 lg:pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
-                  Capturing Life&apos;s Moments with Heart and Expertise: A Message from Our CEO
-                </h2>
-              </div>
-              <div className="row-start-3 lg:row-start-2 lg:pl-16 lg:pr-20 text-base md:text-xl lg:text-2xl font-raleway text-project-200">
-                <p>
-                  As the CEO of Sujan Studio, I understand that choosing the right
-                  photographer can be a daunting task, but I assure you that we are here
-                  to make your decision an easy one. Our team of experienced photographers
-                  are passionate about creating breathtaking images that tell your unique
-                  story. Whether it&lbquo;s your wedding day, a special family moment, or a
-                  corporate event, we pride ourselves on capturing those perfect shots
-                  that will be cherished for a lifetime.
-                </p>
-                <p>&nbsp;</p>
-                <p>
-                  But it&lbquo;s not just our technical expertise that sets us apart. At Sujan
-                  Studio, we understand that photography is about more than just taking
-                  pictures - it&lbquo;s about capturing emotions, memories, and experiences.
-                  That&lbquo;s why we take the time to get to know our clients, to understand
-                  their vision and to create a comfortable and relaxed environment where
-                  those natural and authentic moments can shine.
-                </p>
-                <p>&nbsp;</p>
-                <p>
-                  Located in the heart of Adelaide, we offer a range of photography
-                  services tailored to your specific needs. From our stunning studio space
-                  to on-location shoots, we have the expertise and equipment to create
-                  beautiful images that exceed your expectations.
-                </p>
-              </div>
-              <div className='row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-fit sm:w-min lg:w-full h-full min-w-[50%]'>
-                <div className="aspect-[35/42]">
-                  <Image
-                    width="400"
-                    height="800"
-                    src="/jpegs/Sujan.jpg"
-                    alt="CEO Picture"
-                    className="w-full lg:h-full object-cover"
-                  />
-                </div>
-              </div>
-            </section>
-          </main>
-          <footer id="footer" className="bg-darkbg">
-            <section className="footer text-white px-4 lg:px-12 py-8 md:py-12 lg:py-16">
-              <div className=" text-left md:gap-4 lg:gap-0 lg:justify-between">
-                <div className="mb-6 flex flex-wrap justify-between flex-col md:flex-row items-start md:items-end">
-                  <h2 className='flex-1 text-21xl font-semibold xl:text-61xl'>
-                    <span className="underline">Let&apos;s talk</span> and create an&nbsp;awesome&nbsp;Memory.
-                  </h2>
-                  <a href="#" className="flex items-center relative text-xl xl:text-5xl leading-[3em] font-raleway">
-                    <>sujanstudio@gmail.com
-                      <span>
-                        <svg width="40px" height="40px" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M50 48V52H67.18L48 71.18L50.82 74L70 54.82V72H74V48H50Z" fill="white" />
-                        </svg>
-                      </span>
-                    </>
-                  </a>
 
-                </div>
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                  {locations?.map((location, idx) => <LocationCard key={idx} locationData={location} />)}
-                </div>
-              </div>
-            </section>
-            <section>
-              <div className="text-sm leading-[1.5em] font-medium font-raleway opacity-[0.5] py-8">
-                <p className='mx-auto w-fit'>© 2023 Sujan Studio. All rights reserved</p>
-              </div>
-            </section>
-          </footer>
+      <Banner {...bannerData} />
+      <section className='services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2'>
+        <Services services={services} />
+      </section>
+      <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
+        <div className="flex flex-col items-center justify-start gap-4 md:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+          <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">Why Choose Us?</h2>
+          <hr className='w-[80%] border-t border-divider' />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16 3xl:gap-28">
+            {chooseUsData.map((data, idx) =>
+              <ChooseUsCard key={idx} data={data} />)}
+          </div>
         </div>
-      </div>
-      <script>0</script>
+      </section>
+      <section className="reviews">
+        <ReviewSlider reviews={reviews} className='h-64 md:h-72 lg:h-96' />
+      </section>
+      <section className="what-we-do bg-light-grey py-12 md:py-16 lg:py-20">
+        <div className="flex flex-col items-center justify-start gap-4 lg:gap-8 xl:gap-16 text-center text-project-100 p-4 md:p-8">
+          <h2 className="font-semibold text-21xl lg:text-41xl leading-[1]">What We Do?</h2>
+          <hr className='w-[80%] border-t border-divider' />
+          <div className="grid  w-full xl:w-[85%] justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
+            {whatWeDoData.map((data, idx) =>
+              <WhatWeDoCard key={idx} data={data} />
+            )}
+          </div>
+        </div>
+      </section>
+      <CEOMessage />
     </>
   );
 };

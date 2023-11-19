@@ -34,7 +34,7 @@ const config: Config = {
       colors: {
         "project": {
           "100": "rgba(2, 17, 41, 1)",
-          "200": "rgba(2, 17, 41, 0.5)"
+          "200": "#435269"
         },
         "divider": "#5F789729",
         "light-grey": "#dceafd",
