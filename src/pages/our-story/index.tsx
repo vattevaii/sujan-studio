@@ -28,8 +28,8 @@ export default function OurStory({ reviews }: InferGetStaticPropsType<typeof get
                 </div>
             </section>
             <section className='our-story bg-light-grey'>
-                <h2 className='text-21xl lg:text-41xl text-project-100 text-center pt-16 pb-14 lg:pt-28 lg:pb-24'>Our Story</h2>
-                <div className='grid text-project-200 text-md lg:text-5xl px-4 lg:px-20 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-y-8 gap-x-10 lg:gap-x-16 lg:gap-y-11 pb-16 lg:pb-32'>
+                <h2 className='text-21xl lg:text-41xl text-project-100 text-center font-semibold pt-16 pb-14 lg:pt-28 lg:pb-24'>Our Story</h2>
+                <div className='grid text-project-200 text-md md:text-xl lg:text-5xl px-4 lg:px-20 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-y-8 gap-x-10 lg:gap-x-16 lg:gap-y-11 pb-16 lg:pb-32'>
                     <div className='md:col-span-2 lg:col-span-1 xl:col-span-2'>
                         We started our photographic journey in the summer of 2009 with a medium format Kodak Camera and since then everything has changed. From BW films to today’s digital era Sujan Studio has produced, reproduced plenty photographic works in and out of Adelaide. This has been quite a journey for all our team.
                         Starting from Adelaide, currently, we are proud to share we are providing photographic service from four major cities of Australia. We can not thank you enough for all the love and support you have provided through all these years. We are truly so happy to be a part of your life and memories. We trust in the quality of creative works and rigorously work for it.
@@ -43,7 +43,7 @@ export default function OurStory({ reviews }: InferGetStaticPropsType<typeof get
                         <PlaceHolderImage className='object-cover h-full w-full' width="700" height="700" src={"img"} alt={" Image "} />
                     </div>
                     <div className='bg-yellow-50 row-start-3 col-start-1 md:row-start-2 md:col-start-2 lg:row-start-3 lg:col-start-1 xl:row-start-2 xl:col-start-2 aspect-[2/1] min-h-[50px]'>
-                        <PlaceHolderImage className='object-cover h-full w-full' width="700" height="700" src={"img"} alt={" Image "} />
+                        <PlaceHolderImage className='object-cover h-full w-full' width="700" height="350" src={"img"} alt={" Image "} />
                     </div>
                 </div>
             </section>

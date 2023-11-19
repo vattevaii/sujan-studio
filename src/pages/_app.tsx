@@ -15,7 +15,7 @@ const raleway = Raleway({
 });
 const source_sans = Source_Sans_3({
   subsets: ['latin'],
-  weight: ["400", "500","700"]
+  weight: ["400", "500","600","700"]
 });
 
 export default function App({ Component, pageProps }: AppProps) {
