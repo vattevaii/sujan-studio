@@ -1,43 +1,43 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import Script from 'next/script'
-import { Raleway, Source_Sans_3 } from 'next/font/google';
-import Head from 'next/head';
-import { IntersectionProvider } from '@/packages/use-intersection-observer';
-import { useRouter } from 'next/router';
-import CustomerLayout from '@/components/Layouts/Customer';
-import AdminLayout from '@/components/Layouts/Admin';
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import Script from "next/script";
+import { Raleway, Source_Sans_3 } from "next/font/google";
+import Head from "next/head";
+import { IntersectionProvider } from "@/packages/use-intersection-observer";
+import { useRouter } from "next/router";
+import CustomerLayout from "@/components/Layouts/Customer";
+import AdminLayout from "@/components/Layouts/Admin";
 
 const raleway = Raleway({
-  subsets: ['latin'],
+  subsets: ["latin"],
   weight: ["200", "500", "600", "700"],
-
 });
 const source_sans = Source_Sans_3({
-  subsets: ['latin'],
-  weight: ["400", "500","600","700"]
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const firstPath = router.asPath.split('/')[1] || "";
+  const firstPath = router.asPath.split("/")[1] || "";
   const Layout = firstPath !== "admin" ? CustomerLayout : AdminLayout;
-  return <>
-    <Head>
-      <meta name="viewport" id="my-viewport" content="width=430" />
-      {/* <meta name="viewport" id="my-viewport" content="width=device-width, initial-scale=1.0" /> */}
-    </Head>
-    <style jsx global>{`
+  return (
+    <>
+      <Head>
+        <meta name="viewport" id="my-viewport" content="width=430" />
+        {/* <meta name="viewport" id="my-viewport" content="width=device-width, initial-scale=1.0" /> */}
+      </Head>
+      <style jsx global>{`
         :root {
           --raleway-font: ${raleway.style.fontFamily};
           --sourcesans-font: ${source_sans.style.fontFamily};
         }
       `}</style>
-    {/* <Script strategy='lazyOnload'
+      {/* <Script strategy='lazyOnload'
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
     /> */}
 
-    {/* <Script id="googleTagManager" strategy='lazyOnload'>
+      {/* <Script id="googleTagManager" strategy='lazyOnload'>
       {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script>
     {/* <!-- Google Tag Manager --> */}
-    {/* <Script id="gtagmanager" strategy='lazyOnload'>
+      {/* <Script id="gtagmanager" strategy='lazyOnload'>
       {`
         (function(w,d,s,l,i){
           w[l] = w[l] || [];
@@ -61,11 +61,12 @@ export default function App({ Component, pageProps }: AppProps) {
         (window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GOOGLE_TAG_M}');
       `}
     </Script> */}
-    {/* <!-- End Google Tag Manager --> */}
-    <IntersectionProvider>
-      <Layout locations={pageProps.locations} route={firstPath}>
-        <Component {...pageProps} />
-      </Layout>
-    </IntersectionProvider>
-  </>
+      {/* <!-- End Google Tag Manager --> */}
+      <IntersectionProvider>
+        <Layout locations={pageProps.locations} route={firstPath}>
+          <Component {...pageProps} />
+        </Layout>
+      </IntersectionProvider>
+    </>
+  );
 }

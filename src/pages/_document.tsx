@@ -1,11 +1,11 @@
-import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
+import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <Script id="change-meta-viewport" strategy='beforeInteractive'>
+        <Script id="change-meta-viewport" strategy="beforeInteractive">
           {`
             window.onload = function(){
               if(screen.width > 430){
@@ -18,12 +18,16 @@ export default function Document() {
       </Head>
       <body>
         <noscript>
-          <iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_M}`}
-            height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG_M}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
         </noscript>
         <Main />
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

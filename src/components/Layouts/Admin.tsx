@@ -1,9 +1,7 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from "react";
 
-type Props = {}
+type Props = {};
 
-export default function AdminLayout({children}: PropsWithChildren<Props>) {
-  return (
-    <div>{children}</div>
-  )
+export default function AdminLayout({ children }: PropsWithChildren<Props>) {
+  return <div>{children}</div>;
 }

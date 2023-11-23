@@ -1,5 +1,5 @@
-import { useTypewriter } from '@/packages/react-simple-typewriter/hooks/useTypeWriter';
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useTypewriter } from "@/packages/react-simple-typewriter/hooks/useTypeWriter";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 // const words = ["Image", "Video", "Audience"];
 // function measureText(string: string) {
@@ -11,38 +11,43 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 //     .reduce((cur, acc) => acc + cur) * avg
 // }
 
-export type BannerTypeWriterProps = { items: string[], itemsWidth: number[] }
-export default function BannerTypewriter({ items, itemsWidth }: BannerTypeWriterProps) {
-    const [currentWordIdx, setCurrentWordIdx] = useState(0);
-    const typewriter = useRef<HTMLElement | null>(null);
-    const [text, helpers] = useTypewriter({
-        words: items,
-        loop: 0,
-        delaySpeed: 2000,
-        typeSpeed: 200,
-        strategy: "start_from_full"
-    })
-    const { isDelete } = helpers;
-    useEffect(() => {
-        if (isDelete === true) {
-            setCurrentWordIdx((curr) => {
-                if (curr >= items.length - 1) return 0;
-                return curr + 1;
-            });
-        }
-    }, [isDelete, items.length]);
+export type BannerTypeWriterProps = { items: string[]; itemsWidth: number[] };
+export default function BannerTypewriter({
+  items,
+  itemsWidth,
+}: BannerTypeWriterProps) {
+  const [currentWordIdx, setCurrentWordIdx] = useState(0);
+  const typewriter = useRef<HTMLElement | null>(null);
+  const [text, helpers] = useTypewriter({
+    words: items,
+    loop: 0,
+    delaySpeed: 2000,
+    typeSpeed: 200,
+    strategy: "start_from_full",
+  });
+  const { isDelete } = helpers;
+  useEffect(() => {
+    if (isDelete === true) {
+      setCurrentWordIdx((curr) => {
+        if (curr >= items.length - 1) return 0;
+        return curr + 1;
+      });
+    }
+  }, [isDelete, items.length]);
 
-    useEffect(() => {
-        // console.log("Updating current word " + items[currentWordIdx]);
-        if (typewriter.current) {
-            typewriter.current.style.width = itemsWidth[currentWordIdx] + 0.5 + "em";
-        }
-    }, [currentWordIdx, itemsWidth]);
-    return (
-
-        <b ref={typewriter} className='transition-[width] duration-700 inline-block'>
-            {text}<span className='animate animate-cursor'>|</span>
-        </b>
-
-    )
+  useEffect(() => {
+    // console.log("Updating current word " + items[currentWordIdx]);
+    if (typewriter.current) {
+      typewriter.current.style.width = itemsWidth[currentWordIdx] + 0.5 + "em";
+    }
+  }, [currentWordIdx, itemsWidth]);
+  return (
+    <b
+      ref={typewriter}
+      className="transition-[width] duration-700 inline-block"
+    >
+      {text}
+      <span className="animate animate-cursor">|</span>
+    </b>
+  );
 }

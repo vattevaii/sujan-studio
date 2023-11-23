@@ -4,7 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-*, ::before, ::after { border-width: 0; } 
+*,
+::before,
+::after {
+  border-width: 0;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
