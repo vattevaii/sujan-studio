@@ -1,8 +1,10 @@
 import { LocationItem } from "@/components/LocationCard";
+import ImageGrid from "@/components/PageSections/ImageGrid";
 import PlaceHolderImage from "@/components/PlaceHolderImage";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -18,6 +20,26 @@ const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
+      <section id="banner" className="relative banner">
+        <Image
+          priority={true}
+          width={100}
+          height={400}
+          className="absolute top-0 -z-[1] w-full h-full object-cover"
+          alt=""
+          src="/jpegs/mainSection.jpg"
+        />
+        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
+          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
+            <h1>
+              <b>
+                We Capture Beautiful&nbsp;Memories!
+                <br /> Explore Our Portfolio For&nbsp;Reference.
+              </b>
+            </h1>
+          </div>
+        </div>
+      </section>
       {[
         {
           title: "Real State Photography",
@@ -63,22 +85,54 @@ const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
             "http://placekitten.com/200/300",
           ],
         },
+        {
+          title: "School & Events",
+          images: [
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+          ],
+        },
+        {
+          title: "Others",
+          images: [
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+            "http://placekitten.com/200/300",
+          ],
+        },
       ].map((item, idx) => (
         <section key={idx}>
-          <div className="bg-light-grey px-[31px] text-21xl lg:text-41xl">
-            <h2 className="text-project-100 py-5 lg:py-9">{item.title}</h2>
+          <div className="text-project-100 bg-light-grey px-4 lg:px-8 flex justify-between items-center">
+            <h2 className="py-[0.4em] lg:py-[0.2em] text-5xl md:text-21xl xl:text-41xl font-bold">
+              {item.title}
+            </h2>
+            <Link
+              href="/admin"
+              className="font-normal hover:underline text-xl md:text-5xl xl:text-[30px]"
+            >
+              <span className="hidden md:inline px-2">View More</span>
+              <svg
+                className="inline w-2 h-2 md:w-3 xl:w-4 md:h-3 xl:h-4"
+                viewBox="0 0 15 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.15385 0.5V2.80769H11.0654L0 13.8731L1.62692 15.5L12.6923 4.43462V14.3462H15V0.5H1.15385Z"
+                  fill="#000815"
+                />
+              </svg>
+            </Link>
           </div>
-          <div className="grid">
-            {item.images.map((img, idx) => (
-              <PlaceHolderImage
-                width="700"
-                height="700"
-                key={idx}
-                src={img}
-                alt={item.title + " Image " + (idx + 1)}
-              />
-            ))}
-          </div>
+          {/* @ts-expect-error */}
+          <ImageGrid images={item.images} onSelectImage={() => {}} />
         </section>
       ))}
 
