@@ -1,4 +1,6 @@
 import React, {
+  EventHandler,
+  KeyboardEventHandler,
   MouseEvent,
   MouseEventHandler,
   PropsWithChildren,
@@ -6,6 +8,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -21,21 +24,29 @@ type SliderData = {
   showSlider: (idx: number) => void;
   setSlideCount: (idx: number) => void;
 };
+function checkVisible(elm: Element) {
+  var rect = elm.getBoundingClientRect();
+  var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+  return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
 const SliderContext = createContext<SliderData | null>(null);
 export const SliderProvider = ({
   children,
   autoplay = false,
   autoplayDuration = 2.5,
   loop = true,
+  activeIdx: active = 0,
 }: PropsWithChildren<{
   autoplay?: boolean;
   autoplayDuration?: number;
   loop?: boolean;
+  activeIdx?: number;
 }>) => {
-  const [activeIdx, setActive] = useState(0);
+  const [activeIdx, setActive] = useState(active);
   const [prevIdx, setPrev] = useState(-1);
   const [nextIdx, setNext] = useState(1);
   const [slideCount, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement | null>(null);
   const next = () => {
     setActive((curr) => {
       setPrev(curr);
@@ -79,6 +90,28 @@ export const SliderProvider = ({
       if (interval) clearInterval(interval);
     };
   }, [autoplay, autoplayDuration]);
+
+  useEffect(() => {
+    const keypressEvent: (this:Document, e:KeyboardEvent) => void = (ev) => {
+      console.log("key Pressed inside slider")
+      if(autoplay) return;
+      if(!checkVisible(ref.current!)) return;
+      switch (ev.key) {
+        case "ArrowLeft":
+          prev();
+          break;
+        case "ArrowRight":
+          next();
+          break;
+        default:
+          break;
+      }
+    };
+    document.addEventListener("keydown", keypressEvent);
+    return () => {
+      document.removeEventListener("keydown", keypressEvent);
+    };
+  }, [prev, next]);
   return (
     <SliderContext.Provider
       value={{
@@ -93,7 +126,7 @@ export const SliderProvider = ({
         showSlider,
       }}
     >
-      <div className="relative h-full">{children}</div>
+      <div className="relative h-full" ref={ref}>{children}</div>
     </SliderContext.Provider>
   );
 };
@@ -101,7 +134,7 @@ const useSliderContext = () => {
   const sliderData = useContext(SliderContext);
   if (sliderData === null)
     throw new Error(
-      "Hello. if you arre seeing this error you are using the component incorrectly."
+      "Hello. if you are seeing this error you are using the component incorrectly."
     );
   return sliderData;
 };
