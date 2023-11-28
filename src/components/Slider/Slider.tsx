@@ -15,6 +15,7 @@ type SliderData = {
   prevIdx: number;
   nextIdx: number;
   slideCount: number;
+  loop: boolean;
   next: () => void;
   prev: () => void;
   showSlider: (idx: number) => void;
@@ -25,7 +26,12 @@ export const SliderProvider = ({
   children,
   autoplay = false,
   autoplayDuration = 2.5,
-}: PropsWithChildren<{ autoplay?: boolean; autoplayDuration?: number }>) => {
+  loop = true,
+}: PropsWithChildren<{
+  autoplay?: boolean;
+  autoplayDuration?: number;
+  loop?: boolean;
+}>) => {
   const [activeIdx, setActive] = useState(0);
   const [prevIdx, setPrev] = useState(-1);
   const [nextIdx, setNext] = useState(1);
@@ -54,10 +60,12 @@ export const SliderProvider = ({
   };
   useEffect(() => {
     if (activeIdx === -1) {
-      showSlider(slideCount - 1);
+      if (loop) showSlider(slideCount - 1);
+      else showSlider(0);
     }
     if (activeIdx === slideCount) {
-      showSlider(0);
+      if (loop) showSlider(0);
+      else showSlider(slideCount - 1);
     }
   }, [activeIdx, showSlider, slideCount]);
   useEffect(() => {
@@ -78,6 +86,7 @@ export const SliderProvider = ({
         prevIdx,
         nextIdx,
         slideCount,
+        loop,
         setSlideCount,
         next,
         prev,
@@ -155,7 +164,7 @@ export const SliderNavigation = () => {
 };
 
 export const SliderPrev = () => {
-  const { prev } = useSliderContext();
+  const { prev, activeIdx, loop } = useSliderContext();
   // wrap prev in a function to prevent event bubbling
   const wrapPrev: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
@@ -163,8 +172,9 @@ export const SliderPrev = () => {
   };
   return (
     <button
-      className="absolute top-1/2 left-5 -translate-y-1/2 rotate-180 w-10 h-10 hover:bg-black rounded-full"
+      className="absolute top-1/2 left-5 -translate-y-1/2 rotate-180 w-10 h-10 opacity-75 hover:opacity-100 disabled:bg-gray-800 disabled:opacity-25 rounded-full"
       onClick={wrapPrev}
+      disabled={activeIdx === 0 && !loop}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
         <g filter="url(#a)">
@@ -210,15 +220,16 @@ export const SliderPrev = () => {
 };
 
 export const SliderNext = () => {
-  const { next } = useSliderContext();
+  const { next, activeIdx, slideCount, loop } = useSliderContext();
   const wrapNext: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     next();
   };
   return (
     <button
-      className="absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10  hover:bg-black rounded-full"
+      className="absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10 opacity-75 hover:opacity-100 disabled:bg-gray-800 disabled:opacity-25 rounded-full"
       onClick={wrapNext}
+      disabled={!loop && activeIdx === slideCount - 1}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
         <g filter="url(#a)">

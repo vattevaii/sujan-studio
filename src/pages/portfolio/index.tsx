@@ -111,11 +111,11 @@ export const getStaticProps: GetStaticProps<{
           title: "Real State Photography",
           images: [
             "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
+            "http://placekitten.com/300/300",
+            "http://placekitten.com/400/300",
+            "http://placekitten.com/500/300",
+            "http://placekitten.com/600/300",
+            "http://placekitten.com/700/300",
           ],
         },
         {
