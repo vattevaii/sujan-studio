@@ -7,6 +7,7 @@ interface IAdminProps {
 const AdminPage: React.FunctionComponent<IAdminProps> = (props) => {
   return <div>
     <Link href="/admin/image-grid">Image Grid</Link>
+    <Link href="/admin/slider">Image Slider</Link>
   </div>;
 };
 

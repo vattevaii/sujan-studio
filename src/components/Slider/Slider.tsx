@@ -1,4 +1,6 @@
 import React, {
+  MouseEvent,
+  MouseEventHandler,
   PropsWithChildren,
   createContext,
   useCallback,
@@ -90,7 +92,7 @@ const useSliderContext = () => {
   const sliderData = useContext(SliderContext);
   if (sliderData === null)
     throw new Error(
-      "Hello. if you arre seeing this error you are using the component incorrectly.",
+      "Hello. if you arre seeing this error you are using the component incorrectly."
     );
   return sliderData;
 };
@@ -114,7 +116,7 @@ export const Slider = ({ children }: { children: React.ReactNode[] }) => {
           <div
             key={idx - 1}
             className={
-              "absolute grid place-items-center h-full w-full transition-transform duration-300"
+              "absolute flex justify-center items-center h-full w-full transition-transform duration-300"
             }
             style={{
               transform: `translateX(${(idx - activeIdx - 1) * 100}%)`,
@@ -154,10 +156,15 @@ export const SliderNavigation = () => {
 
 export const SliderPrev = () => {
   const { prev } = useSliderContext();
+  // wrap prev in a function to prevent event bubbling
+  const wrapPrev: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    prev();
+  };
   return (
     <button
       className="absolute top-1/2 left-5 -translate-y-1/2 rotate-180 w-10 h-10 hover:bg-black rounded-full"
-      onClick={prev}
+      onClick={wrapPrev}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
         <g filter="url(#a)">
@@ -204,10 +211,14 @@ export const SliderPrev = () => {
 
 export const SliderNext = () => {
   const { next } = useSliderContext();
+  const wrapNext: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    next();
+  };
   return (
     <button
       className="absolute top-1/2 right-5 -translate-y-1/2 w-10 h-10  hover:bg-black rounded-full"
-      onClick={next}
+      onClick={wrapNext}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
         <g filter="url(#a)">

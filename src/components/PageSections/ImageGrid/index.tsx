@@ -1,9 +1,13 @@
 import PlaceHolderImage from "@/components/PlaceHolderImage";
+import Image from "next/image";
 import { MouseEventHandler } from "react";
 
 export interface IAppProps {
-  images: [string, string, string, string, string, string];
-  onSelectImage: () => void;
+  images: string[];
+  onSelectImage: (
+    img: string,
+    imgPos: [number, number, number, number]
+  ) => void;
 }
 const lgGridItemSize: { [x: number]: string } = {
   0: "border col-span-2 row-span-6",
@@ -30,26 +34,33 @@ const imgSizes: { [x: number]: string } = {
   5: "aspect-[754/507]",
 };
 const imgHeights = Object.values(imgSizes).map((item) => {
-  console.log(item.slice(7, 13));
-  return item.slice(7, 13);
+  //console.log(item.slice(7, 13));
+  return item.slice(8, 13);
 });
 
 export default function ImageGrid(props: IAppProps) {
   const selectImage: MouseEventHandler<HTMLImageElement> = (e) => {
     const bcr = e.currentTarget.getBoundingClientRect();
-    return [bcr.top, bcr.right, bcr.bottom, bcr.left];
+    props.onSelectImage(e.currentTarget.src, [
+      bcr.top,
+      bcr.right,
+      bcr.bottom,
+      bcr.left,
+    ]);
   };
   return (
     <div className="">
       <div className="hidden md:grid grid-cols-7 grid-rows-9 gap-4 w-full">
-        {props.images.map((image, i) => (
+        {props.images.slice(0,6).map((image, i) => (
           <div key={i} className={lgGridItemSize[i] + " "}>
-            <PlaceHolderImage
+            <Image
               width="500"
               height="500"
               src={image}
               alt=""
-              className="object-cover h-full w-full"
+              className="object-cover h-full w-full min-h-[200px]"
+              onClick={selectImage}
+              unoptimized={true}
             />
           </div>
         ))}
@@ -57,12 +68,14 @@ export default function ImageGrid(props: IAppProps) {
       <div className="grid md:hidden grid-cols-7 grid-rows-12 gap-4 w-full">
         {props.images.map((image, i) => (
           <div key={i} className={smGridItemSize[i] + " "}>
-            <PlaceHolderImage
+            <Image
               width="500"
               height="500"
               src={image}
               alt=""
               className="object-cover h-full w-full"
+              onClick={selectImage}
+              unoptimized={true}
             />
           </div>
         ))}

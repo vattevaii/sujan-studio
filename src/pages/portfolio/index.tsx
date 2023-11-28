@@ -1,14 +1,38 @@
 import { LocationItem } from "@/components/LocationCard";
 import ImageGrid from "@/components/PageSections/ImageGrid";
-import PlaceHolderImage from "@/components/PlaceHolderImage";
+import ImageSlider, { ImageSliderOptions } from "@/components/Slider/ImageSlider";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
-const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const NewWebsite = ({
+  portfolioImages,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [imageSliderOptions, setImgSliderOptions] = useState<ImageSliderOptions>({
+    currentCategory: portfolioImages[0].title,
+    images: portfolioImages[0].images,
+    index: 0,
+  });
+  const openImageModal = (
+    title: string,
+    img: string,
+    imgPos: [number, number, number, number]
+  ) => {
+    const allImgs = portfolioImages.find(img => img.title === title)!.images;
+    // console.log(allImgs, portfolioImages, title);
+    setImgSliderOptions({
+      images: allImgs,
+      currentCategory: title,
+      index: allImgs.findIndex(i => i === img),
+    })
+    setOpenModal(true)
+  };
   return (
     <>
+      {openModal ? <ImageSlider options={imageSliderOptions} onClose={() => setOpenModal(false)} /> : <></>}
       <Head>
         <meta
           name="google-site-verification"
@@ -40,7 +64,49 @@ const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
           </div>
         </div>
       </section>
-      {[
+      {portfolioImages.map((item, idx) => (
+        <section key={idx}>
+          <div className="text-project-100 bg-light-grey px-4 lg:px-8 flex justify-between items-center">
+            <h2 className="py-[0.4em] lg:py-[0.2em] text-5xl md:text-21xl xl:text-41xl font-bold">
+              {item.title}
+            </h2>
+            <Link
+              href="/admin"
+              className="font-normal hover:underline text-xl md:text-5xl xl:text-[30px]"
+            >
+              <span className="hidden md:inline px-2">View More</span>
+              <svg
+                className="inline w-2 h-2 md:w-3 xl:w-4 md:h-3 xl:h-4"
+                viewBox="0 0 15 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.15385 0.5V2.80769H11.0654L0 13.8731L1.62692 15.5L12.6923 4.43462V14.3462H15V0.5H1.15385Z"
+                  fill="#000815"
+                />
+              </svg>
+            </Link>
+          </div>
+          <ImageGrid
+            images={item.images}
+            onSelectImage={(img, imgPos) =>
+              openImageModal(item.title, img, imgPos)
+            }
+          />
+        </section>
+      ))}
+    </>
+  );
+};
+
+export const getStaticProps: GetStaticProps<{
+  locations: LocationItem[];
+  portfolioImages: { title: string; images: string[] }[];
+}> = () => {
+  return {
+    props: {
+      portfolioImages: [
         {
           title: "Real State Photography",
           images: [
@@ -107,45 +173,7 @@ const NewWebsite = ({}: InferGetStaticPropsType<typeof getStaticProps>) => {
             "http://placekitten.com/200/300",
           ],
         },
-      ].map((item, idx) => (
-        <section key={idx}>
-          <div className="text-project-100 bg-light-grey px-4 lg:px-8 flex justify-between items-center">
-            <h2 className="py-[0.4em] lg:py-[0.2em] text-5xl md:text-21xl xl:text-41xl font-bold">
-              {item.title}
-            </h2>
-            <Link
-              href="/admin"
-              className="font-normal hover:underline text-xl md:text-5xl xl:text-[30px]"
-            >
-              <span className="hidden md:inline px-2">View More</span>
-              <svg
-                className="inline w-2 h-2 md:w-3 xl:w-4 md:h-3 xl:h-4"
-                viewBox="0 0 15 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.15385 0.5V2.80769H11.0654L0 13.8731L1.62692 15.5L12.6923 4.43462V14.3462H15V0.5H1.15385Z"
-                  fill="#000815"
-                />
-              </svg>
-            </Link>
-          </div>
-          {/* @ts-expect-error */}
-          <ImageGrid images={item.images} onSelectImage={() => {}} />
-        </section>
-      ))}
-
-      <section>This is our portfolio.</section>
-    </>
-  );
-};
-
-export const getStaticProps: GetStaticProps<{
-  locations: LocationItem[];
-}> = () => {
-  return {
-    props: {
+      ],
       locations: [
         {
           locationName: "South Australia",
