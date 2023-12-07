@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type LocationItem = {
   locationName: string;
   address: string;
@@ -10,7 +12,12 @@ const LocationCard = ({ locationData }: { locationData: LocationItem }) => {
 
   return (
     <div className="flex flex-col items-start gap-4 text-left">
-      <div className="font-semibold text-11xl xl:text-21xl">{locationName}</div>
+      <Link
+        href={"/" + locationName.split(" ").join("-").toLowerCase()}
+        className="font-semibold text-11xl xl:text-21xl hover:underline decoration-2 transition-all"
+      >
+        {locationName}
+      </Link>
       <div className="text-xl xl:text-5xl font-raleway">
         <p>{address}</p>
         <p>
