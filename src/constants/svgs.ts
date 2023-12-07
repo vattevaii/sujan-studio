@@ -27,6 +27,9 @@ import Icon_RealState from "@/images/svgs/real-estate-agency-svgrepo-com.svg";
 import Icon_Car from "@/images/svgs/car-svgrepo-com.svg";
 import Icon_Family from "@/images/svgs/family-avatars-svgrepo-com.svg";
 import Icon_CostEstimate from "@/images/svgs/cost-estimate.svg";
+import Icon_CallUs from "@/images/svgs/call-calling.svg";
+import Icon_MessageUs from "@/images/svgs/sms.svg";
+import Icon_OurLocation from "@/images/svgs/location.svg";
 const brandSvgs = {
   logo: {
     src: Icon_Logo,
@@ -162,6 +165,22 @@ const callToActionSvgs = {
     alt: "Get Estimate",
   },
 };
+
+const contactUs = {
+  call: {
+    src: Icon_CallUs
+    ,alt: "Call Us"
+  },
+  location:{
+    src: Icon_OurLocation,
+    alt:"Our Location",
+
+  },
+  message:{
+    src: Icon_MessageUs,
+    alt: "Mail Us",
+  }
+}
 const svgs = {
   actionsSvg,
   mediaSvgs,
@@ -170,6 +189,7 @@ const svgs = {
   chooseUsSvg,
   whatWeDoSvgs,
   callToActionSvgs,
+  contactUs
 };
 
 export default svgs;

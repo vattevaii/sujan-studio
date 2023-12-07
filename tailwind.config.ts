@@ -37,6 +37,8 @@ const config: Config = {
           "100": "rgba(2, 17, 41, 1)",
           "200": "#435269",
         },
+        inputF: "#021129",
+        input: "#5F789735",
         divider: "#5F789729",
         "light-grey": "#dceafd",
         white: "#fff",
