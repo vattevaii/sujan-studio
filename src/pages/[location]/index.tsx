@@ -165,8 +165,9 @@ const LocationPage: React.FunctionComponent<
           By Locations|{mainLocation}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(max(300px,calc(100px+13vw)),1fr))] gap-5 text-project-200 text-5xl">
-          {sublocations.map((loc) => (
+          {sublocations?.map((loc) => (
             <Link
+              key={loc}
               href={
                 "/" +
                 mainLocation.toLowerCase().split(" ").join("-") +
