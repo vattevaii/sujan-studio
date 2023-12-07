@@ -33,7 +33,7 @@ function Service({ service }: { service: ServiceItem }) {
             top-0 left-0 pointer-fine:cursor-pointer w-full h-full pointer-fine:backdrop-blur-[1px]
             transition-opacity duration-[500ms] opacity-0 pointer-coarse:opacity-100 hover:opacity-100 active:opacity-100 focus:opacity-100 focus-within:opacity-100"
       >
-        <h3 className="delay-250 duration-300 transition-transform translate-y-6 pointer-coarse:translate-y-0 group-hover:translate-y-0">
+        <h3 className="text-center delay-250 duration-300 transition-transform translate-y-6 pointer-coarse:translate-y-0 group-hover:translate-y-0">
           {service.text}
         </h3>
         <button

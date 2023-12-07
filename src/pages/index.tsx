@@ -41,7 +41,7 @@ const NewWebsite = ({
       </Head>
 
       <Banner {...bannerData} />
-      <section className="services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 grid-rows-2">
+      <section className="services relative overflow-x-hidden grid grid-cols-1 min-[560px]:grid-cols-2 md:grid-cols-3 grid-rows-2">
         <Services services={services} />
       </section>
       <section className="choose-us bg-light-grey py-12 md:py-16 lg:py-20">
@@ -100,13 +100,23 @@ export const getStaticProps: GetStaticProps<{
         { href: "/", src: "/jpegs/Weddings.jpg", text: "Weddings" },
         {
           href: "/",
+          src: "/jpegs/SchoolEvents.png",
+          text: "School & Events",
+        },
+        {
+          href: "/",
           src: "/jpegs/FamilyAndEvents.jpg",
-          text: "Family & Events",
+          text: "Family and Events",
         },
         {
           href: "/",
           src: "/jpegs/CoorporateEvents.jpg",
           text: "Corporate Events",
+        },
+        {
+          href: "/",
+          src: "/jpegs/Others.png",
+          text: "Others",
         },
       ],
       chooseUsData: [
