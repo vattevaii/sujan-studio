@@ -20,7 +20,8 @@ const source_sans = Source_Sans_3({
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const firstPath = router.asPath.split("/")[1] || "";
-  const Layout = firstPath !== "admin" ? CustomerLayout : AdminLayout;
+  console.log(firstPath, firstPath.startsWith("admin"));
+  const Layout = firstPath.startsWith("admin") ? AdminLayout : CustomerLayout;
   return (
     <>
       <Head>

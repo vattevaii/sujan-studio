@@ -10,13 +10,18 @@
     "analyze": "set ANALYZE=true&&next build"
   },
   "dependencies": {
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.21.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "next": "14.0.1",
+    "next-sanity": "^7.0.2",
     "npm": "^10.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-simple-typewriter": "^5.0.1",
-    "sharp": "^0.32.6"
+    "sanity": "^3.21.1",
+    "sharp": "^0.32.6",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.0.1",
