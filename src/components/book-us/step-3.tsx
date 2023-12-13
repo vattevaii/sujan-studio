@@ -1,7 +1,11 @@
 import * as React from "react";
 import InputText from "../input/InputText";
 
-export interface IStep3Props {}
+export interface IStep3Props {
+  
+  nextStep: () => void;
+  prevStep: () => void;
+}
 
 export default function Step3(props: IStep3Props) {
   return (
@@ -87,6 +91,21 @@ export default function Step3(props: IStep3Props) {
           </div>
         </div>
       </div>
+      <div className="flex justify-between pt-6">
+          <button
+              className="bg-inputBgF border-2 border-project-100 text-project-100 p-2 min-w-[150px]"
+              onClick={props.prevStep}
+            >
+              Previous
+            </button>
+            <button
+              className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
+              onClick={props.nextStep}
+            >
+              Next
+            </button>
+          
+        </div>
     </div>
   );
 }

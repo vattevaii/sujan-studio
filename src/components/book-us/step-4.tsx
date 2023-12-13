@@ -1,9 +1,14 @@
 import * as React from "react";
 import InputText from "../input/InputText";
+import { useFormikContext } from "formik";
+import InputButton from "../input/inputbutton";
 
-export interface IStep4Props {}
+export interface IStep4Props {
+  prevStep: () => void;
+}
 
 export default function Step4(props: IStep4Props) {
+  const form = useFormikContext();
   return (
     <div>
       <p>Your Address Details</p>
@@ -52,6 +57,15 @@ export default function Step4(props: IStep4Props) {
             </label>
           </div>
         </div>
+      </div>
+      <div className="flex justify-between pt-6">
+        <button
+          className="bg-inputBgF border-2 border-project-100 text-project-100 p-2 min-w-[150px]"
+          onClick={props.prevStep}
+        >
+          Previous
+        </button>
+        <InputButton value="Email My Quote." />
       </div>
     </div>
   );

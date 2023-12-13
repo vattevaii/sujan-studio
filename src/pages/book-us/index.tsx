@@ -53,7 +53,7 @@ const BookUs: React.FunctionComponent<
           free to add as much detail as needed.
         </p>
         <StepDots
-          totalSteps={[1, 2, 3, 4, 5]}
+          totalSteps={[1, 2, 3, 4]}
           changeStep={(n) => setStep(n)}
           currentStep={step}
         />
@@ -67,40 +67,17 @@ const BookUs: React.FunctionComponent<
         >
           <Form>
             {step === 1 ? (
-              <Step1 />
+              <Step1 nextStep={() => setStep(s => s+1)}/>
             ) : step === 2 ? (
-              <Step2 />
+              <Step2 nextStep={() => setStep(s => s+1)} prevStep={() => setStep(s => s-1)}/>
             ) : step === 3 ? (
-              <Step3 />
+              <Step3 nextStep={() => setStep(s => s+1)} prevStep={() => setStep(s => s-1)}/>
             ) : (
-              <Step4 />
+              <Step4 prevStep={() => setStep(s => s-1)}/>
             )}
           </Form>
         </Formik>
-        <div className="flex justify-between pt-6">
-          {step > 1 ? (
-            <button
-              className="bg-inputBgF border-2 border-project-100 text-project-100 p-2 min-w-[150px]"
-              onClick={() => setStep((s) => s - 1)}
-            >
-              Previous
-            </button>
-          ) : (
-            <div />
-          )}
-          {step < 4 ? (
-            <button
-              className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
-              onClick={() => setStep((s) => s + 1)}
-            >
-              Next
-            </button>
-          ) : (
-            <button className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]">
-              Email my quote.
-            </button>
-          )}
-        </div>
+        
       </section>
     </>
   );

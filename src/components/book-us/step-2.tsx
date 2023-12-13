@@ -1,7 +1,13 @@
 import * as React from "react";
-import { InputRadioGroup, InputRadioItemForBookUsPage } from "../input/inputradio";
+import {
+  InputRadioGroup,
+  InputRadioItemForBookUsPage,
+} from "../input/inputradio";
 
-export interface IStep2Props {}
+export interface IStep2Props {
+  nextStep: () => void;
+  prevStep: () => void;
+}
 
 export default function Step2(props: IStep2Props) {
   return (
@@ -40,6 +46,21 @@ export default function Step2(props: IStep2Props) {
           </InputRadioItemForBookUsPage>
         </label>
       </InputRadioGroup>
+      <div className="flex justify-between pt-6">
+        <button
+          className="bg-inputBgF border-2 border-project-100 text-project-100 p-2 min-w-[150px]"
+          onClick={props.prevStep}
+        >
+          Previous
+        </button>
+
+        <button
+          className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
+          onClick={props.nextStep}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
