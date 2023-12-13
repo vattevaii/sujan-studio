@@ -7,6 +7,7 @@ import { IntersectionProvider } from "@/packages/use-intersection-observer";
 import { useRouter } from "next/router";
 import CustomerLayout from "@/components/Layouts/Customer";
 import AdminLayout from "@/components/Layouts/Admin";
+import { SessionProvider } from "next-auth/react";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -63,11 +64,13 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script> */}
       {/* <!-- End Google Tag Manager --> */}
-      <IntersectionProvider>
-        <Layout locations={pageProps.locations} route={firstPath}>
-          <Component {...pageProps} />
-        </Layout>
-      </IntersectionProvider>
+      <SessionProvider session={pageProps.session}>
+        <IntersectionProvider>
+          <Layout locations={pageProps.locations} route={firstPath}>
+            <Component {...pageProps} />
+          </Layout>
+        </IntersectionProvider>
+      </SessionProvider>
     </>
   );
 }

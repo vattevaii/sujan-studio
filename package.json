@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "set ANALYZE=true&&next build"
+    "analyze": "set ANALYZE=true&&next build",
+    "sanity:import": "sanity dataset import"
   },
   "dependencies": {
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.21.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "next": "13.4.19",
+    "next-auth": "^4.24.4",
     "next-sanity": "^7.0.2",
     "npm": "^10.2.3",
     "react": "^18",
@@ -36,5 +38,8 @@
     "tailwindcss": "^3.3.0",
     "tailwindcss-touch": "^1.0.1",
     "typescript": "^5"
+  },
+  "resolutions": {
+    "wrap-ansi": "7.0.0"
   }
 }
