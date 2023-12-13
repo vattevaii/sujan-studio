@@ -38,6 +38,7 @@ const config: Config = {
           "200": "#435269",
         },
         inputF: "#021129",
+        inputBgF: "#02112937",
         input: "#5F789735",
         divider: "#5F789729",
         "light-grey": "#dceafd",

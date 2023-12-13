@@ -8,6 +8,7 @@ import locations from "./schemas/locations";
 import reviews from "./schemas/reviews";
 import pagePortfolio from "./schemas/page-portfolio";
 import contactUs from "./schemas/contact-us";
+import serviceItem from "./schemas/serviceItem";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -18,6 +19,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     locations,
     reviews,
     pagePortfolio,
-    contactUs
+    contactUs,
+    serviceItem
   ],
 };

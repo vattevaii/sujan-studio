@@ -71,3 +71,33 @@ export function InputRadioItem({
     </>
   );
 }
+
+export function InputRadioItemForBookUsPage({
+  className,
+  children,
+  ...props
+}: React.HTMLProps<HTMLInputElement>) {
+  const ctx = React.useContext(inputContext);
+  if (!ctx) throw new Error("Radio Item not wrapped with RadioGroup");
+  return (
+    <>
+      <input
+        type="radio"
+        name={ctx.name}
+        {...props}
+        className={className + " hidden"}
+      ></input>
+      <div
+        className={
+          (ctx.selected === props.value
+            ? "bg-inputBgF border-inputF text-project-100"
+            : "border-divider text-project-200") +
+          " flex justify-center items-center md:flex-row border-2 transition-all p-3 md:min-w-[120px] xl:min-w-[200px] " +
+          className
+        }
+      >
+        {children}
+      </div>
+    </>
+  );
+}
