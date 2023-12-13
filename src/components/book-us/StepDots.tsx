@@ -27,9 +27,9 @@ const StepDots: React.FunctionComponent<IStepDotsProps> = (props) => {
     >
       {props.totalSteps.map((v, i) =>
         i === 0 ? (
-          <Step v={v} i={i} />
+          <Step key={i} v={v} i={i} />
         ) : (
-          <>
+          <React.Fragment key={i}>
             <div
               className={
                 (props.currentStep >= i + 1
@@ -39,7 +39,7 @@ const StepDots: React.FunctionComponent<IStepDotsProps> = (props) => {
               }
             ></div>
             <Step v={v} i={i} />
-          </>
+          </React.Fragment>
         )
       )}
     </div>

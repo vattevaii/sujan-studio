@@ -4,10 +4,11 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const withAdmin = (WrappedComponent: NextComponentType) => {
-  return (props: any) => {
+  return function AdminComponent(props: any) {
+    const Router = useRouter();
+    const session = useSession();
     if (typeof window !== "undefined") {
-      const Router = useRouter();
-      const { status, data } = useSession();
+      const { status, data } = session;
       const isAuthenticated = status === "authenticated";
       const isLoading = status === "loading";
       console.log(data);

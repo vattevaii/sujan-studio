@@ -34,8 +34,8 @@ export default function AddData(props: any) {
     <div>
       <InputText placeholder="Document Name" ref={docNameRef} />
       <div className="flex gap-5">
-        {docNames.map((docName) => (
-          <span className="cursor-pointer" onClick={() => setDocName(docName)}>
+        {docNames.map((docName,i) => (
+          <span key={i} className="cursor-pointer" onClick={() => setDocName(docName)}>
             {docName}
           </span>
         ))}
