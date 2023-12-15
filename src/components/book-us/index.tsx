@@ -6,7 +6,7 @@ import Step4 from "./step-4";
 export type TypeBookUs = {
   needs: string;
   purpose: string;
-  "exact-need": string;
+  "exactNeed": string;
   "address":{
     street: string;
     zip: string;

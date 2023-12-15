@@ -9,6 +9,7 @@ import reviews from "./schemas/reviews";
 import pagePortfolio from "./schemas/page-portfolio";
 import contactUs from "./schemas/contact-us";
 import serviceItem from "./schemas/serviceItem";
+import booking from "./schemas/booking";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -20,6 +21,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     reviews,
     pagePortfolio,
     contactUs,
-    serviceItem
+    serviceItem,
+    booking
   ],
 };

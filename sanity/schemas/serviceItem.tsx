@@ -16,7 +16,7 @@ export default defineType({
       title: "Service Scope",
       type: "array",
       options: {
-        list: ["Personal", "Business"],
+        list: ["personal", "business"],
       },
       of: [
         {
@@ -29,7 +29,7 @@ export default defineType({
       title: "Services",
       type: "array",
       options: {
-        list: ["Photography", "Videography"],
+        list: ["photography", "videography"],
       },
       of: [
         {

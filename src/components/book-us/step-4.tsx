@@ -6,12 +6,30 @@ import InputButton from "../input/inputbutton";
 export interface IStep4Props {
   prevStep: () => void;
 }
-
+const isEmpty = (s: Array<string | number>) => {
+  let empty = false;
+  s.forEach((s) => {
+    if (s.toString().length === 0) empty = true;
+  });
+  return empty;
+};
 export default function Step4(props: IStep4Props) {
-  const form = useFormikContext();
+  const [error, setError] = React.useState("");
+  const form = useFormikContext<{
+    personal: {
+      "fullName": string;
+      email: string;
+      phone: string;
+    };
+  }>();
+  const handleSubmit = () => {
+    if (!form.values.personal || isEmpty(Object.values(form.values.personal)))
+      setError("Please fill in your information");
+    else form.handleSubmit();
+  };
   return (
     <div>
-      <p>Your Address Details</p>
+      <p className="text-lg">Your Address Details</p>
       <div className="grid gap-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-7">
           <div className="flex flex-col justify-between w-full">
@@ -19,8 +37,9 @@ export default function Step4(props: IStep4Props) {
               <p>Full Name</p>
               <InputText
                 className="w-full"
-                id="first-name"
-                placeholder="your First Name here"
+                id="full-name"
+                placeholder="your Full Name here"
+                {...form.getFieldProps("personal.fullName")}
               />
             </label>
           </div>
@@ -31,6 +50,7 @@ export default function Step4(props: IStep4Props) {
                 className="w-full"
                 id="email"
                 placeholder="your Email here"
+                {...form.getFieldProps("personal.email")}
               />
             </label>
           </div>
@@ -38,15 +58,16 @@ export default function Step4(props: IStep4Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-7">
           <div className="flex flex-col justify-between w-full">
             <label className="block">
-              <p>Full Name</p>
+              <p>Phone Number</p>
               <InputText
                 className="w-full"
                 id="first-name"
                 placeholder="your First Name here"
+                {...form.getFieldProps("personal.phone")}
               />
             </label>
           </div>
-          <div className="flex flex-col justify-between w-full">
+          <div className="flex flex-col justify-between w-full opacity-0">
             <label className="block">
               <p>Your Email</p>
               <InputText
@@ -65,8 +86,14 @@ export default function Step4(props: IStep4Props) {
         >
           Previous
         </button>
-        <InputButton value="Email My Quote." />
+        <button
+          className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
+          onClick={handleSubmit}
+        >
+          Email My Quote.
+        </button>
       </div>
+      <div className="flex justify-end text-red-500">{error}</div>
     </div>
   );
 }

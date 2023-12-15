@@ -1,8 +1,10 @@
 import { Step1, Step2, Step3, Step4, StepDots } from "@/components/book-us";
 import { Form, Formik } from "formik";
+import { debounce } from "lodash";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 interface IBookUsProps {}
@@ -11,6 +13,47 @@ const BookUs: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   const [step, setStep] = React.useState(1);
+  const router = useRouter();
+  const [initVal, setInitVal] = React.useState({
+    needs: "",
+    purpose: "",
+    exactNeed: "",
+    address: {
+      street: "",
+      zip: "",
+      city: "",
+    },
+    prefer: {
+      date: "",
+      startTime: "",
+      hours: 0,
+    },
+    personal: {
+      fullName: "",
+      email: "",
+      phone: "",
+    },
+  });
+  const submitBooking = debounce((d) => {
+    fetch("/api/submitbooking", {
+      method: "POST",
+      body: JSON.stringify(d),
+    }).then((d) => {
+      if (d.status === 201) {
+        router.push("/book-us?success=true");
+      }
+    });
+  }, 100);
+  React.useEffect(() => {
+    const { step, ...query } = router.query;
+    try {
+      if (Number(step) < 5) {
+        setStep(Number(step));
+      }
+    } catch (e) {}
+    // console.log(initVal, query);
+    setInitVal({ ...initVal, ...query });
+  }, [router]);
   return (
     <>
       <Head>
@@ -58,26 +101,31 @@ const BookUs: React.FunctionComponent<
           currentStep={step}
         />
         <Formik
-          initialValues={{
-            needs: "",
-            purpose: "",
-            "exact-need": "",
+          enableReinitialize={true}
+          initialValues={initVal}
+          onSubmit={(d: any) => {
+            console.log(d);
+            submitBooking(d);
           }}
-          onSubmit={() => {}}
         >
           <Form>
             {step === 1 ? (
-              <Step1 nextStep={() => setStep(s => s+1)}/>
+              <Step1 nextStep={() => setStep((s) => s + 1)} />
             ) : step === 2 ? (
-              <Step2 nextStep={() => setStep(s => s+1)} prevStep={() => setStep(s => s-1)}/>
+              <Step2
+                nextStep={() => setStep((s) => s + 1)}
+                prevStep={() => setStep((s) => s - 1)}
+              />
             ) : step === 3 ? (
-              <Step3 nextStep={() => setStep(s => s+1)} prevStep={() => setStep(s => s-1)}/>
+              <Step3
+                nextStep={() => setStep((s) => s + 1)}
+                prevStep={() => setStep((s) => s - 1)}
+              />
             ) : (
-              <Step4 prevStep={() => setStep(s => s-1)}/>
+              <Step4 prevStep={() => setStep((s) => s - 1)} />
             )}
           </Form>
         </Formik>
-        
       </section>
     </>
   );

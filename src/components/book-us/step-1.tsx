@@ -4,51 +4,78 @@ import {
   InputRadioItemForBookUsPage,
 } from "../input/inputradio";
 import { useFormikContext } from "formik";
+import { useRouter } from "next/router";
 
 export interface IStep1Props {
   nextStep: () => void;
 }
 
 export default function Step1(props: IStep1Props) {
-  const form = useFormikContext();
+  const form = useFormikContext<{
+    needs: string;
+    purpose: string;
+  }>();
+  const [error, setError] = React.useState("");
+  const router = useRouter();
   const next = () => {
-    // if(form.values)
-    props.nextStep()
-  }
+    if (form.values.needs && form.values.purpose) {
+      const query = router.query;
+      setError("");
+      router.push(
+        {
+          query: {
+            ...query,
+            needs: form.values.needs,
+            purpose: form.values.purpose,
+            step: 2
+          },
+        },
+        undefined,
+        {
+          shallow: true,
+        }
+      );
+      props.nextStep();
+    } else setError("Make sure that both fields are selected");
+  };
   return (
     <>
       <div className="flex flex-col gap-5 md:flex-row items-center text-center md:text-start justify-between">
         <div>
-          <p>What you Need?</p>
+          <p className="text-lg">What you Need?</p>
           <InputRadioGroup
             name="needs"
             className="flex justify-center md:justify-start  gap-5"
+            onChange={(v) => form.setFieldValue("needs", v)}
+            value={form.values.needs}
           >
             <label>
-              <InputRadioItemForBookUsPage value="photographer">
+              <InputRadioItemForBookUsPage value="photography">
                 <p>Photographer</p>
               </InputRadioItemForBookUsPage>
             </label>
             <label>
-              <InputRadioItemForBookUsPage value="videographer">
+              <InputRadioItemForBookUsPage value="videography">
                 <p>Videographer</p>
               </InputRadioItemForBookUsPage>
             </label>
           </InputRadioGroup>
         </div>
         <div>
-          <p>For Business or personal purposes</p>
+          <p className="text-lg">For Business or personal purposes</p>
           <InputRadioGroup
             name="purpose"
             className="flex gap-5  justify-center md:justify-end"
+            onChange={(v) => form.setFieldValue("purpose", v)}
+            value={form.values.purpose}
           >
             <label>
-              <InputRadioItemForBookUsPage value="photographer">
+              <InputRadioItemForBookUsPage value="personal">
                 <p>Personal</p>
               </InputRadioItemForBookUsPage>
             </label>
             <label>
-              <InputRadioItemForBookUsPage value="videographer">
+              <InputRadioItemForBookUsPage value="business">
                 <p>Business</p>
               </InputRadioItemForBookUsPage>
             </label>
@@ -64,6 +91,7 @@ export default function Step1(props: IStep1Props) {
           Next
         </button>
       </div>
+      <div className="flex justify-end text-red-500">{error}</div>
     </>
   );
 }

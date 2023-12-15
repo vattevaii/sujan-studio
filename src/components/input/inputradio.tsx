@@ -17,6 +17,9 @@ export function InputRadioGroup({
   } & React.HTMLProps<HTMLDivElement>
 >) {
   const [current, setCurrent] = React.useState(value ?? "");
+  React.useEffect(() => {
+    if (value) setCurrent(value);
+  }, [value]);
   return (
     <inputContext.Provider value={{ name: name, selected: current }}>
       <div
@@ -24,7 +27,7 @@ export function InputRadioGroup({
           // @ts-expect-error
           onChange?.(e.target.value);
           // @ts-expect-error
-          if (!value) setCurrent(e.target.value);
+          setCurrent(e.target.value);
         }}
         {...props}
       >
