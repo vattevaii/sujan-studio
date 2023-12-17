@@ -2,29 +2,34 @@ import * as React from "react";
 import InputText from "../input/InputText";
 import { useFormikContext } from "formik";
 import InputButton from "../input/inputbutton";
+import flattenObject from "@/utils/flattenObject";
 
 export interface IStep4Props {
   prevStep: () => void;
 }
-const isEmpty = (s: Array<string | number>) => {
-  let empty = false;
-  s.forEach((s) => {
-    if (s.toString().length === 0) empty = true;
-  });
-  return empty;
-};
+
 export default function Step4(props: IStep4Props) {
   const [error, setError] = React.useState("");
   const form = useFormikContext<{
     personal: {
-      "fullName": string;
+      fullName: string;
       email: string;
       phone: string;
     };
   }>();
-  const handleSubmit = () => {
-    if (!form.values.personal || isEmpty(Object.values(form.values.personal)))
-      setError("Please fill in your information");
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    console.log(form.errors);
+    console.log(form.values);
+    if (form.errors.personal) {
+      const errs = flattenObject({ a: form.errors.personal });
+      console.log(errs);
+      setError(Object.values(errs).join(", "));
+      return;
+    } else if (Object.keys(form.errors).length > 0)
+      setError(
+        "Please revisit the whole form to see if you entered correct data."
+      );
     else form.handleSubmit();
   };
   return (

@@ -37,6 +37,7 @@ const config: Config = {
           "100": "rgba(2, 17, 41, 1)",
           "200": "#435269",
         },
+        "faded": "#F6FAFF",
         inputF: "#021129",
         inputBgF: "#02112937",
         input: "#5F789735",

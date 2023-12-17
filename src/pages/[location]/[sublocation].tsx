@@ -1,4 +1,5 @@
 import { LocationItem } from "@/components/LocationCard";
+import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -88,6 +89,56 @@ export const getStaticProps = (async (context) => {
           "/jpegs/Weddings.jpg",
         ],
       },
+      reviews: [
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+        {
+          bg: "/jpegs/mainSection.jpg",
+          author: "Caitlyn Mathews",
+          authorSrc: "/jpegs/WeddingItem.jpg",
+          company: "Company Name",
+          reviewText:
+            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
+        },
+      ],
       locations: [
         {
           locationName: "South Australia",
@@ -167,11 +218,93 @@ const LocationPage: React.FunctionComponent<
       </section>
       <section
         id="locations"
-        className="bg-light-grey text-project-100 px-10 xl:px-16 py-20"
+        className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5"
       >
-        <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold pb-20">
-          By Locations|{mainLocation}
+        <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
+          Transforming&nbsp;Moments into Timeless&nbsp;Memories –
+          Your&nbsp;Vision, Our&nbsp;Expertise.
         </h2>
+        <div className="grid md:grid-cols-2 gap-5">
+          <div>
+            <Image
+              className="w-full rounded-md"
+              width={500}
+              height={500}
+              src={props.sublocationData.pictures[0]}
+              alt=""
+            />
+          </div>
+          <div className="flex flex-col items-end gap-5 text-project-200 text-md md:text-xl xl:text-5xl">
+            <p>
+              Sujan Studio is your partner in creating visual narratives that
+              captivate hearts and minds. We don’t just take photographs and
+              videos; we curate moments that resonate. Whether it's a milestone
+              event, a business venture, or a personal journey, our mission is
+              to bring your story to life in the most authentic and enchanting
+              way.
+            </p>
+            <Link href="/book-us">
+              <button className=" bg-project-100 text-white p-4 w-44">
+                Book Us
+              </button>
+            </Link>
+          </div>
+        </div>
+        <div>
+          <Image
+            className="w-full rounded-md my-5 max-h-52"
+            width={500}
+            height={500}
+            src={props.sublocationData.pictures[1]}
+            alt=""
+          />
+        </div>
+      </section>
+      <ReviewSlider reviews={props.reviews} className="h-64 md:h-72 lg:h-96" />
+      <section className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5">
+        <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
+          We Bring Dreams Into&nbsp;Reality
+        </h2>
+        <div className="grid md:grid-cols-2 gap-5">
+          <div className="flex flex-col items-end gap-5 text-project-200 text-md md:text-xl xl:text-5xl">
+            <p>
+              Sujan Studio is your partner in creating visual narratives that
+              captivate hearts and minds. We don’t just take photographs and
+              videos; we curate moments that resonate. Whether it's a milestone
+              event, a business venture, or a personal journey, our mission is
+              to bring your story to life in the most authentic and enchanting
+              way.
+            </p>
+          </div>
+          <div>
+            <Image
+              className="w-full rounded-md"
+              width={500}
+              height={500}
+              src={props.sublocationData.pictures[0]}
+              alt=""
+            />
+          </div>
+        </div>
+        <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
+          Moments Captured with Our Exceptional Photography Services
+        </h2>
+        <div className="flex flex-col sm:flex-row justify-between">
+          <div>
+            <h2 className="w-fit text-5xl lg:text-21xl font-semibold pb-3">
+              Lets start something amazing together.
+            </h2>
+            <p>
+              Our skilled photographers will document every cherished moment,
+              creating timeless memories.
+            </p>
+          </div>
+          <Link href="/book-us" className="self-end">
+            <button className=" bg-project-100 text-white p-4 w-44">
+              Book Us
+            </button>
+          </Link>
+        </div>
       </section>
     </>
   );

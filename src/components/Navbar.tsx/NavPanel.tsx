@@ -75,6 +75,11 @@ export default function NavPanel({
               icon: svgs.navSvgs.news,
             },
             {
+              route: "packages",
+              name: "Our Packages",
+              icon: svgs.navSvgs.packages,
+            },
+            {
               route: "book-us",
               name: "Book a Photographer",
               icon: svgs.navSvgs.book,

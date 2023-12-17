@@ -18,7 +18,7 @@ export default function Step1(props: IStep1Props) {
   const [error, setError] = React.useState("");
   const router = useRouter();
   const next = () => {
-    if (form.values.needs && form.values.purpose) {
+    if (!form.errors.needs && !form.errors.purpose) {
       const query = router.query;
       setError("");
       router.push(

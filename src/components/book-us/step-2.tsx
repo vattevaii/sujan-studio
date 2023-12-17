@@ -23,7 +23,7 @@ export default function Step2(props: IStep2Props) {
   >([]);
   const next = () => {
     const query = router.query;
-    if (form.values["exactNeed"]) {
+    if (!form.errors["exactNeed"]) {
       setError("");
       router.push(
         {

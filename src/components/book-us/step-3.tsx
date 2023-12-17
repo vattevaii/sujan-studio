@@ -2,19 +2,12 @@ import * as React from "react";
 import InputText from "../input/InputText";
 import { useFormikContext } from "formik";
 import { useRouter } from "next/router";
+import flattenObject from "@/utils/flattenObject";
 
 export interface IStep3Props {
   nextStep: () => void;
   prevStep: () => void;
 }
-
-const isEmpty = (s: Array<string | number>) => {
-  let empty = false;
-  s.forEach((s) => {
-    if (s.toString().length === 0) empty = true;
-  });
-  return empty;
-};
 
 export default function Step3(props: IStep3Props) {
   const [error, setError] = React.useState("");
@@ -27,22 +20,20 @@ export default function Step3(props: IStep3Props) {
     };
     prefer: {
       date: string;
-      "startTime": string;
+      startTime: string;
       hours: number;
     };
   }>();
-  const next = () => {
+  const next: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
     const query = router.query;
-    if (
-      !form.values.address ||
-      !form.values.prefer ||
-      isEmpty(Object.values(form.values.address)) ||
-      isEmpty(Object.values(form.values.prefer))
-    ) {
-      setError("All form items must be filled");
+    if (form.errors.address || form.errors.prefer) {
+      const errs=flattenObject({a:form.errors.address, b:form.errors.prefer});
+      console.log(errs)
+      setError(Object.values(errs).join(", "));
       return;
     }
-    console.log(form.values);
+    // console.log(form.values);
     router.push(
       {
         query: { ...query, step: 4 },
