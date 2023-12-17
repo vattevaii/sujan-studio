@@ -17,18 +17,18 @@ export function Package(props: IPackageProps) {
           className="w-full h-full"
           width={500}
           height={500}
-          src={props.image}
+          src={props.image?props.image: "/jpegs/mainSection.jpg"}
           alt={""}
         />
       </div>
       <h3 className="text-light-grey text-21xl">{props.name}</h3>
       <p className="text-light-grey text-xl pb-4">Starting From</p>
       <div className="flex items-center justify-center aspect-square border-[6px] p-5 border-faded bg-project-100 text-white rounded-full">
-        <p className="text-[48px] font-semibold">{props.dollars}</p>
+        <p className="text-21xl lg:text-[48px] font-semibold">{props.dollars}</p>
       </div>
       <div className="w-full grid gap-5 font-raleway">
-        {props.privileges.map((ptext) => (
-          <p className="flex items-center gap-5">
+        {props.privileges.map((ptext,key) => (
+          <p className="flex items-center gap-5" key={key}>
             <svg
               width="20"
               height="20"

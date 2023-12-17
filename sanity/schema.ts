@@ -10,6 +10,7 @@ import pagePortfolio from "./schemas/page-portfolio";
 import contactUs from "./schemas/contact-us";
 import serviceItem from "./schemas/serviceItem";
 import booking from "./schemas/booking";
+import packageItem from "./schemas/packageItem";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pagePortfolio,
     contactUs,
     serviceItem,
-    booking
+    booking,
+    packageItem
   ],
 };

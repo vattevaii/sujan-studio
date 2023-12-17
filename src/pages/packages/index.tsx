@@ -1,11 +1,15 @@
 import { Package } from "@/components/Cards/package";
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import * as React from "react";
+import { client } from "../../../sanity/lib/client";
 
 interface IPackagePageProps {}
 
-const PackagePage: React.FunctionComponent<IPackagePageProps> = (props) => {
+const PackagePage: React.FunctionComponent<
+  IPackagePageProps & InferGetStaticPropsType<typeof getStaticProps>
+> = (props) => {
   return (
     <>
       <Head>
@@ -43,51 +47,27 @@ const PackagePage: React.FunctionComponent<IPackagePageProps> = (props) => {
         <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-5">
           Get your packages according to&nbsp;your&nbsp;need.
         </h2>
-        <p className="mx-auto text-center w-fit text-project-200 text-xl lg:text-5xl pb-20">Lorem ipsum dolor sit amet consectetur. Velit turpis ultrices malesuada laoreet.</p>
+        <p className="mx-auto text-center w-fit text-project-200 text-xl lg:text-5xl pb-20">
+          Lorem ipsum dolor sit amet consectetur. Velit turpis ultrices
+          malesuada laoreet.
+        </p>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(420px,1fr))] gap-5">
-            <Package dollars="$500" image="/jpegs/mainSection.jpg" name="Wedding" privileges={[
-                "Starting from 2 Hours minimum session",
-                "Professionally Edited & Etched Images",
-                "Unlimited Image From Session",
-                "4K-8K Images/Videos(4K UHD/8KUHD)",
-                "24-48 Hours Turnaround"
-            ]} />
-            <Package dollars="$500" image="/jpegs/mainSection.jpg" name="Wedding" privileges={[
-                "Starting from 2 Hours minimum session",
-                "Professionally Edited & Etched Images",
-                "Unlimited Image From Session",
-                "4K-8K Images/Videos(4K UHD/8KUHD)",
-                "24-48 Hours Turnaround"
-            ]} />
-            <Package dollars="$500" image="/jpegs/mainSection.jpg" name="Wedding" privileges={[
-                "Starting from 2 Hours minimum session",
-                "Professionally Edited & Etched Images",
-                "Unlimited Image From Session",
-                "4K-8K Images/Videos(4K UHD/8KUHD)",
-                "24-48 Hours Turnaround"
-            ]} />
-            <Package dollars="$500" image="/jpegs/mainSection.jpg" name="Wedding" privileges={[
-                "Starting from 2 Hours minimum session",
-                "Professionally Edited & Etched Images",
-                "Unlimited Image From Session",
-                "4K-8K Images/Videos(4K UHD/8KUHD)",
-                "24-48 Hours Turnaround"
-            ]} />
-            <Package dollars="$500" image="/jpegs/mainSection.jpg" name="Wedding" privileges={[
-                "Starting from 2 Hours minimum session",
-                "Professionally Edited & Etched Images",
-                "Unlimited Image From Session",
-                "4K-8K Images/Videos(4K UHD/8KUHD)",
-                "24-48 Hours Turnaround"
-            ]} />
+          {props.packages.map((item, key) => (
+            // @ts-expect-error
+            <Package {...item} key={key} />
+          ))}
         </div>
       </section>
     </>
   );
 };
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
+  const query = `*[_type=="package"]{name,dollars,privileges,"image":image.asset.url}`;
+  const packages: IPackagePageProps[] = await client.fetch(query);
+  console.log(packages);
   return {
     props: {
+      packages: packages,
       locations: [
         {
           locationName: "South Australia",
