@@ -15,6 +15,7 @@ import ReviewSlider, {
 } from "@/components/PageSections/UserReviews/ReviewSlider";
 import Navbar from "@/components/Navbar.tsx/Navbar";
 import CEOMessage from "@/components/PageSections/CEOMessage";
+import { getAllLocations } from "@/utils/sanity/location";
 
 const NewWebsite = ({
   services,
@@ -78,14 +79,7 @@ const NewWebsite = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<{
-  services: ServiceItem[];
-  locations: LocationItem[];
-  chooseUsData: SimpleCardProps[];
-  whatWeDoData: SimpleCardProps[];
-  bannerData: BannerProps;
-  reviews: ReviewItem[];
-}> = () => {
+export const getStaticProps = async () => {
   const bannerTextItems = ["Image", "Video", "Audience"];
   const banner: BannerProps = {
     typewriter: {
@@ -93,6 +87,7 @@ export const getStaticProps: GetStaticProps<{
       itemsWidth: measureTextWidth(bannerTextItems),
     },
   };
+  const locations = await getAllLocations();
   return {
     props: {
       services: [
@@ -195,36 +190,7 @@ export const getStaticProps: GetStaticProps<{
           imageSrc: "/jpegs/FamilyItem.jpg",
         },
       ],
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
       reviews: [
         {
           bg: "/jpegs/mainSection.jpg",

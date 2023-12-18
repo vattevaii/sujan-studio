@@ -11,9 +11,9 @@ function IntersectionProvider({ children }: PropsWithChildren) {
   );
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
-      // console.log("Something intersected");
+      // // console.log("Something intersected");
       if (entry.isIntersecting) {
-        // console.log(intersectionItemsMap.current);
+        // // console.log(intersectionItemsMap.current);
         const options = intersectionItemsMap.current?.get(entry.target);
         if (options) {
           options.handleIntersect();
@@ -43,7 +43,7 @@ function IntersectionProvider({ children }: PropsWithChildren) {
     intersectionItemsMap.current?.set(item, observerData);
     const observer2 = getIntersectionObserver(observerData.threshold);
     observer2.observe(item);
-    // console.log("Added Observe Item ", intersectionItemsMap.current?.size);
+    // // console.log("Added Observe Item ", intersectionItemsMap.current?.size);
   };
   const removeIntersctionItem = (item: Element) => {
     const options = intersectionItemsMap.current?.get(item);
@@ -52,9 +52,9 @@ function IntersectionProvider({ children }: PropsWithChildren) {
       observer.unobserve(item);
     }
     intersectionItemsMap.current?.delete(item);
-    // console.log("Removed Observed Item. Current Observe stack size:", intersectionItemsMap.current?.size)
+    // // console.log("Removed Observed Item. Current Observe stack size:", intersectionItemsMap.current?.size)
   };
-  // console.log("Initialized Observer API")
+  // // console.log("Initialized Observer API")
   return (
     <IntersectionContext.Provider
       value={{ addIntersctionItem, removeIntersctionItem }}

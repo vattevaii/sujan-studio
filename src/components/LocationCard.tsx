@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export type LocationItem = {
   locationName: string;
+  slug: string;
   address: string;
   city: string;
   postalCode: string;
@@ -13,7 +14,7 @@ const LocationCard = ({ locationData }: { locationData: LocationItem }) => {
   return (
     <div className="flex flex-col items-start gap-4 text-left">
       <Link
-        href={"/" + locationName.split(" ").join("-").toLowerCase()}
+        href={"/" + locationData.slug}
         className="font-semibold text-11xl xl:text-21xl hover:underline decoration-2 transition-all"
       >
         {locationName}

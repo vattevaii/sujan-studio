@@ -4,6 +4,8 @@ import Head from "next/head";
 import Image from "next/image";
 import * as React from "react";
 import { client } from "../../../sanity/lib/client";
+import { LocationItem } from "@/components/LocationCard";
+import { getAllLocations } from "@/utils/sanity/location";
 
 interface IPackagePageProps {}
 
@@ -64,40 +66,11 @@ const PackagePage: React.FunctionComponent<
 export const getStaticProps = async () => {
   const query = `*[_type=="package"]{name,dollars,privileges,"image":image.asset.url}`;
   const packages: IPackagePageProps[] = await client.fetch(query);
-  console.log(packages);
+  const locations: LocationItem[] = await getAllLocations();
   return {
     props: {
       packages: packages,
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
     },
   };
 };

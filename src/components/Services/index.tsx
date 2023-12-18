@@ -13,7 +13,7 @@ function Service({ service }: { service: ServiceItem }) {
   const [visibleImg, setVisibleImg] = useState(false);
   const handleOnScreen = () => {
     setTimeout(() => {
-      // console.log("Image is visible on screen")
+      // // console.log("Image is visible on screen")
       setVisibleImg(true);
     }, 1);
   };

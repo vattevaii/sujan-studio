@@ -31,7 +31,7 @@ const imgSizes: { [x: number]: string } = {
   5: "aspect-[754/507]",
 };
 const imgHeights = Object.values(imgSizes).map((item) => {
-  //console.log(item.slice(8, 13));
+  //// console.log(item.slice(8, 13));
   return item.slice(8, 13);
 });
 

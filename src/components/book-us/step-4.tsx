@@ -19,11 +19,11 @@ export default function Step4(props: IStep4Props) {
   }>();
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    console.log(form.errors);
-    console.log(form.values);
+    // console.log(form.errors);
+    // console.log(form.values);
     if (form.errors.personal) {
       const errs = flattenObject({ a: form.errors.personal });
-      console.log(errs);
+      // console.log(errs);
       setError(Object.values(errs).join(", "));
       return;
     } else if (Object.keys(form.errors).length > 0)

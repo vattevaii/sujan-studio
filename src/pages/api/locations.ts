@@ -11,12 +11,17 @@ export default function handler(
   if (req.method === "GET") {
     try {
       const id = req.query["id"] as string;
-      const query = `*[_type=="booking" && _id=="${id}"]`;
+      let query = `*[_type=="locationItem"`;
+      if (id) {
+        query += ` && _id=="${id}"]`;
+      } else query += `]`;
       client
         .fetch(query)
         .then((d) => {
           // console.log(d);
-          res.status(200).json({ message: "Booking found!", data: d[0] });
+          res
+            .status(200)
+            .json({ message: "Locations found!", data: id ? d[0] : d });
         })
         .catch((err) => {
           res.status(500).json({ message: err });

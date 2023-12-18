@@ -4,6 +4,7 @@ import ReviewSlider, {
   ReviewItem,
 } from "@/components/PageSections/UserReviews/ReviewSlider";
 import PlaceHolderImage from "@/components/PlaceHolderImage";
+import { getAllLocations } from "@/utils/sanity/location";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -107,42 +108,11 @@ export default function OurStory({
   );
 }
 
-export const getStaticProps: GetStaticProps<{
-  locations: LocationItem[];
-  reviews: ReviewItem[];
-}> = () => {
+export const getStaticProps = async () => {
+  const locations = await getAllLocations();
   return {
     props: {
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
       reviews: [
         {
           bg: "/jpegs/mainSection.jpg",

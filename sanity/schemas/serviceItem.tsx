@@ -57,7 +57,7 @@ export default defineType({
       const { title, subtitle, media } = selection;
       const sub = subtitle?.join(" - ");
       const m = '🚫';
-      console.log(media)
+      // console.log(media)
       return {
         title,
         subtitle: sub ?? "No scopes selected",

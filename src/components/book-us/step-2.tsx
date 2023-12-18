@@ -66,7 +66,7 @@ export default function Step2(props: IStep2Props) {
       }`
       )
       .then((v: { serviceName: string; icon: string }[]) => {
-        console.log(v);
+        // console.log(v);
         if (v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1) {
           form.setFieldValue("exactNeed", "");
           router.push(

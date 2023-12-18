@@ -93,7 +93,7 @@ export const SliderProvider = ({
 
   useEffect(() => {
     const keypressEvent: (this:Document, e:KeyboardEvent) => void = (ev) => {
-      console.log("key Pressed inside slider")
+      // console.log("key Pressed inside slider")
       if(autoplay) return;
       if(!checkVisible(ref.current!)) return;
       switch (ev.key) {

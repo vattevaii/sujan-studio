@@ -28,7 +28,7 @@ export default function handler(
         .catch((err) => {
           res.status(500).json({ message: err.message });
         });
-      //   .then(console.log)
+      //   .then(// console.log)
       //   .catch(console.error)
     } catch (err) {
       res.status(500).json({ message: err as string });

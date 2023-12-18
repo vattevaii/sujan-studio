@@ -1,4 +1,5 @@
 import { Step1, Step2, Step3, Step4, StepDots } from "@/components/book-us";
+import { getAllLocations } from "@/utils/sanity/location";
 import bookingSchema from "@/utils/schema/bookingSchema";
 import { Form, Formik } from "formik";
 import { debounce } from "lodash";
@@ -57,7 +58,7 @@ const BookUs: React.FunctionComponent<
         setSuccess(true);
       }
     } catch (e) {}
-    // console.log(initVal, query);
+    // // console.log(initVal, query);
     setInitVal({ ...initVal, ...query });
   }, [router]);
   return (
@@ -115,7 +116,7 @@ const BookUs: React.FunctionComponent<
               enableReinitialize={true}
               initialValues={initVal}
               onSubmit={(d: any) => {
-                console.log(d);
+                // console.log(d);
                 submitBooking(d);
               }}
               validationSchema={toFormikValidationSchema(bookingSchema)}
@@ -145,39 +146,11 @@ const BookUs: React.FunctionComponent<
   );
 };
 
-export const getStaticProps = () => {
+export const getStaticProps =async () => {
+  const locations = await getAllLocations();
   return {
     props: {
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations
     },
   };
 };

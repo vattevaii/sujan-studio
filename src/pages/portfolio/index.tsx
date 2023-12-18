@@ -1,6 +1,9 @@
 import { LocationItem } from "@/components/LocationCard";
 import ImageGrid from "@/components/PageSections/ImageGrid";
-import ImageSlider, { ImageSliderOptions } from "@/components/Slider/ImageSlider";
+import ImageSlider, {
+  ImageSliderOptions,
+} from "@/components/Slider/ImageSlider";
+import { getAllLocations } from "@/utils/sanity/location";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -11,28 +14,36 @@ const NewWebsite = ({
   portfolioImages,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [openModal, setOpenModal] = useState(false);
-  const [imageSliderOptions, setImgSliderOptions] = useState<ImageSliderOptions>({
-    currentCategory: portfolioImages[0].title,
-    images: portfolioImages[0].images,
-    index: 0,
-  });
+  const [imageSliderOptions, setImgSliderOptions] =
+    useState<ImageSliderOptions>({
+      currentCategory: portfolioImages[0].title,
+      images: portfolioImages[0].images,
+      index: 0,
+    });
   const openImageModal = (
     title: string,
     img: string,
     imgPos: [number, number, number, number]
   ) => {
-    const allImgs = portfolioImages.find(img => img.title === title)!.images;
-    // console.log(allImgs, portfolioImages, title);
+    const allImgs = portfolioImages.find((img) => img.title === title)!.images;
+    // // console.log(allImgs, portfolioImages, title);
     setImgSliderOptions({
       images: allImgs,
       currentCategory: title,
-      index: allImgs.findIndex(i => i === img),
-    })
-    setOpenModal(true)
+      index: allImgs.findIndex((i) => i === img),
+    });
+    setOpenModal(true);
   };
   return (
     <>
-      {openModal ? <ImageSlider options={imageSliderOptions} onClose={() => setOpenModal(false)} /> : <></>}
+      {openModal ? (
+        <ImageSlider
+          options={imageSliderOptions}
+          onClose={() => setOpenModal(false)}
+        />
+      ) : (
+        <></>
+      )}
       <Head>
         <meta
           name="google-site-verification"
@@ -100,10 +111,8 @@ const NewWebsite = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<{
-  locations: LocationItem[];
-  portfolioImages: { title: string; images: string[] }[];
-}> = () => {
+export const getStaticProps = async () => {
+  const locations = await getAllLocations();
   return {
     props: {
       portfolioImages: [
@@ -174,36 +183,7 @@ export const getStaticProps: GetStaticProps<{
           ],
         },
       ],
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
     },
   };
 };

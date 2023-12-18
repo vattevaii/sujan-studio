@@ -9,7 +9,7 @@ export default function WhatWeDoCard({ data }: Props) {
   const goToEstimatePage = () => {};
   const getEstimate = () => {
     if (window.matchMedia("(any-hover: none)").matches) {
-      console.log("Show Banner");
+      // console.log("Show Banner");
     } else goToEstimatePage();
   };
   return (

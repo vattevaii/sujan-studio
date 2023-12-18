@@ -171,7 +171,7 @@ export default async function handler(
     }
     res.status(201).json({ message: "Booking success!", _ids: created });
 
-    //   .then(console.log)
+    //   .then(// console.log)
     //   .catch(console.error)
   } catch (err) {
     res.status(500).json({ message: err as string });

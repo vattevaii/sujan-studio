@@ -1,35 +1,21 @@
 import { LocationItem } from "@/components/LocationCard";
+import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 interface ILocationPageProps {}
 export const getStaticPaths = (async () => {
+  const locations: LocationItem[] = await getAllLocations();
   return {
-    paths: [
-      {
-        params: {
-          location: "south-australia",
-        },
-      }, // See the "paths" section below
-      {
-        params: {
-          location: "victoria",
-        },
-      }, // See the "paths" section below
-      {
-        params: {
-          location: "new-south-wales",
-        },
-      }, // See the "paths" section below
-      {
-        params: {
-          location: "queensland",
-        },
-      }, // See the "paths" section below
-    ],
+    paths: locations.map((loc) => ({
+      params: {
+        location: loc.slug,
+      },
+    })),
     fallback: true, // false or "blocking"
   };
 }) satisfies GetStaticPaths;
@@ -37,93 +23,60 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (context) => {
   //   const res = await fetch("https://api.github.com/repos/vercel/next.js");
   //   const repo = await res.json();
+  // console.log("Location Page",context);
   const location = context.params?.location as string;
+  // console.log(location);
   if (!location)
     return {
       notFound: true,
     };
+  const locationData = await getAllSubLocations(location);
+  if (!locationData || locationData.length === 0)
+    return {
+      notFound: true,
+    };
+  // console.log(locationData);
+
+  const locations = await getAllLocations();
+
+  // console.log(locationData)
+  // console.log(locationData);
   return {
     props: {
-      mainLocation: location
-        .split("-")
-        .reduce(
-          (p, c) => (p ? p + " " : "") + c[0].toUpperCase() + c.slice(1),
-          ""
-        ),
-      sublocations: [
-        "Sydney",
-        "Melbourne",
-        "Brisbane",
-        "Perth",
-        "Adelaide",
-        "Gold Coast",
-        "Newcastle",
-        "Canberra",
-        "Sunshine Coast",
-        "Wollongong",
-        "Hobart",
-        "Geelong",
-        "Townsville",
-        "Cairns",
-        "Darwin",
-        "Toowoomba",
-        "Ballarat",
-        "Bendigo",
-        "Albury-Wodonga",
-        "Launceston",
-        "Mackay",
-        "Rockhampton",
-        "Bunbury",
-        "Coffs Harbour",
-        "Wagga Wagga",
-        "Hervey Bay",
-        "Mildura",
-        "Shepparton",
-        "Gladstone",
-        "Tamworth",
-      ],
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      mainLocation: {
+        name: locationData[0].locationName,
+        slug: locationData[0].slug,
+      },
+      sublocations: locationData[0].sublocations,
+      locations,
     },
   };
 }) satisfies GetStaticProps<{
   locations: LocationItem[];
-  mainLocation: string;
-  sublocations: string[];
+  mainLocation: { name: string; slug: string };
+  sublocations: { sublocationName: string; slug: string }[];
 }>;
 
 const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   const { mainLocation, sublocations } = props;
+  const router = useRouter()
+  if(router.isFallback){
+    return <>
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
+        />
+        <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
+        <meta
+          name="description"
+          content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
+        />
+      </Head>
+    </>
+  }
   return (
     <>
       <Head>
@@ -131,7 +84,7 @@ const LocationPage: React.FunctionComponent<
           name="google-site-verification"
           content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
         />
-        <title>{mainLocation + " | Sujan Studio"}</title>
+        <title>{mainLocation.name + " | Sujan Studio"}</title>
         <meta
           name="description"
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
@@ -162,21 +115,16 @@ const LocationPage: React.FunctionComponent<
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-20"
       >
         <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold pb-20">
-          By Locations|{mainLocation}
+          By Locations | {mainLocation.name}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(max(300px,calc(100px+13vw)),1fr))] gap-5 text-project-200 text-5xl">
           {sublocations?.map((loc) => (
             <Link
-              key={loc}
-              href={
-                "/" +
-                mainLocation.toLowerCase().split(" ").join("-") +
-                "/" +
-                loc.toLowerCase().split(" ").join("-")
-              }
+              key={loc.slug}
+              href={"/" + mainLocation.slug + "/" + loc.slug}
               className="hover:underline"
             >
-              {loc}{" "}
+              {loc.sublocationName}&nbsp;
               <svg
                 className="w-4 h-4 lg:w-6 lg:h-6 inline"
                 viewBox="0 0 24 24"
@@ -191,7 +139,7 @@ const LocationPage: React.FunctionComponent<
                   d="M18.75 15.77C19.16 15.77 19.5 15.43 19.5 15.02V4.75C19.5 4.34 19.16 4 18.75 4H8.48C8.07 4 7.73 4.34 7.73 4.75C7.73 5.16 8.07 5.5 8.48 5.5H18V15.02C18 15.43 18.34 15.77 18.75 15.77Z"
                   fill="#435269"
                 />
-              </svg>{" "}
+              </svg>
             </Link>
           ))}
         </div>

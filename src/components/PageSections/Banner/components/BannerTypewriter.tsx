@@ -36,7 +36,7 @@ export default function BannerTypewriter({
   }, [isDelete, items.length]);
 
   useEffect(() => {
-    // console.log("Updating current word " + items[currentWordIdx]);
+    // // console.log("Updating current word " + items[currentWordIdx]);
     if (typewriter.current) {
       typewriter.current.style.width = itemsWidth[currentWordIdx] + 0.5 + "em";
     }

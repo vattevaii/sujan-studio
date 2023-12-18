@@ -29,11 +29,11 @@ export default function Step3(props: IStep3Props) {
     const query = router.query;
     if (form.errors.address || form.errors.prefer) {
       const errs=flattenObject({a:form.errors.address, b:form.errors.prefer});
-      console.log(errs)
+      // console.log(errs)
       setError(Object.values(errs).join(", "));
       return;
     }
-    // console.log(form.values);
+    // // console.log(form.values);
     router.push(
       {
         query: { ...query, step: 4 },
@@ -43,7 +43,7 @@ export default function Step3(props: IStep3Props) {
         shallow: true,
       }
     );
-    console.log(form.values);
+    // console.log(form.values);
   };
   return (
     <div>

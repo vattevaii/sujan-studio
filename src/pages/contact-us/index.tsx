@@ -1,12 +1,10 @@
-import { LocationItem } from "@/components/LocationCard";
-import ReviewSlider, {
-  ReviewItem,
-} from "@/components/PageSections/UserReviews/ReviewSlider";
+import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import InputText from "@/components/input/InputText";
 import InputButton from "@/components/input/inputbutton";
 import { InputRadioGroup, InputRadioItem } from "@/components/input/inputradio";
 import svgs from "@/constants/svgs";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { getAllLocations } from "@/utils/sanity/location";
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import * as React from "react";
@@ -51,7 +49,9 @@ export default function App(props: IAppProps) {
         id="contact-us-form"
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
       >
-        <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold py-5">Contact Us</h2>
+        <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold py-5">
+          Contact Us
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-1 xl:grid-cols-[1fr_2fr] gap-5 md:gap-10 lg:gap-5 xl:gap-28">
           <div className="grid h-min gap-5 place-items-center text-center md:text-left md:place-items-start lg:place-items-center lg:text-center xl:text-left xl:place-items-start ">
             <h3 className="text-5xl lg:text-21xl font-semibold">
@@ -61,7 +61,7 @@ export default function App(props: IAppProps) {
               <div className="flex items-center">
                 <span>
                   <Image
-                  className="inline-block mr-2 w-5 lg:w-8"
+                    className="inline-block mr-2 w-5 lg:w-8"
                     height="40"
                     width="40"
                     src={svgs.contactUs.message.src}
@@ -73,7 +73,7 @@ export default function App(props: IAppProps) {
               <div className="flex items-center">
                 <span>
                   <Image
-                  className="inline-block mr-2 w-5 lg:w-8"
+                    className="inline-block mr-2 w-5 lg:w-8"
                     height="40"
                     width="40"
                     src={svgs.contactUs.call.src}
@@ -85,7 +85,7 @@ export default function App(props: IAppProps) {
               <div className="flex items-center">
                 <span>
                   <Image
-                  className="inline-block mr-2 w-5 lg:w-8"
+                    className="inline-block mr-2 w-5 lg:w-8"
                     height="40"
                     width="40"
                     src={svgs.contactUs.location.src}
@@ -144,7 +144,9 @@ export default function App(props: IAppProps) {
                 <p className="block">Select Subject</p>
                 <InputRadioGroup
                   name="hello"
-                  onChange={(v) => console.log(v)}
+                  onChange={(v) => {
+                    // console.log(v)
+                  }}
                   className="flex justify-between"
                 >
                   <label className="flex items-center gap-3">
@@ -207,10 +209,8 @@ export default function App(props: IAppProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<{
-  locations: LocationItem[];
-  reviews: ReviewItem[];
-}> = () => {
+export const getStaticProps = async () => {
+  const locations = await getAllLocations();
   return {
     props: {
       reviews: [
@@ -263,36 +263,7 @@ export const getStaticProps: GetStaticProps<{
             "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
         },
       ],
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
     },
   };
 };

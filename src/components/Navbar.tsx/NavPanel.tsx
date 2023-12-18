@@ -38,7 +38,7 @@ export default function NavPanel({
   className = "",
   activeRoute,
 }: HTMLAttributes<HTMLElement> & { activeRoute: string }) {
-  console.log("Route: ", activeRoute);
+  // console.log("Route: ", activeRoute);
   return (
     <aside
       className={

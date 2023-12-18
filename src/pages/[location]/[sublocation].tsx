@@ -1,60 +1,29 @@
 import { LocationItem } from "@/components/LocationCard";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
+import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 interface ILocationPageProps {}
 export const getStaticPaths = (async () => {
-  const sublocations = [
-    "Sydney",
-    "Melbourne",
-    "Brisbane",
-    "Perth",
-    "Adelaide",
-    "Gold Coast",
-    "Newcastle",
-    "Canberra",
-    "Sunshine Coast",
-    "Wollongong",
-    "Hobart",
-    "Geelong",
-    "Townsville",
-    "Cairns",
-    "Darwin",
-    "Toowoomba",
-    "Ballarat",
-    "Bendigo",
-    "Albury-Wodonga",
-    "Launceston",
-    "Mackay",
-    "Rockhampton",
-    "Bunbury",
-    "Coffs Harbour",
-    "Wagga Wagga",
-    "Hervey Bay",
-    "Mildura",
-    "Shepparton",
-    "Gladstone",
-    "Tamworth",
-  ];
-  const mainLocations = [
-    "South Australia",
-    "Victoria",
-    "New South Wales",
-    "Queensland",
-  ];
-  return {
-    paths: mainLocations.flatMap((i) => {
-      return sublocations.map((s) => ({
+  const locations = await getAllSubLocations();
+  const mapped = locations
+    .map((d) => {
+      const subLocations = d.sublocations.map((i) => ({
         params: {
-          location: i.toLowerCase().split(" ").join("-"),
-          sublocation: s.toLowerCase().split(" ").join("-"),
+          location: d.slug,
+          sublocation: i.slug,
         },
       }));
-    }),
+      return subLocations;
+    })
+    .flat();
+  return {
+    paths: mapped,
     fallback: true, // false or "blocking"
   };
 }) satisfies GetStaticPaths;
@@ -62,12 +31,14 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (context) => {
   //   const res = await fetch("https://api.github.com/repos/vercel/next.js");
   //   const repo = await res.json();
+  // console.log(context);
   const location = context.params?.location as string;
   const sublocation = context.params?.sublocation as string;
-  if (!location && !sublocation)
+  if (!location || !sublocation)
     return {
       notFound: true,
     };
+  const locations = await getAllLocations();
   return {
     props: {
       mainLocation: location
@@ -139,36 +110,7 @@ export const getStaticProps = (async (context) => {
             "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
         },
       ],
-      locations: [
-        {
-          locationName: "South Australia",
-          address: "97 Marian Road",
-          city: "Firle, South Australia",
-          postalCode: "5070",
-          phoneNumber: "08-7092-3531",
-        },
-        {
-          locationName: "Victoria",
-          address: "178 Boundary Road",
-          city: "Pasco Vale, Vic",
-          postalCode: "3044",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "New South Wales",
-          address: "5/34-36 Princes Hwy",
-          city: "Kogarah NSW",
-          postalCode: "2217",
-          phoneNumber: "08-8427-1817",
-        },
-        {
-          locationName: "Queensland",
-          address: "195 Days Road",
-          city: "Grange QLD",
-          postalCode: "4051",
-          phoneNumber: "08-8427-1817",
-        },
-      ],
+      locations,
     },
   };
 }) satisfies GetStaticProps<{
@@ -186,6 +128,22 @@ const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   const { locations, mainLocation, sublocation, sublocationData } = props;
+  const router = useRouter()
+  if(router.isFallback){
+    return <>
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
+        />
+        <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
+        <meta
+          name="description"
+          content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
+        />
+      </Head>
+    </>
+  }
   return (
     <>
       <Head>
@@ -238,10 +196,10 @@ const LocationPage: React.FunctionComponent<
             <p>
               Sujan Studio is your partner in creating visual narratives that
               captivate hearts and minds. We don’t just take photographs and
-              videos; we curate moments that resonate. Whether it's a milestone
-              event, a business venture, or a personal journey, our mission is
-              to bring your story to life in the most authentic and enchanting
-              way.
+              videos; we curate moments that resonate. Whether it&apos;s a
+              milestone event, a business venture, or a personal journey, our
+              mission is to bring your story to life in the most authentic and
+              enchanting way.
             </p>
             <Link href="/book-us">
               <button className=" bg-project-100 text-white p-4 w-44">
@@ -270,10 +228,10 @@ const LocationPage: React.FunctionComponent<
             <p>
               Sujan Studio is your partner in creating visual narratives that
               captivate hearts and minds. We don’t just take photographs and
-              videos; we curate moments that resonate. Whether it's a milestone
-              event, a business venture, or a personal journey, our mission is
-              to bring your story to life in the most authentic and enchanting
-              way.
+              videos; we curate moments that resonate. Whether it&apos;s a
+              milestone event, a business venture, or a personal journey, our
+              mission is to bring your story to life in the most authentic and
+              enchanting way.
             </p>
           </div>
           <div>
