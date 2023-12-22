@@ -17,6 +17,7 @@ export type ReviewItem = {
   reviewText: string;
 };
 export default function ReviewSlider({ className = "", reviews }: Props) {
+  if (!reviews || reviews.length === 0) return <></>;
   const items = reviews.map(
     ({ author, authorSrc, bg, company, reviewText }, idx) => (
       <div
@@ -28,7 +29,7 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
           height={30}
           className="absolute top-0 w-full h-full -z-[1] object-cover"
           alt=""
-          src={bg}
+          src={bg ?? ""}
         />
         <div className="flex flex-col items-center justify-center h-full">
           <article
@@ -41,7 +42,7 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
                 height={20}
                 className="w-16 h-16 bg-black rounded-[100px] object-cover"
                 alt=""
-                src={authorSrc}
+                src={authorSrc ?? ""}
               />
               <div className="flex flex-col items-start justify-start gap-[10px]">
                 <div className="font-medium">{author}</div>
@@ -56,31 +57,37 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
           </article>
         </div>
       </div>
-    ),
+    )
   );
   const [mouseIn, setMouseIn] = useState(false);
   return (
     <div
-      className={className}
+      className={className.length ? className : "h-64 md:h-72 lg:h-96"}
       onMouseEnter={() => setMouseIn(true)}
       onMouseLeave={() => setMouseIn(false)}
     >
       <SliderProvider autoplay={!mouseIn}>
-        <div className="h-full overflow-hidden bg-light-grey">
+        <div className="h-full overflow-hidden bg-project-200">
           <Slider>{items}</Slider>
         </div>
         {/* <SliderNavigation /> */}
-        <div
-          className={
-            (mouseIn ? "opacity-100" : "opacity-0") + " transition-opacity"
-          }
-        >
-          <SliderPrev />
-          <SliderNext />
-        </div>
-        <div className="absolute bottom-0 flex gap-2 -translate-x-1/2 left-1/2 p-5">
-          <SliderPagination />
-        </div>
+        {reviews.length === 1 ? (
+          <></>
+        ) : (
+          <>
+            <div
+              className={
+                (mouseIn ? "opacity-100" : "opacity-0") + " transition-opacity"
+              }
+            >
+              <SliderPrev />
+              <SliderNext />
+            </div>
+            <div className="absolute bottom-0 flex gap-2 -translate-x-1/2 left-1/2 p-5">
+              <SliderPagination />
+            </div>
+          </>
+        )}
       </SliderProvider>
     </div>
   );

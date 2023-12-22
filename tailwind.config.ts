@@ -37,7 +37,7 @@ const config: Config = {
           "100": "rgba(2, 17, 41, 1)",
           "200": "#435269",
         },
-        "faded": "#F6FAFF",
+        faded: "#F6FAFF",
         inputF: "#021129",
         inputBgF: "#02112937",
         input: "#5F789735",
@@ -55,6 +55,8 @@ const config: Config = {
         // "source-sans-3": ['"Source Sans 3"', 'ui-sans-serif', 'system-ui'],
         raleway: "var(--raleway-font)",
         "source-sans-3": "var(--sourcesans-font)",
+        antonio: "var(--antonio-font)",
+        actays: "var(--actays-font)",
       },
       borderRadius: {
         "3xs": "10px",
