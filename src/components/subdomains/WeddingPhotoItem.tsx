@@ -25,11 +25,11 @@ const AND = () => {
   );
 };
 
-const HoverImageItem: React.FunctionComponent<
+export const HoverImageItem: React.FunctionComponent<
   React.PropsWithChildren<ImageProps>
 > = ({ children, ...props }) => {
   return (
-    <div className="group relative">
+    <div className="group relative w-full h-full">
       <div className="w-full h-auto">
           <Image {...props} />
       </div>
