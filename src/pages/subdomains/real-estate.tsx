@@ -55,7 +55,7 @@ const RealEstateSubDomain: React.FunctionComponent<
               porttitor. Neque laoreet congue egestas eu porttitor tempus.
             </SText.Sub>
             <div className="flex gap-5 text-21xl justify-between py-5">
-              <div className="flex flex-col items-start justify-end w-max">
+              <div className="flex flex-wrap flex-col items-start justify-end w-max">
               <BannerCountUpTo count={14} duration={0.5} />
               <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
                 <p className="m-0">{`years of `}</p>

@@ -25,7 +25,7 @@ const MailUs: React.FunctionComponent<
         an&nbsp;awesome&nbsp;Memory.
       </h2>
       <a
-        href="#"
+        href="mailto:sujanstudio@gmail.com"
         className={
           "flex items-center relative leading-[3em] font-raleway " +
           (variant === "large" ? "text-xl xl:text-5xl" : "text-md xl:text-xl")

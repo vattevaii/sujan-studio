@@ -11,6 +11,7 @@ import contactUs from "./schemas/contact-us";
 import serviceItem from "./schemas/serviceItem";
 import booking from "./schemas/booking";
 import packageItem from "./schemas/packageItem";
+import imageStore from "./schemas/imagestore";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -24,6 +25,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactUs,
     serviceItem,
     booking,
-    packageItem
+    packageItem,
+    imageStore
   ],
 };

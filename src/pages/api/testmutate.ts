@@ -1113,27 +1113,27 @@ export default async function handler(
       //   await client.patch(mutations[i]._id).unset(["sublocations"]).commit({
       //     token: TOKEN,
       //   });
-      await client.patch(mutations[i]._id).set({ sublocations: [] }).commit({
+      await client.patch("2bd04658-88fb-4af0-948a-07e6c8a5e33d").set({ relatedImages: [] }).commit({
         token: TOKEN,
       });
-      await client
-        .patch(mutations[i]._id, {
-          insert: {
-            after: "sublocations[-1]",
-            items: mutations[i].sublocations,
-          },
-        })
-        .commit({
-          autoGenerateArrayKeys: true,
-          token: TOKEN,
-        })
-        .then((result) => {
-          // console.log(result)
-        })
-        .catch((error) => {
-          // console.log(error);
-          res.status(500).json({ message: error });
-        });
+    //   await client
+    //     .patch(mutations[i]._id, {
+    //       insert: {
+    //         after: "sublocations[-1]",
+    //         items: mutations[i].sublocations,
+    //       },
+    //     })
+    //     .commit({
+    //       autoGenerateArrayKeys: true,
+    //       token: TOKEN,
+    //     })
+    //     .then((result) => {
+    //       // console.log(result)
+    //     })
+    //     .catch((error) => {
+    //       // console.log(error);
+    //       res.status(500).json({ message: error });
+    //     });
     }
     res.status(201).json({ message: "Done" });
 
