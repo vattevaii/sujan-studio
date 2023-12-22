@@ -138,6 +138,7 @@ export const getStaticProps = async function () {
   const locations = await getAllLocations();
   return {
     props: { reviews, locations },
+    revalidate: 3600
   };
 };
 

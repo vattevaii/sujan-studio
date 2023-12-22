@@ -1,6 +1,7 @@
 import { LocationItem } from "@/components/LocationCard";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
+import { getAllReviews } from "@/utils/sanity/reviews";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -39,6 +40,7 @@ export const getStaticProps = (async (context) => {
       notFound: true,
     };
   const locations = await getAllLocations();
+  const reviews = await getAllReviews();
   return {
     props: {
       mainLocation: location
@@ -60,58 +62,10 @@ export const getStaticProps = (async (context) => {
           "/jpegs/Weddings.jpg",
         ],
       },
-      reviews: [
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-      ],
+      reviews,
       locations,
     },
+    revalidate: 3600
   };
 }) satisfies GetStaticProps<{
   locations: LocationItem[];

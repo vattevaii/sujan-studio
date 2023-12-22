@@ -3,7 +3,7 @@ import { getAllLocations } from "@/utils/sanity/location";
 import bookingSchema from "@/utils/schema/bookingSchema";
 import { Form, Formik } from "formik";
 import { debounce } from "lodash";
-import { InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -58,7 +58,7 @@ const BookUs: React.FunctionComponent<
         setSuccess(true);
       }
     } catch (e) {}
-    // // console.log(initVal, query);
+    // console.log(initVal, query);
     setInitVal({ ...initVal, ...query });
   }, [router]);
   return (
@@ -116,7 +116,7 @@ const BookUs: React.FunctionComponent<
               enableReinitialize={true}
               initialValues={initVal}
               onSubmit={(d: any) => {
-                // console.log(d);
+                console.log(d);
                 submitBooking(d);
               }}
               validationSchema={toFormikValidationSchema(bookingSchema)}
@@ -146,12 +146,13 @@ const BookUs: React.FunctionComponent<
   );
 };
 
-export const getStaticProps =async () => {
+export const getStaticProps = async () => {
   const locations = await getAllLocations();
   return {
     props: {
-      locations
+      locations,
     },
+    revalidate: 3600,
   };
 };
 export default BookUs;

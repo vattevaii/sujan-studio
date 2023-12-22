@@ -69,9 +69,10 @@ export const getStaticProps = async () => {
   const locations: LocationItem[] = await getAllLocations();
   return {
     props: {
-      packages: packages,
+      packages,
       locations,
     },
+    revalidate: 3600
   };
 };
 export default PackagePage;

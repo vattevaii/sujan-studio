@@ -64,7 +64,11 @@ const CorporateEventsSubDomain: React.FunctionComponent<
           />
         </div>
         <div className="flex flex-wrap justify-center gap-12">
-          {new Array(10).fill("/jpegs/CoorporateEvents.jpg").map(item => <Image alt="" src={item} width="50" height="50" />)}
+          {new Array(10)
+            .fill("/jpegs/CoorporateEvents.jpg")
+            .map((item, idx) => (
+              <Image key={idx} alt="" src={item} width="50" height="50" />
+            ))}
         </div>
       </section>
       <section className="text-center text-light-grey py-6 px-[10vw]">
@@ -109,6 +113,7 @@ export const getStaticProps = async function () {
   const locations = await getAllLocations();
   return {
     props: { reviews, locations },
+    revalidate: 3600,
   };
 };
 

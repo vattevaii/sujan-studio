@@ -185,6 +185,7 @@ export const getStaticProps = async () => {
       ],
       locations,
     },
+    revalidate: 3600
   };
 };
 

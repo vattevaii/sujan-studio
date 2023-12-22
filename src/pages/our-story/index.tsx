@@ -5,6 +5,7 @@ import ReviewSlider, {
 } from "@/components/PageSections/UserReviews/ReviewSlider";
 import PlaceHolderImage from "@/components/PlaceHolderImage";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getAllReviews } from "@/utils/sanity/reviews";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -110,59 +111,11 @@ export default function OurStory({
 
 export const getStaticProps = async () => {
   const locations = await getAllLocations();
+  const reviews = await getAllReviews();
   return {
     props: {
       locations,
-      reviews: [
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-        {
-          bg: "/jpegs/mainSection.jpg",
-          author: "Caitlyn Mathews",
-          authorSrc: "/jpegs/WeddingItem.jpg",
-          company: "Company Name",
-          reviewText:
-            "&quot;Sujan Studio delivered stunning photos that captured the essence&nbsp;of&nbsp;our&nbsp;moments. <wbr /> We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;",
-        },
-      ],
+      reviews,
     },
   };
 };

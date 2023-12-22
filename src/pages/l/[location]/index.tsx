@@ -50,6 +50,7 @@ export const getStaticProps = (async (context) => {
       sublocations: locationData[0].sublocations,
       locations,
     },
+    revalidate: 3600,
   };
 }) satisfies GetStaticProps<{
   locations: LocationItem[];
@@ -61,21 +62,23 @@ const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   const { mainLocation, sublocations } = props;
-  const router = useRouter()
-  if(router.isFallback){
-    return <>
-      <Head>
-        <meta
-          name="google-site-verification"
-          content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
-        />
-        <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
-        <meta
-          name="description"
-          content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
-        />
-      </Head>
-    </>
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <>
+        <Head>
+          <meta
+            name="google-site-verification"
+            content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
+          />
+          <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
+          <meta
+            name="description"
+            content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
+          />
+        </Head>
+      </>
+    );
   }
   return (
     <>

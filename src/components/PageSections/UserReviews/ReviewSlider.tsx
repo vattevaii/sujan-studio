@@ -17,6 +17,8 @@ export type ReviewItem = {
   reviewText: string;
 };
 export default function ReviewSlider({ className = "", reviews }: Props) {
+  const [mouseIn, setMouseIn] = useState(false);
+  
   if (!reviews || reviews.length === 0) return <></>;
   const items = reviews.map(
     ({ author, authorSrc, bg, company, reviewText }, idx) => (
@@ -59,7 +61,6 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
       </div>
     )
   );
-  const [mouseIn, setMouseIn] = useState(false);
   return (
     <div
       className={className.length ? className : "h-64 md:h-72 lg:h-96"}
