@@ -32,7 +32,7 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="FamilyPortraits" />
       <SFlatNav />
-      <SBanner service="FamilyPortraits" bannerImg="/jpegs/mainSection.jpg" />
+      <SBanner service="Family Portraits" bannerImg="/jpegs/mainSection.jpg" />
       <section className="grid bg-light-grey text-project-100 px-[5vw] py-10 gap-6">
         <SText.Title className="text-center">
           A trusted photography business, collaborating seamlessly with families

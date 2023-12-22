@@ -91,20 +91,28 @@ export const getStaticProps = async () => {
   return {
     props: {
       services: [
-        { href: "/", src: "/jpegs/RealEstate.jpg", text: "Real State" },
-        { href: "/", src: "/jpegs/Weddings.jpg", text: "Weddings" },
         {
-          href: "/",
+          href: process.env.NEXT_PUBLIC_REALESTATE_SUBDOMAIN ?? "/",
+          src: "/jpegs/RealEstate.jpg",
+          text: "Real State",
+        },
+        {
+          href: process.env.NEXT_PUBLIC_WEDDING_SUBDOMAIN ?? "/",
+          src: "/jpegs/Weddings.jpg",
+          text: "Weddings",
+        },
+        {
+          href: process.env.NEXT_PUBLIC_SCHOOL_SUBDOMAIN ?? "/",
           src: "/jpegs/SchoolEvents.png",
           text: "School & Events",
         },
         {
-          href: "/",
+          href: process.env.NEXT_PUBLIC_FAMILY_SUBDOMAIN ?? "/",
           src: "/jpegs/FamilyAndEvents.jpg",
           text: "Family and Events",
         },
         {
-          href: "/",
+          href: process.env.NEXT_PUBLIC_COORPORATE_SUBDOMAIN ?? "/",
           src: "/jpegs/CoorporateEvents.jpg",
           text: "Corporate Events",
         },

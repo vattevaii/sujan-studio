@@ -1,5 +1,6 @@
 import useIntersectionObserver from "@/packages/use-intersection-observer";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 export type ServiceItem = {
@@ -36,7 +37,8 @@ function Service({ service }: { service: ServiceItem }) {
         <h3 className="text-center delay-250 duration-300 transition-transform translate-y-6 pointer-coarse:translate-y-0 group-hover:translate-y-0">
           {service.text}
         </h3>
-        <button
+        <Link
+          href={service.href}
           className="relative h-12 lg:h-20 w-auto pointer-coarse:translate-y-3/4"
           aria-label={`Click to reveal more information about ${service.text} photography service`}
         >
@@ -90,7 +92,7 @@ function Service({ service }: { service: ServiceItem }) {
               </filter>
             </defs>
           </svg>
-        </button>
+        </Link>
       </div>
       <Image
         width={30}

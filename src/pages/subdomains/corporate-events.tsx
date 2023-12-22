@@ -33,7 +33,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="CorporateEvents" />
       <SFlatNav />
-      <SBanner service="CorporateEvents" bannerImg="/jpegs/mainSection.jpg" />
+      <SBanner service="Corporate Events" bannerImg="/jpegs/mainSection.jpg" />
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           Why Us For Your Coorporate Events?
@@ -54,7 +54,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
             porttitor. Neque laoreet congue egestas eu porttitor tempus.
           </SText.Sub>
         </div>
-        <div className="h-full row-start-2 aspect-[8/2]">
+        <div className="h-full row-start-2 aspect-[6/2]">
           <Image
             src={"/jpegs/CoorporateEvents.jpg"}
             alt=""
@@ -63,7 +63,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
             className="h-full w-full"
           />
         </div>
-        <div className="flex justify-center gap-12">
+        <div className="flex flex-wrap justify-center gap-12">
           {new Array(10).fill("/jpegs/CoorporateEvents.jpg").map(item => <Image alt="" src={item} width="50" height="50" />)}
         </div>
       </section>
