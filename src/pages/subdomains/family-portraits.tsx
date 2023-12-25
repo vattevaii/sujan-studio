@@ -38,7 +38,7 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
       <SFlatNav />
       <SBanner
         service="Family Portraits"
-        bannerImg="/jpegs/mainSection.jpg"
+        bannerImg="/jpegs/FamilyItem.jpg"
         getEstimateLink="/book-us"
       />
       <section className="grid bg-light-grey text-project-100 px-[5vw] py-10 gap-6">
@@ -52,12 +52,12 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
             name="Project Name"
           />
           <FamilyPortraitsPhotoItem
-            imageSrc="/jpegs/CoorporateEvents.jpg"
+            imageSrc="/jpegs/FamilyItem.jpg"
             name="Project Name"
           />
           <FamilyPortraitsPhotoItem
             className="hidden md:block"
-            imageSrc="/jpegs/CoorporateEvents.jpg"
+            imageSrc="/jpegs/FamilyAndEvents.jpg"
             name="Project Name"
           />
         </div>

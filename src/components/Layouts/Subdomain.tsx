@@ -27,14 +27,14 @@ export default function SubDomainLayout({
               <MailUs variant="small" className="" />
             </section>
             <section id="footer" className="footer text-white px-4 lg:px-12 pt-8 md:pt-12 lg:pt-16">
-              <div className="mb-6 h-20 flex items-center justify-between">
+              <div className="mb-6 flex gap-5 flex-wrap items-center justify-between">
                 <Link href={"/"} className="flex items-center gap-5 h-full">
                   <Image
                     src="/jpegs/logo-light.png"
                     alt="Sujan Studio"
                     width={300}
                     height={300}
-                    className="h-full w-auto"
+                    className="h-full max-h-20 w-auto"
                   />
                   <p className="text-light-grey text-5xl">Sujan Studio</p>
                 </Link>

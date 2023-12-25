@@ -35,44 +35,47 @@ const SchoolEventsSubDomain: React.FunctionComponent<
       <SFlatNav />
       <SBanner
         service="School And Events"
-        bannerImg="/jpegs/mainSection.jpg"
+        bannerImg="/jpegs/SchoolEvents.png"
         getEstimateLink="/book-us"
       />
-      <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
+      <section className=" bg-light-grey text-project-100 px-[10vw] py-10">
         <SText.Title className="text-center">
-          Why Us For Your Coorporate Events?
+          Why Us, For your Schooling Events?
         </SText.Title>
-        <div className="">
-          <SText.Sub className="text-project-200">
-            Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-            egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-            neque eget. Quam nisl eget euismod feugiat posuere porttitor. Neque
-            laoreet congue egestas eu porttitor tempus. Ac condimentum sed
-            consequat eu massa pretium sed nisl. Cursus sagittis est sed tortor.
-            Turpis arcu pharetra aliquam a ac faucibus. Diam molestie cursus
-            quis libero lorem ultricies. Id sit bibendum posuere ut amet
-            ullamcorper. Massa bibendum laoreet sagittis senectus eget enim
-            sapien urna duis. Lorem ipsum dolor sit amet consectetur. Ultrices
-            justo sit duis egestas. Et sagittis egestas in porttitor lectus nec
-            sollicitudin neque eget. Quam nisl eget euismod feugiat posuere
-            porttitor. Neque laoreet congue egestas eu porttitor tempus.
-          </SText.Sub>
-        </div>
-        <div className="h-full row-start-2 aspect-[8/2]">
-          <Image
-            src={"/jpegs/CoorporateEvents.jpg"}
-            alt=""
-            width="500"
-            height="500"
-            className="h-full w-full"
-          />
-        </div>
-        <div className="flex flex-wrap justify-center gap-12">
-          {new Array(10)
-            .fill("/jpegs/CoorporateEvents.jpg")
-            .map((item, idx) => (
-              <Image key={idx} alt="" src={item} width="50" height="50" />
-            ))}
+        <div className="grid gap-3">
+          <div className="row-start-2 lg:row-start-1 lg:col-start-2">
+            <SText.Sub className="text-project-200">
+              Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
+              egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
+              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
+              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
+              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
+              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
+              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
+              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
+              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
+              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
+              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
+              posuere porttitor. Neque laoreet congue egestas eu porttitor
+              tempus.
+            </SText.Sub>
+          </div>
+          <div className="h-full w-full col-start-1 row-start-1 max-h-48 lg:max-h-max">
+            <Image
+              src={"/jpegs/ProductItem.jpg"}
+              alt=""
+              width="500"
+              height="500"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div className="flex flex-wrap col-start-1 row-start-3 lg:row-start-2 col-span-1 lg:col-span-2 justify-center gap-12">
+            {new Array(10)
+              .fill("/jpegs/CoorporateEvents.jpg")
+              .map((item, idx) => (
+                <Image key={idx} alt="" src={item} width="50" height="50" />
+              ))}
+          </div>
         </div>
       </section>
       <section className="text-center text-light-grey py-6 px-[10vw]">

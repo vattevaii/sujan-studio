@@ -37,7 +37,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
       <SFlatNav />
       <SBanner
         service="Corporate Events"
-        bannerImg="/jpegs/mainSection.jpg"
+        bannerImg="/jpegs/CoorporateEvents.jpg"
         getEstimateLink="/book-us"
       />
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
@@ -66,7 +66,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
             alt=""
             width="500"
             height="500"
-            className="h-full w-full"
+            className="h-full w-full object-cover"
           />
         </div>
         <div className="flex flex-wrap justify-center gap-12">

@@ -45,7 +45,7 @@ const RealEstateSubDomain: React.FunctionComponent<
           Learn about our experience
         </SText.Title>
         <div className="grid gap-3">
-          <div className=" col-start-2">
+          <div className="row-start-2 lg:row-start-1 lg:col-start-2">
             <SText.Sub className="text-project-200">
               Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
               egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
@@ -61,7 +61,7 @@ const RealEstateSubDomain: React.FunctionComponent<
               posuere porttitor. Neque laoreet congue egestas eu porttitor
               tempus.
             </SText.Sub>
-            <div className="flex gap-5 text-21xl justify-between py-5">
+            <div className="flex flex-wrap gap-5 text-21xl justify-between py-5">
               <div className="flex flex-wrap flex-col items-start justify-end w-max">
                 <BannerCountUpTo count={14} duration={0.5} />
                 <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
@@ -92,13 +92,13 @@ const RealEstateSubDomain: React.FunctionComponent<
               </div>
             </div>
           </div>
-          <div className="h-full col-start-1 row-start-1">
+          <div className="h-full w-full col-start-1 row-start-1 max-h-48 lg:max-h-max">
             <Image
               src={"/jpegs/RealEstate.jpg"}
               alt=""
               width="500"
               height="500"
-              className="h-full w-auto"
+              className="h-full w-full object-cover"
             />
           </div>
         </div>

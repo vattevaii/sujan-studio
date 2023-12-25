@@ -12,6 +12,7 @@ import { getAllReviews } from "@/utils/sanity/reviews";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 
 interface IWeddingSubDomainProps {}
@@ -60,35 +61,41 @@ const WeddingSubDomain: React.FunctionComponent<
           ))}
         </div>
       </section>
-      <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
-        <div className="col-start-1 grid gap-3">
-          <SText.Title>Why work with us?</SText.Title>
-          <SText.Sub className="text-project-200">
-            Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-            egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-            neque eget. Quam nisl eget euismod feugiat posuere porttitor. Neque
-            laoreet congue egestas eu porttitor tempus. Ac condimentum sed
-            consequat eu massa pretium sed nisl. Cursus sagittis est sed tortor.
-            Turpis arcu pharetra aliquam a ac faucibus. Diam molestie cursus
-            quis libero lorem ultricies. Id sit bibendum posuere ut amet
-            ullamcorper. Massa bibendum laoreet sagittis senectus eget enim
-            sapien urna duis. Lorem ipsum dolor sit amet consectetur. Ultrices
-            justo sit duis egestas. Et sagittis egestas in porttitor lectus nec
-            sollicitudin neque eget. Quam nisl eget euismod feugiat posuere
-            porttitor. Neque laoreet congue egestas eu porttitor tempus.
-          </SText.Sub>
-          <button className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px] w-min">
-            Book Us Now
-          </button>
-        </div>
-        <div className="h-full col-start-2">
-          <Image
-            src={"/jpegs/Weddings.jpg"}
-            alt=""
-            width="500"
-            height="500"
-            className="h-full w-auto"
-          />
+      <section className=" py-6 bg-light-grey text-project-100 px-[10vw]">
+        <SText.Title>Why work with us?</SText.Title>
+        <div className="grid gap-2">
+          <div className="row-start-2 lg:row-start-1 col-start-1 grid gap-3">
+            <SText.Sub className="text-project-200">
+              Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
+              egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
+              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
+              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
+              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
+              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
+              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
+              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
+              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
+              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
+              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
+              posuere porttitor. Neque laoreet congue egestas eu porttitor
+              tempus.
+            </SText.Sub>
+            <Link
+              href={"/book-us"}
+              className="mx-auto text-center lg:mx-0 bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px] w-min"
+            >
+              Book Us Now
+            </Link>
+          </div>
+          <div className="h-full col-start-1 lg:col-start-2">
+            <Image
+              src={"/jpegs/Weddings.jpg"}
+              alt=""
+              width="500"
+              height="500"
+              className="h-full w-full max-h-72 object-cover"
+            />
+          </div>
         </div>
       </section>
       <ReviewSlider reviews={props.reviews} />

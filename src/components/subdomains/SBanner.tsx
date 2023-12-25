@@ -12,15 +12,16 @@ const SBanner: React.FunctionComponent<ISBannerProps> = (props) => {
   const router = useRouter();
   const goToEstimatePage = () => router.push(props.getEstimateLink); //
   return (
-    <section id="banner" className="relative banner">
+    <section id="banner" className="relative banner isolate">
       <Image
         priority={true}
         width={100}
         height={400}
         className="absolute top-0 -z-[1] w-full h-full object-cover"
         alt=""
-        src="/jpegs/mainSection.jpg"
+        src={props.bannerImg}
       />
+      <div className="absolute top-0 -z-[1] w-full h-full bg-blue-950 opacity-70" />
       <div className="flex flex-col gap-6 content-center justify-center text-light-grey text-center min-h-[calc(80vh)] px-9">
         <div className="text-41xl lg:text-61xl font-semibold">
           <h1>{props.service} Photography By Sujan&nbsp;Studio</h1>
