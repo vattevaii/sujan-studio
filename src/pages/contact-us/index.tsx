@@ -5,14 +5,55 @@ import { InputRadioGroup, InputRadioItem } from "@/components/input/inputradio";
 import svgs from "@/constants/svgs";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { ContactFormSchema } from "@/utils/schema/contactUsSchema";
+import { useFormik } from "formik";
+import { debounce } from "lodash";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as React from "react";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function App(props: IAppProps) {
+  const router = useRouter();
+  const submitForm = debounce((d) => {
+    fetch("/api/submitcontactus", {
+      method: "POST",
+      body: JSON.stringify(d),
+    }).then((d) => {
+      if (d.status === 201) {
+        router.push("/contact-us?success=true");
+      }
+    });
+  }, 200);
+  const formik = useFormik<{
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    subject: string;
+    message: string;
+  }>({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      subject: "",
+      message: "",
+    },
+    validationSchema: toFormikValidationSchema(ContactFormSchema),
+    onSubmit: (values) => {
+      submitForm(values);
+    },
+  });
+  if (router.asPath.indexOf("success") !== -1) {
+    formik.resetForm();
+    router.push("/contact-us");
+  }
   return (
     <>
       <Head>
@@ -98,55 +139,91 @@ export default function App(props: IAppProps) {
             </div>
           </div>
           <div className="">
-            <form className="grid gap-7 text-xl lg:text-5xl">
+            <form
+              className="grid gap-7 text-xl lg:text-5xl"
+              onSubmit={(e) => {
+                e.preventDefault();
+                formik.setTouched({
+                  email: true,
+                  firstName: true,
+                  lastName: true,
+                  message: true,
+                  phoneNumber: true,
+                  subject: true,
+                });
+                formik.submitForm();
+              }}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-7">
                 <div className="flex flex-col justify-between w-full">
                   <label htmlFor="first-name" className="block">
                     First Name
                   </label>
+                  <p className="text-red-500 text-2xs -mt-2 h-3">
+                    {formik.touched.firstName ? formik.errors.firstName : ""}
+                  </p>
                   <InputText
                     className="w-full"
                     id="first-name"
-                    placeholder="your First Name here"
+                    placeholder="Your First Name here"
+                    {...formik.getFieldProps("firstName")}
                   />
                 </div>
                 <div className="flex flex-col justify-between w-full">
                   <label htmlFor="last-name" className="block">
                     Last Name
                   </label>
+                  <p className="text-red-500 text-2xs -mt-2 h-3">
+                    {formik.touched.lastName ? formik.errors.lastName : ""}
+                  </p>
+
                   <InputText
                     className="w-full"
                     id="last-name"
                     placeholder="your Last Name here"
+                    {...formik.getFieldProps("lastName")}
                   />
                 </div>
                 <div className="flex flex-col justify-between w-full">
                   <label htmlFor="e-mail" className="block">
                     Email
                   </label>
+                  <p className="text-red-500 text-2xs -mt-2 h-3">
+                    {formik.touched.email ? formik.errors.email : ""}
+                  </p>
                   <InputText
                     className="w-full"
                     id="e-mail"
                     placeholder="your email here"
+                    {...formik.getFieldProps("email")}
                   />
                 </div>
                 <div className="flex flex-col justify-between w-full">
                   <label htmlFor="phone" className="block">
                     Phone Number
                   </label>
+                  <p className="text-red-500 text-2xs -mt-2 h-3">
+                    {formik.touched.phoneNumber
+                      ? formik.errors.phoneNumber
+                      : ""}
+                  </p>
                   <InputText
                     className="w-full"
                     id="phone"
                     placeholder="your Phone Number here"
+                    {...formik.getFieldProps("phoneNumber")}
                   />
                 </div>
               </div>
               <div className="flex flex-col justify-between w-full">
                 <p className="block">Select Subject</p>
+                <p className="text-red-500 text-2xs -mt-2 h-3">
+                  {formik.touched.subject ? formik.errors.subject : ""}
+                </p>
                 <InputRadioGroup
                   name="hello"
                   onChange={(v) => {
-                    // console.log(v)
+                    formik.setFieldValue("subject", v);
                   }}
                   className="flex justify-between"
                 >
@@ -168,10 +245,14 @@ export default function App(props: IAppProps) {
                 <label htmlFor="your-message" className="block">
                   Your Message
                 </label>
+                <p className="text-red-500 text-2xs -mt-2 h-3">
+                  {formik.touched.message ? formik.errors.message : ""}
+                </p>
                 <InputText
                   className="w-full"
                   id="your-message"
                   placeholder="your Your Message here"
+                  {...formik.getFieldProps("message")}
                 />
               </div>
               <div className="flex justify-end">

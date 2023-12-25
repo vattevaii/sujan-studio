@@ -26,7 +26,7 @@ export default function SubDomainLayout({
             <section className="px-4 lg:px-12 py-8 bg-light-grey text-project-100">
               <MailUs variant="small" className="" />
             </section>
-            <section className="footer text-white px-4 lg:px-12 pt-8 md:pt-12 lg:pt-16">
+            <section id="footer" className="footer text-white px-4 lg:px-12 pt-8 md:pt-12 lg:pt-16">
               <div className="mb-6 h-20 flex items-center justify-between">
                 <Link href={"/"} className="flex items-center gap-5 h-full">
                   <Image

@@ -7,11 +7,11 @@ interface ISFlatNavProps {
 }
 
 export const subdomainLinks = [
-  { name: "Home", href: "" },
-  { name: "About Us", href: "" },
-  { name: "Our Works", href: "" },
-  { name: "Blog", href: "" },
-  { name: "Contact Us", href: "" },
+  { name: "Home", href: "#" },
+  { name: "About Us", href: "/our-story" },
+  { name: "Our Works", href: "/portfolio" },
+  { name: "Blog", href: "#footer" },
+  { name: "Contact Us", href: "/contact-us" },
 ];
 
 const SFlatNav: React.FunctionComponent<ISFlatNavProps> = ({
