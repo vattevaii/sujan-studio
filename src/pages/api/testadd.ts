@@ -156,12 +156,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
+  if (process.env.NODE_ENV === "production") {
+    res.status(400).json({ message: "Not accessible" });
+  }
   try {
     const parsedData = data.map((d) => ({
       _type: schemaName,
       ...d,
     }));
-    await client.delete({ query: `*[_type == "${schemaName}"][0...999]` }, {token: TOKEN});
+    await client.delete(
+      { query: `*[_type == "${schemaName}"][0...999]` },
+      { token: TOKEN }
+    );
     const created = [];
     for (let i = 0; i < parsedData.length; i++) {
       const d = await client.create(parsedData[i], {

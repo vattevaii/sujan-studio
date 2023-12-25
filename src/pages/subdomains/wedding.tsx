@@ -94,7 +94,7 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("wedding");
-  console.log(images);
+//   console.log(images);
   return {
     props: { reviews, locations, featured: images },
     revalidate: 3600,
