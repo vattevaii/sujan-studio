@@ -3,6 +3,7 @@ import ImageGrid from "@/components/PageSections/ImageGrid";
 import ImageSlider, {
   ImageSliderOptions,
 } from "@/components/Slider/ImageSlider";
+import { getSubdomainLink } from "@/utils/getSubdomainLink";
 import { getPortfolio } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -84,7 +85,7 @@ const NewWebsite = ({
               {item.title}
             </h2>
             <Link
-              href="/admin"
+              href={item.link}
               className="font-normal hover:underline text-xl md:text-5xl xl:text-[30px]"
             >
               <span className="hidden md:inline px-2">View More</span>
@@ -118,12 +119,12 @@ export const getStaticProps = async () => {
   const portfolio = await getPortfolio();
   const items: { [x: string]: number } = {};
   const relatedImages: { [x: string]: string[] } = {};
-  const portfolioImages: { title: string; images: string[] }[] = [];
+  const portfolioImages: { title: string; link:string, images: string[] }[] = [];
   portfolio.forEach((item) => {
     if (!(item.title in items)) {
       items[item.title] = portfolioImages.length;
       relatedImages[item.title] = [];
-      portfolioImages.push({ title: item.title, images: [] });
+      portfolioImages.push({ title: item.title, link:getSubdomainLink(item.title), images: [] });
     }
     const idx = items[item.title];
     portfolioImages[idx].images.push(item.mainImage);

@@ -5,6 +5,7 @@ import {
   SliderNext,
   SliderPagination,
 } from "@/components/Slider/Slider";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import Image from "next/image";
 import React, { HTMLAttributes, useState } from "react";
 
@@ -29,8 +30,17 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
         <Image
           width={30}
           height={30}
+          loading="eager"
           className="absolute top-0 w-full h-full -z-[1] object-cover"
           alt=""
+          src={bg ?? ""}
+        />
+        <Image
+          width={300}
+          height={300}
+          className="absolute top-0 w-full h-full -z-[1] object-cover"
+          alt=""
+          loader={sanityImageLoader}
           src={bg ?? ""}
         />
         <div className="flex flex-col items-center justify-center h-full">
@@ -40,10 +50,11 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
           >
             <div className="flex flex-row items-center justify-start gap-[20px] text-md lg:text-5xl font-raleway">
               <Image
-                width={20}
-                height={20}
+                width={50}
+                height={50}
                 className="w-16 h-16 bg-black rounded-[100px] object-cover"
                 alt=""
+                loader={sanityImageLoader}
                 src={authorSrc ?? ""}
               />
               <div className="flex flex-col items-start justify-start gap-[10px]">

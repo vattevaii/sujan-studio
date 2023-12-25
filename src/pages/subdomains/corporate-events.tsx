@@ -5,6 +5,7 @@ import SFlatNav from "@/components/subdomains/SFlatNav";
 import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
+import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { InferGetStaticPropsType } from "next";
@@ -79,7 +80,14 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
-          <CorporateEventsPhotoItem
+          {props.featured.map((item, idx) => (
+            <CorporateEventsPhotoItem
+              key={idx}
+              imageSrc={item.mainImage}
+              name={item.name}
+            />
+          ))}
+          {/* <CorporateEventsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
@@ -94,11 +102,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
           <CorporateEventsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
-          />
-          <CorporateEventsPhotoItem
-            imageSrc="/jpegs/CoorporateEvents.jpg"
-            name="Project Name"
-          />
+          /> */}
         </div>
       </section>
 
@@ -111,8 +115,9 @@ const CorporateEventsSubDomain: React.FunctionComponent<
 export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
+  const images = await getImages("corporateEvents");
   return {
-    props: { reviews, locations },
+    props: { reviews, locations, featured: images },
     revalidate: 3600,
   };
 };

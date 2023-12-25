@@ -30,7 +30,7 @@ export const HoverImageItem: React.FunctionComponent<
 > = ({ children, ...props }) => {
   return (
     <div className="group relative w-full h-full">
-      <div className="w-full h-auto">
+      <div className="w-full h-full">
           <Image {...props} />
       </div>
       <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 absolute top-0 left-0 w-full h-full">
@@ -44,21 +44,23 @@ const WeddingPhotoItem: React.FunctionComponent<IWeddingPhotoItemProps> = (
   props
 ) => {
   return (
-    <HoverImageItem className="w-full h-auto aspect-[5.1/6.8]" alt="" src={props.imageSrc} width={500} height={500}>
-      <>
-        <div className="absolute top-0 left-0 w-full h-full bg-[#000815] opacity-70" />
-        <div className="w-full h-full p-5 relative z-10">
-          <div className="border-light-grey inset-0 h-full border grid place-items-center font-antonio">
-            <div className="grid place-items-center gap-3">
-                <p className="font-actays">{props.date}</p>
-                <p className="text-11xl">{props.groom}</p>
-                <AND />
-                <p className="text-11xl">{props.bride}</p>
+    <div className="aspect-[5.1/6.8]">
+        <HoverImageItem className="w-full h-full object-cover" alt="" src={props.imageSrc} width={500} height={500}>
+          <>
+            <div className="absolute top-0 left-0 w-full h-full bg-[#000815] opacity-70" />
+            <div className="w-full h-full p-5 relative z-10">
+              <div className="border-light-grey inset-0 h-full border grid place-items-center font-antonio">
+                <div className="grid place-items-center gap-3">
+                    <p className="font-actays">{props.date}</p>
+                    <p className="text-11xl">{props.groom}</p>
+                    <AND />
+                    <p className="text-11xl">{props.bride}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </>
-    </HoverImageItem>
+          </>
+        </HoverImageItem>
+    </div>
   );
 };
 

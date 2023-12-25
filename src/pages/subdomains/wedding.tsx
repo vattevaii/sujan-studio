@@ -5,6 +5,7 @@ import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import WeddingPhotoItem from "@/components/subdomains/WeddingPhotoItem";
 import SText from "@/components/subdomains/text/STextTitle";
+import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { InferGetStaticPropsType } from "next";
@@ -41,36 +42,15 @@ const WeddingSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
-          <WeddingPhotoItem
-            imageSrc="/jpegs/RealEstate.jpg"
-            bride="Antonio"
-            groom="Claire"
-            date="19th Jan 2019"
-          />
-          <WeddingPhotoItem
-            imageSrc="/jpegs/Weddings.jpg"
-            bride="Antonio"
-            groom="Claire"
-            date="19th Jan 2019"
-          />
-          <WeddingPhotoItem
-            imageSrc="/jpegs/CoorporateEvents.jpg"
-            bride="Antonio"
-            groom="Claire"
-            date="19th Jan 2019"
-          />
-          <WeddingPhotoItem
-            imageSrc="/jpegs/Weddings.jpg"
-            bride="Antonio"
-            groom="Claire"
-            date="19th Jan 2019"
-          />
-          <WeddingPhotoItem
-            imageSrc="/jpegs/Weddings.jpg"
-            bride="Antonio"
-            groom="Claire"
-            date="19th Jan 2019"
-          />
+          {props.featured.map((item, idx) => (
+            <WeddingPhotoItem
+              key={idx}
+              imageSrc={item.mainImage}
+              bride={item.brideName}
+              groom={item.groomName}
+              date={item.date}
+            />
+          ))}
         </div>
       </section>
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
@@ -113,9 +93,11 @@ const WeddingSubDomain: React.FunctionComponent<
 export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
+  const images = await getImages("wedding");
+  console.log(images);
   return {
-    props: { reviews, locations },
-    revalidate: 3600
+    props: { reviews, locations, featured: images },
+    revalidate: 3600,
   };
 };
 

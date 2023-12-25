@@ -93,19 +93,70 @@ const imageStore = defineType({
           return true;
         }),
     }),
+    defineField({
+      name: "eventName",
+      title: "Event Name",
+      type: "string",
+      description: "Name of the event or title for the photo collection",
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          if (!value) {
+            return "Event Name cannot be empty";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "eventDate",
+      title: "Event Date",
+      type: "date",
+    }),
+    defineField({
+      name: "brideName",
+      title: "Bride Name",
+      type: "string",
+      description: 'Specify if category is "Wedding"',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          // Validate that otherCategory is provided if category is 'Others'
+          // @ts-expect-error
+          const category = context.parent.category;
+          if (category && category.includes("wedding") && !value) {
+            return 'Bride Name is required when Category is "Wedding"';
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "groomName",
+      title: "Groom Name",
+      type: "string",
+      description: 'Specify if category is "Wedding"',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          // Validate that otherCategory is provided if category is 'Others'
+          // @ts-expect-error
+          const category = context.parent.category;
+          if (category && category.includes("wedding") && !value) {
+            return 'Groom Name is required when Category is "Wedding"';
+          }
+          return true;
+        }),
+    }),
   ],
   preview: {
     select: {
+      event: "eventName",
       title: "mainLocation.locationName",
       sub: "category",
       subtitle: "subLocation",
       media: "mainImage",
     },
     prepare(selection) {
-      const { title, sub, media,subtitle } = selection;
+      const { event, title, sub, media, subtitle } = selection;
       return {
-        title: title +" "+ sub[0],
-        subtitle,
+        title: event,
+        subtitle: title + " " + sub[0],
         media,
       };
     },

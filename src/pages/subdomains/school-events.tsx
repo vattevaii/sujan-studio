@@ -10,12 +10,12 @@ import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import * as React from "react";
+import { getImages } from "@/utils/sanity/imageStore";
 
 interface ISchoolEventsSubDomainProps {}
 
 const SchoolEventsSubDomain: React.FunctionComponent<
-  ISchoolEventsSubDomainProps &
-    InferGetStaticPropsType<typeof getStaticProps>
+  ISchoolEventsSubDomainProps & InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   return (
     <>
@@ -63,7 +63,11 @@ const SchoolEventsSubDomain: React.FunctionComponent<
           />
         </div>
         <div className="flex flex-wrap justify-center gap-12">
-          {new Array(10).fill("/jpegs/CoorporateEvents.jpg").map((item,idx) => <Image key={idx} alt="" src={item} width="50" height="50" />)}
+          {new Array(10)
+            .fill("/jpegs/CoorporateEvents.jpg")
+            .map((item, idx) => (
+              <Image key={idx} alt="" src={item} width="50" height="50" />
+            ))}
         </div>
       </section>
       <section className="text-center text-light-grey py-6 px-[10vw]">
@@ -74,38 +78,42 @@ const SchoolEventsSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-2 md:grid-cols-4 place-items-center">
-          <SchoolEventsPhotoItem
-          date={"19th Dec 2050"}
+          {props.featured.map((item, idx) => (
+            <SchoolEventsPhotoItem
+              key={idx}
+              date={item.date}
+              imageSrc={item.mainImage}
+              name={item.name}
+              className={idx===3||idx==4?"row-span-2 col-span-2 w-full":""}
+            />
+          ))}
+          {/* <SchoolEventsPhotoItem
+            date={"19th Dec 2050"}
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
           <SchoolEventsPhotoItem
-          date={"19th Dec 2050"}
+            className="row-span-2 col-span-2 w-full"
+            date={"19th Dec 2050"}
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
           <SchoolEventsPhotoItem
-          className="row-span-2 col-span-2 w-full"
-          date={"19th Dec 2050"}
+            className="row-span-2 col-span-2 w-full"
+            date={"19th Dec 2050"}
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
           <SchoolEventsPhotoItem
-          className="row-span-2 col-span-2 w-full"
-          date={"19th Dec 2050"}
+            date={"19th Dec 2050"}
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
           <SchoolEventsPhotoItem
-          date={"19th Dec 2050"}
+            date={"19th Dec 2050"}
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
-          />
-          <SchoolEventsPhotoItem
-          date={"19th Dec 2050"}
-            imageSrc="/jpegs/CoorporateEvents.jpg"
-            name="Project Name"
-          />
+          /> */}
         </div>
       </section>
 
@@ -118,9 +126,10 @@ const SchoolEventsSubDomain: React.FunctionComponent<
 export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
+  const images = await getImages("schoolAndEvents");
   return {
-    props: { reviews, locations },
-    revalidate: 3600
+    props: { reviews, locations, featured: images },
+    revalidate: 3600,
   };
 };
 

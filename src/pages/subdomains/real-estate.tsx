@@ -6,6 +6,7 @@ import SFlatNav from "@/components/subdomains/SFlatNav";
 import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
+import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { InferGetStaticPropsType } from "next";
@@ -43,46 +44,47 @@ const RealEstateSubDomain: React.FunctionComponent<
             <SText.Sub className="text-project-200">
               Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
               egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-              neque eget. Quam nisl eget euismod feugiat posuere porttitor. Neque
-              laoreet congue egestas eu porttitor tempus. Ac condimentum sed
-              consequat eu massa pretium sed nisl. Cursus sagittis est sed tortor.
-              Turpis arcu pharetra aliquam a ac faucibus. Diam molestie cursus
-              quis libero lorem ultricies. Id sit bibendum posuere ut amet
-              ullamcorper. Massa bibendum laoreet sagittis senectus eget enim
-              sapien urna duis. Lorem ipsum dolor sit amet consectetur. Ultrices
-              justo sit duis egestas. Et sagittis egestas in porttitor lectus nec
-              sollicitudin neque eget. Quam nisl eget euismod feugiat posuere
-              porttitor. Neque laoreet congue egestas eu porttitor tempus.
+              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
+              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
+              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
+              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
+              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
+              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
+              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
+              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
+              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
+              posuere porttitor. Neque laoreet congue egestas eu porttitor
+              tempus.
             </SText.Sub>
             <div className="flex gap-5 text-21xl justify-between py-5">
               <div className="flex flex-wrap flex-col items-start justify-end w-max">
-              <BannerCountUpTo count={14} duration={0.5} />
-              <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                <p className="m-0">{`years of `}</p>
-                <p className="m-0">Visual Excellence</p>
+                <BannerCountUpTo count={14} duration={0.5} />
+                <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                  <p className="m-0">{`years of `}</p>
+                  <p className="m-0">Visual Excellence</p>
+                </div>
               </div>
-                        </div>
-                        <hr className="h-auto w-[125%] sm:w-0 border-l border-divider" />
-                        <div className="flex flex-col items-start justify-end w-max">
-              <BannerCountUpTo
-                count={500}
-                start={400}
-                duration={1.5}
-                append="+"
-              />
-              <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                <p className="m-0">Happy</p>
-                <p className="m-0">Customers</p>
+              <hr className="h-auto w-[125%] sm:w-0 border-l border-divider" />
+              <div className="flex flex-col items-start justify-end w-max">
+                <BannerCountUpTo
+                  count={500}
+                  start={400}
+                  duration={1.5}
+                  append="+"
+                />
+                <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                  <p className="m-0">Happy</p>
+                  <p className="m-0">Customers</p>
+                </div>
               </div>
-                        </div>
-                        <hr className="h-auto w-[125%] sm:w-0 border-l border-divider" />
-                        <div className="flex flex-col items-start justify-end w-max">
-              <BannerCountUpTo count={5} duration={1} append="+" />
-              <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
-                <p className="m-0">Photography</p>
-                <p className="m-0">Awards</p>
+              <hr className="h-auto w-[125%] sm:w-0 border-l border-divider" />
+              <div className="flex flex-col items-start justify-end w-max">
+                <BannerCountUpTo count={5} duration={1} append="+" />
+                <div className="text-lg leading-[30px] uppercase font-medium font-raleway opacity-[0.5]">
+                  <p className="m-0">Photography</p>
+                  <p className="m-0">Awards</p>
+                </div>
               </div>
-                        </div>
             </div>
           </div>
           <div className="h-full col-start-1 row-start-1">
@@ -104,11 +106,14 @@ const RealEstateSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
-          <RealEstatePhotoItem
-            imageSrc="/jpegs/RealEstate.jpg"
-            name="Project Name"
-          />
-          <RealEstatePhotoItem
+          {props.featured.map((item, idx) => (
+            <RealEstatePhotoItem
+              key={idx}
+              imageSrc={item.mainImage}
+              name={item.name}
+            />
+          ))}
+          {/* <RealEstatePhotoItem
             imageSrc="/jpegs/RealEstate.jpg"
             name="Project Name"
           />
@@ -123,7 +128,7 @@ const RealEstateSubDomain: React.FunctionComponent<
           <RealEstatePhotoItem
             imageSrc="/jpegs/RealEstate.jpg"
             name="Project Name"
-          />
+          /> */}
         </div>
       </section>
 
@@ -136,9 +141,11 @@ const RealEstateSubDomain: React.FunctionComponent<
 export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
+  const images = await getImages("realEstate");
+  // console.log(images)
   return {
-    props: { reviews, locations },
-    revalidate: 3600
+    props: { reviews, locations, featured: images },
+    revalidate: 3600,
   };
 };
 

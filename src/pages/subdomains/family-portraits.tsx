@@ -5,6 +5,7 @@ import SBanner from "@/components/subdomains/SBanner";
 import SFlatNav from "@/components/subdomains/SFlatNav";
 import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
+import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
@@ -63,11 +64,13 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="w-5/6 mx-auto border-light-grey opacity-40 my-10" />
         <div className="grid gap-5 grid-cols-2 md:grid-cols-4 place-items-center">
-          <FamilyPortraitsPhotoItem
-            imageSrc="/jpegs/CoorporateEvents.jpg"
-            name="Project Name"
-          />
-          <FamilyPortraitsPhotoItem
+          {props.featured.map((item, idx) => (<FamilyPortraitsPhotoItem
+            key={idx}
+            imageSrc={item.mainImage}
+            name={item.name}
+            className={(idx===3 || idx===5)?"row-span-2 w-full":""}
+          />))}
+          {/* <FamilyPortraitsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
@@ -105,7 +108,7 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
           <FamilyPortraitsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
-          />
+          /> */}
         </div>
       </section>
 
@@ -118,8 +121,9 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
 export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
+  const images = await getImages("familyAndEvents");
   return {
-    props: { reviews, locations },
+    props: { reviews, locations, featured: images },
     revalidate: 3600
   };
 } satisfies GetStaticProps<{
