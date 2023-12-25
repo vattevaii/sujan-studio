@@ -7,6 +7,8 @@ import {
   SliderPagination,
 } from "./Slider";
 import Image from "next/image";
+import { urlForImage } from "@/utils/imageUrlBuilder";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 export type ImageSliderOptions = {
   currentCategory: string;
@@ -26,15 +28,26 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
   const items = options.images.map((src, idx) => (
     <div
       key={idx}
-      className="relative text-center text-xl lg:text-11xl h-full w-full flex items-center justify-center"
+      className="isolate z-20 relative text-center text-xl lg:text-11xl h-full w-full flex items-center justify-center"
     >
       <Image
-        width={30}
-        height={30}
+        width={100}
+        height={100}
+        className="absolute w-11/12 lg:w-auto h-auto max-h-full max-w-full lg:h-full -z-[1] object-contain mx-auto"
+        alt=""
+        src={src}
+        loading="eager"
+        loader={sanityImageLoader}
+        // unoptimized={src.startsWith("http")}
+      />
+      <Image
+        width={1500}
+        height={1500}
         className="w-11/12 lg:w-auto h-auto max-h-full max-w-full lg:h-full -z-[1] object-contain mx-auto"
         alt=""
         src={src}
-        unoptimized={src.startsWith("http")}
+        loader={sanityImageLoader}
+        // unoptimized={src.startsWith("http")}
       />
     </div>
   ));

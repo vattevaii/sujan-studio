@@ -3,6 +3,7 @@ import ImageGrid from "@/components/PageSections/ImageGrid";
 import ImageSlider, {
   ImageSliderOptions,
 } from "@/components/Slider/ImageSlider";
+import { getPortfolio } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
@@ -23,6 +24,7 @@ const NewWebsite = ({
   const openImageModal = (
     title: string,
     img: string,
+    idx: number,
     imgPos: [number, number, number, number]
   ) => {
     const allImgs = portfolioImages.find((img) => img.title === title)!.images;
@@ -30,7 +32,7 @@ const NewWebsite = ({
     setImgSliderOptions({
       images: allImgs,
       currentCategory: title,
-      index: allImgs.findIndex((i) => i === img),
+      index: idx,
     });
     setOpenModal(true);
   };
@@ -100,9 +102,9 @@ const NewWebsite = ({
             </Link>
           </div>
           <ImageGrid
-            images={item.images}
-            onSelectImage={(img, imgPos) =>
-              openImageModal(item.title, img, imgPos)
+            images={item.images.slice(0, 6)}
+            onSelectImage={(img,imgIdx, imgPos) =>
+              openImageModal(item.title, img, imgIdx, imgPos)
             }
           />
         </section>
@@ -113,79 +115,35 @@ const NewWebsite = ({
 
 export const getStaticProps = async () => {
   const locations = await getAllLocations();
+  const portfolio = await getPortfolio();
+  const items: { [x: string]: number } = {};
+  const relatedImages: { [x: string]: string[] } = {};
+  const portfolioImages: { title: string; images: string[] }[] = [];
+  portfolio.forEach((item) => {
+    if (!(item.title in items)) {
+      items[item.title] = portfolioImages.length;
+      relatedImages[item.title] = [];
+      portfolioImages.push({ title: item.title, images: [] });
+    }
+    const idx = items[item.title];
+    portfolioImages[idx].images.push(item.mainImage);
+    relatedImages[item.title] = [...relatedImages[item.title], ...item.images];
+  });
+  portfolioImages.forEach((item) => {
+    item.images = [...item.images, ...relatedImages[item.title]];
+    item.title =
+      item.title[0].toUpperCase() + item.title.slice(1) + " Photography";
+  });
+  // const portfolioImages = portfolio.map((item) => ({
+  //   title: item.title[0].toUpperCase() + item.title.slice(1) + " Photography",
+  //   images:[item.mainImage, ...item.images],
+  // }))
   return {
     props: {
-      portfolioImages: [
-        {
-          title: "Real State Photography",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/300/300",
-            "http://placekitten.com/400/300",
-            "http://placekitten.com/500/300",
-            "http://placekitten.com/600/300",
-            "http://placekitten.com/700/300",
-          ],
-        },
-        {
-          title: "Wedding Photography",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-          ],
-        },
-        {
-          title: "Family & Events Photography",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-          ],
-        },
-        {
-          title: "Corporate Events Photography",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-          ],
-        },
-        {
-          title: "School & Events",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-          ],
-        },
-        {
-          title: "Others",
-          images: [
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-            "http://placekitten.com/200/300",
-          ],
-        },
-      ],
+      portfolioImages,
       locations,
     },
-    revalidate: 3600
+    revalidate: 3600,
   };
 };
 
