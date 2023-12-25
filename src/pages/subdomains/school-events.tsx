@@ -11,6 +11,7 @@ import Head from "next/head";
 import Image from "next/image";
 import * as React from "react";
 import { getImages } from "@/utils/sanity/imageStore";
+import ImageSliderWrap from "@/components/ImageSliderWrap";
 
 interface ISchoolEventsSubDomainProps {}
 
@@ -32,7 +33,11 @@ const SchoolEventsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="SchoolEvents" />
       <SFlatNav />
-      <SBanner service="School And Events" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
+      <SBanner
+        service="School And Events"
+        bannerImg="/jpegs/mainSection.jpg"
+        getEstimateLink="/book-us"
+      />
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           Why Us For Your Coorporate Events?
@@ -79,13 +84,16 @@ const SchoolEventsSubDomain: React.FunctionComponent<
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-2 md:grid-cols-4 place-items-center">
           {props.featured.map((item, idx) => (
-            <SchoolEventsPhotoItem
-              key={idx}
-              date={item.date}
-              imageSrc={item.mainImage}
-              name={item.name}
-              className={idx===3||idx==4?"row-span-2 col-span-2 w-full":""}
-            />
+            <ImageSliderWrap key={idx} images={item.images}>
+              <SchoolEventsPhotoItem
+                date={item.date}
+                imageSrc={item.mainImage}
+                name={item.name}
+                className={
+                  idx === 3 || idx == 4 ? "row-span-2 col-span-2 w-full" : ""
+                }
+              />
+            </ImageSliderWrap>
           ))}
           {/* <SchoolEventsPhotoItem
             date={"19th Dec 2050"}

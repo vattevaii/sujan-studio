@@ -18,13 +18,22 @@ export type ImageSliderOptions = {
 
 interface IImageSliderProps {
   options: ImageSliderOptions;
-  onClose?: () => void;
+  onClose?: (e:any) => void;
 }
 
 const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
   options,
   onClose,
 }) => {
+  const closeModal = (e: KeyboardEvent) => {
+    if (e.key === "Escape") onClose?.(e);
+  };
+  React.useEffect(() => {
+    document.addEventListener("keydown", closeModal);
+    return () => {
+      document.removeEventListener("keydown", closeModal);
+    };
+  });
   const items = options.images.map((src, idx) => (
     <div
       key={idx}
@@ -52,7 +61,10 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
     </div>
   ));
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen z-10" onClick={onClose}>
+    <div
+      className="fixed top-0 left-0 w-screen h-screen z-10"
+      onClick={onClose}
+    >
       <div className="absolute w-full h-full top-0 left-0 bg-black opacity-70"></div>
       <div className="absolute w-full h-full lg:w-3/4 -translate-x-1/2 left-1/2 top-0">
         <SliderProvider autoplay={false} loop={false} activeIdx={options.index}>

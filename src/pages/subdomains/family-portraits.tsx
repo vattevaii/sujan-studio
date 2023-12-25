@@ -1,5 +1,8 @@
+import ImageSliderWrap from "@/components/ImageSliderWrap";
 import { LocationItem } from "@/components/LocationCard";
-import ReviewSlider, { ReviewItem } from "@/components/PageSections/UserReviews/ReviewSlider";
+import ReviewSlider, {
+  ReviewItem,
+} from "@/components/PageSections/UserReviews/ReviewSlider";
 import FamilyPortraitsPhotoItem from "@/components/subdomains/FamilyPortraitsPhotoItem";
 import SBanner from "@/components/subdomains/SBanner";
 import SFlatNav from "@/components/subdomains/SFlatNav";
@@ -33,7 +36,11 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="FamilyPortraits" />
       <SFlatNav />
-      <SBanner service="Family Portraits" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
+      <SBanner
+        service="Family Portraits"
+        bannerImg="/jpegs/mainSection.jpg"
+        getEstimateLink="/book-us"
+      />
       <section className="grid bg-light-grey text-project-100 px-[5vw] py-10 gap-6">
         <SText.Title className="text-center">
           A trusted photography business, collaborating seamlessly with families
@@ -49,12 +56,11 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
             name="Project Name"
           />
           <FamilyPortraitsPhotoItem
-          className="hidden md:block"
+            className="hidden md:block"
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
           />
         </div>
-       
       </section>
       <section className="text-center text-light-grey py-6 ">
         <SText.Title>Our Featured Works</SText.Title>
@@ -64,12 +70,16 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         </SText.Sub>
         <hr className="w-5/6 mx-auto border-light-grey opacity-40 my-10" />
         <div className="grid gap-5 grid-cols-2 md:grid-cols-4 place-items-center">
-          {props.featured.map((item, idx) => (<FamilyPortraitsPhotoItem
-            key={idx}
-            imageSrc={item.mainImage}
-            name={item.name}
-            className={(idx===3 || idx===5)?"row-span-2 w-full":""}
-          />))}
+          {props.featured.map((item, idx) => (
+            <ImageSliderWrap key={idx} images={item.images}>
+              <FamilyPortraitsPhotoItem
+                key={idx}
+                imageSrc={item.mainImage}
+                name={item.name}
+                className={idx === 3 || idx === 5 ? "row-span-2 w-full" : ""}
+              />
+            </ImageSliderWrap>
+          ))}
           {/* <FamilyPortraitsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"
             name="Project Name"
@@ -124,11 +134,11 @@ export const getStaticProps = async function () {
   const images = await getImages("familyAndEvents");
   return {
     props: { reviews, locations, featured: images },
-    revalidate: 3600
+    revalidate: 3600,
   };
 } satisfies GetStaticProps<{
-  reviews: ReviewItem[],
-  locations: LocationItem[]
+  reviews: ReviewItem[];
+  locations: LocationItem[];
 }>;
 
 export default FamilyPortraitsSubDomain;

@@ -1,3 +1,4 @@
+import ImageSliderWrap from "@/components/ImageSliderWrap";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import CorporateEventsPhotoItem from "@/components/subdomains/CorporateEventsPhotoItem";
 import SBanner from "@/components/subdomains/SBanner";
@@ -34,7 +35,11 @@ const CorporateEventsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="CorporateEvents" />
       <SFlatNav />
-      <SBanner service="Corporate Events" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
+      <SBanner
+        service="Corporate Events"
+        bannerImg="/jpegs/mainSection.jpg"
+        getEstimateLink="/book-us"
+      />
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           Why Us For Your Coorporate Events?
@@ -81,11 +86,13 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
           {props.featured.map((item, idx) => (
-            <CorporateEventsPhotoItem
-              key={idx}
-              imageSrc={item.mainImage}
-              name={item.name}
-            />
+            <ImageSliderWrap key={idx} images={item.images}>
+              <CorporateEventsPhotoItem
+                key={idx}
+                imageSrc={item.mainImage}
+                name={item.name}
+              />
+            </ImageSliderWrap>
           ))}
           {/* <CorporateEventsPhotoItem
             imageSrc="/jpegs/CoorporateEvents.jpg"

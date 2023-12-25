@@ -1,3 +1,4 @@
+import ImageSliderWrap from "@/components/ImageSliderWrap";
 import BannerCountUpTo from "@/components/PageSections/Banner/components/BannerCountUpto";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import RealEstatePhotoItem from "@/components/subdomains/RealEstatePhotoItem";
@@ -34,7 +35,11 @@ const RealEstateSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="RealEstate" />
       <SFlatNav />
-      <SBanner service="Real Estate" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
+      <SBanner
+        service="Real Estate"
+        bannerImg="/jpegs/mainSection.jpg"
+        getEstimateLink="/book-us"
+      />
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
         <SText.Title className="text-center">
           Learn about our experience
@@ -107,11 +112,13 @@ const RealEstateSubDomain: React.FunctionComponent<
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
           {props.featured.map((item, idx) => (
-            <RealEstatePhotoItem
-              key={idx}
-              imageSrc={item.mainImage}
-              name={item.name}
-            />
+            <ImageSliderWrap key={idx} images={item.images}>
+              <RealEstatePhotoItem
+                key={idx}
+                imageSrc={item.mainImage}
+                name={item.name}
+              />
+            </ImageSliderWrap>
           ))}
           {/* <RealEstatePhotoItem
             imageSrc="/jpegs/RealEstate.jpg"

@@ -16,6 +16,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
+    if(process.env.NODE_ENV === 'production') {
+        res.status(400).json({message:"Not accessible"})
+    }
   try {
     client
       .fetch(query)

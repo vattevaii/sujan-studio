@@ -29,7 +29,7 @@ export const HoverImageItem: React.FunctionComponent<
   React.PropsWithChildren<ImageProps>
 > = ({ children, ...props }) => {
   return (
-    <div className="group relative w-full h-full">
+    <div className="group relative w-full h-full isolate">
       <div className="w-full h-full">
           <Image {...props} />
       </div>

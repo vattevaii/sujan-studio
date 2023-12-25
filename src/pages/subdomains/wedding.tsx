@@ -1,3 +1,4 @@
+import ImageSliderWrap from "@/components/ImageSliderWrap";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import SBanner from "@/components/subdomains/SBanner";
 import SFlatNav from "@/components/subdomains/SFlatNav";
@@ -32,7 +33,11 @@ const WeddingSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="Wedding" />
-      <SBanner service="Wedding" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
+      <SBanner
+        service="Wedding"
+        bannerImg="/jpegs/mainSection.jpg"
+        getEstimateLink="/book-us"
+      />
       <SFlatNav />
       <section className="text-center text-light-grey py-6 px-[10vw]">
         <SText.Title>Our Featured Wedding Photography</SText.Title>
@@ -43,13 +48,15 @@ const WeddingSubDomain: React.FunctionComponent<
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
           {props.featured.map((item, idx) => (
-            <WeddingPhotoItem
-              key={idx}
-              imageSrc={item.mainImage}
-              bride={item.brideName}
-              groom={item.groomName}
-              date={item.date}
-            />
+            <ImageSliderWrap key={idx} images={item.images}>
+              <WeddingPhotoItem
+                key={idx}
+                imageSrc={item.mainImage}
+                bride={item.brideName}
+                groom={item.groomName}
+                date={item.date}
+              />
+            </ImageSliderWrap>
           ))}
         </div>
       </section>
@@ -94,7 +101,7 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("wedding");
-//   console.log(images);
+  //   console.log(images);
   return {
     props: { reviews, locations, featured: images },
     revalidate: 3600,
