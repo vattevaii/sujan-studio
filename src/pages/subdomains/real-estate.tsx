@@ -37,7 +37,7 @@ const RealEstateSubDomain: React.FunctionComponent<
       <SFlatNav />
       <SBanner
         service="Real Estate"
-        bannerImg="/jpegs/mainSection.jpg"
+        bannerImg="/jpegs/RealEstate.jpg"
         getEstimateLink="/book-us"
       />
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">

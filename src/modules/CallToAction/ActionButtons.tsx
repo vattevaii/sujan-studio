@@ -15,11 +15,8 @@ export default function ActionButtons({}: Props) {
   return (
     <div className="flex flex-col-reverse gap-3 fixed z-10 bottom-0 right-0 m-5">
       <TooltipWrapper>
-        <TooltipTrigger>
-          <div
-            className="rounded-full p-4 bg-light-grey shadow-around"
-            onClick={() => router.push("/contact-us")}
-          >
+        <TooltipTrigger onClick={() => router.push("/contact-us")}>
+          <div className="rounded-full p-4 bg-light-grey shadow-around">
             <Image
               width="35"
               height="35"
@@ -32,10 +29,8 @@ export default function ActionButtons({}: Props) {
         </TooltipTrigger>
       </TooltipWrapper>
       <TooltipWrapper>
-        <TooltipTrigger>
-          <div className="rounded-full p-4 bg-light-grey shadow-around"
-            onClick={() => router.push("book-us")}
-            >
+        <TooltipTrigger onClick={() => router.push("/book-us")}>
+          <div className="rounded-full p-4 bg-light-grey shadow-around">
             <Image
               width="35"
               height="35"

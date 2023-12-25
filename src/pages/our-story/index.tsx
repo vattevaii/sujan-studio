@@ -81,21 +81,21 @@ export default function OurStory({
             last forever. We are happy to help to add a bit of craft in your
             memories.
           </div>
-          <div className="bg-yellow-50 row-start-2 col-start-1 row-span-1 md:row-span-2 md:row-start-2 lg:row-span-1 xl:row-span-2 xl:row-start-2 aspect-square">
-            <PlaceHolderImage
+          <div className="bg-yellow-50 row-start-2 col-start-1 row-span-1 md:row-span-1 md:row-start-2 lg:row-span-1 xl:row-span-2 xl:row-start-2 aspect-square h-full w-full max-h-72 md:h-full lg:max-h-72 xl:h-full ">
+            <Image
               className="object-cover h-full w-full"
               width="700"
               height="700"
-              src={"img"}
+              src={"/jpegs/WeddingItem.jpg"}
               alt={" Image "}
             />
           </div>
-          <div className="bg-yellow-50 row-start-3 col-start-1 md:row-start-2 md:col-start-2 lg:row-start-3 lg:col-start-1 xl:row-start-2 xl:col-start-2 aspect-[2/1] min-h-[50px]">
-            <PlaceHolderImage
+          <div className="bg-yellow-50 row-start-3 col-start-1 md:row-start-2 md:col-start-2 lg:row-start-3 lg:col-start-1 xl:row-start-2 xl:col-start-2 aspect-[2/1] h-56 md:h-full lg:h-56 xl:h-full w-full">
+            <Image
               className="object-cover h-full w-full"
               width="700"
               height="350"
-              src={"img"}
+              src={"/jpegs/BusinessItem.jpg"}
               alt={" Image "}
             />
           </div>

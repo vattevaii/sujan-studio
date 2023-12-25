@@ -36,7 +36,7 @@ const WeddingSubDomain: React.FunctionComponent<
       <STopBar service="Wedding" />
       <SBanner
         service="Wedding"
-        bannerImg="/jpegs/mainSection.jpg"
+        bannerImg="/jpegs/WeddingItem.jpg"
         getEstimateLink="/book-us"
       />
       <SFlatNav />

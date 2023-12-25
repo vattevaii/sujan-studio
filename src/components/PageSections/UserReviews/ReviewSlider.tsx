@@ -43,6 +43,7 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
           loader={sanityImageLoader}
           src={bg ?? ""}
         />
+        <div className="absolute top-0 bg-project-100 opacity-60 w-full h-full -z-[1]" />
         <div className="flex flex-col items-center justify-center h-full">
           <article
             className="p-8 md:p-20 flex flex-col-reverse gap-5 lg:gap-10 items-center justify-center h-full"
