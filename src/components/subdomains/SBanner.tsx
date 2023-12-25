@@ -22,7 +22,7 @@ const SBanner: React.FunctionComponent<ISBannerProps> = (props) => {
         src="/jpegs/mainSection.jpg"
       />
       <div className="flex flex-col gap-6 content-center justify-center text-light-grey text-center min-h-[calc(80vh)] px-9">
-        <div className="text-41xl lg:text-61xl ">
+        <div className="text-41xl lg:text-61xl font-semibold">
           <h1>{props.service} Photography By Sujan&nbsp;Studio</h1>
         </div>
         <div className="">

@@ -7,13 +7,14 @@ import { useRouter } from "next/router";
 import { useFormikContext } from "formik";
 import { createClient } from "next-sanity";
 import { client } from "../../../sanity/lib/client";
+import Image from "next/image";
 export interface IStep2Props {
   nextStep: () => void;
   prevStep: () => void;
 }
 export default function Step2(props: IStep2Props) {
   const form = useFormikContext<{
-    "exactNeed": string;
+    exactNeed: string;
   }>();
   const [currPath, setPath] = React.useState("");
   const [error, setError] = React.useState("");
@@ -27,7 +28,7 @@ export default function Step2(props: IStep2Props) {
       setError("");
       router.push(
         {
-          query: { ...query, "exactNeed": form.values["exactNeed"], step: 3 },
+          query: { ...query, exactNeed: form.values["exactNeed"], step: 3 },
         },
         undefined,
         {
@@ -41,7 +42,7 @@ export default function Step2(props: IStep2Props) {
     const query = router.query;
     router.push(
       {
-        query: { ...query, "exactNeed": form.values["exactNeed"], step: 1 },
+        query: { ...query, exactNeed: form.values["exactNeed"], step: 1 },
       },
       undefined,
       {
@@ -51,19 +52,15 @@ export default function Step2(props: IStep2Props) {
     props.prevStep();
   };
   React.useEffect(() => {
-    if(currPath === router.asPath) return;
+    if (currPath === router.asPath) return;
     setPath(router.asPath);
     const query = router.query;
     const fetchD = client
       .fetch(
         `*[_type == 'serviceItem' && '${query.needs}' in services && '${query.purpose}' in serviceScope]{
         serviceName,
-        icon {
-          asset-> {
-            url
-          }
-        }
-      }`
+        "icon": icon.asset->url
+        }`
       )
       .then((v: { serviceName: string; icon: string }[]) => {
         // console.log(v);
@@ -71,7 +68,7 @@ export default function Step2(props: IStep2Props) {
           form.setFieldValue("exactNeed", "");
           router.push(
             {
-              query: { ...query, "exactNeed": undefined, step: 2 },
+              query: { ...query, exactNeed: undefined, step: 2 },
             },
             undefined,
             {
@@ -94,8 +91,11 @@ export default function Step2(props: IStep2Props) {
       >
         {items.map((d) => (
           <label key={d.serviceName}>
-            <InputRadioItemForBookUsPage value={d.serviceName}>
-              <p>{d.serviceName}</p>
+            <InputRadioItemForBookUsPage value={d.serviceName} >
+              <div className="flex w-5/6 gap-5">
+                <Image src={d.icon?? ""} width={25} height={25} alt="" />
+                <p>{d.serviceName}</p>
+              </div>
             </InputRadioItemForBookUsPage>
           </label>
         ))}
