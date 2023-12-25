@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 type Props = {
@@ -6,7 +7,10 @@ type Props = {
 };
 
 export default function WhatWeDoCard({ data }: Props) {
-  const goToEstimatePage = () => {};
+  const router = useRouter();
+  const goToEstimatePage = () => {
+    router.push("/book-us")
+  };
   const getEstimate = () => {
     if (window.matchMedia("(any-hover: none)").matches) {
       // console.log("Show Banner");

@@ -34,7 +34,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="CorporateEvents" />
       <SFlatNav />
-      <SBanner service="Corporate Events" bannerImg="/jpegs/mainSection.jpg" />
+      <SBanner service="Corporate Events" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           Why Us For Your Coorporate Events?

@@ -32,7 +32,7 @@ const WeddingSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="Wedding" />
-      <SBanner service="Wedding" bannerImg="/jpegs/mainSection.jpg" />
+      <SBanner service="Wedding" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
       <SFlatNav />
       <section className="text-center text-light-grey py-6 px-[10vw]">
         <SText.Title>Our Featured Wedding Photography</SText.Title>

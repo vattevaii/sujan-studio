@@ -1,12 +1,16 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import * as React from "react";
 
 interface ISBannerProps {
   service: string;
   bannerImg: string;
+  getEstimateLink: string;
 }
 
 const SBanner: React.FunctionComponent<ISBannerProps> = (props) => {
+  const router = useRouter();
+  const goToEstimatePage = () => router.push(props.getEstimateLink); //
   return (
     <section id="banner" className="relative banner">
       <Image
@@ -28,7 +32,10 @@ const SBanner: React.FunctionComponent<ISBannerProps> = (props) => {
           </p>
         </div>
         <div className="pt-2 lg:pt-7">
-          <button className=" bg-light-grey text-project-100 py-4 px-8 min-w-[150px]">
+          <button
+            className=" bg-light-grey text-project-100 py-4 px-8 min-w-[150px]"
+            onClick={goToEstimatePage}
+          >
             Get Estimation
           </button>
         </div>

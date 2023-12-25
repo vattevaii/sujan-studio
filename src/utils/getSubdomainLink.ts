@@ -2,7 +2,7 @@ export function getSubdomainLink(title: string) {
   const sStirg = title.toLowerCase();
   if (sStirg.includes("wedding"))
     return process.env.NEXT_PUBLIC_WEDDING_SUBDOMAIN?? "#";
-  if (sStirg.includes("coorporate"))
+  if (sStirg.includes("corporate"))
     return process.env.NEXT_PUBLIC_COORPORATE_SUBDOMAIN?? "#";
   if (sStirg.includes("family"))
     return process.env.NEXT_PUBLIC_FAMILY_SUBDOMAIN?? "#";

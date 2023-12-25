@@ -32,7 +32,7 @@ const SchoolEventsSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="SchoolEvents" />
       <SFlatNav />
-      <SBanner service="School And Events" bannerImg="/jpegs/mainSection.jpg" />
+      <SBanner service="School And Events" bannerImg="/jpegs/mainSection.jpg" getEstimateLink="/book-us"/>
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           Why Us For Your Coorporate Events?
