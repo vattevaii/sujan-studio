@@ -33,3 +33,14 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+body:has(.modal-open) {
+  overflow-y: hidden;
+}
+
+.review-text > p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}

@@ -11,7 +11,9 @@
     "sanity:import": "sanity dataset import"
   },
   "dependencies": {
+    "@portabletext/react": "^3.0.11",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/orderable-document-list": "^1.1.0",
     "@sanity/vision": "^3.21.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "formik": "^2.4.5",

@@ -6,6 +6,7 @@ import {
   SliderPagination,
 } from "@/components/Slider/Slider";
 import sanityImageLoader from "@/utils/sanity/imageLoader";
+import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import React, { HTMLAttributes, useState } from "react";
 
@@ -19,9 +20,14 @@ export type ReviewItem = {
 };
 export default function ReviewSlider({ className = "", reviews }: Props) {
   const [mouseIn, setMouseIn] = useState(false);
-  
+
   if (!reviews || reviews.length === 0) return <></>;
-  const items = reviews.map(
+  const mappedData = reviews.map((review) => ({
+    ...review,
+    // @ts-expect-error
+    reviewText: <PortableText value={review.reviewText} />,
+  }));
+  const items = mappedData.map(
     ({ author, authorSrc, bg, company, reviewText }, idx) => (
       <div
         key={idx}
@@ -63,11 +69,7 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
                 <div className="text-xs lg:text-base">{company}</div>
               </div>
             </div>
-            <p className="font-medium inline-block">
-              &quot;Sujan Studio delivered stunning photos that captured the
-              essence&nbsp;of&nbsp;our&nbsp;moments. <wbr />{" "}
-              We&apos;re&nbsp;thrilled&nbsp;with&nbsp;their&nbsp;work!&quot;
-            </p>
+            <div className="review-text">{reviewText}</div>
           </article>
         </div>
       </div>
@@ -90,7 +92,8 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
           <>
             <div
               className={
-                (mouseIn ? "opacity-100" : "opacity-0") + " transition-opacity"
+                (mouseIn ? "opacity-100" : "opacity-0") +
+                " transition-opacity pointer-coarse:opacity-50"
               }
             >
               <SliderPrev />

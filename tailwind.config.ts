@@ -16,7 +16,7 @@ const config: Config = {
       },
       height: {
         // @ts-expect-error
-        screen: ["100vh", "100svh"],
+        screen: ["100vh", "100dvh"],
       },
       keyframes: {
         move45degarrow: {

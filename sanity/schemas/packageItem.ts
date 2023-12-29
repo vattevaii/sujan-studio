@@ -34,6 +34,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: "orderRank",
+      type: "string",
+      hidden: true,
+    }),
   ],
   preview: {
     select: {

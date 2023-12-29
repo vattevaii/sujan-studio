@@ -132,8 +132,6 @@ export const getStaticProps = async () => {
   });
   portfolioImages.forEach((item) => {
     item.images = [...item.images, ...relatedImages[item.title]];
-    item.title =
-      item.title[0].toUpperCase() + item.title.slice(1) + " Photography";
   });
   // const portfolioImages = portfolio.map((item) => ({
   //   title: item.title[0].toUpperCase() + item.title.slice(1) + " Photography",

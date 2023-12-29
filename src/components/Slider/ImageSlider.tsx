@@ -55,6 +55,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
         className="w-11/12 lg:w-auto h-auto max-h-full max-w-full lg:h-full -z-[1] object-contain mx-auto"
         alt=""
         src={src}
+        loading="eager"
         loader={sanityImageLoader}
         // unoptimized={src.startsWith("http")}
       />
@@ -62,14 +63,14 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
   ));
   return (
     <div
-      className="fixed top-0 left-0 w-screen h-screen z-10"
+      className="modal-open fixed top-0 left-0 w-screen h-[100lvh] z-10"
       onClick={onClose}
     >
       <div className="absolute w-full h-full top-0 left-0 bg-black opacity-70"></div>
       <div className="absolute w-full h-full lg:w-3/4 -translate-x-1/2 left-1/2 top-0">
         <SliderProvider autoplay={false} loop={false} activeIdx={options.index}>
-          <div className="h-[90vh] lg:h-full overflow-hidden py-8 lg:mx-20">
-            <Slider>{items}</Slider>
+          <div className="h-[calc(50vh+80vw)] max-h-[95svh] lg:max-h-full lg:h-full overflow-hidden py-8 lg:mx-20">
+            <Slider>{items}</Slider>            
           </div>
           {/* <SliderNavigation /> */}
           <div className="relative w-32 m-auto  lg:static ">

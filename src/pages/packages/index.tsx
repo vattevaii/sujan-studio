@@ -64,7 +64,7 @@ const PackagePage: React.FunctionComponent<
   );
 };
 export const getStaticProps = async () => {
-  const query = `*[_type=="package"]{name,dollars,privileges,"image":image.asset.url}`;
+  const query = `*[_type=="package"]|order(orderRank){name,dollars,privileges,"image":image.asset.url}`;
   const packages: IPackagePageProps[] = await client.fetch(query);
   const locations: LocationItem[] = await getAllLocations();
   return {

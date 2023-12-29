@@ -52,7 +52,7 @@ export default function Step1(props: IStep1Props) {
           >
             <label>
               <InputRadioItemForBookUsPage value="photography">
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-5 items-center min-w-[165px]">
                   <div className="w-min">
                     <svg
                       width="24"
@@ -81,7 +81,7 @@ export default function Step1(props: IStep1Props) {
             </label>
             <label>
               <InputRadioItemForBookUsPage value="videography">
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-5 items-center  min-w-[165px]">
                   <div className="w-min">
                     <svg
                       width="25"
@@ -122,13 +122,13 @@ export default function Step1(props: IStep1Props) {
           <p className="text-lg">For Business or personal purposes</p>
           <InputRadioGroup
             name="purpose"
-            className="flex gap-5  justify-center md:justify-end"
+            className="flex gap-5 justify-center md:justify-end"
             onChange={(v) => form.setFieldValue("purpose", v)}
             value={form.values.purpose}
           >
             <label>
               <InputRadioItemForBookUsPage value="personal">
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-5 items-center min-w-[165px]">
                   <div className="w-min">
                     <svg
                       width="24"
@@ -161,7 +161,7 @@ export default function Step1(props: IStep1Props) {
             </label>
             <label>
               <InputRadioItemForBookUsPage value="business">
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-5 items-center min-w-[165px]">
                   <div className="w-min">
                     <svg
                       width="27"

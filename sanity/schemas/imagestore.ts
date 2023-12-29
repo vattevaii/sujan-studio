@@ -65,15 +65,54 @@ const imageStore = defineType({
       name: "category",
       title: "Category",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          name: "categoryItem",
+          type: "object",
+
+          fields: [
+            { name: "categoryName", type: "string" },
+            { name: "categoryValue", type: "string" },
+          ],
+          preview: {
+            select: {
+              title: 'categoryName'
+            }
+          }
+        },
+      ],
       options: {
         list: [
-          { title: "Wedding", value: "wedding" },
-          { title: "Family and Events", value: "familyAndEvents" },
-          { title: "Corporate Events", value: "corporateEvents" },
-          { title: "Real Estate", value: "realEstate" },
-          { title: "School and Events", value: "schoolAndEvents" },
-          { title: "Others", value: "others" },
+          {
+            _type: "categoryItem",
+            categoryName: "Wedding Photography",
+            categoryValue: "wedding",
+          },
+          {
+            _type: "categoryItem",
+            categoryName: "Family and Events Photography",
+            categoryValue: "familyAndEvents",
+          },
+          {
+            _type: "categoryItem",
+            categoryName: "Corporate Events Photography",
+            categoryValue: "corporateEvents",
+          },
+          {
+            _type: "categoryItem",
+            categoryName: "Real Estate Photography",
+            categoryValue: "realEstate",
+          },
+          {
+            _type: "categoryItem",
+            categoryName: "School and Events Photography",
+            categoryValue: "schoolAndEvents",
+          },
+          {
+            _type: "categoryItem",
+            categoryName: "Others",
+            categoryValue: "others",
+          },
         ],
       },
     }),
@@ -143,6 +182,11 @@ const imageStore = defineType({
           return true;
         }),
     }),
+    defineField({
+      name: "orderRank",
+      type: "string",
+      hidden: true,
+    }),
   ],
   preview: {
     select: {
@@ -156,7 +200,7 @@ const imageStore = defineType({
       const { event, title, sub, media, subtitle } = selection;
       return {
         title: event,
-        subtitle: title + " " + sub[0],
+        subtitle: title + " " + sub?.[0]?.categoryValue ?? "",
         media,
       };
     },

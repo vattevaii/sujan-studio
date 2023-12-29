@@ -14,13 +14,11 @@ const CorporateEventPhotoItem: React.FunctionComponent<
       <>
         <div className="absolute top-0 left-0 w-full h-full bg-[#000815] opacity-70" />
         <div className="w-full h-full p-5 relative z-10">
-          <div className="w-full h-full py-4 flex flex-col justify-between">
-            <p className="text-5xl">{name}</p>
+          <div className="w-full h-full py-4 flex flex-col justify-center gap-6">
+            <p className="text-md lg:text-5xl">{name}</p>
             <div>
               <svg
-                className="mx-auto opacity-70 hover:opacity-100"
-                width="80"
-                height="80"
+                className="mx-auto opacity-70 w-10 h-10 lg:w-20 lg:h-20 hover:opacity-100"
                 viewBox="0 0 120 120"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

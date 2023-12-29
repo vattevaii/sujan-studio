@@ -33,7 +33,7 @@ export const HoverImageItem: React.FunctionComponent<
       <div className="w-full h-full">
           <Image {...props} />
       </div>
-      <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 absolute top-0 left-0 w-full h-full">
+      <div className="transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 absolute top-0 left-0 w-full h-full">
         {children}
       </div>
     </div>
