@@ -12,9 +12,13 @@ import serviceItem from "./schemas/serviceItem";
 import booking from "./schemas/booking";
 import packageItem from "./schemas/packageItem";
 import imageStore from "./schemas/imagestore";
+import textBlock from "./schemas/textBlock";
+import pageContent from "./schemas/pageContent";
+import siteSettings from "./schemas/site-settings";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    siteSettings,
     post,
     author,
     category,
@@ -26,6 +30,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     serviceItem,
     booking,
     packageItem,
-    imageStore
+    pageContent,
+    textBlock,
+    imageStore,
   ],
 };

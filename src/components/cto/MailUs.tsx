@@ -2,21 +2,24 @@ import * as React from "react";
 
 interface IMailUsProps {
   variant?: "large" | "small";
+  email: string;
 }
 
 const MailUs: React.FunctionComponent<
   IMailUsProps & React.HTMLProps<HTMLDivElement>
-> = ({ variant = "large", ...props }) => {
+> = ({ variant = "large", email, ...props }) => {
   return (
     <div
       className={
         props.className +
-        " flex flex-wrap justify-between flex-col md:flex-row items-start "+(variant==="large"?"md:items-end": "md:items-center")
+        " flex flex-wrap justify-between flex-col md:flex-row items-start " +
+        (variant === "large" ? "md:items-end" : "md:items-center")
       }
     >
       <h2
         className={
-          "flex-1 font-semibold " + (variant === "large"
+          "flex-1 font-semibold " +
+          (variant === "large"
             ? "text-21xl xl:text-61xl"
             : "text-5xl xl:text-21xl")
         }
@@ -25,14 +28,14 @@ const MailUs: React.FunctionComponent<
         an&nbsp;awesome&nbsp;Memory.
       </h2>
       <a
-        href="mailto:sujanstudio@gmail.com"
+        href={`mailto:${email}`}
         className={
           "flex items-center relative leading-[3em] font-raleway " +
           (variant === "large" ? "text-xl xl:text-5xl" : "text-md xl:text-xl")
         }
       >
         <>
-          <p>sujanstudio@gmail.com</p>
+          <p>{email}</p>
           <span>
             <svg
               width="40px"

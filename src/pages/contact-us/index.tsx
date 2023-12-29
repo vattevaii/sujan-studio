@@ -1,11 +1,14 @@
+import PageBanner from "@/components/PageSections/PageBanner";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import InputText from "@/components/input/InputText";
 import InputButton from "@/components/input/inputbutton";
 import { InputRadioGroup, InputRadioItem } from "@/components/input/inputradio";
 import svgs from "@/constants/svgs";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { ContactFormSchema } from "@/utils/schema/contactUsSchema";
+import { PortableText } from "@portabletext/react";
 import { useFormik } from "formik";
 import { debounce } from "lodash";
 import { InferGetStaticPropsType } from "next";
@@ -67,37 +70,20 @@ export default function App(props: IAppProps) {
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>
-                Have Feedback Or Questions?
-                <br /> Drop Us A Line Now.
-              </b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner image={props.pageContent.image}>
+        <PortableText value={props.pageContent.bannerText} />
+      </PageBanner>
       <section
         id="contact-us-form"
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
       >
         <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold py-5">
-          Contact Us
+          {props.pageContent.pageTitle}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-1 xl:grid-cols-[1fr_2fr] gap-5 md:gap-10 lg:gap-5 xl:gap-28">
           <div className="grid h-min gap-5 place-items-center text-center md:text-left md:place-items-start lg:place-items-center lg:text-center xl:text-left xl:place-items-start ">
             <h3 className="text-5xl lg:text-21xl font-semibold">
-              We are ready to talk about your project and many more.
+              {props.pageContent.pageSubTitle}
             </h3>
             <div className="flex justify-center flex-row md:flex-col lg:flex-row xl:flex-col flex-wrap gap-y-5 gap-x-10">
               <div className="flex items-center">
@@ -110,7 +96,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                hello@hello.com
+                {props.locations.siteSettings.email}
               </div>
               <div className="flex items-center">
                 <span>
@@ -122,7 +108,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                800-234-567-759
+                {props.locations.siteSettings.phoneNumber}
               </div>
               <div className="flex items-center">
                 <span>
@@ -134,7 +120,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                5/34-36 Princes Hwy Kogarah NSW 2217
+                {props.locations.siteSettings.location}
               </div>
             </div>
           </div>
@@ -294,10 +280,12 @@ export default function App(props: IAppProps) {
 export const getStaticProps = async () => {
   const locations = await getAllLocations();
   const reviews = await getAllReviews();
+  const pageContent = await getPageContent("contact-us");
   return {
     props: {
       reviews,
       locations,
+      pageContent,
     },
     revalidate: 3600,
   };

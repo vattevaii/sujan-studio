@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import MobileNavPanel from "./MovileNavPanel";
 import NavPanel from "./NavPanel";
+import { siteSettings } from "@/pages/_app";
 
 type Props = {
   route: string;
+  settings: siteSettings;
 };
 
-export default function Navbar({ route }: Props) {
+export default function Navbar({ route, settings }: Props) {
   const [navOpen, setNavOpen] = useState(false);
+  // console.log(settings)
   return (
     <>
       <MobileNavPanel
+        settings={settings}
         openNavbar={() => setNavOpen(true)}
         className="fixed top-0 left-0 z-10 lg:hidden"
       />
@@ -32,6 +36,7 @@ export default function Navbar({ route }: Props) {
           }
         />
         <NavPanel
+          settings={settings}
           activeRoute={route}
           className="absolute top-0 right-0 h-full flex w-full max-w-sm"
         />
@@ -52,6 +57,7 @@ export default function Navbar({ route }: Props) {
         </button>
       </div>
       <NavPanel
+        settings={settings}
         activeRoute={route}
         className="sticky top-0 h-screen hidden w-0 lg:w-auto lg:flex"
       />

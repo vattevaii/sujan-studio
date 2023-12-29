@@ -1,11 +1,14 @@
 import { LocationItem } from "@/components/LocationCard";
 import ImageGrid from "@/components/PageSections/ImageGrid";
+import PageBanner from "@/components/PageSections/PageBanner";
 import ImageSlider, {
   ImageSliderOptions,
 } from "@/components/Slider/ImageSlider";
 import { getSubdomainLink } from "@/utils/getSubdomainLink";
 import { getPortfolio } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
+import { PortableText } from "@portabletext/react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -13,6 +16,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const NewWebsite = ({
+  pageContent,
   portfolioImages,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [openModal, setOpenModal] = useState(false);
@@ -58,26 +62,9 @@ const NewWebsite = ({
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>
-                We Capture Beautiful&nbsp;Memories!
-                <br /> Explore Our Portfolio For&nbsp;Reference.
-              </b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner image={pageContent.image}>
+        <PortableText value={pageContent.bannerText} />
+      </PageBanner>
       {portfolioImages.map((item, idx) => (
         <section key={idx}>
           <div className="text-project-100 bg-light-grey px-4 lg:px-8 flex justify-between items-center">
@@ -104,7 +91,7 @@ const NewWebsite = ({
           </div>
           <ImageGrid
             images={item.images.slice(0, 6)}
-            onSelectImage={(img,imgIdx, imgPos) =>
+            onSelectImage={(img, imgIdx, imgPos) =>
               openImageModal(item.title, img, imgIdx, imgPos)
             }
           />
@@ -119,12 +106,18 @@ export const getStaticProps = async () => {
   const portfolio = await getPortfolio();
   const items: { [x: string]: number } = {};
   const relatedImages: { [x: string]: string[] } = {};
-  const portfolioImages: { title: string; link:string, images: string[] }[] = [];
+  const portfolioImages: { title: string; link: string; images: string[] }[] =
+    [];
+  const pageContent = await getPageContent('portfolio');
   portfolio.forEach((item) => {
     if (!(item.title in items)) {
       items[item.title] = portfolioImages.length;
       relatedImages[item.title] = [];
-      portfolioImages.push({ title: item.title, link:getSubdomainLink(item.title), images: [] });
+      portfolioImages.push({
+        title: item.title,
+        link: getSubdomainLink(item.title),
+        images: [],
+      });
     }
     const idx = items[item.title];
     portfolioImages[idx].images.push(item.mainImage);
@@ -139,6 +132,7 @@ export const getStaticProps = async () => {
   // }))
   return {
     props: {
+      pageContent,
       portfolioImages,
       locations,
     },

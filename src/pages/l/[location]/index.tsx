@@ -1,15 +1,14 @@
-import { LocationItem } from "@/components/LocationCard";
+import PageBanner from "@/components/PageSections/PageBanner";
 import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 
 interface ILocationPageProps {}
 export const getStaticPaths = (async () => {
-  const locations: LocationItem[] = await getAllLocations();
+  const { locations } = await getAllLocations();
   return {
     paths: locations.map((loc) => ({
       params: {
@@ -53,7 +52,7 @@ export const getStaticProps = (async (context) => {
     revalidate: 3600,
   };
 }) satisfies GetStaticProps<{
-  locations: LocationItem[];
+  locations: any;
   mainLocation: { name: string; slug: string };
   sublocations: { sublocationName: string; slug: string }[];
 }>;
@@ -93,26 +92,10 @@ const LocationPage: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner text-center">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>
-                Looking For Photographers&nbsp;& Videographers,
-                Near&nbsp;your&nbsp;location?
-              </b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner>
+        Looking For Photographers&nbsp;& Videographers,
+        Near&nbsp;your&nbsp;location?
+      </PageBanner>
       <section
         id="locations"
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-20"

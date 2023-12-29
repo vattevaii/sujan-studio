@@ -19,8 +19,8 @@ const STextSubTitle: React.FunctionComponent<TextProps> = ({
   ...props
 }) => {
   return (
-    <p className={"text-md xl:text-xl font-raleway " + className} {...props}>
-    </p>
+    <div className={"text-md xl:text-xl font-raleway " + className} {...props}>
+    </div>
   );
 };
 

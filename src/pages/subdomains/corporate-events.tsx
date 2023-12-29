@@ -8,7 +8,9 @@ import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { PortableText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -34,30 +36,19 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="CorporateEvents" />
-      <SFlatNav logo/>
+      <SFlatNav logo />
       <SBanner
-        service="Corporate Events"
-        bannerImg="/jpegs/CoorporateEvents.jpg"
+        service={props.pageContent.bannerText}
+        bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
       />
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
-          Why Us For Your Coorporate Events?
+          {props.pageContent.textBlocks[0].blockTitle}
         </SText.Title>
         <div className="">
           <SText.Sub className="text-project-200">
-            Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-            egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-            neque eget. Quam nisl eget euismod feugiat posuere porttitor. Neque
-            laoreet congue egestas eu porttitor tempus. Ac condimentum sed
-            consequat eu massa pretium sed nisl. Cursus sagittis est sed tortor.
-            Turpis arcu pharetra aliquam a ac faucibus. Diam molestie cursus
-            quis libero lorem ultricies. Id sit bibendum posuere ut amet
-            ullamcorper. Massa bibendum laoreet sagittis senectus eget enim
-            sapien urna duis. Lorem ipsum dolor sit amet consectetur. Ultrices
-            justo sit duis egestas. Et sagittis egestas in porttitor lectus nec
-            sollicitudin neque eget. Quam nisl eget euismod feugiat posuere
-            porttitor. Neque laoreet congue egestas eu porttitor tempus.
+            <PortableText value={props.pageContent.textBlocks[0].text} />
           </SText.Sub>
         </div>
         <div className="h-full row-start-2 aspect-[6/2]">
@@ -123,8 +114,10 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("corporateEvents");
+  const pageContent = await getPageContent("subdomain/corporate-events");
+
   return {
-    props: { reviews, locations, featured: images },
+    props: { reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

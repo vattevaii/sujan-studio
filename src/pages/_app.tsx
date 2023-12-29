@@ -24,10 +24,18 @@ const antonio = Antonio({
   preload: false,
 });
 const actay = Lato({
-  subsets:["latin"],
+  subsets: ["latin"],
   weight: ["300", "400"],
   preload: false,
 });
+export type siteSettings = {
+  email: string;
+  logo: string;
+  phoneNumber: string;
+  companyName: string;
+  location: string;
+  socialLinks: { name: string; url: string; logo: string }[];
+};
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const firstPath = router.asPath.split("/")[1] || "";
@@ -82,7 +90,11 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* <!-- End Google Tag Manager --> */}
       <SessionProvider session={pageProps.session}>
         <IntersectionProvider>
-          <Layout locations={pageProps.locations} route={firstPath}>
+          <Layout
+            locations={pageProps.locations?.locations}
+            siteSettings={pageProps.locations?.siteSettings?.[0]}
+            route={firstPath}
+          >
             <Component {...pageProps} />
           </Layout>
         </IntersectionProvider>

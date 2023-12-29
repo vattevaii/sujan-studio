@@ -12,6 +12,8 @@ import Image from "next/image";
 import * as React from "react";
 import { getImages } from "@/utils/sanity/imageStore";
 import ImageSliderWrap from "@/components/ImageSliderWrap";
+import { getPageContent } from "@/utils/sanity/pageContent";
+import { PortableText } from "@portabletext/react";
 
 interface ISchoolEventsSubDomainProps {}
 
@@ -34,35 +36,25 @@ const SchoolEventsSubDomain: React.FunctionComponent<
       <STopBar service="SchoolEvents" />
       <SFlatNav logo />
       <SBanner
-        service="School And Events"
-        bannerImg="/jpegs/SchoolEvents.png"
+        service={props.pageContent.bannerText}
+        bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
-      />
+      >
+        {props.pageContent.pageSubTitle}
+      </SBanner>
       <section className=" bg-light-grey text-project-100 px-[10vw] py-10">
         <SText.Title className="text-center">
-          Why Us, For your Schooling Events?
+          {props.pageContent.textBlocks[0].blockTitle}
         </SText.Title>
         <div className="grid gap-3">
           <div className="row-start-2 lg:row-start-1 lg:col-start-2">
             <SText.Sub className="text-project-200">
-              Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-              egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
-              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
-              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
-              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
-              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
-              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
-              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
-              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
-              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
-              posuere porttitor. Neque laoreet congue egestas eu porttitor
-              tempus.
+              <PortableText value={props.pageContent.textBlocks[0].text} />
             </SText.Sub>
           </div>
-          <div className="h-full w-full col-start-1 row-start-1 max-h-48 lg:max-h-max">
+          <div className="h-full w-full col-start-1 row-start-1 aspect-video">
             <Image
-              src={"/jpegs/ProductItem.jpg"}
+              src={props.pageContent.textBlocks[0].relatedImages[0]}
               alt=""
               width="500"
               height="500"
@@ -138,8 +130,9 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("schoolAndEvents");
+  const pageContent = await getPageContent("subdomain/school-events");
   return {
-    props: { reviews, locations, featured: images },
+    props: { reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

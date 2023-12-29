@@ -17,10 +17,12 @@ import Navbar from "@/components/Navbar.tsx/Navbar";
 import CEOMessage from "@/components/PageSections/CEOMessage";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { getPageContent } from "@/utils/sanity/pageContent";
 
 const NewWebsite = ({
   services,
   locations,
+  pageContent,
   chooseUsData,
   whatWeDoData,
   bannerData,
@@ -75,7 +77,7 @@ const NewWebsite = ({
           </div>
         </div>
       </section>
-      <CEOMessage />
+      <CEOMessage data={pageContent.textBlocks[0]} />
     </>
   );
 };
@@ -90,8 +92,10 @@ export const getStaticProps = async () => {
   };
   const locations = await getAllLocations();
   const reviews = await getAllReviews();
+  const pageContent = await getPageContent("homepage");
   return {
     props: {
+      pageContent,
       services: [
         {
           href: process.env.NEXT_PUBLIC_REALESTATE_SUBDOMAIN ?? "/",

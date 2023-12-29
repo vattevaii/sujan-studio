@@ -6,6 +6,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
+import { CogIcon } from "@sanity/icons";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./sanity/env";
@@ -24,7 +25,16 @@ export default defineConfig({
           .title("Content")
           .items([
             // Minimum required configuration
-            ...(S.defaults().getItems() ?? []),
+            S.listItem()
+              .title("Site Settings")
+              .child(
+                S.document()
+                  .schemaType("siteSettings")
+                  .documentId("siteSettings")
+              ),
+            ...S.documentTypeListItems().filter((item) => {
+              return !["siteSettings"].includes(item.getId()!);
+            }),
             orderableDocumentListDeskItem({ type: "imageStore", S, context }),
             orderableDocumentListDeskItem({ type: "package", S, context }),
             // ... all other desk items
@@ -35,4 +45,19 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
   ],
+  form: {
+    components: {
+      input: (props: any) => {
+        if (Array.isArray(props.groups) && props.groups.length > 0) {
+          if (props.groups[0].name === "all-fields") {
+            const el = props.groups.shift();
+            el.title = "All Fields";
+            el.icon = CogIcon;
+            props.groups.push(el);
+          }
+        }
+        return props.renderDefault(props);
+      },
+    },
+  },
 });

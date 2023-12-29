@@ -1,12 +1,15 @@
+import { siteSettings } from "@/pages/_app";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import Image from "next/image";
 import Link from "next/link";
 import { HTMLAttributes } from "react";
 
 type Props = HTMLAttributes<HTMLElement> & {
   openNavbar: () => void;
+  settings: siteSettings;
 };
 
-const MobileNavPanel = ({ className = "", openNavbar }: Props) => {
+const MobileNavPanel = ({ className = "", settings, openNavbar }: Props) => {
   return (
     <div
       className={
@@ -20,8 +23,9 @@ const MobileNavPanel = ({ className = "", openNavbar }: Props) => {
           height="300"
           priority={true}
           className="relative w-auto h-full overflow-hidden shrink-0"
-          src="/webp/logo.webp"
-          alt={"Sujan Studio"}
+          src={settings.logo}
+          loader={sanityImageLoader}
+          alt={settings.companyName}
         />
       </Link>
       <button onClick={openNavbar} className="h-full w-10">

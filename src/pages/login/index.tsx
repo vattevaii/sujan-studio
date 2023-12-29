@@ -1,11 +1,15 @@
 import InputText from "@/components/input/InputText";
 import InputButton from "@/components/input/inputbutton";
+import { getAllLocations } from "@/utils/sanity/location";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import * as React from "react";
 
 export interface ILoginPageProps {}
-
+export const getStaticProps = async function () {
+  const locations = await getAllLocations();
+  return { props: { locations } };
+};
 export default function LoginPage(props: ILoginPageProps) {
   const { status } = useSession();
   const mailRef = React.useRef<HTMLInputElement | null>(null);
@@ -21,7 +25,7 @@ export default function LoginPage(props: ILoginPageProps) {
     const data = await signIn("credentials", {
       redirect: false,
       callbackUrl: "/admin",
-      username: mailRef.current!.value ,
+      username: mailRef.current!.value,
       password: passwordRef.current!.value,
     });
   };

@@ -9,7 +9,9 @@ import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { PortableText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -34,32 +36,20 @@ const RealEstateSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="RealEstate" />
-      <SFlatNav logo/>
+      <SFlatNav logo />
       <SBanner
-        service="Real Estate"
+        service={props.pageContent.bannerText}
         bannerImg="/jpegs/RealEstate.jpg"
         getEstimateLink="/book-us"
-      />
+      >{props.pageContent.pageSubTitle}</SBanner>
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
         <SText.Title className="text-center">
-          Learn about our experience
+          {props.pageContent.textBlocks[0].blockTitle}
         </SText.Title>
         <div className="grid gap-3">
           <div className="row-start-2 lg:row-start-1 lg:col-start-2">
             <SText.Sub className="text-project-200">
-              Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-              egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
-              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
-              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
-              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
-              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
-              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
-              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
-              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
-              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
-              posuere porttitor. Neque laoreet congue egestas eu porttitor
-              tempus.
+              <PortableText value={props.pageContent.textBlocks[0].text} />
             </SText.Sub>
             <div className="flex flex-wrap gap-5 text-21xl justify-between py-5">
               <div className="flex flex-wrap flex-col items-start justify-end w-max">
@@ -150,8 +140,9 @@ export const getStaticProps = async function () {
   const locations = await getAllLocations();
   const images = await getImages("realEstate");
   // console.log(images)
+  const pageContent = await getPageContent("subdomain/real-estate");
   return {
-    props: { reviews, locations, featured: images },
+    props: { reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

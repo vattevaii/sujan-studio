@@ -6,9 +6,12 @@ import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import WeddingPhotoItem from "@/components/subdomains/WeddingPhotoItem";
 import SText from "@/components/subdomains/text/STextTitle";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { PortableText, toPlainText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -20,6 +23,7 @@ interface IWeddingSubDomainProps {}
 const WeddingSubDomain: React.FunctionComponent<
   IWeddingSubDomainProps & InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
+  // console.log(props);
   return (
     <>
       <Head>
@@ -35,21 +39,23 @@ const WeddingSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="Wedding" />
       <div className="relative">
-        <div className="absolute top-5 left-10 z-10 h-20 w-auto">
+        <Link href={"/"} className="absolute top-5 left-10 z-10 h-20 w-auto">
           <Image
-            alt="sujan studio"
+            alt="Back to sujan studio"
             src={"/jpegs/logo-light.png"}
             className="h-full w-auto"
             priority
             width={100}
             height={80}
           />
-        </div>
+        </Link>
         <SBanner
-          service="Wedding"
-          bannerImg="/jpegs/WeddingItem.jpg"
+          service={props.pageContent.bannerText}
+          bannerImg={props.pageContent.image}
           getEstimateLink="/book-us"
-        />
+        >
+          {props.pageContent.pageSubTitle}
+        </SBanner>
       </div>
       <SFlatNav />
       <section className="text-center text-light-grey py-6 px-[10vw]">
@@ -74,23 +80,11 @@ const WeddingSubDomain: React.FunctionComponent<
         </div>
       </section>
       <section className=" py-6 bg-light-grey text-project-100 px-[10vw]">
-        <SText.Title>Why work with us?</SText.Title>
+        <SText.Title>{props.pageContent.textBlocks[0].blockTitle}</SText.Title>
         <div className="grid gap-2">
           <div className="row-start-2 lg:row-start-1 col-start-1 grid gap-3">
             <SText.Sub className="text-project-200">
-              Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-              egestas. Et sagittis egestas in porttitor lectus nec sollicitudin
-              neque eget. Quam nisl eget euismod feugiat posuere porttitor.
-              Neque laoreet congue egestas eu porttitor tempus. Ac condimentum
-              sed consequat eu massa pretium sed nisl. Cursus sagittis est sed
-              tortor. Turpis arcu pharetra aliquam a ac faucibus. Diam molestie
-              cursus quis libero lorem ultricies. Id sit bibendum posuere ut
-              amet ullamcorper. Massa bibendum laoreet sagittis senectus eget
-              enim sapien urna duis. Lorem ipsum dolor sit amet consectetur.
-              Ultrices justo sit duis egestas. Et sagittis egestas in porttitor
-              lectus nec sollicitudin neque eget. Quam nisl eget euismod feugiat
-              posuere porttitor. Neque laoreet congue egestas eu porttitor
-              tempus.
+              <PortableText value={props.pageContent.textBlocks[0].text} />
             </SText.Sub>
             <Link
               href={"/book-us"}
@@ -101,7 +95,8 @@ const WeddingSubDomain: React.FunctionComponent<
           </div>
           <div className="h-full col-start-1 lg:col-start-2">
             <Image
-              src={"/jpegs/Weddings.jpg"}
+              src={props.pageContent.textBlocks[0].relatedImages[0]}
+              loader={sanityImageLoader}
               alt=""
               width="500"
               height="500"
@@ -120,9 +115,11 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("wedding");
+  const pageContent = await getPageContent("subdomain/wedding");
+  // console.log(pageContent);
   //   console.log(images);
   return {
-    props: { reviews, locations, featured: images },
+    props: { reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

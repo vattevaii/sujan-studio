@@ -3,6 +3,8 @@ import SvgIcon from "../SvgIcon";
 import svgs from "@/constants/svgs";
 import Image from "next/image";
 import Link, { LinkProps } from "next/link";
+import { siteSettings } from "@/pages/_app";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 type Props = {};
 
@@ -36,8 +38,13 @@ const NavItem = ({
 
 export default function NavPanel({
   className = "",
+  settings,
   activeRoute,
-}: HTMLAttributes<HTMLElement> & { activeRoute: string }) {
+}: HTMLAttributes<HTMLElement> & {
+  activeRoute: string;
+  settings: siteSettings;
+}) {
+  // console.log(settings);
   // console.log("Route: ", activeRoute);
   return (
     <aside
@@ -51,9 +58,10 @@ export default function NavPanel({
           width="300"
           height="300"
           priority={true}
-          className="relative w-full h-auto overflow-hidden shrink-0"
-          src="/webp/logo.webp"
-          alt={"Sujan Studio"}
+          className="relative object-cover max-w-[130px]"
+          src={settings.logo}
+          loader={sanityImageLoader}
+          alt={settings.companyName}
         />
       </Link>
       <nav className="flex flex-col items-start justify-start flex-1 gap-4">
@@ -69,11 +77,11 @@ export default function NavPanel({
               name: "Our Story",
               icon: svgs.navSvgs.story,
             },
-            {
-              route: "news",
-              name: "Our News",
-              icon: svgs.navSvgs.news,
-            },
+            // {
+            //   route: "news",
+            //   name: "Our News",
+            //   icon: svgs.navSvgs.news,
+            // },
             {
               route: "packages",
               name: "Our Packages",
@@ -89,11 +97,11 @@ export default function NavPanel({
               name: "Contact Us",
               icon: svgs.navSvgs.message,
             },
-            {
-              route: "my-shop",
-              name: "My Shop",
-              icon: svgs.navSvgs.shop,
-            },
+            // {
+            //   route: "my-shop",
+            //   name: "My Shop",
+            //   icon: svgs.navSvgs.shop,
+            // },
           ].map((item) => (
             <li
               key={item.route}
@@ -137,37 +145,43 @@ export default function NavPanel({
         </div>
         <ul className="flex flex-col items-start justify-start gap-[10px]">
           {[
-            {
-              route: "login",
-              name: "Login/Register",
-              icon: svgs.actionsSvg.auth,
-            },
-            {
-              route: "search",
-              name: "Search",
-              icon: svgs.actionsSvg.search,
-            },
-            {
-              route: "cart",
-              name: "Cart",
-              icon: svgs.actionsSvg.shop,
-            },
-          ].map((item) => (
-            <li
-              key={item.route}
-              className={
-                (activeRoute === item.route
-                  ? "bg-light-grey"
-                  : "bg-transparent") + " bg-opacity-10 w-full px-[31px]"
-              }
-            >
-              <NavItem
-                href={"/" + item.route}
-                name={item.name}
-                icon={item.icon}
-              />
-            </li>
-          ))}
+            // {
+            //   route: "login",
+            //   name: "Login/Register",
+            //   icon: svgs.actionsSvg.auth,
+            // },
+            // {
+            //   route: "search",
+            //   name: "Search",
+            //   icon: svgs.actionsSvg.search,
+            // },
+            // {
+            //   route: "cart",
+            //   name: "Cart",
+            //   icon: svgs.actionsSvg.shop,
+            // },
+          ].map(
+            (item: {
+              route: string;
+              name: string;
+              icon: { src: string; alt: string };
+            }) => (
+              <li
+                key={item.route}
+                className={
+                  (activeRoute === item.route
+                    ? "bg-light-grey"
+                    : "bg-transparent") + " bg-opacity-10 w-full px-[31px]"
+                }
+              >
+                <NavItem
+                  href={"/" + item.route}
+                  name={item.name}
+                  icon={item.icon}
+                />
+              </li>
+            )
+          )}
           {/* <li>
                         <NavItem href="#" name="Login/Register" icon={svgs.actionsSvg.auth} />
                     </li>
@@ -181,11 +195,14 @@ export default function NavPanel({
         <div className="grid place-items-center flex-1 w-full px-[31px]">
           <hr className="border-t  border-divider w-full" />
         </div>
-        <div className="social-icons flex justify-between px-[31px]">
-          <NavItem href="#" icon={svgs.mediaSvgs.facebook} />
-          <NavItem href="#" icon={svgs.mediaSvgs.instagram} />
-          <NavItem href="#" icon={svgs.mediaSvgs.linkedin} />
-          <NavItem href="#" icon={svgs.mediaSvgs.youtube} />
+        <div className="social-icons flex justify-center self-center items-center px-[31px]">
+          {settings.socialLinks.map((socialLink, idx) => (
+            <NavItem
+              key={idx}
+              href={socialLink.url}
+              icon={{ src: socialLink.logo, alt: socialLink.name }}
+            />
+          ))}
         </div>
       </nav>
     </aside>

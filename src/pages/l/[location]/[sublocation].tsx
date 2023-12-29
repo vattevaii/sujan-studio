@@ -1,4 +1,5 @@
 import { LocationItem } from "@/components/LocationCard";
+import PageBanner from "@/components/PageSections/PageBanner";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
 import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
 import { getAllReviews } from "@/utils/sanity/reviews";
@@ -65,10 +66,10 @@ export const getStaticProps = (async (context) => {
       reviews,
       locations,
     },
-    revalidate: 3600
+    revalidate: 3600,
   };
 }) satisfies GetStaticProps<{
-  locations: LocationItem[];
+  locations: any;
   mainLocation: string;
   sublocation: string;
   sublocationData: {
@@ -82,21 +83,23 @@ const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
   const { locations, mainLocation, sublocation, sublocationData } = props;
-  const router = useRouter()
-  if(router.isFallback){
-    return <>
-      <Head>
-        <meta
-          name="google-site-verification"
-          content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
-        />
-        <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
-        <meta
-          name="description"
-          content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
-        />
-      </Head>
-    </>
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <>
+        <Head>
+          <meta
+            name="google-site-verification"
+            content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
+          />
+          <title>{"{mainLocation.name}" + " | Sujan Studio"}</title>
+          <meta
+            name="description"
+            content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
+          />
+        </Head>
+      </>
+    );
   }
   return (
     <>
@@ -111,23 +114,7 @@ const LocationPage: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner text-center">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>Find Your Next Photographer Near {sublocation}</b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner>Find Your Next Photographer Near {sublocation}</PageBanner>
       <section
         id="locations"
         className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5"

@@ -6,6 +6,9 @@ import * as React from "react";
 import { client } from "../../../sanity/lib/client";
 import { LocationItem } from "@/components/LocationCard";
 import { getAllLocations } from "@/utils/sanity/location";
+import PageBanner from "@/components/PageSections/PageBanner";
+import { getPageContent } from "@/utils/sanity/pageContent";
+import { PortableText } from "@portabletext/react";
 
 interface IPackagePageProps {}
 
@@ -25,33 +28,18 @@ const PackagePage: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner text-center">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-21xl font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>Our Packages</b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner image={props.pageContent.image}>
+        <PortableText value={props.pageContent.bannerText} />
+      </PageBanner>
       <section
         id="packages"
         className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5"
       >
         <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-5">
-          Get your packages according to&nbsp;your&nbsp;need.
+          {props.pageContent.pageTitle}
         </h2>
         <p className="mx-auto text-center w-fit text-project-200 text-xl lg:text-5xl pb-20">
-          Lorem ipsum dolor sit amet consectetur. Velit turpis ultrices
-          malesuada laoreet.
+          {props.pageContent.pageSubTitle}
         </p>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(420px,1fr))] gap-5">
           {props.packages.map((item, key) => (
@@ -66,13 +54,15 @@ const PackagePage: React.FunctionComponent<
 export const getStaticProps = async () => {
   const query = `*[_type=="package"]|order(orderRank){name,dollars,privileges,"image":image.asset.url}`;
   const packages: IPackagePageProps[] = await client.fetch(query);
-  const locations: LocationItem[] = await getAllLocations();
+  const locations= await getAllLocations();
+  const pageContent = await getPageContent("packages");
   return {
     props: {
+      pageContent,
       packages,
       locations,
     },
-    revalidate: 3600
+    revalidate: 3600,
   };
 };
 export default PackagePage;

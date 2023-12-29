@@ -10,6 +10,7 @@ import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
@@ -35,29 +36,30 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="FamilyPortraits" />
-      <SFlatNav logo/>
+      <SFlatNav logo />
       <SBanner
-        service="Family Portraits"
-        bannerImg="/jpegs/FamilyItem.jpg"
+        service={props.pageContent.bannerText}
+        bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
-      />
+      >
+        {props.pageContent.pageSubTitle}
+      </SBanner>
       <section className="grid bg-light-grey text-project-100 px-[5vw] py-10 gap-6">
         <SText.Title className="text-center">
-          A trusted photography business, collaborating seamlessly with families
-          and individuals to capture cherished moments.
+          {props.pageContent.textBlocks[0].blockTitle}
         </SText.Title>
         <div className="grid gap-5 md:gap-10 grid-cols-2 md:grid-cols-3 place-items-center">
           <FamilyPortraitsPhotoItem
-            imageSrc="/jpegs/CoorporateEvents.jpg"
+            imageSrc={props.pageContent.textBlocks[0].relatedImages[0]}
             name="Project Name"
           />
           <FamilyPortraitsPhotoItem
-            imageSrc="/jpegs/FamilyItem.jpg"
+            imageSrc={props.pageContent.textBlocks[0].relatedImages[1]}
             name="Project Name"
           />
           <FamilyPortraitsPhotoItem
             className="hidden md:block"
-            imageSrc="/jpegs/FamilyAndEvents.jpg"
+            imageSrc={props.pageContent.textBlocks[0].relatedImages[2]}
             name="Project Name"
           />
         </div>
@@ -132,13 +134,14 @@ export const getStaticProps = async function () {
   const reviews = await getAllReviews();
   const locations = await getAllLocations();
   const images = await getImages("familyAndEvents");
+  const pageContent = await getPageContent("subdomain/family-portraits");
   return {
-    props: { reviews, locations, featured: images },
+    props: { reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 } satisfies GetStaticProps<{
   reviews: ReviewItem[];
-  locations: LocationItem[];
+  locations: any;
 }>;
 
 export default FamilyPortraitsSubDomain;

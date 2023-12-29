@@ -1,11 +1,15 @@
 import { LocationItem } from "@/components/LocationCard";
 import CEOMessage from "@/components/PageSections/CEOMessage";
+import PageBanner from "@/components/PageSections/PageBanner";
 import ReviewSlider, {
   ReviewItem,
 } from "@/components/PageSections/UserReviews/ReviewSlider";
 import PlaceHolderImage from "@/components/PlaceHolderImage";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getAllLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { PortableText } from "@portabletext/react";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -15,6 +19,7 @@ type Props = {};
 
 export default function OurStory({
   reviews,
+  pageContent,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -29,64 +34,27 @@ export default function OurStory({
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <section id="banner" className="relative banner">
-        <Image
-          priority={true}
-          width={100}
-          height={400}
-          className="absolute top-0 -z-[1] w-full h-full object-cover"
-          alt=""
-          src="/jpegs/mainSection.jpg"
-        />
-        <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
-          <div className="flex-1 flex flex-col justify-center text-[50px] font-source-sans-3 font-bold lg:text-41xl">
-            <h1>
-              <b>
-                Elegance is not being noticed,
-                <br /> It&apos;s about being remembered.
-              </b>
-            </h1>
-          </div>
-        </div>
-      </section>
+      <PageBanner image={pageContent.image}>
+        <PortableText value={pageContent.bannerText} />
+      </PageBanner>
       <section className="our-story bg-light-grey">
         <h2 className="text-21xl lg:text-41xl text-project-100 text-center font-semibold pt-16 pb-14 lg:pt-28 lg:pb-24">
-          Our Story
+          {pageContent.pageTitle}
         </h2>
         <div className="grid text-project-200 text-md md:text-xl lg:text-5xl px-4 lg:px-20 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-y-8 gap-x-10 lg:gap-x-16 lg:gap-y-11 pb-16 lg:pb-32">
           <div className="md:col-span-2 lg:col-span-1 xl:col-span-2">
-            We started our photographic journey in the summer of 2009 with a
-            medium format Kodak Camera and since then everything has changed.
-            From BW films to today’s digital era Sujan Studio has produced,
-            reproduced plenty photographic works in and out of Adelaide. This
-            has been quite a journey for all our team. Starting from Adelaide,
-            currently, we are proud to share we are providing photographic
-            service from four major cities of Australia. We can not thank you
-            enough for all the love and support you have provided through all
-            these years. We are truly so happy to be a part of your life and
-            memories. We trust in the quality of creative works and rigorously
-            work for it.
+            <PortableText value={pageContent.textBlocks[0].text} />
           </div>
           <div className="row-start-4 md:row-start-3 md:col-start-2 lg:row-start-4 lg:col-start-1 xl:row-start-3 xl:col-start-2">
-            Because we’re a family-owned business, we understand that
-            photography can mean different things to each person. That’s why we
-            offer a wide range of services—so you can find the one that fits you
-            best. We help businesses with their branding and marketing
-            campaigns; realtors with listing photos; couples get ready for their
-            big day; and families get the perfect photo album. And it’s all
-            because of our mission: We want to make sure every person who steps
-            through our door gets exactly what they need out of photography.
-            We’ve worked with many different types of clients over the years,
-            but our goal is always the same: to help you create memories that
-            last forever. We are happy to help to add a bit of craft in your
-            memories.
+            <PortableText value={pageContent.textBlocks[1].text} />
           </div>
           <div className="bg-yellow-50 row-start-2 col-start-1 row-span-1 md:row-span-1 md:row-start-2 lg:row-span-1 xl:row-span-2 xl:row-start-2 aspect-square h-full w-full max-h-72 md:h-full lg:max-h-72 xl:h-full ">
             <Image
-              className="object-cover h-full w-full"
+              className="object-cover h-[70vh] w-full"
               width="700"
               height="700"
-              src={"/jpegs/WeddingItem.jpg"}
+              src={pageContent.textBlocks[0].relatedImages[0]}
+              loader={sanityImageLoader}
               alt={" Image "}
             />
           </div>
@@ -95,7 +63,8 @@ export default function OurStory({
               className="object-cover h-full w-full"
               width="700"
               height="350"
-              src={"/jpegs/BusinessItem.jpg"}
+              src={pageContent.textBlocks[0].relatedImages[1]}
+              loader={sanityImageLoader}
               alt={" Image "}
             />
           </div>
@@ -104,7 +73,7 @@ export default function OurStory({
       <section className="reviews">
         <ReviewSlider reviews={reviews} className="h-64 md:h-72 lg:h-96" />
       </section>
-      <CEOMessage className="py-12" />
+      <CEOMessage data={pageContent.textBlocks[2]} className="py-12" />
     </>
   );
 }
@@ -112,8 +81,10 @@ export default function OurStory({
 export const getStaticProps = async () => {
   const locations = await getAllLocations();
   const reviews = await getAllReviews();
+  const pageContent = await getPageContent("our-story");
   return {
     props: {
+      pageContent,
       locations,
       reviews,
     },

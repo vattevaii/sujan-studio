@@ -6,14 +6,18 @@ import MailUs from "../cto/MailUs";
 import Image from "next/image";
 import Link from "next/link";
 import { subdomainLinks } from "../subdomains/SFlatNav";
+import { siteSettings } from "@/pages/_app";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 type Props = {
   locations: LocationItem[];
+  siteSettings: siteSettings;
   route: string;
 };
 
 export default function SubDomainLayout({
   locations,
+  siteSettings,
   children,
 }: PropsWithChildren<Props>) {
   return (
@@ -24,19 +28,20 @@ export default function SubDomainLayout({
           <main className="content relative flex-1">{children}</main>
           <footer id="footer" className="bg-darkbg">
             <section className="px-4 lg:px-12 py-8 bg-light-grey text-project-100">
-              <MailUs variant="small" className="" />
+              <MailUs email={siteSettings.email} variant="small" className="" />
             </section>
             <section id="footer" className="footer text-white px-4 lg:px-12 pt-8 md:pt-12 lg:pt-16">
               <div className="mb-6 flex gap-5 flex-wrap items-center justify-between">
                 <Link href={"/"} className="flex items-center gap-5 h-full">
                   <Image
-                    src="/jpegs/logo-light.png"
-                    alt="Sujan Studio"
+                    src={siteSettings.logo}
+                    loader={sanityImageLoader}
+                    alt={siteSettings.companyName}
                     width={300}
                     height={300}
                     className="h-full max-h-20 w-auto"
                   />
-                  <p className="text-light-grey text-5xl">Sujan Studio</p>
+                  <p className="text-light-grey text-5xl">{siteSettings.companyName}</p>
                 </Link>
                 <div className="flex gap-5">
                   {subdomainLinks.map((i, idx) => (

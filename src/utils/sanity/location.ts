@@ -1,12 +1,30 @@
 import { LocationItem } from "@/components/LocationCard";
 import { client } from "../../../sanity/lib/client";
+import { siteSettings } from "@/pages/_app";
 
-export const getAllLocations: () => Promise<LocationItem[]> =
-  async function () {
-    return await client.fetch(`*[_type=="locationItem"]{
-        locationName,"slug":slug.current,address,city,postalCode,phoneNumber
-    }`);
-  };
+export const getAllLocations: () => Promise<{
+  locations: LocationItem[];
+  siteSettings: siteSettings;
+}> = async function () {
+  const locationQ = `*[_type=="locationItem"]{
+      locationName,"slug":slug.current,address,city,postalCode,phoneNumber
+    }`;
+  const siteSettingsQ = `*[_type=="siteSettings"]{
+      phoneNumber,
+      "logo":logoLight.asset -> url,
+      location,
+      email,
+      companyName,
+      "socialLinks":socialLinks[]{
+        "logo":icon.asset->url,
+        name,
+        "url":link
+      }
+    }`;
+  return await client.fetch(
+    `{"locations":${locationQ}, "siteSettings":${siteSettingsQ}}`
+  );
+};
 export const getAllSubLocations = async function (locationslug?: string) {
   const mainQuery = locationslug ? `&& slug.current=="${locationslug}"` : "";
   // console.log(mainQuery);
