@@ -34,7 +34,7 @@ const RealEstateSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="RealEstate" />
-      <SFlatNav />
+      <SFlatNav logo/>
       <SBanner
         service="Real Estate"
         bannerImg="/jpegs/RealEstate.jpg"

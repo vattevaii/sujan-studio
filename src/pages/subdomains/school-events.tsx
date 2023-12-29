@@ -32,7 +32,7 @@ const SchoolEventsSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="SchoolEvents" />
-      <SFlatNav />
+      <SFlatNav logo />
       <SBanner
         service="School And Events"
         bannerImg="/jpegs/SchoolEvents.png"

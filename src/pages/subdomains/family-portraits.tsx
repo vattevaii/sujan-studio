@@ -35,7 +35,7 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="FamilyPortraits" />
-      <SFlatNav />
+      <SFlatNav logo/>
       <SBanner
         service="Family Portraits"
         bannerImg="/jpegs/FamilyItem.jpg"

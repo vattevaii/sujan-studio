@@ -23,7 +23,7 @@ export const getImages: (
     groomName: string;
   }[]
 > = async function (category) {
-  return await client.fetch(`*[_type=="imageStore" && category[0]=="${category}"]|order(orderRank){
+  return await client.fetch(`*[_type=="imageStore" && category[0].categoryValue=="${category}"]|order(orderRank){
         "title":category[0],
         "mainImage": mainImage.asset->url,
         "images":relatedImages[].asset->url,

@@ -34,11 +34,23 @@ const WeddingSubDomain: React.FunctionComponent<
         />
       </Head>
       <STopBar service="Wedding" />
-      <SBanner
-        service="Wedding"
-        bannerImg="/jpegs/WeddingItem.jpg"
-        getEstimateLink="/book-us"
-      />
+      <div className="relative">
+        <div className="absolute top-5 left-10 z-10 h-20 w-auto">
+          <Image
+            alt="sujan studio"
+            src={"/jpegs/logo-light.png"}
+            className="h-full w-auto"
+            priority
+            width={100}
+            height={80}
+          />
+        </div>
+        <SBanner
+          service="Wedding"
+          bannerImg="/jpegs/WeddingItem.jpg"
+          getEstimateLink="/book-us"
+        />
+      </div>
       <SFlatNav />
       <section className="text-center text-light-grey py-6 px-[10vw]">
         <SText.Title>Our Featured Wedding Photography</SText.Title>

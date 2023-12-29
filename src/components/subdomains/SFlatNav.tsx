@@ -25,7 +25,8 @@ const SFlatNav: React.FunctionComponent<ISFlatNavProps> = ({
             <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5/6">
               <Image
                 alt="Back to Sujan Studio"
-                src="/jpegs/Sujan.jpg"
+                priority={true}
+                src="/jpegs/logo-dark.png"
                 className="h-full w-auto"
                 width="300"
                 height="300"

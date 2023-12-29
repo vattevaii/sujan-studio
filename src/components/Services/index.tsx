@@ -11,16 +11,16 @@ export type ServiceItem = {
 type Props = { services: ServiceItem[] };
 
 function Service({ service }: { service: ServiceItem }) {
-  const [visibleImg, setVisibleImg] = useState(false);
+  const [visibleImg, setVisibleImg] = useState(true);
   const handleOnScreen = () => {
-    setTimeout(() => {
-      // // console.log("Image is visible on screen")
-      setVisibleImg(true);
-    }, 1);
+    // setTimeout(() => {
+    //   // // console.log("Image is visible on screen")
+    //   setVisibleImg(true);
+    // }, 1);
   };
   const itemRef = useIntersectionObserver<HTMLDivElement>({
     handleIntersect: handleOnScreen,
-    threshold: 1,
+    threshold: 0.01,
   });
   return (
     <div
