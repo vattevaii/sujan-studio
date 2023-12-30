@@ -16,7 +16,7 @@ const NavItem = ({
   return (
     <Link
       href={href}
-      className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200"
+      className="flex flex-row items-center p-2.5 gap-[10px] transition-[filter] duration-200 hover:filter hover:contrast-200 text-light-grey"
       aria-label={icon.alt}
     >
       <SvgIcon
@@ -77,11 +77,11 @@ export default function NavPanel({
               name: "Our Story",
               icon: svgs.navSvgs.story,
             },
-            // {
-            //   route: "news",
-            //   name: "Our News",
-            //   icon: svgs.navSvgs.news,
-            // },
+            {
+              route: "blog",
+              name: "Our News",
+              icon: svgs.navSvgs.news,
+            },
             {
               route: "packages",
               name: "Our Packages",

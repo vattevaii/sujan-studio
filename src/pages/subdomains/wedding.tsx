@@ -73,7 +73,9 @@ const WeddingSubDomain: React.FunctionComponent<
                 imageSrc={item.mainImage}
                 bride={item.brideName}
                 groom={item.groomName}
-                date={item.date}
+                date={new Date(item.date).toLocaleDateString("en-au", {
+                  dateStyle: "long",
+                })}
               />
             </ImageSliderWrap>
           ))}

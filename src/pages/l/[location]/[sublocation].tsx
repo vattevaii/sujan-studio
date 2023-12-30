@@ -34,13 +34,14 @@ export const getStaticProps = (async (context) => {
   //   const res = await fetch("https://api.github.com/repos/vercel/next.js");
   //   const repo = await res.json();
   // console.log(context);
+  const locations = await getAllLocations();
   const location = context.params?.location as string;
   const sublocation = context.params?.sublocation as string;
   if (!location || !sublocation)
     return {
+      props: { locations },
       notFound: true,
     };
-  const locations = await getAllLocations();
   const reviews = await getAllReviews();
   return {
     props: {
@@ -82,7 +83,6 @@ export const getStaticProps = (async (context) => {
 const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
-  const { locations, mainLocation, sublocation, sublocationData } = props;
   const router = useRouter();
   if (router.isFallback) {
     return (
@@ -101,6 +101,7 @@ const LocationPage: React.FunctionComponent<
       </>
     );
   }
+  const {  mainLocation, sublocation, sublocationData } = props;
   return (
     <>
       <Head>
