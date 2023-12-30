@@ -29,6 +29,7 @@ export default function PostListPage(
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(250px+5vw),1fr))] lg:grid-cols-[repeat(auto-fill,minmax(calc(350px+5vw),1fr))] gap-10">
           {props.posts.map((post) => (
             <Link
+              key={post.slug}
               href={`/blog/${post.slug}`}
               className="p-3 border border-divider"
             >

@@ -66,7 +66,10 @@ export default function PostPage(
             <div className="px-10 py-20 text-center xl:w-2/3">
               <h1>{props.post.title}</h1>
               <h4>
-                By {props.post.author.name} - {new Date(props.post.publishedAt).toLocaleDateString('en-au',{dateStyle:'long'}) }
+                By {props.post.author.name} -{" "}
+                {new Date(props.post.publishedAt).toLocaleDateString("en-au", {
+                  dateStyle: "long",
+                })}
               </h4>
             </div>
           </div>
@@ -76,7 +79,9 @@ export default function PostPage(
             value={props.post.body}
             components={{
               types: {
-                image: (value: string) => <Image src={value} alt="" width={500} height={500}/>,
+                image: ({ value }) => {
+                  return <Image {...value} />;
+                },
               },
             }}
           />
@@ -85,3 +90,4 @@ export default function PostPage(
     </>
   );
 }
+

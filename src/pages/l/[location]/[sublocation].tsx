@@ -130,7 +130,7 @@ const LocationPage: React.FunctionComponent<
               className="w-full rounded-md"
               width={500}
               height={500}
-              src={props.sublocationData.pictures[0]}
+              src={props.sublocationData!.pictures[0]}
               alt=""
             />
           </div>
@@ -155,12 +155,12 @@ const LocationPage: React.FunctionComponent<
             className="w-full rounded-md my-5 max-h-52"
             width={500}
             height={500}
-            src={props.sublocationData.pictures[1]}
+            src={props.sublocationData!.pictures[1]}
             alt=""
           />
         </div>
       </section>
-      <ReviewSlider reviews={props.reviews} className="h-64 md:h-72 lg:h-96" />
+      <ReviewSlider reviews={props.reviews!} className="h-64 md:h-72 lg:h-96" />
       <section className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5">
         <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
           We Bring Dreams Into&nbsp;Reality
@@ -181,7 +181,7 @@ const LocationPage: React.FunctionComponent<
               className="w-full rounded-md"
               width={500}
               height={500}
-              src={props.sublocationData.pictures[0]}
+              src={props.sublocationData!.pictures[0]}
               alt=""
             />
           </div>
