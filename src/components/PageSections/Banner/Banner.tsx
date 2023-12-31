@@ -4,22 +4,28 @@ import BannerTypewriter, {
   BannerTypeWriterProps,
 } from "./components/BannerTypewriter";
 import BannerCountUpTo from "./components/BannerCountUpto";
+import { getPageContent } from "@/utils/sanity/pageContent";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 export type BannerProps = {
   typewriter: BannerTypeWriterProps;
-};
+} & Awaited<ReturnType<typeof getPageContent>>;
 
-export default function Banner({ typewriter }: BannerProps) {
+export default function Banner({ typewriter, ...props }: BannerProps) {
   return (
     <section id="banner" className="relative banner">
       <Image
         priority={true}
-        width={100}
-        height={400}
+        width={5000}
+        height={4000}
         className="absolute top-0 -z-[1] w-full h-full object-cover"
         alt=""
-        src="/jpegs/mainSection.jpg"
+        src={props.image?.length ? props.image : "/jpegs/mainSection.jpg"}
+        loader={sanityImageLoader}
       />
+      <div
+        className="absolute top-0 -z-[1] w-full h-full bg-project-100 opacity-70"
+        ></div>
       <div className="flex flex-col w-full min-h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
         <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl translate-y-7">
           <h1>
