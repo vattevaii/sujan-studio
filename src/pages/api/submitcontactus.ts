@@ -13,7 +13,7 @@ export default function handler(
 ) {
   if (req.method === "POST") {
     try {
-      ContactFormSchema.parse(req.body);
+      ContactFormSchema.parse(JSON.parse(req.body));
       const data = {
         _type: "contactus",
         ...JSON.parse(req.body),
@@ -32,6 +32,7 @@ export default function handler(
       //   .then(// console.log)
       //   .catch(console.error)
     } catch (err) {
+      console.log(err)
       res.status(500).json({ message: err as string });
     }
   } else res.status(405).json({ message: "No route" });

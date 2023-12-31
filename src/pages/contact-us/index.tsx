@@ -20,7 +20,9 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function App(props: IAppProps) {
+export default function ContactUsPage(props: IAppProps) {
+  const siteSettings = props.locations.siteSettings[0];
+  const [successBanner,setSuccessBanner] = React.useState(false);
   const router = useRouter();
   const submitForm = debounce((d) => {
     fetch("/api/submitcontactus", {
@@ -53,10 +55,12 @@ export default function App(props: IAppProps) {
       submitForm(values);
     },
   });
-  if (router.asPath.indexOf("success") !== -1) {
-    formik.resetForm();
-    router.push("/contact-us");
-  }
+  React.useEffect(() => {
+    if (router.asPath.indexOf("success") !== -1) {
+      formik.resetForm();
+      setSuccessBanner(true);
+    }
+  }, [router]);
   return (
     <>
       <Head>
@@ -73,6 +77,9 @@ export default function App(props: IAppProps) {
       <PageBanner image={props.pageContent.image}>
         <PortableText value={props.pageContent.bannerText} />
       </PageBanner>
+      {successBanner?<div className="flex justify-center bg-project-200 text-light-grey">
+        Form has been successfully submitted!
+      </div>:<></>}
       <section
         id="contact-us-form"
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
@@ -96,7 +103,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                {props.locations.siteSettings.email}
+                {siteSettings.email}
               </div>
               <div className="flex items-center">
                 <span>
@@ -108,7 +115,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                {props.locations.siteSettings.phoneNumber}
+                {siteSettings.phoneNumber}
               </div>
               <div className="flex items-center">
                 <span>
@@ -120,7 +127,7 @@ export default function App(props: IAppProps) {
                     alt=""
                   />
                 </span>{" "}
-                {props.locations.siteSettings.location}
+                {siteSettings.location}
               </div>
             </div>
           </div>
@@ -211,9 +218,28 @@ export default function App(props: IAppProps) {
                   onChange={(v) => {
                     formik.setFieldValue("subject", v);
                   }}
-                  className="flex justify-between"
+                  value={formik.values.subject}
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 justify-between"
                 >
-                  <label className="flex items-center gap-3">
+                  {[
+                    "Future Project",
+                    "Jobs",
+                    "Pricing & Package",
+                    "Employee",
+                    "I'm A Model/Artist",
+                    "Feedback",
+                    "Other",
+                  ].map((v) => {
+                    return (
+                      <label className="flex items-center gap-3">
+                        <InputRadioItem value={v} />
+                        <span className="text-md lg:text-xl whitespace-nowrap">
+                          {v}
+                        </span>
+                      </label>
+                    );
+                  })}
+                  {/* <label className="flex items-center gap-3">
                     <InputRadioItem value="dog" />
                     <span className="text-md lg:text-xl">Dog</span>
                   </label>
@@ -224,7 +250,7 @@ export default function App(props: IAppProps) {
                   <label className="flex items-center gap-3">
                     <InputRadioItem value="porcupine" />
                     <span className="text-md lg:text-xl">Porcupine</span>
-                  </label>
+                  </label> */}
                 </InputRadioGroup>
               </div>
               <div className="flex flex-col justify-between w-full">

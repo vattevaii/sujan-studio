@@ -4,7 +4,7 @@ import { siteSettings } from "@/pages/_app";
 
 export const getAllLocations: () => Promise<{
   locations: LocationItem[];
-  siteSettings: siteSettings;
+  siteSettings: siteSettings[];
 }> = async function () {
   const locationQ = `*[_type=="locationItem"]{
       locationName,"slug":slug.current,address,city,postalCode,phoneNumber
