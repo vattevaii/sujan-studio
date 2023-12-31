@@ -10,6 +10,7 @@ import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
+import { getAllPosts } from "@/utils/sanity/posts";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { PortableText, toPlainText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
@@ -108,7 +109,7 @@ const WeddingSubDomain: React.FunctionComponent<
         </div>
       </section>
       <ReviewSlider reviews={props.reviews} />
-      <SLatestBlogs className="px-4 lg:px-8 " />
+      <SLatestBlogs posts={props.blogs} className="px-4 lg:px-8 " />
     </>
   );
 };
@@ -120,8 +121,9 @@ export const getStaticProps = async function () {
   const pageContent = await getPageContent("subdomain/wedding");
   // console.log(pageContent);
   //   console.log(images);
+  const blogs = await getAllPosts();
   return {
-    props: { reviews, locations, featured: images, pageContent },
+    props: { blogs, reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

@@ -44,14 +44,17 @@ export default function PostListPage(
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="p-3 border border-divider"
+                className="p-3 border rounded-sm border-divider flex flex-col gap-1"
               >
-                <Image
-                  src={post.mainImage}
-                  width={600}
-                  height={400}
-                  alt={post.title}
-                />
+                <div className="aspect-video w-full">
+                  <Image
+                    src={post.mainImage}
+                    width={600}
+                    height={400}
+                    alt={post.title}
+                    className="w-full object-cover h-full rounded-sm"
+                  />
+                </div>
                 <h2 className="text-xl lg:text-5xl">{post.title}</h2>
                 <p className="text-sm lg:text-md">{post.shortDescription}</p>
               </Link>

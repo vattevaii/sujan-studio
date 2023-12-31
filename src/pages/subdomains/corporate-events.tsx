@@ -9,6 +9,7 @@ import SText from "@/components/subdomains/text/STextTitle";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
+import { getAllPosts } from "@/utils/sanity/posts";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { PortableText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
@@ -104,7 +105,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         </div>
       </section>
 
-      <SLatestBlogs className="px-4 lg:px-8 " />
+      <SLatestBlogs posts={props.blogs} className="px-4 lg:px-8 " />
       <ReviewSlider reviews={props.reviews} />
     </>
   );
@@ -115,9 +116,10 @@ export const getStaticProps = async function () {
   const locations = await getAllLocations();
   const images = await getImages("corporateEvents");
   const pageContent = await getPageContent("subdomain/corporate-events");
-
+  const blogs = await getAllPosts();
   return {
-    props: { reviews, locations, featured: images, pageContent },
+    props: { blogs,
+      reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

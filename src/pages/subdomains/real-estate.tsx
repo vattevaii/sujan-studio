@@ -10,6 +10,7 @@ import SText from "@/components/subdomains/text/STextTitle";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
+import { getAllPosts } from "@/utils/sanity/posts";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { PortableText } from "@portabletext/react";
 import { InferGetStaticPropsType } from "next";
@@ -41,7 +42,9 @@ const RealEstateSubDomain: React.FunctionComponent<
         service={props.pageContent.bannerText}
         bannerImg="/jpegs/RealEstate.jpg"
         getEstimateLink="/book-us"
-      >{props.pageContent.pageSubTitle}</SBanner>
+      >
+        {props.pageContent.pageSubTitle}
+      </SBanner>
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
         <SText.Title className="text-center">
           {props.pageContent.textBlocks[0].blockTitle}
@@ -129,7 +132,7 @@ const RealEstateSubDomain: React.FunctionComponent<
         </div>
       </section>
 
-      <SLatestBlogs className="px-4 lg:px-8 " />
+      <SLatestBlogs posts={props.blogs} className="px-4 lg:px-8 " />
       <ReviewSlider reviews={props.reviews} />
     </>
   );
@@ -141,8 +144,9 @@ export const getStaticProps = async function () {
   const images = await getImages("realEstate");
   // console.log(images)
   const pageContent = await getPageContent("subdomain/real-estate");
+  const blogs = await getAllPosts();
   return {
-    props: { reviews, locations, featured: images, pageContent },
+    props: { blogs, reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

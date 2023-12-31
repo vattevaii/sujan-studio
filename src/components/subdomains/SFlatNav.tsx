@@ -10,7 +10,7 @@ export const subdomainLinks = [
   { name: "Home", href: "#" },
   { name: "About Us", href: "/our-story" },
   { name: "Our Works", href: "/portfolio" },
-  { name: "Blog", href: "#footer" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact Us", href: "/contact-us" },
 ];
 
@@ -19,7 +19,7 @@ const SFlatNav: React.FunctionComponent<ISFlatNavProps> = ({
 }) => {
   return (
     <>
-      <section className="bg-light-grey text-project-100 px-[10vw] font-raleway text-md lg:text-xl">
+      <section className="bg-light-grey text-project-100 px-[10vw] font-raleway text-sm sm:text-md lg:text-xl text-center">
         <nav className="relative flex justify-center gap-[5vw] py-9">
           {logo ? (
             <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5/6">
@@ -27,7 +27,7 @@ const SFlatNav: React.FunctionComponent<ISFlatNavProps> = ({
                 alt="Back to Sujan Studio"
                 priority={true}
                 src="/jpegs/logo-dark.png"
-                className="h-full w-auto"
+                className="h-full w-auto -translate-x-2/3 md:translate-x-0"
                 width="300"
                 height="300"
               />

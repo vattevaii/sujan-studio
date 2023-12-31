@@ -1,12 +1,20 @@
 import * as React from "react";
 import BlogCard from "../blog/BlogCard";
 import SText from "./text/STextTitle";
+import { getAllPosts } from "@/utils/sanity/posts";
+import { useRouter } from "next/router";
 
-interface ISLatestBlogsProps {}
+interface ISLatestBlogsProps {
+  posts: Awaited<ReturnType<typeof getAllPosts>>;
+}
 
 const SLatestBlogs: React.FunctionComponent<
   ISLatestBlogsProps & React.HTMLProps<HTMLDivElement>
 > = (props) => {
+  const router = useRouter();
+  const goToBlog = (slug: string) => {
+    router.push(`/blog/${slug}`);
+  };
   return (
     <section
       className={
@@ -17,21 +25,20 @@ const SLatestBlogs: React.FunctionComponent<
       <div className="grid place-items-center text-center">
         <SText.Title>Read Our Latest Blogs</SText.Title>
         <SText.Sub>
-          Lorem ipsum dolor sit amet consectetur. Eget ornare a quisque faucibus
-          fusce vitae. Id dolor id nibh sit.
+          Unlock the World of Captivating Moments – Explore Our Latest Blogs on
+          Photography, Weddings, and Real Estate.
         </SText.Sub>
       </div>
       <div className="flex gap-6">
-        <BlogCard
-          title="This is title"
-          description="Lorem ipsum dolor sit amet consectetur and inter lobortis nisl Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
-          imageSrc="/jpegs/FamilyItem.jpg"
-        />
-        <BlogCard
-          title="This is title"
-          description="Lorem ipsum dolor sit amet consectetur and inter lobortis nisl Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
-          imageSrc="/jpegs/WeddingItem.jpg"
-        />
+        {props.posts.slice(0, 2).map((item, idx) => (
+          <BlogCard
+            key={idx}
+            title={item.title}
+            description={item.shortDescription}
+            imageSrc={item.mainImage}
+            onClick={() => goToBlog(item.slug)}
+          />
+        ))}
       </div>
     </section>
   );
