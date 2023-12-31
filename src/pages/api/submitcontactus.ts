@@ -13,10 +13,21 @@ export default function handler(
 ) {
   if (req.method === "POST") {
     try {
-      ContactFormSchema.parse(JSON.parse(req.body));
+      const body = JSON.parse(req.body);
+      console.log(body);
+      ContactFormSchema.parse(body);
+      const { files, ...restBody } = body;
       const data = {
         _type: "contactus",
-        ...JSON.parse(req.body),
+        attachments: files.map((item: any) => {
+          const _key = crypto.randomUUID();
+          return {
+            _key,
+            _type: "attachment",
+            asset: { _type: "reference", _ref: item },
+          };
+        }),
+        ...restBody,
       };
 
       client
@@ -24,7 +35,9 @@ export default function handler(
           token: TOKEN,
         })
         .then((d) => {
-          res.status(201).json({ message: "Contact Us Form submitted!", _id: d._id });
+          res
+            .status(201)
+            .json({ message: "Contact Us Form submitted!", _id: d._id });
         })
         .catch((err) => {
           res.status(500).json({ message: err.message });
@@ -32,7 +45,7 @@ export default function handler(
       //   .then(// console.log)
       //   .catch(console.error)
     } catch (err) {
-      console.log(err)
+      console.log(err);
       res.status(500).json({ message: err as string });
     }
   } else res.status(405).json({ message: "No route" });

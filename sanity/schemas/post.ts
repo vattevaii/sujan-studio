@@ -24,6 +24,15 @@ export default defineType({
       title: "Author",
       type: "reference",
       to: { type: "author" },
+      validation: function (Rule) {
+        return Rule.custom((value, context) => {
+          // Validate that otherCategory is provided if category is 'Others'
+          if (!value) {
+            return "Author is required";
+          }
+          return true;
+        });
+      },
     }),
     defineField({
       name: "mainImage",

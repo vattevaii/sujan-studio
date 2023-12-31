@@ -43,32 +43,32 @@ body:has(.modal-open) {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
 }
-.bg-light-grey h1,
-.bg-light-grey h2,
-.bg-light-grey h3,
-.bg-light-grey h4 {
+.blog-page .bg-light-grey h1,
+.blog-page .bg-light-grey h2,
+.blog-page .bg-light-grey h3,
+.blog-page .bg-light-grey h4 {
   @apply text-project-100;
 }
-.bg-light-grey {
+.blog-page .bg-light-grey {
   @apply text-project-200;
 }
-h1 {
+.blog-page h1 {
   @apply text-21xl lg:text-41xl font-semibold;
 }
-h1 > p {
+.blog-page h1 > p {
   @apply text-21xl lg:text-41xl font-semibold;
 }
-h2 {
+.blog-page h2 {
   @apply text-11xl lg:text-21xl font-semibold;
 }
-h2 > em {
+.blog-page h2 > em {
   @apply text-5xl lg:text-11xl font-semibold;
 }
 /* h3{
   @apply text-xl lg:text-11xl font-semibold;
 } */
-h4 {
+.blog-page h4 {
   @apply text-md lg:text-lg font-semibold;
 }

@@ -2,6 +2,7 @@ import { getAllLocations } from "@/utils/sanity/location";
 import { getAllPosts, getPost } from "@/utils/sanity/posts";
 import { PortableText } from "@portabletext/react";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import Image from "next/image";
 
 export const getStaticPaths = (async () => {
@@ -52,13 +53,25 @@ export default function PostPage(
   if (!props.post) return "Loading...";
   return (
     <>
-      <section className="">
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
+        />
+        <title>{`${props.post.title} | Sujan Studio`}</title>
+        <meta
+          name="description"
+          content={props.post.shortDescription}
+        />
+      </Head>
+      <section className="blog-page">
         <div className="relative">
           <Image
-            src={props.post.mainImage}
+            src={props.post.mainImage??"/jpegs/mainSection.jpg"}
             alt={props.post.title}
             width="1200"
             height="1200"
+            priority={true}
             className="w-full h-auto max-h-screen object-cover"
           />
           <div className="absolute top-0 h-full w-full flex justify-center items-center isolate ">
@@ -74,7 +87,7 @@ export default function PostPage(
             </div>
           </div>
         </div>
-        <div className="px-10 pt-3 pb-20 text-project-100 bg-light-grey">
+        <div className=" px-10 pt-3 pb-20 text-project-100 bg-light-grey">
           <PortableText
             value={props.post.body}
             components={{
@@ -90,4 +103,3 @@ export default function PostPage(
     </>
   );
 }
-

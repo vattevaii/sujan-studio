@@ -79,7 +79,7 @@ export default function NavPanel({
             },
             {
               route: "blog",
-              name: "Our News",
+              name: "Our Blogs",
               icon: svgs.navSvgs.news,
             },
             {

@@ -136,7 +136,7 @@ const imageStore = defineType({
           const category = context.parent.category;
           if (
             category &&
-            category.category[0].categoryValue === "wedding" &&
+            category[0].categoryValue === "wedding" &&
             !value
           ) {
             return 'Bride Name is required when Category is "Wedding"';
@@ -167,7 +167,7 @@ const imageStore = defineType({
           const category = context.parent?.category;
           if (
             category &&
-            category.category[0].categoryValue === "wedding" &&
+            category[0].categoryValue === "wedding" &&
             !value
           ) {
             return 'Groom Name is required when Category is "Wedding"';
@@ -235,9 +235,6 @@ const imageStore = defineType({
         return false;
       }
     }),
-    
-
-    
     defineField({
       name: "orderRank",
       type: "string",

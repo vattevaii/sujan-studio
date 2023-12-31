@@ -1,71 +1,63 @@
 // sanitySchema.js
-import { defineType, defineField } from 'sanity';
+import { defineType, defineField } from "sanity";
 
 // Define a schema for individual attachments (image or PDF)
 const attachmentSchema = defineField({
-  name: 'attachment',
-  title: 'Attachment',
-  type: 'object',
-  fields: [
-    defineField({
-      name: 'file',
-      title: 'File',
-      type: 'file',
-      options: {
-        accept: '.pdf,image/*', // Adjust file types as needed
-      },
-    }),
-    // Add other fields as needed for each attachment
-  ],
+  name: "attachment",
+  title: "Attachment",
+  type: "file",
+  options: {
+    accept: ".pdf,image/*", // Adjust file types as needed
+  },
 });
 
 // Define the main document type for form submissions
 export default defineType({
-  name: 'contactus',
-  title: 'Contact Us',
-  type: 'document',
+  name: "contactus",
+  title: "Contact Us",
+  type: "document",
   fields: [
     defineField({
-      name: 'firstName',
-      title: 'First Name',
-      type: 'string',
+      name: "firstName",
+      title: "First Name",
+      type: "string",
     }),
     defineField({
-      name: 'lastName',
-      title: 'Last Name',
-      type: 'string',
+      name: "lastName",
+      title: "Last Name",
+      type: "string",
     }),
     defineField({
-      name: 'email',
-      title: 'Email',
-      type: 'string',
+      name: "email",
+      title: "Email",
+      type: "string",
     }),
     defineField({
-      name: 'phoneNumber',
-      title: 'Phone Number',
-      type: 'string',
+      name: "phoneNumber",
+      title: "Phone Number",
+      type: "string",
     }),
     defineField({
-      name: 'subject',
-      title: 'Subject',
-      type: 'string',
+      name: "subject",
+      title: "Subject",
+      type: "string",
     }),
     defineField({
-      name: 'message',
-      title: 'Message',
-      type: 'text',
+      name: "message",
+      title: "Message",
+      type: "text",
     }),
     // Related documents field for multiple attachments
     defineField({
-      name: 'attachments',
-      title: 'Attachments',
-      type: 'array',
+      name: "attachments",
+      title: "Attachments",
+      type: "array",
       of: [attachmentSchema],
     }),
   ],
   preview: {
     select: {
-      title: 'firstName',
+      title: "firstName",
     },
   },
 });

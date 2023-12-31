@@ -17,12 +17,13 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import UploadFileToSanity from "@/components/input/inputFile";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function ContactUsPage(props: IAppProps) {
   const siteSettings = props.locations.siteSettings[0];
-  const [successBanner,setSuccessBanner] = React.useState(false);
+  const [successBanner, setSuccessBanner] = React.useState(false);
   const router = useRouter();
   const submitForm = debounce((d) => {
     fetch("/api/submitcontactus", {
@@ -41,6 +42,8 @@ export default function ContactUsPage(props: IAppProps) {
     phoneNumber: string;
     subject: string;
     message: string;
+    terms: string;
+    files: string[];
   }>({
     initialValues: {
       firstName: "",
@@ -49,6 +52,8 @@ export default function ContactUsPage(props: IAppProps) {
       phoneNumber: "",
       subject: "",
       message: "",
+      terms: "",
+      files: [],
     },
     validationSchema: toFormikValidationSchema(ContactFormSchema),
     onSubmit: (values) => {
@@ -77,9 +82,13 @@ export default function ContactUsPage(props: IAppProps) {
       <PageBanner image={props.pageContent.image}>
         <PortableText value={props.pageContent.bannerText} />
       </PageBanner>
-      {successBanner?<div className="flex justify-center bg-project-200 text-light-grey">
-        Form has been successfully submitted!
-      </div>:<></>}
+      {successBanner ? (
+        <div className="flex justify-center bg-project-200 text-light-grey">
+          Form has been successfully submitted!
+        </div>
+      ) : (
+        <></>
+      )}
       <section
         id="contact-us-form"
         className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
@@ -231,7 +240,7 @@ export default function ContactUsPage(props: IAppProps) {
                     "Other",
                   ].map((v) => {
                     return (
-                      <label className="flex items-center gap-3">
+                      <label className="flex items-center gap-3" key={v}>
                         <InputRadioItem value={v} />
                         <span className="text-md lg:text-xl whitespace-nowrap">
                           {v}
@@ -267,8 +276,28 @@ export default function ContactUsPage(props: IAppProps) {
                   {...formik.getFieldProps("message")}
                 />
               </div>
+              <UploadFileToSanity
+                addFileRef={(ref: string[]) =>
+                  formik.setFieldValue("files", ref)
+                }
+              />
+              <InputRadioGroup
+                name="terms"
+                onChange={(v) => formik.setFieldValue("terms", v)}
+              >
+                <label className="flex items-center gap-3">
+                  <InputRadioItem value={"accept"} />
+                  <span className="text-md lg:text-xl whitespace-nowrap">
+                    I accept communication emails & privacy policy
+                  </span>
+                </label>
+              </InputRadioGroup>
               <div className="flex justify-end">
-                <InputButton value="Send Message" className="px-8" />
+                <InputButton
+                  value="Send Message"
+                  className="px-8"
+                  disabled={!formik.isValid}
+                />
               </div>
             </form>
           </div>

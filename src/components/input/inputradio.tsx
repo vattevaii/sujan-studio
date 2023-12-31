@@ -23,11 +23,14 @@ export function InputRadioGroup({
   return (
     <inputContext.Provider value={{ name: name, selected: current }}>
       <div
-        onChange={(e) => {
+        onClick={(e) => {
           // @ts-expect-error
-          onChange?.(e.target.value);
-          // @ts-expect-error
-          setCurrent(e.target.value);
+          const val = e.target.value;
+          if (val) {
+            const val2 = current === val ? "" : val;
+            onChange?.(val2);
+            setCurrent(val2);
+          }
         }}
         {...props}
       >

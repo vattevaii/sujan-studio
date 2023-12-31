@@ -108,7 +108,7 @@ export const getStaticProps = async () => {
   const relatedImages: { [x: string]: string[] } = {};
   const portfolioImages: { title: string; link: string; images: string[] }[] =
     [];
-  const pageContent = await getPageContent('portfolio');
+  const pageContent = await getPageContent("portfolio");
   portfolio.forEach((item) => {
     if (!(item.title in items)) {
       items[item.title] = portfolioImages.length;
@@ -121,7 +121,12 @@ export const getStaticProps = async () => {
     }
     const idx = items[item.title];
     portfolioImages[idx].images.push(item.mainImage);
-    relatedImages[item.title] = [...relatedImages[item.title], ...item.images];
+    if (item.images)
+      relatedImages[item.title] = [
+        ...relatedImages[item.title],
+        ...item.images,
+      ];
+    else console.log(item);
   });
   portfolioImages.forEach((item) => {
     item.images = [...item.images, ...relatedImages[item.title]];
