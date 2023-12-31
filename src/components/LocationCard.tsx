@@ -14,7 +14,7 @@ const LocationCard = ({ locationData, variant="large" }: { locationData: Locatio
   return (
     <div className="flex flex-col items-start gap-4 text-left">
       <Link
-        href={"/l/" + locationData.slug}
+        href={"/location/" + locationData.slug}
         className={"font-semibold hover:underline decoration-2 transition-all "+(variant==="large"?"text-11xl xl:text-21xl":"text-5xl xl:text-11xl")}
       >
         {locationName}

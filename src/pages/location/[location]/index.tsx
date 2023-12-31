@@ -107,7 +107,7 @@ const LocationPage: React.FunctionComponent<
           {sublocations?.map((loc) => (
             <Link
               key={loc.slug}
-              href={"/" + mainLocation.slug + "/" + loc.slug}
+              href={"/location/" + mainLocation.slug + "/" + loc.slug}
               className="hover:underline"
             >
               {loc.sublocationName}&nbsp;
