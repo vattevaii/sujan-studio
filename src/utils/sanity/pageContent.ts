@@ -3,6 +3,7 @@ import { client } from "../../../sanity/lib/client";
 
 export const getPageContent: (route: string) => Promise<{
   bannerText: TypedObject | TypedObject[];
+  bannerSubTitle: string;
   pageTitle: string;
   pageSubTitle: string;
   image: string;
@@ -16,6 +17,7 @@ export const getPageContent: (route: string) => Promise<{
     .fetch(
       `*[_type=="pageContent" && pageRoute=="${route}"]{
     bannerText,
+    bannerSubTitle,
     "image": bannerImage.asset->url,
     pageTitle,
     pageSubTitle,

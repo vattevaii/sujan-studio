@@ -42,7 +42,9 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         service={props.pageContent.bannerText}
         bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
-      />
+      >
+        {props.pageContent.bannerSubTitle}
+      </SBanner>
       <section className="grid bg-light-grey text-project-100 px-[10vw] py-10 gap-6">
         <SText.Title className="text-center">
           {props.pageContent.textBlocks[0].blockTitle}
@@ -70,10 +72,9 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         </div>
       </section>
       <section className="text-center text-light-grey py-6 px-[10vw]">
-        <SText.Title>Our Featured Works</SText.Title>
+        <SText.Title>{props.pageContent.pageTitle}</SText.Title>
         <SText.Sub className="text-project-200">
-          Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-          egestas.
+          {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
@@ -118,8 +119,7 @@ export const getStaticProps = async function () {
   const pageContent = await getPageContent("subdomain/corporate-events");
   const blogs = await getAllPosts();
   return {
-    props: { blogs,
-      reviews, locations, featured: images, pageContent },
+    props: { blogs, reviews, locations, featured: images, pageContent },
     revalidate: 3600,
   };
 };

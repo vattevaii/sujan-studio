@@ -43,7 +43,7 @@ const RealEstateSubDomain: React.FunctionComponent<
         bannerImg="/jpegs/RealEstate.jpg"
         getEstimateLink="/book-us"
       >
-        {props.pageContent.pageSubTitle}
+        {props.pageContent.bannerSubTitle}
       </SBanner>
       <section className="grid py-6 bg-light-grey text-project-100 px-[10vw] gap-2">
         <SText.Title className="text-center">
@@ -96,11 +96,10 @@ const RealEstateSubDomain: React.FunctionComponent<
           </div>
         </div>
       </section>
-      <section className="text-center text-light-grey py-6 px-[10vw]">
-        <SText.Title>Our Real Estate Works</SText.Title>
+      <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
+        <SText.Title>{props.pageContent.pageTitle}</SText.Title>
         <SText.Sub className="text-project-200">
-          Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-          egestas.
+          {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">

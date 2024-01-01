@@ -40,7 +40,7 @@ const SchoolEventsSubDomain: React.FunctionComponent<
         bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
       >
-        {props.pageContent.pageSubTitle}
+        {props.pageContent.bannerSubTitle}
       </SBanner>
       <section className=" bg-light-grey text-project-100 px-[10vw] py-10">
         <SText.Title className="text-center">
@@ -71,10 +71,9 @@ const SchoolEventsSubDomain: React.FunctionComponent<
         </div>
       </section>
       <section className="text-center text-light-grey py-6 px-[10vw]">
-        <SText.Title>Our Featured Works</SText.Title>
+        <SText.Title>{props.pageContent.pageTitle}</SText.Title>
         <SText.Sub className="text-project-200">
-          Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-          egestas.
+          {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-2 md:grid-cols-4 place-items-center">

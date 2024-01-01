@@ -42,7 +42,7 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         bannerImg={props.pageContent.image}
         getEstimateLink="/book-us"
       >
-        {props.pageContent.pageSubTitle}
+        {props.pageContent.bannerSubTitle}
       </SBanner>
       <section className="grid bg-light-grey text-project-100 px-[5vw] py-10 gap-6">
         <SText.Title className="text-center">
@@ -65,10 +65,9 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
         </div>
       </section>
       <section className="text-center text-light-grey py-6 ">
-        <SText.Title>Our Featured Works</SText.Title>
+        <SText.Title>{props.pageContent.pageTitle}</SText.Title>
         <SText.Sub className="text-project-200">
-          Lorem ipsum dolor sit amet consectetur. Ultrices justo sit duis
-          egestas.
+          {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="w-5/6 mx-auto border-light-grey opacity-40 my-10" />
         <div className="grid gap-5 grid-cols-2 md:grid-cols-4 place-items-center">

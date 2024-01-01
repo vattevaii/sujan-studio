@@ -23,6 +23,11 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "bannerSubTitle",
+      title: "Banner Sub Title",
+      type: "string",
+    }),
+    defineField({
       name: "bannerImage",
       title: "Banner Image",
       type: "image",
