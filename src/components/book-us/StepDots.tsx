@@ -15,7 +15,7 @@ const StepDots: React.FunctionComponent<IStepDotsProps> = (props) => {
           : "bg-divider text-project-100") +
         " transition-all circle rounded-full flex justify-center items-center w-8 h-8 lg:w-11 lg:h-11 text-center text-sm lg:text-lg"
       }
-      onClick={() => props.changeStep(i + 1)}
+      // onClick={() => props.changeStep(i + 1)}
     >
       {v}
     </div>

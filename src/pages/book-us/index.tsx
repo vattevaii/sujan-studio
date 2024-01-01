@@ -52,14 +52,15 @@ const BookUs: React.FunctionComponent<
     });
   }, 100);
   React.useEffect(() => {
-    const { step, success, ...query } = router.query;
+    const { step: stepQ, success: successQ, ...query } = router.query;
     try {
-      if (Number(step) < 5) {
-        setStep(Number(step));
+      if (Number(stepQ) < 5) {
+        if (Number(stepQ) !== step) setStep(Number(step));
       }
-      if (success === "true") {
+      if (successQ === "true" && success === false) {
         setSuccess(true);
       }
+      if (successQ === "false" || !successQ) setSuccess(false);
     } catch (e) {}
     // console.log(initVal, query);
     setInitVal({ ...initVal, ...query });

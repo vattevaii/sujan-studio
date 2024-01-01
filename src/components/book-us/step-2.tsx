@@ -17,6 +17,8 @@ export default function Step2(props: IStep2Props) {
     exactNeed: string;
   }>();
   const [currPath, setPath] = React.useState("");
+  const [need, setNeed] = React.useState("");
+  const [purpose, setPurpose] = React.useState("");
   const [error, setError] = React.useState("");
   const router = useRouter();
   const [items, setItems] = React.useState<
@@ -55,6 +57,10 @@ export default function Step2(props: IStep2Props) {
     if (currPath === router.asPath) return;
     setPath(router.asPath);
     const query = router.query;
+    if (query.needs === need && purpose === query.purpose) return;
+    setItems([]);
+    setNeed((query.needs as string) ?? "");
+    setPurpose((query.purpose as string) ?? "");
     const fetchD = client
       .fetch(
         `*[_type == 'serviceItem' && '${query.needs}' in services && '${query.purpose}' in serviceScope]{
@@ -64,7 +70,7 @@ export default function Step2(props: IStep2Props) {
       )
       .then((v: { serviceName: string; icon: string }[]) => {
         // console.log(v);
-        if (v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1) {
+        if (typeof query["exactNeed"] === 'string' && v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1) {
           form.setFieldValue("exactNeed", "");
           router.push(
             {
@@ -91,9 +97,9 @@ export default function Step2(props: IStep2Props) {
       >
         {items.map((d) => (
           <label key={d.serviceName}>
-            <InputRadioItemForBookUsPage value={d.serviceName} >
+            <InputRadioItemForBookUsPage value={d.serviceName}>
               <div className="flex w-5/6 gap-5">
-                <Image src={d.icon?? ""} width={25} height={25} alt="" />
+                <Image src={d.icon ?? ""} width={25} height={25} alt="" />
                 <p>{d.serviceName}</p>
               </div>
             </InputRadioItemForBookUsPage>
