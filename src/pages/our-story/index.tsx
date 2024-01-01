@@ -48,9 +48,9 @@ export default function OurStory({
           <div className="row-start-4 md:row-start-3 md:col-start-2 lg:row-start-4 lg:col-start-1 xl:row-start-3 xl:col-start-2">
             <PortableText value={pageContent.textBlocks[1].text} />
           </div>
-          <div className="bg-yellow-50 row-start-2 col-start-1 row-span-1 md:row-span-1 md:row-start-2 lg:row-span-1 xl:row-span-2 xl:row-start-2 aspect-square h-full w-full max-h-72 md:h-full lg:max-h-72 xl:h-full ">
+          <div className="flex row-start-2 col-start-1 row-span-1 md:row-span-1 md:row-start-2 lg:row-span-1 xl:row-span-2 xl:row-start-2 aspect-square h-full w-full max-h-72 md:h-full lg:max-h-72 xl:h-full ">
             <Image
-              className="object-cover h-[70vh] w-full"
+              className="object-cover md:h-[70vh] lg:h-auto xl:h-[70vh] w-full"
               width="700"
               height="700"
               src={pageContent.textBlocks[0].relatedImages[0]}
@@ -58,7 +58,7 @@ export default function OurStory({
               alt={" Image "}
             />
           </div>
-          <div className="bg-yellow-50 row-start-3 col-start-1 md:row-start-2 md:col-start-2 lg:row-start-3 lg:col-start-1 xl:row-start-2 xl:col-start-2 aspect-[2/1] h-56 md:h-full lg:h-56 xl:h-full w-full">
+          <div className="flex row-start-3 col-start-1 md:row-start-2 md:col-start-2 lg:row-start-3 lg:col-start-1 xl:row-start-2 xl:col-start-2 aspect-[2/1] h-56 md:h-full lg:h-56 xl:h-full w-full">
             <Image
               className="object-cover h-full w-full"
               width="700"

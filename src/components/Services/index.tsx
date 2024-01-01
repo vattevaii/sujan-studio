@@ -39,7 +39,7 @@ function Service({ service }: { service: ServiceItem }) {
         </h3>
         <Link
           href={service.href}
-          className="relative h-12 lg:h-20 w-auto pointer-coarse:translate-y-3/4"
+          className="relative h-12 lg:h-20 w-auto max-w-[100px] pointer-coarse:translate-y-3/4"
           aria-label={`Click to reveal more information about ${service.text} photography service`}
         >
           <div className="absolute whitespace-nowrap -left-full -top-7 text-xs invisible group-focus-within:visible bg-divider">
@@ -94,6 +94,72 @@ function Service({ service }: { service: ServiceItem }) {
           </svg>
         </Link>
       </div>
+      {/* <div
+        className="absolute z-[1] group pointer-coarse:px-5 flex flex-row 
+            items-end justify-between
+            bg-transparent bg-gradient-to-t from-slate-900 to-transparent to-[3%]
+            top-0 left-0 w-full h-full"
+      >
+        <h3 className="text-center delay-250 duration-300 transition-transform translate-y-0 group-hover:translate-y-0">
+          {service.text}
+        </h3>
+        <Link
+          href={service.href}
+          className="relative h-12 lg:h-20 w-fit max-w-[100px] pointer-coarse:translate-y-3/4"
+          aria-label={`Click to reveal more information about ${service.text} photography service`}
+        >
+          <div className="absolute whitespace-nowrap -left-full -top-7 text-xs invisible group-focus-within:visible bg-divider">
+            Learn more about {service.text} photography services.
+          </div>
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 120 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g filter="url(#filter0_b_30_323)">
+              <rect
+                width="120"
+                height="120"
+                rx="60"
+                fill="#B7B7B7"
+                fillOpacity="0.21"
+              />
+            </g>
+            <path
+              className="group-hover:animate-arrow-move"
+              d="M50 48V52H67.18L48 71.18L50.82 74L70 54.82V72H74V48H50Z"
+              fill="white"
+            />
+            <defs>
+              <filter
+                id="filter0_b_30_323"
+                x="-20"
+                y="-20"
+                width="160"
+                height="160"
+                filterUnits="userSpaceOnUse"
+                colorInterpolationFilters="sRGB"
+              >
+                <feFlood floodOpacity="5" result="BackgroundImageFix" />
+                <feGaussianBlur in="BackgroundImageFix" stdDeviation="120" />
+                <feComposite
+                  in2="SourceAlpha"
+                  operator="in"
+                  result="effect1_backgroundBlur_30_323"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_backgroundBlur_30_323"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </Link>
+      </div> */}
       <Image
         width={30}
         height={30}
