@@ -34,6 +34,7 @@ export type siteSettings = {
   phoneNumber: string;
   companyName: string;
   location: string;
+  locationLink: string;
   socialLinks: { name: string; url: string; logo: string }[];
   clients: { name: string; url: string; logo: string }[];
 };

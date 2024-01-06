@@ -19,6 +19,7 @@ import * as React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import UploadFileToSanity from "@/components/input/inputFile";
 import InputTextArea from "@/components/input/InputTextArea";
+import Link from "next/link";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -103,7 +104,10 @@ export default function ContactUsPage(props: IAppProps) {
               {props.pageContent.pageSubTitle}
             </h3>
             <div className="flex justify-center flex-row md:flex-col lg:flex-row xl:flex-col flex-wrap gap-y-5 gap-x-10">
-              <div className="flex items-center">
+              <Link
+                href={`mailto:${siteSettings.email}`}
+                className="flex items-center"
+              >
                 <span>
                   <Image
                     className="inline-block mr-2 w-5 lg:w-8"
@@ -114,8 +118,11 @@ export default function ContactUsPage(props: IAppProps) {
                   />
                 </span>{" "}
                 {siteSettings.email}
-              </div>
-              <div className="flex items-center">
+              </Link>
+              <Link
+                href={`tel:${siteSettings.phoneNumber.replace(/\D/g, "")}`}
+                className="flex items-center"
+              >
                 <span>
                   <Image
                     className="inline-block mr-2 w-5 lg:w-8"
@@ -126,8 +133,8 @@ export default function ContactUsPage(props: IAppProps) {
                   />
                 </span>{" "}
                 {siteSettings.phoneNumber}
-              </div>
-              <div className="flex items-center">
+              </Link>
+              <Link href={siteSettings.locationLink} className="flex items-center">
                 <span>
                   <Image
                     className="inline-block mr-2 w-5 lg:w-8"
@@ -138,7 +145,7 @@ export default function ContactUsPage(props: IAppProps) {
                   />
                 </span>{" "}
                 {siteSettings.location}
-              </div>
+              </Link>
             </div>
           </div>
           <div className="">

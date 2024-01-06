@@ -13,6 +13,7 @@ export const getAllLocations: () => Promise<{
       phoneNumber,
       "logo":logoLight.asset -> url,
       location,
+      locationLink,
       email,
       companyName,
       "socialLinks":socialLinks[]{

@@ -36,6 +36,11 @@ export default defineType({
       title: "Location",
       type: "string",
     },
+    {
+      name: "locationLink",
+      title: "Location Link (Google Map/Apple Map)",
+      type: "string",
+    },
     defineField({
       name: "socialLinks",
       type: "array",
