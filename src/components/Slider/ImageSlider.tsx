@@ -66,7 +66,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
       className="modal-open fixed top-0 left-0 w-screen h-[100lvh] z-10"
       onClick={onClose}
     >
-      <div className="absolute w-full h-full top-0 left-0 bg-black opacity-70"></div>
+      <div className="absolute w-full h-full top-0 left-0 bg-black opacity-80"></div>
       <div className="absolute w-full h-full lg:w-3/4 -translate-x-1/2 left-1/2 top-0">
         <SliderProvider autoplay={false} loop={false} activeIdx={options.index}>
           <div className="h-[calc(50vh+80vw)] max-h-[95svh] lg:max-h-full lg:h-full overflow-hidden py-8 lg:mx-20">
