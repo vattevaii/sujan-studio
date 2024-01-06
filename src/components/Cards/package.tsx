@@ -1,3 +1,4 @@
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -7,6 +8,7 @@ export interface IPackageProps {
   image: string;
   dollars: string;
   privileges: string[];
+  linkTo: string;
 }
 
 export function Package(props: IPackageProps) {
@@ -14,20 +16,27 @@ export function Package(props: IPackageProps) {
     <div className="relative flex flex-col items-center isolate bg-faded p-5 text-project-200">
       <div className="absolute top-0 left-0 w-full h-64 -z-[1]">
         <Image
-          className="w-full h-full"
+          className="w-full h-full object-cover"
           width={500}
           height={500}
-          src={props.image?props.image: "/jpegs/mainSection.jpg"}
+          src={props.image ? props.image : "/jpegs/mainSection.jpg"}
+          loader={sanityImageLoader}
+          sizes="30vw"
           alt={""}
         />
       </div>
-      <h3 className="text-light-grey text-21xl text-center flex items-center h-[2.2em] leading-10">{props.name}</h3>
+      <div className="absolute top-0 left-0 w-full h-64 -z-[1] bg-overlay-from"/>
+      <h3 className="text-light-grey text-21xl text-center flex items-center h-[2.2em] leading-10">
+        {props.name}
+      </h3>
       <p className="text-light-grey text-xl pb-4">Starting From</p>
       <div className="flex items-center justify-center aspect-square border-[6px] p-5 border-faded bg-project-100 text-white rounded-full">
-        <p className="text-21xl lg:text-[48px] font-semibold">{props.dollars}</p>
+        <p className="text-21xl lg:text-[48px] font-semibold">
+          {props.dollars}
+        </p>
       </div>
       <div className="w-full grid gap-5 font-raleway">
-        {props.privileges.map((ptext,key) => (
+        {props.privileges.map((ptext, key) => (
           <p className="flex items-center gap-5" key={key}>
             <svg
               width="20"
@@ -45,8 +54,10 @@ export function Package(props: IPackageProps) {
           </p>
         ))}
       </div>
-      <Link href="/book-us" className="w-full pt-10 mt-auto">
-        <button className=" bg-project-100 text-white p-4 w-full">See this Plan</button>
+      <Link href={props.linkTo} className="w-full pt-10 mt-auto">
+        <button className=" bg-project-100 text-white p-4 w-full">
+          See this Plan
+        </button>
       </Link>
     </div>
   );

@@ -10,7 +10,17 @@ import PageBanner from "@/components/PageSections/PageBanner";
 import { getPageContent } from "@/utils/sanity/pageContent";
 import { PortableText } from "@portabletext/react";
 
-interface IPackagePageProps {}
+interface IPackagePageProps {
+  name: string;
+  dollars: string;
+  privileges: string;
+  image: string;
+  linkedService: {
+    serviceName: string;
+    scope: string;
+    service: string;
+  };
+}
 
 const PackagePage: React.FunctionComponent<
   IPackagePageProps & InferGetStaticPropsType<typeof getStaticProps>
@@ -45,17 +55,31 @@ const PackagePage: React.FunctionComponent<
           {props.pageContent.pageSubTitle}
         </p>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(420px,1fr))] gap-5">
-          {props.packages.map((item, key) => (
-            // @ts-expect-error
-            <Package {...item} key={key} />
-          ))}
+          {props.packages.map((item, key) => {
+            const linkTo = `/book-us?needs=${item.linkedService.scope}&purpose=${item.linkedService.service}&exactNeed=${item.linkedService.serviceName}&step=3`;
+            return (
+              // @ts-expect-error
+              <Package {...item} linkTo={linkTo} key={key} />
+            );
+          })}
         </div>
       </section>
     </>
   );
 };
 export const getStaticProps = async () => {
-  const query = `*[_type=="package"]|order(orderRank){name,dollars,privileges,"image":image.asset.url}`;
+  const query = `*[_type=="package"]|order(orderRank)
+  {
+    name,
+    dollars,
+    privileges,
+    "image":image.asset->url,
+    "linkedService":getEstimateLink->{
+      serviceName,
+      "scope":serviceScope[0],
+      "service":services[0]
+    }
+  }`;
   const packages: IPackagePageProps[] = await client.fetch(query);
   const locations = await getAllLocations();
   const pageContent = await getPageContent("packages");

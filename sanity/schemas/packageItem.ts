@@ -1,36 +1,42 @@
 // package.js
-import { defineType, defineField } from 'sanity';
+import { defineType, defineField } from "sanity";
 
 export default defineType({
-  name: 'package',
-  title: 'Package',
-  type: 'document',
+  name: "package",
+  title: "Package",
+  type: "document",
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
+      name: "name",
+      title: "Name",
+      type: "string",
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
+      name: "image",
+      title: "Image",
+      type: "image",
       options: {
         hotspot: true, // If you want to enable hotspot for the image
       },
     }),
     defineField({
-      name: 'dollars',
-      title: 'Dollars',
-      type: 'string',
+      name: "getEstimateLink",
+      title: "Linked Service",
+      type: "reference",
+      to: [{ type: "serviceItem" }],
     }),
     defineField({
-      name: 'privileges',
-      title: 'Privileges',
-      type: 'array',
+      name: "dollars",
+      title: "Dollars",
+      type: "string",
+    }),
+    defineField({
+      name: "privileges",
+      title: "Privileges",
+      type: "array",
       of: [
         {
-          type: 'string',
+          type: "string",
         },
       ],
     }),
@@ -42,8 +48,8 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'name',
-      media: 'image',
+      title: "name",
+      media: "image",
     },
   },
 });
