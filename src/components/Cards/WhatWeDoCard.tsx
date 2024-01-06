@@ -3,13 +3,18 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 type Props = {
-  data: { title: string; description: string; imageSrc: string };
+  data: {
+    title: string;
+    description: string;
+    imageSrc: string;
+    bookUsLink: string;
+  };
 };
 
 export default function WhatWeDoCard({ data }: Props) {
   const router = useRouter();
   const goToEstimatePage = () => {
-    router.push("/book-us")
+    router.push(data.bookUsLink);
   };
   const getEstimate = () => {
     if (window.matchMedia("(any-hover: none)").matches) {
@@ -35,24 +40,24 @@ export default function WhatWeDoCard({ data }: Props) {
             alt=""
             height="690"
             src={data.imageSrc}
-            className="invisible h-full w-auto object-cover rounded-[inherit]"
+            className="invisible h-full w-full object-cover rounded-[inherit]"
           />
           <Image
             width="549"
             alt=""
             height="690"
             src={data.imageSrc}
-            className="absolute top-0 left-0 h-full w-auto object-cover rounded-[inherit]"
+            className="absolute top-0 left-0 h-full w-full object-cover rounded-[inherit]"
           />
         </div>
         <div
           className={
-            "group-hover:h-8 group-hover:opacity-100 h-0 rounded-b-lg opacity-0 pointer-fine:hidden absolute bottom-0 transition-all bg-overlay-from w-full text-white"
+            "group-hover:h-8 group-hover:opacity-100 h-0 rounded-b-lg opacity-0 pointer-fine:hidden absolute bottom-0 transition-all duration-300 bg-overlay-from w-full text-white"
           }
         >
           Get Estimate?
         </div>
-        <div className="absolute flex flex-col justify-center items-center gap-2 md:gap-4 text-lg md:text-xl font-raleway text-light-grey pointer-coarse:hidden py-[1em] left-0 top-0 w-full h-full bg-overlay-from transition-opacity duration-300 opacity-0 hover:opacity-100 backdrop-blur-[1px]">
+        <div className="absolute flex flex-col justify-center items-center gap-2 md:gap-4 text-lg md:text-xl font-raleway text-light-grey pointer-coarse:hidden py-[1em] left-0 top-0 w-full h-full bg-overlay-from transition-opacity duration-300 delay-100 group-hover:delay-0 opacity-0 hover:opacity-100 backdrop-blur-[1px]">
           {/* <div className="blurred-bg absolute w-full h-full bg-overlay-from blur-3xl" /> */}
 
           <svg

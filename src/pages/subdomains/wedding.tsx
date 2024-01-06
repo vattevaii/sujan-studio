@@ -54,7 +54,7 @@ const WeddingSubDomain: React.FunctionComponent<
           service={props.pageContent.bannerText}
           bannerImg={props.pageContent.image}
           blurDataURL={props.pageContent.blurDataImage}
-          getEstimateLink="/book-us"
+          getEstimateLink="/book-us?needs=photography&purpose=personal&step=3&exactNeed=Wedding"
         >
           {props.pageContent.bannerSubTitle}
         </SBanner>
@@ -90,8 +90,8 @@ const WeddingSubDomain: React.FunctionComponent<
               <PortableText value={props.pageContent.textBlocks[0].text} />
             </SText.Sub>
             <Link
-              href={"/book-us"}
-              className="mx-auto text-center lg:mx-0 bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px] w-min"
+              href={"/book-us?needs=photography&purpose=personal&step=3&exactNeed=Wedding"}
+              className="mx-auto text-center lg:mx-0 bg-project-100 border-2 border-project-100 text-light-grey p-2 min-w-[150px] w-min flex items-center justify-center"
             >
               Book Us Now
             </Link>

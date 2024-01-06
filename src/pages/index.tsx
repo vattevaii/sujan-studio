@@ -173,37 +173,43 @@ export const getStaticProps = async () => {
           title: "Weddings & Events",
           description:
             "Your love story is one of a kind – let our wedding photography service capture the magic and romance of your special day, creating timeless memories that will last a lifetime.",
-          imageSrc: "/jpegs/WeddingItem.jpg",
+          imageSrc: "/jpegs/Wedding_EventsPhotographer.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=personal&step=3&exactNeed=Wedding"
         },
         {
           title: "Commercials & Real Estate",
           description:
             "Visuals are everything in today’s world of business - let our commercial photography service help you stand out from the crowd with captivating images that tell your brand’s story and elevate your marketing to the next level.",
-          imageSrc: "/jpegs/RealStateItem.jpg",
+          imageSrc: "/jpegs/RealEstate_CommercialPhotographer.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=business&step=3&exactNeed=Property"
         },
         {
           title: "Business & Corporate",
           description:
             "We capture the essence and personality of your brand, creating images that showcase your team, facilities, products, and services in a way that exudes professionalism, quality, and success.",
-          imageSrc: "/jpegs/BusinessItem.jpg",
+          imageSrc: "/jpegs/Business_CorporatePhotographer.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=business&step=2"
         },
         {
           title: "Automotives & Rendering",
           description:
             "Our automotive photography service is dedicated to capturing the sleek lines, impressive features, and unique character of your ride, creating images that will make you fall in love with it all over again.",
-          imageSrc: "/jpegs/CarItem.jpg",
+          imageSrc: "/jpegs/Automotive_carsphotographer.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=business&step=3&exactNeed=Car"
         },
         {
           title: "Product & Fashion",
           description:
             "Our product photography service is all about capturing the essence and beauty of your merchandise, creating images that will make them irresistible to customers and help drive your sales to the next level.",
-          imageSrc: "/jpegs/ProductItem.jpg",
+          imageSrc: "/jpegs/Product_FashionPhotographer.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=business&step=3&exactNeed=Product"
         },
         {
           title: "Family & Portraits",
           description:
             "Family is where life begins and love never ends – our family photography service is dedicated to capturing those precious moments that you will cherish for a lifetime.",
-          imageSrc: "/jpegs/FamilyItem.jpg",
+          imageSrc: "/jpegs/Family_PortraitPhotographer_2.jpg",
+          bookUsLink: "/book-us?needs=photography&purpose=personal&step=3&exactNeed=Family"
         },
       ],
       locations,

@@ -43,7 +43,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         service={props.pageContent.bannerText}
         bannerImg={props.pageContent.image}
         blurDataURL={props.pageContent.blurDataImage}
-        getEstimateLink="/book-us"
+        getEstimateLink="/book-us?needs=photography&purpose=business&step=2"
       >
         {props.pageContent.bannerSubTitle}
       </SBanner>

@@ -54,8 +54,8 @@ const BookUs: React.FunctionComponent<
   React.useEffect(() => {
     const { step: stepQ, success: successQ, ...query } = router.query;
     try {
-      if (Number(stepQ) < 5) {
-        if (Number(stepQ) !== step) setStep(Number(step));
+      if (Number(stepQ) < 5 && !isNaN(Number(stepQ))) {
+        if (step !== Number(stepQ)) setStep(Number(stepQ));
       }
       if (successQ === "true" && success === false) {
         setSuccess(true);
@@ -65,6 +65,9 @@ const BookUs: React.FunctionComponent<
     // console.log(initVal, query);
     setInitVal({ ...initVal, ...query });
   }, [router]);
+  React.useEffect(() => {
+    console.log("Step Changed", step);
+  }, [step]);
   return (
     <>
       <Head>

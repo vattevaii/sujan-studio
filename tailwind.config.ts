@@ -46,8 +46,8 @@ const config: Config = {
         white: "#fff",
         darkbg: "#000815",
         stroke: "rgba(95, 120, 151, 0.3)",
-        "overlay-from": "rgba(2, 17, 41, 0.50)",
-        "overlay-to": "rgba(2, 17, 41, 0.50) 100%)",
+        "overlay-from": "rgba(2, 17, 41, 0.70)",
+        "overlay-to": "rgba(2, 17, 41, 0.70) 100%)",
       },
       spacing: {},
       fontFamily: {
