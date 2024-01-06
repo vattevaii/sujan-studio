@@ -12,7 +12,7 @@ export interface IPackageProps {
 export function Package(props: IPackageProps) {
   return (
     <div className="relative flex flex-col items-center isolate bg-faded p-5 text-project-200">
-      <div className="absolute top-0 left-0 w-full h-52 -z-[1]">
+      <div className="absolute top-0 left-0 w-full h-64 -z-[1]">
         <Image
           className="w-full h-full"
           width={500}
@@ -21,7 +21,7 @@ export function Package(props: IPackageProps) {
           alt={""}
         />
       </div>
-      <h3 className="text-light-grey text-21xl">{props.name}</h3>
+      <h3 className="text-light-grey text-21xl text-center flex items-center h-[2.2em] leading-10">{props.name}</h3>
       <p className="text-light-grey text-xl pb-4">Starting From</p>
       <div className="flex items-center justify-center aspect-square border-[6px] p-5 border-faded bg-project-100 text-white rounded-full">
         <p className="text-21xl lg:text-[48px] font-semibold">{props.dollars}</p>
@@ -45,7 +45,7 @@ export function Package(props: IPackageProps) {
           </p>
         ))}
       </div>
-      <Link href="/book-us" className="w-full mt-10">
+      <Link href="/book-us" className="w-full pt-10 mt-auto">
         <button className=" bg-project-100 text-white p-4 w-full">See this Plan</button>
       </Link>
     </div>
