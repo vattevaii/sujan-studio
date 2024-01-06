@@ -43,7 +43,7 @@ export default function Step1(props: IStep1Props) {
     <>
       <div className="flex flex-col gap-5 md:flex-row items-center text-center md:text-start justify-between">
         <div>
-          <p className="text-lg">What you Need?</p>
+          <p className="text-lg">What do you Need?*</p>
           <InputRadioGroup
             name="needs"
             className="flex justify-center md:justify-start  gap-5"
@@ -119,7 +119,7 @@ export default function Step1(props: IStep1Props) {
           </InputRadioGroup>
         </div>
         <div>
-          <p className="text-lg">For Business or personal purposes</p>
+          <p className="text-lg">Is your shoot for business or personal?*</p>
           <InputRadioGroup
             name="purpose"
             className="flex gap-5 justify-center md:justify-end"
