@@ -30,7 +30,7 @@ export default function Banner({ typewriter, ...props }: BannerProps) {
         <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl translate-y-7">
           <h1>
             <BannerTypewriter {...typewriter} />
-            <b> is Everything,</b>
+            <b> is Everything.</b>
           </h1>
           <b>We Deliver.</b>
         </div>

@@ -83,14 +83,14 @@ const NewWebsite = ({
 };
 
 export const getStaticProps = async () => {
-  const bannerTextItems = ["Image", "Video", "Audience"];
-  const bannerD = await getPageContent('homepage');
+  const bannerTextItems = ["Audience", "Image", "Video"];
+  const bannerD = await getPageContent("homepage");
   const banner: BannerProps & typeof bannerD = {
     typewriter: {
       items: bannerTextItems,
       itemsWidth: measureTextWidth(bannerTextItems),
     },
-    ...bannerD
+    ...bannerD,
   };
   const locations = await getAllLocations();
   const reviews = await getAllReviews();
