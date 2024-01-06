@@ -70,9 +70,9 @@ const SchoolEventsSubDomain: React.FunctionComponent<
           </div>
         </div>
       </section>
-      <section className="text-center text-light-grey py-6 px-[10vw]">
+      <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
-        <SText.Sub className="text-project-200">
+        <SText.Sub className="">
           {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />

@@ -64,9 +64,9 @@ const FamilyPortraitsSubDomain: React.FunctionComponent<
           />
         </div>
       </section>
-      <section className="text-center text-light-grey py-6 ">
+      <section className="text-center bg-darkbg text-light-grey py-6 ">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
-        <SText.Sub className="text-project-200">
+        <SText.Sub className="">
           {props.pageContent.pageSubTitle}
         </SText.Sub>
         <hr className="w-5/6 mx-auto border-light-grey opacity-40 my-10" />
