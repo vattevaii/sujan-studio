@@ -6,7 +6,7 @@ export const getAllLocations: () => Promise<{
   locations: LocationItem[];
   siteSettings: siteSettings[];
 }> = async function () {
-  const locationQ = `*[_type=="locationItem"]{
+  const locationQ = `*[_type=="locationItem"]|order(orderRank){
       locationName,"slug":slug.current,address,city,postalCode,phoneNumber
     }`;
   const siteSettingsQ = `*[_type=="siteSettings"]{

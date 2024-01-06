@@ -37,6 +37,7 @@ export default defineConfig({
             }),
             orderableDocumentListDeskItem({ type: "imageStore", S, context }),
             orderableDocumentListDeskItem({ type: "package", S, context }),
+            orderableDocumentListDeskItem({ type: "locationItem", S, context }),
             // ... all other desk items
           ]);
       },

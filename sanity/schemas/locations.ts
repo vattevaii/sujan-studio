@@ -86,6 +86,11 @@ export default defineType({
       type: "array",
       of: [sublocationType], // Specify the sublocation type
     }),
+    defineField({
+      name: "orderRank",
+      type: "string",
+      hidden: true,
+    }),
   ],
   preview: {
     select: {

@@ -20,29 +20,62 @@ export default function CEOMessage({
     <section
       className={
         className +
-        " ceo-talk px-10 lg:px-0 grid gap-y-5 grid-rows-[min-content_auto] lg:flex-row bg-light-grey text-project-100 min-h-screen pb-6"
+        " ceo-talk flex gap-y-5 bg-light-grey text-project-100 pb-6 overflow-clip"
       }
     >
-      <div className="relative row-start-1 overflow-clip lg:py-0 lg:p-0 max-h-fit">
-        <h2 className="relative text-center lg:text-left z-0 lg:pl-16 lg:pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
+      <div className="relative px-10 lg:pl-20 flex flex-col items-center flex-[7]">
+        <h2 className="relative md:self-start lg:self-center xl:self-start z-0 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
           {content.blockTitle}
         </h2>
-      </div>
-      <div className="row-start-3 lg:row-start-2 lg:pl-16 lg:pr-20 text-base md:text-xl lg:text-2xl font-raleway text-project-200">
-        <PortableText value={content.text} />
-      </div>
-      <div className="row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-fit sm:w-min lg:w-full h-full min-w-[50%]">
-        <div className="aspect-[35/42]">
+        <div className="aspect-[35/42] md:hidden lg:block xl:hidden max-w-sm overflow-clip">
           <Image
             width="400"
             height="800"
             src={content.relatedImages[0]}
             loader={sanityImageLoader}
             alt="CEO Picture"
-            className="w-full lg:h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
+        <PortableText value={content.text} />
+      </div>
+      <div className="aspect-[35/42] hidden md:block lg:hidden xl:block flex-[5] max-w-[500px] max-h-[500px] lg:max-h-[1000px]">
+        <Image
+          width="400"
+          height="800"
+          src={content.relatedImages[0]}
+          loader={sanityImageLoader}
+          alt="CEO Picture"
+          className="w-full h-full object-cover "
+        />
       </div>
     </section>
+    // <section
+    //   className={
+    //     className +
+    //     " ceo-talk px-10 lg:px-0 grid gap-y-5 grid-rows-[min-content_auto] lg:flex-row bg-light-grey text-project-100 min-h-screen pb-6"
+    //   }
+    // >
+    //   <div className="relative row-start-1 overflow-clip lg:py-0 lg:p-0 max-h-fit">
+    //     <h2 className="relative text-center lg:text-left z-0 lg:pl-16 lg:pr-20 text-11xl md:text-21xl lg:text-21xl xl:text-41xl font-semibold capitalize">
+    //       {content.blockTitle}
+    //     </h2>
+    //   </div>
+    //   <div className="row-start-3 lg:row-start-2 lg:pl-16 lg:pr-20 text-base md:text-xl lg:text-2xl font-raleway text-project-200">
+    //     <PortableText value={content.text} />
+    //   </div>
+    //   <div className="row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-2 -col-end-1 mx-auto w-fit sm:w-min lg:w-full h-full min-w-[50%]">
+    //     <div className="aspect-[35/42]">
+    //       <Image
+    //         width="400"
+    //         height="800"
+    //         src={content.relatedImages[0]}
+    //         loader={sanityImageLoader}
+    //         alt="CEO Picture"
+    //         className="w-full lg:h-full object-cover"
+    //       />
+    //     </div>
+    //   </div>
+    // </section>
   );
 }
