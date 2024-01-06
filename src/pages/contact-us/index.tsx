@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import UploadFileToSanity from "@/components/input/inputFile";
+import InputTextArea from "@/components/input/InputTextArea";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -263,16 +264,17 @@ export default function ContactUsPage(props: IAppProps) {
                 </InputRadioGroup>
               </div>
               <div className="flex flex-col justify-between w-full">
-                <label htmlFor="your-message" className="block">
+                <label htmlFor="message" className="block">
                   Your Message
                 </label>
                 <p className="text-red-500 text-2xs -mt-2 h-3">
                   {formik.touched.message ? formik.errors.message : ""}
                 </p>
-                <InputText
+                <InputTextArea
+                  rows={5}
                   className="w-full"
-                  id="your-message"
-                  placeholder="your Your Message here"
+                  id="message"
+                  placeholder="Your Message here"
                   {...formik.getFieldProps("message")}
                 />
               </div>
