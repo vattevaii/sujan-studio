@@ -3,12 +3,17 @@ import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllPosts } from "@/utils/sanity/posts";
 import { PortableText } from "@portabletext/react";
-import { InferGetStaticPropsType } from "next";
+import {
+  InferGetStaticPropsType,
+  GetStaticProps,
+} from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-export const getStaticProps = async () => {
+export const getStaticProps = (async (context) => {
+  const query = context;
+  console.log("Query ", query);
   const posts = await getAllPosts();
   const locations = await getAllLocations();
   const pageContent = await getPageContent("blog");
@@ -16,7 +21,7 @@ export const getStaticProps = async () => {
     props: { pageContent, posts, locations },
     revalidate: 3600,
   };
-};
+}) satisfies GetStaticProps;
 
 export default function PostListPage(
   props: InferGetStaticPropsType<typeof getStaticProps>

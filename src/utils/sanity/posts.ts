@@ -16,6 +16,10 @@ export type Post = {
   body: TypedObject | TypedObject[];
 };
 
+export const getAllPostsCount: () => Promise<number> = async function () {
+  const postQ = `count(*[_type=="post"])`;
+  return await client.fetch(`${postQ}`);
+};
 export const getAllPosts: () => Promise<Omit<Post, "body">[]> =
   async function () {
     const postQ = `*[_type=="post"]{
@@ -27,6 +31,20 @@ export const getAllPosts: () => Promise<Omit<Post, "body">[]> =
       }`;
     return await client.fetch(`${postQ}`);
   };
+export const getAllPostsByPage: (
+  page: number
+) => Promise<Omit<Post, "body">[]> = async function (page) {
+  const fetchFrom = page * 6 - 5;
+  const fetchTo = page * 6;
+  const postQ = `*[_type=="post"][${fetchFrom}...${fetchTo}]{
+        title,"slug":slug.current,"mainImage":mainImage.asset->url,
+        "package":packageType->name,publishedAt,
+        "author":author->{
+            name,"slug":slug.current,"image":image.asset->url
+        },shortDescription
+      }`;
+  return await client.fetch(`${postQ}`);
+};
 export const getPost: (slug: string) => Promise<Post> = async function (slug) {
   const postQ = `*[_type=="post" && slug.current=="${slug}"]{
         title,"slug":slug.current,"mainImage":mainImage.asset->url,
