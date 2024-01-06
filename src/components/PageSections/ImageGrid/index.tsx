@@ -63,8 +63,8 @@ export default function ImageGrid(props: IAppProps) {
               height="100"
               src={image.url}
               blurDataURL={image.lqip}
-              alt=""
               loading="eager"
+              alt=""
               className="absolute object-cover h-full w-full min-h-[200px]"
               loader={sanityImageLoader}
               // unoptimized={true}
@@ -73,6 +73,7 @@ export default function ImageGrid(props: IAppProps) {
               width="500"
               height="500"
               src={image.url}
+              loading="eager"
               blurDataURL={image.lqip}
               alt=""
               className="relative z-10 object-cover h-full w-full min-h-[200px]"
@@ -102,6 +103,7 @@ export default function ImageGrid(props: IAppProps) {
               height="400"
               src={image.url}
               blurDataURL={image.lqip}
+              loading="eager"
               alt=""
               loader={sanityImageLoader}
               className="relative z-10 object-cover h-full w-full"
