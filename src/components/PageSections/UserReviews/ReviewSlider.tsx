@@ -31,7 +31,7 @@ export default function ReviewSlider({ className = "", reviews }: Props) {
     ({ author, authorSrc, bg, company, reviewText }, idx) => (
       <div
         key={idx}
-        className="relative text-center text-xl lg:text-11xl h-full w-full"
+        className="relative text-center text-xl lg:text-11xl h-full w-full text-light-grey"
       >
         <Image
           width={30}
