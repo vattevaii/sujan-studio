@@ -29,7 +29,6 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (context) => {
   const query = context.params;
-  console.log(query);
   const locations = await getAllLocations();
   const pageContent = await getPageContent("blog");
   const blogsCount = await getAllPostsCount();
@@ -72,7 +71,6 @@ export default function PostListPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const router = useRouter();
-  console.log(props)
   if (router.isFallback)
     return (
       <>
@@ -103,7 +101,10 @@ export default function PostListPage(
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner image={props.pageContent.image}>
+      <PageBanner
+        image={props.pageContent.image}
+        blurDataURL={props.pageContent.blurDataImage}
+      >
         <PortableText value={props.pageContent.bannerText} />
       </PageBanner>
       <section className="blog-page">

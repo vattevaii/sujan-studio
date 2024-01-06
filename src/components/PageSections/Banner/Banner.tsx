@@ -21,11 +21,10 @@ export default function Banner({ typewriter, ...props }: BannerProps) {
         className="absolute top-0 -z-[1] w-full h-full object-cover"
         alt=""
         src={props.image?.length ? props.image : "/jpegs/mainSection.jpg"}
+        blurDataURL={props.blurDataImage}
         loader={sanityImageLoader}
       />
-      <div
-        className="absolute top-0 -z-[1] w-full h-full bg-project-100 opacity-70"
-        ></div>
+      <div className="absolute top-0 -z-[1] w-full h-full bg-project-100 opacity-70"></div>
       <div className="flex flex-col w-full min-h-screen px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
         <div className="flex-1 flex flex-col justify-center text-41xl lg:text-61xl xl:text-111xl translate-y-7">
           <h1>

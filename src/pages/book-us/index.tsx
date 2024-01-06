@@ -78,7 +78,10 @@ const BookUs: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner image={props.pageContent.image}>
+      <PageBanner
+        image={props.pageContent.image}
+        blurDataURL={props.pageContent.blurDataImage}
+      >
         <PortableText value={props.pageContent.bannerText} />
       </PageBanner>
       <section

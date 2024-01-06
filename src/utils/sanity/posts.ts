@@ -5,6 +5,7 @@ export type Post = {
   title: string;
   slug: string;
   mainImage: string;
+  mainImageBlur: string;
   package: string;
   author: {
     name: string;
@@ -23,7 +24,9 @@ export const getAllPostsCount: () => Promise<number> = async function () {
 export const getAllPosts: () => Promise<Omit<Post, "body">[]> =
   async function () {
     const postQ = `*[_type=="post"]{
-        title,"slug":slug.current,"mainImage":mainImage.asset->url,
+        title,"slug":slug.current,
+        "mainImage":mainImage.asset->url,
+        "mainImageBlur":mainImage.asset->lqip,
         "package":packageType->name,publishedAt,
         "author":author->{
             name,"slug":slug.current,"image":image.asset->url

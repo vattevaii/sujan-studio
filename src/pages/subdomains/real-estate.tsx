@@ -40,7 +40,8 @@ const RealEstateSubDomain: React.FunctionComponent<
       <SFlatNav logo />
       <SBanner
         service={props.pageContent.bannerText}
-        bannerImg="/jpegs/RealEstate.jpg"
+        bannerImg={props.pageContent.image}
+        blurDataURL={props.pageContent.blurDataImage}
         getEstimateLink="/book-us"
       >
         {props.pageContent.bannerSubTitle}

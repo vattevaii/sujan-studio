@@ -81,7 +81,10 @@ export default function ContactUsPage(props: IAppProps) {
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner image={props.pageContent.image}>
+      <PageBanner
+        image={props.pageContent.image}
+        blurDataURL={props.pageContent.blurDataImage}
+      >
         <PortableText value={props.pageContent.bannerText} />
       </PageBanner>
       {successBanner ? (
@@ -134,7 +137,10 @@ export default function ContactUsPage(props: IAppProps) {
                 </span>{" "}
                 {siteSettings.phoneNumber}
               </Link>
-              <Link href={siteSettings.locationLink} className="flex items-center">
+              <Link
+                href={siteSettings.locationLink}
+                className="flex items-center"
+              >
                 <span>
                   <Image
                     className="inline-block mr-2 w-5 lg:w-8"

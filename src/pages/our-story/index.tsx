@@ -34,7 +34,10 @@ export default function OurStory({
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner image={pageContent.image}>
+      <PageBanner
+        image={pageContent.image}
+        blurDataURL={pageContent.blurDataImage}
+      >
         <PortableText value={pageContent.bannerText} />
       </PageBanner>
       <section className="our-story bg-light-grey">

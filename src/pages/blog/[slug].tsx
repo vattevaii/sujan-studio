@@ -1,3 +1,4 @@
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getAllPosts, getPost } from "@/utils/sanity/posts";
 import { PortableText } from "@portabletext/react";
@@ -59,19 +60,18 @@ export default function PostPage(
           content="f_68tqeL-mLzXjKfyyXJpWikq44fXRXbgmcKhvqKj4s"
         />
         <title>{`${props.post.title} | Sujan Studio`}</title>
-        <meta
-          name="description"
-          content={props.post.shortDescription}
-        />
+        <meta name="description" content={props.post.shortDescription} />
       </Head>
       <section className="blog-page">
         <div className="relative">
           <Image
-            src={props.post.mainImage??"/jpegs/mainSection.jpg"}
+            src={props.post.mainImage ?? "/jpegs/mainSection.jpg"}
             alt={props.post.title}
             width="1200"
             height="1200"
             priority={true}
+            blurDataURL={props.post.mainImageBlur}
+            loader={sanityImageLoader}
             className="w-full h-auto max-h-screen object-cover"
           />
           <div className="absolute top-0 h-full w-full flex justify-center items-center isolate ">

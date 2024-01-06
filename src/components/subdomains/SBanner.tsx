@@ -1,4 +1,6 @@
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { PortableText } from "@portabletext/react";
+import { Console } from "console";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -7,6 +9,7 @@ import { TypedObject } from "sanity";
 interface ISBannerProps {
   service: TypedObject | TypedObject[];
   bannerImg: string;
+  blurDataURL: string;
   getEstimateLink: string;
 }
 
@@ -23,6 +26,9 @@ const SBanner: React.FunctionComponent<
         height={400}
         className="absolute top-0 -z-[1] w-full h-full object-cover"
         alt=""
+        loader={sanityImageLoader}
+        blurDataURL={props.blurDataURL}
+        sizes={`100vw,1vw"`}
         src={props.bannerImg ?? "/jpegs/WeddingItem.jpg"}
       />
       <div className="absolute top-0 -z-[1] w-full h-full bg-project-100 opacity-70" />

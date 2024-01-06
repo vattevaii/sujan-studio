@@ -1,4 +1,12 @@
-export default function sanityImageLoader({ src, width, quality }: any) {
+import { ImageLoaderProps } from "next/image";
+
+export default function sanityImageLoader({
+  src,
+  width,
+  quality,
+}: ImageLoaderProps) {
+  const isSanityImg = src.startsWith("https://cdn.sanity.io");
+  if (!isSanityImg) return src;
   const prj = "ub1sk5dc";
   const dataset = "production";
   const url = new URL(`${src}`);

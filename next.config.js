@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ["cdn.sanity.io"],
     unoptimized: false,
+    minimumCacheTTL: 60 * 60 * 24,
   },
   rewrites: async function () {
     return [

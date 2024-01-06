@@ -1,22 +1,27 @@
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import Image from "next/image";
 import * as React from "react";
 
 interface IPageBannerProps {
   image?: string;
+  blurDataURL?: string;
 }
 
 const PageBanner: React.FunctionComponent<
   React.PropsWithChildren<IPageBannerProps>
-> = ({ image, children }) => {
+> = ({ image, children, blurDataURL }) => {
   return (
     <section id="banner" className="relative banner">
       <Image
         priority={true}
-        width={1000}
+        width={2000}
         height={400}
         className="absolute top-0 -z-[1] w-full h-full object-cover"
         alt=""
-        src={image??"/jpegs/mainSection.jpg"}
+        loader={sanityImageLoader}
+        sizes={`100vw,1vw"`}
+        src={image ?? "/jpegs/mainSection.jpg"}
+        blurDataURL={blurDataURL}
       />
       <div className="absolute top-0 -z-[1] w-full h-full bg-project-100 opacity-70" />
       <div className="flex flex-col items-center min-h-[50vh] w-full px-[5vw] py-[1vh] lg:px-[100px] lg:py-[10px]">
