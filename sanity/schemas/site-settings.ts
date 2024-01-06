@@ -48,5 +48,17 @@ export default defineType({
         ],
       }]
     }),
+    defineField({
+      name: "clients",
+      type: "array",
+      of: [{
+        type:"object",
+        fields: [
+          { name: "name", type: "string" },
+          { name: "link", type: "string" },
+          { name: "icon", type: "image" },
+        ],
+      }]
+    }),
   ],
 });

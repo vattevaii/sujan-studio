@@ -19,6 +19,11 @@ export const getAllLocations: () => Promise<{
         "logo":icon.asset->url,
         name,
         "url":link
+      },
+      "clients":clients[]{
+        "logo":icon.asset->url,
+        name,
+        "url":link
       }
     }`;
   return await client.fetch(

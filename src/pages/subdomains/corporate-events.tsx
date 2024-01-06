@@ -23,6 +23,7 @@ const CorporateEventsSubDomain: React.FunctionComponent<
   ICorporateEventsSubDomainProps &
     InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
+  const clients = props.locations.siteSettings[0].clients;
   return (
     <>
       <Head>
@@ -63,19 +64,15 @@ const CorporateEventsSubDomain: React.FunctionComponent<
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="flex flex-wrap justify-center gap-12">
-          {new Array(10)
-            .fill("/jpegs/CoorporateEvents.jpg")
-            .map((item, idx) => (
-              <Image key={idx} alt="" src={item} width="50" height="50" />
-            ))}
+        <div className="flex flex-wrap justify-around gap-x-12 bg-gradient-to-b from-divider to-transparent rounded-lg min-h-12 lg:min-h-20">
+          {clients?.map((item, idx) => (
+            <Image key={idx} alt="" src={item.logo} width="500" height="500" title={item.name} className="h-12 lg:h-20 w-auto"/>
+          ))}
         </div>
       </section>
       <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
-        <SText.Sub className="">
-          {props.pageContent.pageSubTitle}
-        </SText.Sub>
+        <SText.Sub className="">{props.pageContent.pageSubTitle}</SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
           {props.featured.map((item, idx) => (

@@ -20,6 +20,7 @@ interface ISchoolEventsSubDomainProps {}
 const SchoolEventsSubDomain: React.FunctionComponent<
   ISchoolEventsSubDomainProps & InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
+  const clients = props.locations.siteSettings[0].clients;
   return (
     <>
       <Head>
@@ -61,20 +62,24 @@ const SchoolEventsSubDomain: React.FunctionComponent<
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="flex flex-wrap col-start-1 row-start-3 lg:row-start-2 col-span-1 lg:col-span-2 justify-center gap-12">
-            {new Array(10)
-              .fill("/jpegs/CoorporateEvents.jpg")
-              .map((item, idx) => (
-                <Image key={idx} alt="" src={item} width="50" height="50" />
-              ))}
+          <div className="col-span-2 flex flex-wrap justify-around gap-x-12 bg-gradient-to-b from-divider to-transparent rounded-lg min-h-12 lg:min-h-20">
+            {clients?.map((item, idx) => (
+              <Image
+                key={idx}
+                alt=""
+                src={item.logo}
+                width="500"
+                height="500"
+                title={item.name}
+                className="w-auto h-12 lg:h-20"
+              />
+            ))}
           </div>
         </div>
       </section>
       <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
-        <SText.Sub className="">
-          {props.pageContent.pageSubTitle}
-        </SText.Sub>
+        <SText.Sub className="">{props.pageContent.pageSubTitle}</SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-2 md:grid-cols-4 place-items-center">
           {props.featured.map((item, idx) => (

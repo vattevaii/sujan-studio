@@ -7,7 +7,7 @@ interface ISTopBarProps {
 
 const STopBar: React.FunctionComponent<ISTopBarProps> = (props) => {
   return (
-    <div className="flex justify-between text-light-grey py-2 px-[min(calc(0px+8vw))] bg-[#021129] text-center">
+    <div className="flex sticky top-0 z-50 justify-between text-light-grey py-2 px-[min(calc(0px+8vw))] bg-[#021129] text-center">
       <Link href={"/"} className="hover:underline">
         Back to Sujan Studio
       </Link>

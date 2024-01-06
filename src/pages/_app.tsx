@@ -35,6 +35,7 @@ export type siteSettings = {
   companyName: string;
   location: string;
   socialLinks: { name: string; url: string; logo: string }[];
+  clients: { name: string; url: string; logo: string }[];
 };
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
