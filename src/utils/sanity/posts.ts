@@ -26,7 +26,7 @@ export const getAllPosts: () => Promise<Omit<Post, "body">[]> =
     const postQ = `*[_type=="post"]{
         title,"slug":slug.current,
         "mainImage":mainImage.asset->url,
-        "mainImageBlur":mainImage.asset->lqip,
+        "mainImageBlur":mainImage.asset->metadata.lqip,
         "package":packageType->name,publishedAt,
         "author":author->{
             name,"slug":slug.current,"image":image.asset->url

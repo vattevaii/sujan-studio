@@ -12,13 +12,13 @@ import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 export type ImageSliderOptions = {
   currentCategory: string;
-  images: string[];
+  images: string[] | { url: string; lqip: string }[];
   index: number;
 };
 
 interface IImageSliderProps {
   options: ImageSliderOptions;
-  onClose?: (e:any) => void;
+  onClose?: (e: any) => void;
 }
 
 const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
@@ -44,7 +44,8 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
         height={100}
         className="absolute w-11/12 lg:w-auto h-auto max-h-full max-w-full lg:h-full -z-[1] object-contain mx-auto"
         alt=""
-        src={src}
+        src={typeof src === "string" ? src : src.url}
+        blurDataURL={typeof src === "string" ? undefined : src.lqip}
         loading="eager"
         loader={sanityImageLoader}
         // unoptimized={src.startsWith("http")}
@@ -54,7 +55,8 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
         height={1500}
         className="w-11/12 lg:w-auto h-auto max-h-full max-w-full lg:h-full -z-[1] object-contain mx-auto"
         alt=""
-        src={src}
+        src={typeof src === "string" ? src : src.url}
+        blurDataURL={typeof src === "string" ? undefined : src.lqip}
         loading="eager"
         loader={sanityImageLoader}
         // unoptimized={src.startsWith("http")}
@@ -70,7 +72,7 @@ const ImageSlider: React.FunctionComponent<IImageSliderProps> = ({
       <div className="absolute w-full h-full lg:w-3/4 -translate-x-1/2 left-1/2 top-0">
         <SliderProvider autoplay={false} loop={false} activeIdx={options.index}>
           <div className="h-[calc(50vh+80vw)] max-h-[95svh] lg:max-h-full lg:h-full overflow-hidden py-8 lg:mx-20">
-            <Slider>{items}</Slider>            
+            <Slider>{items}</Slider>
           </div>
           {/* <SliderNavigation /> */}
           <div className="relative w-32 m-auto  lg:static ">

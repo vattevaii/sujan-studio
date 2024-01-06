@@ -4,7 +4,7 @@ import Image from "next/image";
 import { MouseEvent, MouseEventHandler } from "react";
 
 export interface IAppProps {
-  images: string[];
+  images: { url: string; lqip: string }[];
   onSelectImage: (
     img: string,
     imgIdx: number,
@@ -41,13 +41,17 @@ const imgHeights = Object.values(imgSizes).map((item) => {
 });
 
 export default function ImageGrid(props: IAppProps) {
-  const selectImage = (e:MouseEvent<HTMLImageElement, globalThis.MouseEvent>, idx:number) => {
+  const selectImage = (
+    e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>,
+    idx: number
+  ) => {
     const bcr = e.currentTarget.getBoundingClientRect();
-    props.onSelectImage(
-      e.currentTarget.src,
-      idx,
-      [bcr.top, bcr.right, bcr.bottom, bcr.left]
-    );
+    props.onSelectImage(e.currentTarget.src, idx, [
+      bcr.top,
+      bcr.right,
+      bcr.bottom,
+      bcr.left,
+    ]);
   };
   return (
     <div className="isolate z-0">
@@ -57,7 +61,8 @@ export default function ImageGrid(props: IAppProps) {
             <Image
               width="100"
               height="100"
-              src={image}
+              src={image.url}
+              blurDataURL={image.lqip}
               alt=""
               loading="eager"
               className="absolute object-cover h-full w-full min-h-[200px]"
@@ -67,7 +72,8 @@ export default function ImageGrid(props: IAppProps) {
             <Image
               width="500"
               height="500"
-              src={image}
+              src={image.url}
+              blurDataURL={image.lqip}
               alt=""
               className="relative z-10 object-cover h-full w-full min-h-[200px]"
               onClick={(e) => selectImage(e, i)}
@@ -83,7 +89,8 @@ export default function ImageGrid(props: IAppProps) {
             <Image
               width="100"
               height="100"
-              src={image}
+              src={image.url}
+              blurDataURL={image.lqip}
               alt=""
               loading="eager"
               className="absolute object-cover h-full w-full"
@@ -93,7 +100,8 @@ export default function ImageGrid(props: IAppProps) {
             <Image
               width="400"
               height="400"
-              src={image}
+              src={image.url}
+              blurDataURL={image.lqip}
               alt=""
               loader={sanityImageLoader}
               className="relative z-10 object-cover h-full w-full"

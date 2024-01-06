@@ -20,7 +20,7 @@ export const getPageContent: (route: string) => Promise<{
     bannerText,
     bannerSubTitle,
     "image": bannerImage.asset->url,
-    "blurDataImage": bannerImage.asset->lqip,
+    "blurDataImage": bannerImage.asset->metadata.lqip,
     pageTitle,
     pageSubTitle,
     "textBlocks":textBlocks[]->{

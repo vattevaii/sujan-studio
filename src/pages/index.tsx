@@ -101,27 +101,27 @@ export const getStaticProps = async () => {
       services: [
         {
           href: process.env.NEXT_PUBLIC_REALESTATE_SUBDOMAIN ?? "/",
-          src: "/jpegs/RealEstate.jpg",
+          src: "/jpegs/RealEstatePhotographer.jpg",
           text: "Real State",
         },
         {
           href: process.env.NEXT_PUBLIC_WEDDING_SUBDOMAIN ?? "/",
-          src: "/jpegs/Weddings.jpg",
+          src: "/jpegs/weddingphotographer-ringsphoto.jpg",
           text: "Weddings",
         },
         {
           href: process.env.NEXT_PUBLIC_SCHOOL_SUBDOMAIN ?? "/",
-          src: "/jpegs/SchoolEvents.png",
+          src: "/jpegs/GraduationPhotographer.jpg",
           text: "School & Events",
         },
         {
           href: process.env.NEXT_PUBLIC_FAMILY_SUBDOMAIN ?? "/",
-          src: "/jpegs/FamilyAndEvents.jpg",
+          src: "/jpegs/Family_PortraitPhotographer.jpg",
           text: "Family and Events",
         },
         {
           href: process.env.NEXT_PUBLIC_COORPORATE_SUBDOMAIN ?? "/",
-          src: "/jpegs/CoorporateEvents.jpg",
+          src: "/jpegs/CorporateEventsPhotographer.jpg",
           text: "Corporate Events",
         },
         {

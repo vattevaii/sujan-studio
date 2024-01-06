@@ -1,18 +1,20 @@
 import { client } from "../../../sanity/lib/client";
 
 export const getPortfolio: () => Promise<
-  { title: string; mainImage: string; images: string[] }[]
+  {
+    title: string;
+    mainImage: { url: string; lqip: string };
+    images: { url: string; lqip: string }[];
+  }[]
 > = async function () {
   return await client.fetch(`*[_type=="imageStore"]|order(orderRank){
     "title":category[0].categoryName,
-    "mainImage": mainImage.asset->url,
-    "images":relatedImages[].asset->url
+    "mainImage": mainImage.asset->{url,"lqip":metadata.lqip},
+    "images":relatedImages[].asset->{url,"lqip":metadata.lqip}
   }`);
 };
 
-export const getImages: (
-  category: string
-) => Promise<
+export const getImages: (category: string) => Promise<
   {
     title: string;
     mainImage: string;

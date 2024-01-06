@@ -108,9 +108,12 @@ export const getStaticProps = async () => {
   const locations = await getAllLocations();
   const portfolio = await getPortfolio();
   const items: { [x: string]: number } = {};
-  const relatedImages: { [x: string]: string[] } = {};
-  const portfolioImages: { title: string; link: string; images: string[] }[] =
-    [];
+  const relatedImages: { [x: string]: { url: string; lqip: string }[] } = {};
+  const portfolioImages: {
+    title: string;
+    link: string;
+    images: { url: string; lqip: string }[];
+  }[] = [];
   const pageContent = await getPageContent("portfolio");
   portfolio.forEach((item) => {
     if (!(item.title in items)) {

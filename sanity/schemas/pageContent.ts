@@ -1,4 +1,28 @@
 import { defineField, defineType } from "sanity";
+
+const imageTitleUrlField = defineType({
+  name: "imageTitleUrl",
+  type: "object",
+  fields: [
+    defineField({
+      name: "imageTitle",
+      type: "string",
+    }),
+    defineField({
+      name: "image",
+      type: "image",
+    }),
+    defineField({
+      name: "url",
+      type: "string",
+    }),
+    defineField({
+      name: "rank",
+      type: "number",
+    }),
+  ],
+});
+
 export default defineType({
   name: "pageContent",
   title: "Page Content",
@@ -12,7 +36,8 @@ export default defineType({
     defineField({
       name: "bannerText",
       title: "Banner Text",
-      description:"Use Left-ALT + 255 for non-breaking spaces (Option + Space for MAC)",
+      description:
+        "Use Left-ALT + 255 for non-breaking spaces (Option + Space for MAC)",
       type: "array",
       of: [
         {
@@ -49,6 +74,7 @@ export default defineType({
       name: "textBlocks",
       title: "Text Blocks",
       type: "array",
+
       of: [
         {
           type: "reference",
@@ -56,6 +82,36 @@ export default defineType({
         },
       ],
     }),
+    // defineField({
+    //   name: "subdomains",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "object",
+    //       fields: [{type: "string", name:"hello"}],
+    //     },
+    //   ],
+
+    //   hidden: (context) => {
+    //     if (["homepage"].includes(context.parent["pageRoute"])) return false;
+    //     return true;
+    //   },
+    // }),
+    // defineField({
+    //   name: "whatwedo",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "object",
+    //       fields: imageTitleUrlField.fields,
+    //     },
+    //   ],
+    //   hidden: (context) => {
+    //     console.log("Xontext", context);
+    //     if (["homepage"].includes(context.parent["pageRoute"])) return false;
+    //     return true;
+    //   },
+    // }),
   ],
   preview: {
     select: {
