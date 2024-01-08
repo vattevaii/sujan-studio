@@ -20,9 +20,9 @@ const SFlatNav: React.FunctionComponent<ISFlatNavProps> = ({
   return (
     <>
       <section className="sticky top-8 z-50 shadow-md bg-light-grey text-project-100 px-[10vw] font-raleway text-sm sm:text-md lg:text-xl text-center">
-        <nav className="relative flex justify-center gap-[5vw] py-9">
+        <nav className="relative flex items-center justify-center gap-[5vw] py-9">
           {logo ? (
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5/6">
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5/6 hidden md:block">
               <Image
                 alt="Back to Sujan Studio"
                 priority={true}

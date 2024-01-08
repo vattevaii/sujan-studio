@@ -14,6 +14,7 @@ import { getImages } from "@/utils/sanity/imageStore";
 import ImageSliderWrap from "@/components/ImageSliderWrap";
 import { getPageContent } from "@/utils/sanity/pageContent";
 import { PortableText } from "@portabletext/react";
+import Marquee from "react-fast-marquee";
 
 interface ISchoolEventsSubDomainProps {}
 
@@ -63,21 +64,22 @@ const SchoolEventsSubDomain: React.FunctionComponent<
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="col-span-2 flex flex-wrap justify-around gap-x-12 bg-gradient-to-b from-divider to-transparent rounded-lg min-h-12 lg:min-h-20">
-            {clients?.map((item, idx) => (
-              <Image
-                key={idx}
-                alt=""
-                src={item.logo}
-                width="500"
-                height="500"
-                title={item.name}
-                className="w-auto h-12 lg:h-20"
-              />
-            ))}
-          </div>
         </div>
       </section>
+      <Marquee className="bg-white" autoFill>
+        {clients?.map((item, idx) => (
+          <Image
+            key={idx}
+            alt=""
+            src={item.logo}
+            width="500"
+            height="500"
+            loading="eager"
+            title={item.name}
+            className="h-12 lg:h-20 w-auto mx-10 lg:mx-20"
+          />
+        ))}
+      </Marquee>
       <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
         <SText.Sub className="">{props.pageContent.pageSubTitle}</SText.Sub>

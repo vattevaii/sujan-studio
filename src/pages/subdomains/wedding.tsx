@@ -40,7 +40,7 @@ const WeddingSubDomain: React.FunctionComponent<
       </Head>
       <STopBar service="Wedding" />
       <div className="relative">
-        <Link href={"/"} className="absolute top-5 left-10 z-10 h-20 w-auto">
+        <Link href={"/"} className="absolute top-5 left-10 z-10 h-20 w-auto hidden md:block">
           <Image
             alt="Back to sujan studio"
             src={"/jpegs/logo-light.png"}
