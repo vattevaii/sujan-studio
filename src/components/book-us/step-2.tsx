@@ -17,6 +17,7 @@ export default function Step2(props: IStep2Props) {
     exactNeed: string;
   }>();
   const [currPath, setPath] = React.useState("");
+  const [fetching, setFetching] = React.useState(false);
   const [need, setNeed] = React.useState("");
   const [purpose, setPurpose] = React.useState("");
   const [error, setError] = React.useState("");
@@ -26,7 +27,7 @@ export default function Step2(props: IStep2Props) {
   >([]);
   const next = () => {
     const query = router.query;
-    if (!form.errors["exactNeed"]) {
+    if (form.values["exactNeed"]) {
       setError("");
       router.push(
         {
@@ -54,13 +55,16 @@ export default function Step2(props: IStep2Props) {
     props.prevStep();
   };
   React.useEffect(() => {
+    const query = router.query;
+    if (fetching || !query.needs || !query.purpose) return;
     if (currPath === router.asPath) return;
     setPath(router.asPath);
-    const query = router.query;
     if (query.needs === need && purpose === query.purpose) return;
     setItems([]);
     setNeed((query.needs as string) ?? "");
     setPurpose((query.purpose as string) ?? "");
+    setFetching(true);
+    console.log("start fetch")
     const fetchD = client
       .fetch(
         `*[_type == 'serviceItem' && '${query.needs}' in services && '${query.purpose}' in serviceScope]{
@@ -70,7 +74,10 @@ export default function Step2(props: IStep2Props) {
       )
       .then((v: { serviceName: string; icon: string }[]) => {
         // console.log(v);
-        if (typeof query["exactNeed"] === 'string' && v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1) {
+        if (
+          typeof query["exactNeed"] === "string" &&
+          v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1
+        ) {
           form.setFieldValue("exactNeed", "");
           router.push(
             {
@@ -83,6 +90,9 @@ export default function Step2(props: IStep2Props) {
           );
         }
         setItems(v);
+      })
+      .finally(() => {
+        setFetching(false);
       });
     return () => {};
   }, [router]);

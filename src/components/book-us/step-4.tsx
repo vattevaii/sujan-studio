@@ -13,7 +13,7 @@ export default function Step4(props: IStep4Props) {
   const form = useFormikContext<{
     personal: {
       fullName: string;
-      email: string;
+      email?: string;
       phone: string;
     };
   }>();
@@ -22,9 +22,10 @@ export default function Step4(props: IStep4Props) {
     // console.log(form.errors);
     // console.log(form.values);
     if (form.errors.personal) {
-      const errs = flattenObject({ a: form.errors.personal });
+      // const errs = flattenObject({ a: form.errors.personal });
       // console.log(errs);
-      setError(Object.values(errs).join(", "));
+      // setError(Object.values(errs).join(", "));
+      setError("Please fill in your correct Contact Information");
       return;
     } else if (Object.keys(form.errors).length > 0)
       setError(
@@ -33,7 +34,7 @@ export default function Step4(props: IStep4Props) {
     else form.handleSubmit();
   };
   return (
-    <div>
+    <div onChange={() => setError("")}>
       <p className="text-lg">Your Address Details</p>
       <div className="grid gap-7">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-7">

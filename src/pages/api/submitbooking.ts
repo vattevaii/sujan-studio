@@ -12,10 +12,11 @@ export default function handler(
 ) {
   if (req.method === "POST") {
     try {
-      bookingSchema.parse(req.body);
+      const body = JSON.parse(req.body);
+      bookingSchema.parse(body);
       const data = {
         _type: "booking",
-        ...JSON.parse(req.body),
+        ...body,
       };
 
       client

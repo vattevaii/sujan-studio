@@ -2,7 +2,9 @@ import { z } from "zod";
 
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 const timePattern = /^\d{2}:\d{2}$/;
-
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
 const bookingSchema = z.object({
   needs: z.string().min(1).max(255), // Adjust the max length as needed
   purpose: z.string().min(1).max(255),
@@ -21,15 +23,8 @@ const bookingSchema = z.object({
   }),
   personal: z.object({
     fullName: z.string().min(1).max(255),
-    email: z.string().email(),
-    phone: z
-      .string()
-      .min(6, {
-        message: "Phone Number Must be filled correctly"
-      })
-      .max(15, {
-        message: "Phone Number Must be filled correctly"
-      }), // Adjust the min and max length for phone number
+    email: z.string().email().optional().or(z.literal("")),
+    phone: z.string().regex(phoneRegex, "Invalid Phone Number!"), // Adjust the min and max length for phone number
   }),
 });
 

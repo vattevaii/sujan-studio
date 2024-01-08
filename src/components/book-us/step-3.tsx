@@ -27,10 +27,22 @@ export default function Step3(props: IStep3Props) {
   const next: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     const query = router.query;
-    if (form.errors.address || form.errors.prefer) {
-      const errs=flattenObject({a:form.errors.address, b:form.errors.prefer});
-      // console.log(errs)
-      setError(Object.values(errs).join(", "));
+    if (
+      form.errors.address ||
+      form.errors.prefer ||
+      !form.touched.address ||
+      !form.touched.prefer
+    ) {
+      // const errs = flattenObject({
+      //   a: form.errors.address,
+      //   b: form.errors.prefer,
+      // });
+      // console.log(errs);
+      // const errors = Object.values(errs)
+      //   .filter((v) => v)
+      //   .join(", ");
+      // setError(errors.length ? errors : "Please fill in the form above");
+      setError("Please fill in the form above");
       return;
     }
     // // console.log(form.values);
@@ -46,7 +58,8 @@ export default function Step3(props: IStep3Props) {
     // console.log(form.values);
   };
   return (
-    <div>
+    <div onChange={() => setError("")}>
+      <h3 className="text-xl">Event Details</h3>
       <div className="grid grid-cols-2 gap-7">
         <div className="flex flex-col gap-2">
           <h3 className="text-lg">Your Address Details</h3>
