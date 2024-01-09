@@ -5,9 +5,6 @@ function elementInViewport(myElement: HTMLElement) {
     bounding.top >=
       ((window.innerHeight || document.documentElement.clientHeight) * 1) /
         10 &&
-    bounding.left >= 0 &&
-    bounding.right <=
-      (window.innerWidth || document.documentElement.clientWidth) &&
     bounding.bottom <=
       ((window.innerHeight || document.documentElement.clientHeight) * 14) / 15
   ) {
