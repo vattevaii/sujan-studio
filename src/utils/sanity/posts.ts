@@ -37,7 +37,7 @@ export const getAllPosts: () => Promise<Omit<Post, "body">[]> =
 export const getAllPostsByPage: (
   page: number
 ) => Promise<Omit<Post, "body">[]> = async function (page) {
-  const fetchFrom = page * 6 - 5;
+  const fetchFrom = page * 6 - 6;
   const fetchTo = page * 6;
   const postQ = `*[_type=="post"][${fetchFrom}...${fetchTo}]{
         title,"slug":slug.current,"mainImage":mainImage.asset->url,
