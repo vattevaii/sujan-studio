@@ -40,8 +40,8 @@ export default defineType({
       title: "Related Images",
       type: "array",
       of: [imageSchema],
-      validation: (Rule) =>
-        Rule.max(3).error("Only up to 3 related images are allowed."),
+      // validation: (Rule) =>
+      //   Rule.max(3).error("Only up to 3 related images are allowed."),
     }),
   ],
   preview:{

@@ -44,7 +44,7 @@ export const getStaticProps = (async (context) => {
           pageContent: pageContent,
           posts: [],
           page: 0,
-          lastPage,
+          lastPage: 1,
         },
       };
     }
@@ -71,6 +71,7 @@ export default function PostListPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const router = useRouter();
+  console.log(props);
   if (router.isFallback)
     return (
       <>
@@ -110,9 +111,9 @@ export default function PostListPage(
       <section className="blog-page">
         <div className="bg-light-grey px-5 py-10 blog-page">
           <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(250px+5vw),1fr))] xl:grid-cols-[repeat(auto-fill,minmax(calc(350px+5vw),1fr))] gap-10">
-            {props.posts.map((post) => (
+            {props.posts.map((post, i) => (
               <Link
-                key={post.slug}
+                key={i}
                 href={`/blog/${post.slug}`}
                 className="p-3 border rounded-sm border-divider flex flex-col gap-1"
               >
@@ -131,22 +132,77 @@ export default function PostListPage(
             ))}
           </div>
         </div>
-        <div className="flex justify-between px-5 py-10  bg-light-grey text-project-100 ">
-          {props.page === 1 ? (
-            <div></div>
-          ) : (
-            <Link href={`/blog?page=${props.page - 1}`} className="underline">
-              {"<"} Prev
-            </Link>
-          )}
-          {props.lastPage > props.page ? (
-            <Link href={`/blog?page=${props.page + 1}`} className="underline">
-              Next {">"}
-            </Link>
-          ) : (
-            <></>
-          )}
-        </div>
+        {props.lastPage === 1 ? (
+          <></>
+        ) : (
+          <div className="flex justify-center items-center px-5 py-10  bg-light-grey text-project-100 gap-3">
+            {props.page === 1 ? (
+              <div></div>
+            ) : (
+              <Link
+                href={`/blog?page=${props.page - 1}`}
+                replace={false}
+                className="text-project-100 border hover:bg-opacity-10 hover:bg-project-200 transition-all border-project-200 rounded-full p-3 h-10 w-10 flex justify-center items-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 25 50"
+                  className="h-5/6 w-full rotate-180"
+                  fill="none"
+                >
+                  <g stroke="currentColor" strokeWidth={4}>
+                    <path d="M0 2L25 25L0 48" />
+                  </g>
+                </svg>
+              </Link>
+            )}
+            <div className="flex items-center gap-1">
+              {Array.from({ length: props.lastPage }, (_, i) => i + 1).map(
+                (i) => {
+                  if (props.page === i)
+                    return (
+                      <div
+                        key={i}
+                        className="bg-project-100 text-light-grey rounded-full p-3 h-10 w-10 flex justify-center items-center"
+                      >
+                        {i}
+                      </div>
+                    );
+                  return (
+                    <Link
+                      key={i}
+                      replace={false}
+                      href={`/blog?page=${i}`}
+                      className="text-project-100 border hover:bg-opacity-10 hover:bg-project-200 transition-all border-project-200 rounded-full p-3 h-10 w-10 flex justify-center items-center"
+                    >
+                      {i}
+                    </Link>
+                  );
+                }
+              )}
+            </div>
+            {props.lastPage > props.page ? (
+              <Link
+                replace={false}
+                href={`/blog?page=${props.page + 1}`}
+                className="text-project-100 border hover:bg-opacity-10 hover:bg-project-200 transition-all border-project-200 rounded-full p-3 h-10 w-10 flex justify-center items-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 25 50"
+                  className="h-5/6 w-full"
+                  fill="none"
+                >
+                  <g stroke="currentColor" strokeWidth={4}>
+                    <path d="M0 2L25 25L0 48" />
+                  </g>
+                </svg>
+              </Link>
+            ) : (
+              <></>
+            )}
+          </div>
+        )}
       </section>
     </>
   );

@@ -1,8 +1,10 @@
-import { LocationItem } from "@/components/LocationCard";
 import PageBanner from "@/components/PageSections/PageBanner";
 import ReviewSlider from "@/components/PageSections/UserReviews/ReviewSlider";
+import useHorizontalScroll from "@/packages/use-horizontal-scroll";
 import { getAllLocations, getAllSubLocations } from "@/utils/sanity/location";
+import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllReviews } from "@/utils/sanity/reviews";
+import { shuffleArray } from "@/utils/shuffleArray";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -35,6 +37,7 @@ export const getStaticProps = (async (context) => {
   //   const repo = await res.json();
   // console.log(context);
   const locations = await getAllLocations();
+  const pageContent = await getPageContent("sublocation");
   const location = context.params?.location as string;
   const sublocation = context.params?.sublocation as string;
   if (!location || !sublocation)
@@ -45,6 +48,7 @@ export const getStaticProps = (async (context) => {
   const reviews = await getAllReviews();
   return {
     props: {
+      pageContent,
       mainLocation: location
         .split("-")
         .reduce((p, c) => p + " " + c[0].toUpperCase() + c.slice(1), ""),
@@ -57,12 +61,7 @@ export const getStaticProps = (async (context) => {
           .reduce((p, c) => p + " " + c[0].toUpperCase() + c.slice(1), ""),
         description: `Sujan Studio is your partner in creating visual narratives that captivate hearts and minds. We don’t just take photographs and videos; we curate moments that resonate.
         Whether it's a milestone event, a business venture, or a personal journey, our mission is to bring your story to life in the most authentic and enchanting way.`,
-        pictures: [
-          "/jpegs/BusinessItem.jpg",
-          "/jpegs/mainSection.jpg",
-          "/jpegs/FamilyItem.jpg",
-          "/jpegs/Weddings.jpg",
-        ],
+        pictures: shuffleArray(pageContent.textBlocks[0].relatedImages),
       },
       reviews,
       locations,
@@ -83,6 +82,7 @@ export const getStaticProps = (async (context) => {
 const LocationPage: React.FunctionComponent<
   InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
+  const { ref: horizontalScroll } = useHorizontalScroll<HTMLDivElement>();
   const router = useRouter();
   if (router.isFallback) {
     return (
@@ -101,7 +101,7 @@ const LocationPage: React.FunctionComponent<
       </>
     );
   }
-  const {  mainLocation, sublocation, sublocationData } = props;
+  const { mainLocation, sublocation, sublocationData } = props;
   return (
     <>
       <Head>
@@ -115,7 +115,15 @@ const LocationPage: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner>Find Your Next Photographer Near {sublocation}</PageBanner>
+      <PageBanner
+        image={
+          props.sublocationData!.pictures[
+            props.sublocationData!.pictures.length - 1
+          ]
+        }
+      >
+        Find Your Next Photographer Near {sublocation}
+      </PageBanner>
       <section
         id="locations"
         className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5"
@@ -127,7 +135,7 @@ const LocationPage: React.FunctionComponent<
         <div className="grid md:grid-cols-2 gap-5">
           <div>
             <Image
-              className="w-full rounded-md"
+              className="w-full rounded-md object-cover"
               width={500}
               height={500}
               src={props.sublocationData!.pictures[0]}
@@ -152,7 +160,7 @@ const LocationPage: React.FunctionComponent<
         </div>
         <div>
           <Image
-            className="w-full rounded-md my-5 max-h-52"
+            className="w-full rounded-md my-5 max-h-52 object-cover"
             width={500}
             height={500}
             src={props.sublocationData!.pictures[1]}
@@ -161,35 +169,56 @@ const LocationPage: React.FunctionComponent<
         </div>
       </section>
       <ReviewSlider reviews={props.reviews!} className="h-64 md:h-72 lg:h-96" />
-      <section className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20 pb-5">
-        <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
-          We Bring Dreams Into&nbsp;Reality
-        </h2>
-        <div className="grid md:grid-cols-2 gap-5">
-          <div className="flex flex-col items-end gap-5 text-project-200 text-md md:text-xl xl:text-5xl">
-            <p>
-              Sujan Studio is your partner in creating visual narratives that
-              captivate hearts and minds. We don’t just take photographs and
-              videos; we curate moments that resonate. Whether it&apos;s a
-              milestone event, a business venture, or a personal journey, our
-              mission is to bring your story to life in the most authentic and
-              enchanting way.
-            </p>
-          </div>
-          <div>
-            <Image
-              className="w-full rounded-md"
-              width={500}
-              height={500}
-              src={props.sublocationData!.pictures[0]}
-              alt=""
-            />
+      <section className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20">
+        <div className="pb-20">
+          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
+            We Bring Dreams Into&nbsp;Reality
+          </h2>
+          <div className="grid md:grid-cols-2 gap-5">
+            <div className="flex flex-col items-end gap-5 text-project-200 text-md md:text-xl xl:text-5xl">
+              <p>
+                Sujan Studio is your partner in creating visual narratives that
+                captivate hearts and minds. We don’t just take photographs and
+                videos; we curate moments that resonate. Whether it&apos;s a
+                milestone event, a business venture, or a personal journey, our
+                mission is to bring your story to life in the most authentic and
+                enchanting way.
+              </p>
+            </div>
+            <div>
+              <Image
+                className="w-full rounded-md object-cover"
+                width={500}
+                height={500}
+                src={props.sublocationData!.pictures[2]}
+                alt=""
+              />
+            </div>
           </div>
         </div>
-        <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
-          Moments Captured with Our Exceptional Photography Services
-        </h2>
-        <div className="flex flex-col sm:flex-row justify-between">
+        <div className="pb-20">
+          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold">
+            Moments Captured with Our Exceptional Photography Services
+          </h2>
+          <div
+            className="flex h-[50vh] gap-5 w-full overflow-scroll scrollbar-none"
+            ref={horizontalScroll}
+          >
+            {props.sublocationData?.pictures.slice(3).map((picture, i) => {
+              return (
+                <Image
+                key={i}
+                  width={500}
+                  height={500}
+                  src={picture}
+                  alt=""
+                  className="h-full aspect-[3/4] object-cover"
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-col sm:flex-row justify-between pb-5">
           <div>
             <h2 className="w-fit text-5xl lg:text-21xl font-semibold pb-3">
               Lets start something amazing together.

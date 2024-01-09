@@ -10,12 +10,12 @@ const nextConfig = {
     return [
       {
         source: "/blog",
-        destination: "/blog/page/1",
+        has: [{ type: "query", key: "page" }],
+        destination: "/blog/page/:page",
       },
       {
         source: "/blog",
-        has: [{ type: "query", key: "page" }],
-        destination: "/blog/page/:page",
+        destination: "/blog/page/1",
       },
     ];
   },
