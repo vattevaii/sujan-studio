@@ -13,9 +13,20 @@ function elementInViewport(myElement: HTMLElement) {
     return false;
   }
 }
+function greaterDelta(a: number, b: number) {
+  // Remove signs
+  const absA = Math.abs(a);
+  const absB = Math.abs(b);
+
+  // Compare absolute values
+  if (absA > absB) {
+    return a;
+  } else {
+    return b;
+  }
+}
+
 export default function useHorizontalScroll<T extends HTMLElement>() {
-  let lastKnownScrollPosition = 0;
-  let deltaY = 0;
   const horizontalScroll = useRef<T>(null);
   const scrollHorizontally = (delta: number) => {
     horizontalScroll.current?.scrollBy({
@@ -32,7 +43,7 @@ export default function useHorizontalScroll<T extends HTMLElement>() {
     ) {
       return;
     }
-    const delta = event.deltaY;
+    const delta = greaterDelta(event.deltaY, event.deltaX);
     scrollHorizontally(delta);
     if (
       horizontalScroll.current?.scrollLeft === 0 ||
