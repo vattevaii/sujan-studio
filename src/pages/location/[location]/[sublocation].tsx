@@ -170,8 +170,8 @@ const LocationPage: React.FunctionComponent<
       </section>
       <ReviewSlider reviews={props.reviews!} className="h-64 md:h-72 lg:h-96" />
       <section className="bg-light-grey text-project-100 px-10 xl:px-16 pt-20">
-        <div className="pb-20">
-          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-20">
+        <div>
+          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold pb-10">
             We Bring Dreams Into&nbsp;Reality
           </h2>
           <div className="grid md:grid-cols-2 gap-5">
@@ -196,18 +196,20 @@ const LocationPage: React.FunctionComponent<
             </div>
           </div>
         </div>
-        <div className="pb-20">
-          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold">
+      </section>
+      <section className="bg-light-grey  text-project-100 ">
+        <div>
+          <h2 className="mx-auto text-center w-fit text-21xl lg:text-41xl font-semibold px-10 xl:px-16 pt-20">
             Moments Captured with Our Exceptional Photography Services
           </h2>
           <div
-            className="flex h-[50vh] gap-5 w-full overflow-scroll scrollbar-none"
+            className={"flex h-[50vh] gap-5 w-full overflow-scroll scrollbar-none mt-10 "+(props.sublocationData!.pictures.length < 7?"justify-center":"")}
             ref={horizontalScroll}
           >
             {props.sublocationData?.pictures.slice(3).map((picture, i) => {
               return (
                 <Image
-                key={i}
+                  key={i}
                   width={500}
                   height={500}
                   src={picture}
@@ -218,7 +220,7 @@ const LocationPage: React.FunctionComponent<
             })}
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between pb-5">
+        <div className="flex flex-col sm:flex-row justify-between pb-5 px-10 xl:px-16 pt-20">
           <div>
             <h2 className="w-fit text-5xl lg:text-21xl font-semibold pb-3">
               Lets start something amazing together.
