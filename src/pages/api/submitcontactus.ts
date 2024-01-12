@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../../sanity/lib/client";
 import { ContactFormSchema } from "@/utils/schema/contactUsSchema";
+import sendMail from "@/utils/sendMail";
 type ResponseData = {
   message: string;
 } & { [x: string]: any };
@@ -38,7 +39,17 @@ export default async function handler(
         ...restBody,
         captchaData: JSON.stringify(captchaData),
       };
-
+      await sendMail({
+        email: "vattevaii@mail.com",
+        name: "Asdfhi",
+        message: "HELLO GUYS",
+      })
+        .then(() => {
+          console.log("Sent mail to vattevaii");
+        })
+        .catch((e) => {
+          console.log("Failed to send mail to vattevaii", e);
+        });
       client
         .create(data, {
           token: TOKEN,
