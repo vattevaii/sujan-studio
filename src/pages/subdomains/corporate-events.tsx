@@ -6,6 +6,7 @@ import SFlatNav from "@/components/subdomains/SFlatNav";
 import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
@@ -59,7 +60,11 @@ const CorporateEventsSubDomain: React.FunctionComponent<
         </div>
         <div className="h-full row-start-2 aspect-[6/2]">
           <Image
-            src={"/jpegs/CoorporateEvents.jpg"}
+            src={
+              props.pageContent.textBlocks[0].relatedImages[0] ??
+              "/jpegs/CoorporateEvents.jpg"
+            }
+            loader={sanityImageLoader}
             alt=""
             width="500"
             height="500"
@@ -128,7 +133,7 @@ export const getStaticProps = async function () {
   const blogs = await getAllPosts();
   return {
     props: { blogs, reviews, locations, featured: images, pageContent },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 

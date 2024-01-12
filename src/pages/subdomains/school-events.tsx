@@ -15,6 +15,7 @@ import ImageSliderWrap from "@/components/ImageSliderWrap";
 import { getPageContent } from "@/utils/sanity/pageContent";
 import { PortableText } from "@portabletext/react";
 import Marquee from "react-fast-marquee";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 
 interface ISchoolEventsSubDomainProps {}
 
@@ -59,6 +60,7 @@ const SchoolEventsSubDomain: React.FunctionComponent<
             <Image
               src={props.pageContent.textBlocks[0].relatedImages[0]}
               alt=""
+              loader={sanityImageLoader}
               width="500"
               height="500"
               className="h-full w-full object-cover"
@@ -140,7 +142,7 @@ export const getStaticProps = async function () {
   const pageContent = await getPageContent("subdomain/school-events");
   return {
     props: { reviews, locations, featured: images, pageContent },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 

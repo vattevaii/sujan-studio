@@ -216,7 +216,7 @@ export const getStaticProps = async () => {
       reviews,
       bannerData: banner,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 

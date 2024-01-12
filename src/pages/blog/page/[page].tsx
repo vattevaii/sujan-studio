@@ -63,7 +63,7 @@ export const getStaticProps = (async (context) => {
     };
   return {
     props: { pageContent, posts, locations, page, lastPage },
-    revalidate: 3600,
+    revalidate: 180,
   };
 }) satisfies GetStaticProps;
 

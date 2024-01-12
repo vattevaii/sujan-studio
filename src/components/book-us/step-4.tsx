@@ -3,7 +3,7 @@ import InputText from "../input/InputText";
 import { useFormikContext } from "formik";
 import InputButton from "../input/inputbutton";
 import flattenObject from "@/utils/flattenObject";
-
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 export interface IStep4Props {
   prevStep: () => void;
 }
@@ -17,6 +17,7 @@ export default function Step4(props: IStep4Props) {
       phone: string;
     };
   }>();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     // console.log(form.errors);
@@ -31,7 +32,19 @@ export default function Step4(props: IStep4Props) {
       setError(
         "Please revisit the whole form to see if you entered correct data."
       );
-    else form.handleSubmit();
+    else {
+      if (!executeRecaptcha) {
+        console.log("Execute recaptcha not available yet");
+        setError(
+          "Execute recaptcha not available yet likely meaning key not recaptcha key not set."
+        );
+        return;
+      }
+      executeRecaptcha("book-us-form-submit").then((gReCaptchaToken) => {
+        form.setFieldValue("gReCaptchaToken", gReCaptchaToken);
+        form.handleSubmit();
+      });
+    }
   };
   return (
     <div onChange={() => setError("")}>
@@ -85,6 +98,7 @@ export default function Step4(props: IStep4Props) {
           </div>
         </div>
       </div>
+
       <div className="flex justify-between pt-6">
         <button
           className="bg-inputBgF border-2 border-project-100 text-project-100 p-2 min-w-[150px]"

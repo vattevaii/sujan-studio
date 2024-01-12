@@ -61,9 +61,10 @@ export default function App({ Component, pageProps }: AppProps) {
           --actays-font: ${actay.style.fontFamily};
         }
       `}</style>
-      {/* <Script strategy='lazyOnload'
-      src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-    /> */}
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
 
       {/* <Script id="googleTagManager" strategy='lazyOnload'>
       {`
@@ -76,8 +77,8 @@ export default function App({ Component, pageProps }: AppProps) {
       `}
     </Script>
     {/* <!-- Google Tag Manager --> */}
-      {/* <Script id="gtagmanager" strategy='lazyOnload'>
-      {`
+      <Script id="gtagmanager" strategy="lazyOnload">
+        {`
         (function(w,d,s,l,i){
           w[l] = w[l] || [];
           w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
@@ -88,7 +89,7 @@ export default function App({ Component, pageProps }: AppProps) {
         })
         (window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GOOGLE_TAG_M}');
       `}
-    </Script> */}
+      </Script>
       {/* <!-- End Google Tag Manager --> */}
       <SessionProvider session={pageProps.session}>
         <IntersectionProvider>

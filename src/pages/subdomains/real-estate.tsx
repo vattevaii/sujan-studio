@@ -7,6 +7,7 @@ import SFlatNav from "@/components/subdomains/SFlatNav";
 import SLatestBlogs from "@/components/subdomains/SLatestBlogs";
 import STopBar from "@/components/subdomains/TopBar";
 import SText from "@/components/subdomains/text/STextTitle";
+import sanityImageLoader from "@/utils/sanity/imageLoader";
 import { getImages } from "@/utils/sanity/imageStore";
 import { getAllLocations } from "@/utils/sanity/location";
 import { getPageContent } from "@/utils/sanity/pageContent";
@@ -88,7 +89,11 @@ const RealEstateSubDomain: React.FunctionComponent<
           </div>
           <div className="h-full w-full col-start-1 row-start-1 max-h-48 lg:max-h-max">
             <Image
-              src={"/jpegs/RealEstate.jpg"}
+              src={
+                props.pageContent.textBlocks[0].relatedImages[0] ??
+                "/jpegs/RealEstate.jpg"
+              }
+              loader={sanityImageLoader}
               alt=""
               width="500"
               height="500"
@@ -99,9 +104,7 @@ const RealEstateSubDomain: React.FunctionComponent<
       </section>
       <section className="text-center bg-darkbg text-light-grey py-6 px-[10vw]">
         <SText.Title>{props.pageContent.pageTitle}</SText.Title>
-        <SText.Sub className="">
-          {props.pageContent.pageSubTitle}
-        </SText.Sub>
+        <SText.Sub className="">{props.pageContent.pageSubTitle}</SText.Sub>
         <hr className="border-light-grey opacity-40 my-10" />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(calc(200px+10vw),1fr))] gap-5 place-items-center">
           {props.featured.map((item, idx) => (
@@ -147,7 +150,7 @@ export const getStaticProps = async function () {
   const blogs = await getAllPosts();
   return {
     props: { blogs, reviews, locations, featured: images, pageContent },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 

@@ -20,6 +20,8 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import UploadFileToSanity from "@/components/input/inputFile";
 import InputTextArea from "@/components/input/InputTextArea";
 import Link from "next/link";
+import ContactUsForm from "@/components/contact-us/ContactUsForm";
+import Recaptcha from "@/components/Recaptcha";
 
 export type IAppProps = {} & InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -27,44 +29,8 @@ export default function ContactUsPage(props: IAppProps) {
   const siteSettings = props.locations.siteSettings[0];
   const [successBanner, setSuccessBanner] = React.useState(false);
   const router = useRouter();
-  const submitForm = debounce((d) => {
-    fetch("/api/submitcontactus", {
-      method: "POST",
-      body: JSON.stringify(d),
-    }).then((d) => {
-      if (d.status === 201) {
-        router.push("/contact-us?success=true");
-      }
-    });
-  }, 200);
-  const formik = useFormik<{
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    subject: string;
-    message: string;
-    terms: string;
-    files: string[];
-  }>({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      subject: "",
-      message: "",
-      terms: "",
-      files: [],
-    },
-    validationSchema: toFormikValidationSchema(ContactFormSchema),
-    onSubmit: (values) => {
-      submitForm(values);
-    },
-  });
   React.useEffect(() => {
     if (router.asPath.indexOf("success") !== -1) {
-      formik.resetForm();
       setSuccessBanner(true);
     }
   }, [router]);
@@ -155,166 +121,9 @@ export default function ContactUsPage(props: IAppProps) {
             </div>
           </div>
           <div className="">
-            <form
-              className="grid gap-7 text-xl lg:text-5xl"
-              onSubmit={(e) => {
-                e.preventDefault();
-                formik.setTouched({
-                  email: true,
-                  firstName: true,
-                  lastName: true,
-                  message: true,
-                  phoneNumber: true,
-                  subject: true,
-                });
-                formik.submitForm();
-              }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-7">
-                <div className="flex flex-col justify-between w-full">
-                  <label htmlFor="first-name" className="block">
-                    First Name
-                  </label>
-                  <p className="text-red-500 text-2xs -mt-2 h-3">
-                    {formik.touched.firstName ? formik.errors.firstName : ""}
-                  </p>
-                  <InputText
-                    className="w-full"
-                    id="first-name"
-                    placeholder="Your First Name here"
-                    {...formik.getFieldProps("firstName")}
-                  />
-                </div>
-                <div className="flex flex-col justify-between w-full">
-                  <label htmlFor="last-name" className="block">
-                    Last Name
-                  </label>
-                  <p className="text-red-500 text-2xs -mt-2 h-3">
-                    {formik.touched.lastName ? formik.errors.lastName : ""}
-                  </p>
-
-                  <InputText
-                    className="w-full"
-                    id="last-name"
-                    placeholder="your Last Name here"
-                    {...formik.getFieldProps("lastName")}
-                  />
-                </div>
-                <div className="flex flex-col justify-between w-full">
-                  <label htmlFor="e-mail" className="block">
-                    Email
-                  </label>
-                  <p className="text-red-500 text-2xs -mt-2 h-3">
-                    {formik.touched.email ? formik.errors.email : ""}
-                  </p>
-                  <InputText
-                    className="w-full"
-                    id="e-mail"
-                    placeholder="your email here"
-                    {...formik.getFieldProps("email")}
-                  />
-                </div>
-                <div className="flex flex-col justify-between w-full">
-                  <label htmlFor="phone" className="block">
-                    Phone Number
-                  </label>
-                  <p className="text-red-500 text-2xs -mt-2 h-3">
-                    {formik.touched.phoneNumber
-                      ? formik.errors.phoneNumber
-                      : ""}
-                  </p>
-                  <InputText
-                    className="w-full"
-                    id="phone"
-                    placeholder="your Phone Number here"
-                    {...formik.getFieldProps("phoneNumber")}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col justify-between w-full">
-                <p className="block">Select Subject</p>
-                <p className="text-red-500 text-2xs -mt-2 h-3">
-                  {formik.touched.subject ? formik.errors.subject : ""}
-                </p>
-                <InputRadioGroup
-                  name="hello"
-                  onChange={(v) => {
-                    formik.setFieldValue("subject", v);
-                  }}
-                  value={formik.values.subject}
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-2 justify-between"
-                >
-                  {[
-                    "Future Project",
-                    "Jobs",
-                    "Pricing & Package",
-                    "Employee",
-                    "I'm A Model/Artist",
-                    "Feedback",
-                    "Other",
-                  ].map((v) => {
-                    return (
-                      <label className="flex items-center gap-3" key={v}>
-                        <InputRadioItem value={v} />
-                        <span className="text-md lg:text-xl whitespace-nowrap">
-                          {v}
-                        </span>
-                      </label>
-                    );
-                  })}
-                  {/* <label className="flex items-center gap-3">
-                    <InputRadioItem value="dog" />
-                    <span className="text-md lg:text-xl">Dog</span>
-                  </label>
-                  <label className="flex items-center gap-3">
-                    <InputRadioItem value="cat" />
-                    <span className="text-md lg:text-xl">Cat</span>
-                  </label>
-                  <label className="flex items-center gap-3">
-                    <InputRadioItem value="porcupine" />
-                    <span className="text-md lg:text-xl">Porcupine</span>
-                  </label> */}
-                </InputRadioGroup>
-              </div>
-              <div className="flex flex-col justify-between w-full">
-                <label htmlFor="message" className="block">
-                  Your Message
-                </label>
-                <p className="text-red-500 text-2xs -mt-2 h-3">
-                  {formik.touched.message ? formik.errors.message : ""}
-                </p>
-                <InputTextArea
-                  rows={5}
-                  className="w-full"
-                  id="message"
-                  placeholder="Your Message here"
-                  {...formik.getFieldProps("message")}
-                />
-              </div>
-              <UploadFileToSanity
-                addFileRef={(ref: string[]) =>
-                  formik.setFieldValue("files", ref)
-                }
-              />
-              <InputRadioGroup
-                name="terms"
-                onChange={(v) => formik.setFieldValue("terms", v)}
-              >
-                <label className="flex items-center gap-3">
-                  <InputRadioItem value={"accept"} />
-                  <span className="text-md lg:text-xl whitespace-nowrap">
-                    I accept communication emails & privacy policy
-                  </span>
-                </label>
-              </InputRadioGroup>
-              <div className="flex justify-end">
-                <InputButton
-                  value="Send Message"
-                  className="px-8"
-                  disabled={!formik.isValid}
-                />
-              </div>
-            </form>
+            <Recaptcha.Wrapper>
+              <ContactUsForm />
+            </Recaptcha.Wrapper>
           </div>
         </div>
       </section>
@@ -357,6 +166,6 @@ export const getStaticProps = async () => {
       locations,
       pageContent,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };

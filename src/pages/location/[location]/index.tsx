@@ -49,7 +49,7 @@ export const getStaticProps = (async (context) => {
       sublocations: locationData[0].sublocations,
       locations,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 }) satisfies GetStaticProps<{
   locations: any;

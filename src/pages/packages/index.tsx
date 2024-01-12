@@ -89,7 +89,7 @@ export const getStaticProps = async () => {
       packages,
       locations,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 export default PackagePage;

@@ -44,7 +44,7 @@ export const getStaticProps = (async (context) => {
       locations,
       post,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 }) satisfies GetStaticProps<any>;
 

@@ -137,7 +137,7 @@ export const getStaticProps = async function () {
   const pageContent = await getPageContent("subdomain/family-portraits");
   return {
     props: { reviews, locations, featured: images, pageContent },
-    revalidate: 3600,
+    revalidate: 180,
   };
 } satisfies GetStaticProps<{
   reviews: ReviewItem[];

@@ -147,7 +147,7 @@ export const getStaticProps = async () => {
       portfolioImages,
       locations,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 

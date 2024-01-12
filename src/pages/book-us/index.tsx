@@ -6,12 +6,13 @@ import bookingSchema from "@/utils/schema/bookingSchema";
 import { PortableText } from "@portabletext/react";
 import { Form, Formik } from "formik";
 import { debounce } from "lodash";
-import { InferGetStaticPropsType, GetStaticProps } from "next";
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import Recaptcha from "@/components/Recaptcha";
 
 interface IBookUsProps {}
 
@@ -81,62 +82,63 @@ const BookUs: React.FunctionComponent<
           content="Discover Sujan Studio, your trusted source for professional photography services in Adelaide, South Australia, and beyond. We serve various locations, including South Australia, Victoria, New South Wales, and Queensland. Contact us today for captivating moments captured."
         />
       </Head>
-      <PageBanner
-        image={props.pageContent.image}
-        blurDataURL={props.pageContent.blurDataImage}
-      >
-        <PortableText value={props.pageContent.bannerText} />
-      </PageBanner>
-      <section
-        id="book-us-form"
-        className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
-      >
-        {success === true ? (
-          <div>Your form has been submitted successfully.</div>
-        ) : (
-          <>
-            <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold py-5 text-center">
-              {props.pageContent.pageTitle}
-            </h2>
-            <p className="text-center mx-auto w-fit text-project-200">
-              {props.pageContent.pageSubTitle}
-            </p>
-            <StepDots
-              totalSteps={[1, 2, 3, 4]}
-              changeStep={(n) => setStep(n)}
-              currentStep={step}
-            />
-
-            <Formik
-              enableReinitialize={true}
-              initialValues={initVal}
-              onSubmit={(d: any) => {
-                // console.log(d);
-                submitBooking(d);
-              }}
-              validationSchema={toFormikValidationSchema(bookingSchema)}
-            >
-              <Form>
-                {step === 1 ? (
-                  <Step1 nextStep={() => setStep((s) => s + 1)} />
-                ) : step === 2 ? (
-                  <Step2
-                    nextStep={() => setStep((s) => s + 1)}
-                    prevStep={() => setStep((s) => s - 1)}
-                  />
-                ) : step === 3 ? (
-                  <Step3
-                    nextStep={() => setStep((s) => s + 1)}
-                    prevStep={() => setStep((s) => s - 1)}
-                  />
-                ) : (
-                  <Step4 prevStep={() => setStep((s) => s - 1)} />
-                )}
-              </Form>
-            </Formik>
-          </>
-        )}
-      </section>
+      <Recaptcha.Wrapper>
+        <PageBanner
+          image={props.pageContent.image}
+          blurDataURL={props.pageContent.blurDataImage}
+        >
+          <PortableText value={props.pageContent.bannerText} />
+        </PageBanner>
+        <section
+          id="book-us-form"
+          className="bg-light-grey text-project-100 px-10 xl:px-16 py-5"
+        >
+          {success === true ? (
+            <div>Your form has been submitted successfully.</div>
+          ) : (
+            <>
+              <h2 className="mx-auto w-fit text-21xl lg:text-41xl font-semibold py-5 text-center">
+                {props.pageContent.pageTitle}
+              </h2>
+              <p className="text-center mx-auto w-fit text-project-200">
+                {props.pageContent.pageSubTitle}
+              </p>
+              <StepDots
+                totalSteps={[1, 2, 3, 4]}
+                changeStep={(n) => setStep(n)}
+                currentStep={step}
+              />
+              <Formik
+                enableReinitialize={true}
+                initialValues={initVal}
+                onSubmit={(d: any) => {
+                  // console.log(d);
+                  submitBooking(d);
+                }}
+                validationSchema={toFormikValidationSchema(bookingSchema)}
+              >
+                <Form>
+                  {step === 1 ? (
+                    <Step1 nextStep={() => setStep((s) => s + 1)} />
+                  ) : step === 2 ? (
+                    <Step2
+                      nextStep={() => setStep((s) => s + 1)}
+                      prevStep={() => setStep((s) => s - 1)}
+                    />
+                  ) : step === 3 ? (
+                    <Step3
+                      nextStep={() => setStep((s) => s + 1)}
+                      prevStep={() => setStep((s) => s - 1)}
+                    />
+                  ) : (
+                    <Step4 prevStep={() => setStep((s) => s - 1)} />
+                  )}
+                </Form>
+              </Formik>
+            </>
+          )}
+        </section>
+      </Recaptcha.Wrapper>
     </>
   );
 };
@@ -150,7 +152,7 @@ export const getStaticProps = async () => {
       locations,
       pageContent,
     },
-    revalidate: 3600,
+    revalidate: 180,
   };
 };
 export default BookUs;

@@ -6,6 +6,7 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 const bookingSchema = z.object({
+  gReCaptchaToken: z.string(),
   needs: z.string().min(1).max(255), // Adjust the max length as needed
   purpose: z.string().min(1).max(255),
   exactNeed: z.string().min(1).max(255),
@@ -24,7 +25,7 @@ const bookingSchema = z.object({
   personal: z.object({
     fullName: z.string().min(1).max(255),
     email: z.string().email().optional().or(z.literal("")),
-    phone: z.string().regex(phoneRegex, "Invalid Phone Number!"), // Adjust the min and max length for phone number
+    phone: z.string().regex(phoneRegex, { message: "Invalid Phone Number!" }), // Adjust the min and max length for phone number
   }),
 });
 

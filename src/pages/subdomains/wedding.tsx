@@ -13,7 +13,7 @@ import { getPageContent } from "@/utils/sanity/pageContent";
 import { getAllPosts } from "@/utils/sanity/posts";
 import { getAllReviews } from "@/utils/sanity/reviews";
 import { PortableText, toPlainText } from "@portabletext/react";
-import { InferGetStaticPropsType } from "next";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -124,8 +124,8 @@ export const getStaticProps = async function () {
   const blogs = await getAllPosts();
   return {
     props: { blogs, reviews, locations, featured: images, pageContent },
-    revalidate: 3600,
+    revalidate: 180,
   };
-};
+}satisfies GetStaticProps;
 
 export default WeddingSubDomain;
