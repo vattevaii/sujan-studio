@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-const timePattern = /^\d{2}:\d{2}$/;
+const timePattern = /^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$|^((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])$/;
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
@@ -16,8 +16,16 @@ const bookingSchema = z.object({
     city: z.string().min(1).max(255),
   }),
   prefer: z.object({
-    date: z.string().refine((value) => datePattern.test(value)),
-    startTime: z.string().refine((value) => timePattern.test(value)),
+    date: z
+      .string()
+      .refine((value) => datePattern.test(value), {
+        message: "Date must be of pattern YYYY-MM-DD and valid",
+      }),
+    startTime: z
+      .string()
+      .refine((value) => timePattern.test(value), {
+        message: "Time must be of pattern HH:MM AA and valid",
+      }),
     hours: z.number().min(1, {
       message: "Hours must be greater than 1",
     }),

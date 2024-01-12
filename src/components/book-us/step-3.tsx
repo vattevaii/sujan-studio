@@ -69,7 +69,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="first-name"
-                placeholder="your First Name here"
+                placeholder="Enter your street address here"
                 {...form.getFieldProps("address.street")}
               />
             </label>
@@ -80,7 +80,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="first-name"
-                placeholder="your First Name here"
+                placeholder="Enter your Zip Code here"
                 {...form.getFieldProps("address.zip")}
               />
             </label>
@@ -91,7 +91,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="first-name"
-                placeholder="your First Name here"
+                placeholder="Enter your City here"
                 {...form.getFieldProps("address.city")}
               />
             </label>
@@ -102,10 +102,13 @@ export default function Step3(props: IStep3Props) {
           <div className="flex flex-col justify-between w-full">
             <label className="block">
               <p>Choose Date</p>
+              <p className="text-red-500 text-2xs -mt-2 h-3">
+                {form.errors?.prefer?.date ?? ""}
+              </p>
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="your Email here"
+                placeholder="YYYY-MM-DD"
                 type="date"
                 {...form.getFieldProps("prefer.date")}
               />
@@ -114,10 +117,13 @@ export default function Step3(props: IStep3Props) {
           <div className="flex flex-col justify-between w-full">
             <label className="block">
               <p>Tentative Start Time</p>
+              <p className="text-red-500 text-2xs -mt-2 h-3">
+                {form.errors?.prefer?.startTime ?? ""}
+              </p>
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="your Email here"
+                placeholder="HH:MM AA"
                 type="time"
                 {...form.getFieldProps("prefer['startTime']")}
               />
@@ -129,7 +135,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="your Email here"
+                placeholder="Your Email here"
                 type="number"
                 {...form.getFieldProps("prefer.hours")}
               />
