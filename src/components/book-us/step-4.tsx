@@ -54,6 +54,9 @@ export default function Step4(props: IStep4Props) {
           <div className="flex flex-col justify-between w-full">
             <label className="block">
               <p>Full Name</p>
+              <p className="text-red-500 text-2xs -mt-2 h-3">
+                {form.errors?.personal?.fullName ?? ""}
+              </p>
               <InputText
                 className="w-full"
                 id="full-name"
@@ -65,6 +68,9 @@ export default function Step4(props: IStep4Props) {
           <div className="flex flex-col justify-between w-full">
             <label className="block">
               <p>Your Email</p>
+              <p className="text-red-500 text-2xs -mt-2 h-3">
+                {form.errors?.personal?.email ?? ""}
+              </p>
               <InputText
                 className="w-full"
                 id="email"
@@ -78,6 +84,9 @@ export default function Step4(props: IStep4Props) {
           <div className="flex flex-col justify-between w-full">
             <label className="block">
               <p>Phone Number</p>
+              <p className="text-red-500 text-2xs -mt-2 h-3">
+                {form.errors?.personal?.phone ?? ""}
+              </p>
               <InputText
                 className="w-full"
                 id="first-name"
