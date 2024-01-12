@@ -3,7 +3,7 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 export const ContactFormSchema = z.object({
-  gReCaptchaToken: z.string().optional(),
+  gReCaptchaToken: z.string().optional().or(z.literal("")),
   firstName: z.string().min(1, { message: "First name is required" }),
   lastName: z.string().min(1, { message: "Last name is required" }),
   email: z

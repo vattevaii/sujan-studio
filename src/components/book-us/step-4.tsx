@@ -36,7 +36,7 @@ export default function Step4(props: IStep4Props) {
       if (!executeRecaptcha) {
         console.log("Execute recaptcha not available yet");
         setError(
-          "Execute recaptcha not available yet likely meaning key not recaptcha key not set."
+          "Execute recaptcha not available yet likely meaning key not recaptcha key not set"
         );
         return;
       }

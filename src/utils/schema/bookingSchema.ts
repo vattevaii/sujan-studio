@@ -6,7 +6,7 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 const bookingSchema = z.object({
-  gReCaptchaToken: z.string(),
+  gReCaptchaToken: z.string().optional().or(z.literal("")),
   needs: z.string().min(1).max(255), // Adjust the max length as needed
   purpose: z.string().min(1).max(255),
   exactNeed: z.string().min(1).max(255),

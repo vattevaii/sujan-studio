@@ -212,15 +212,19 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
           <span className="text-md lg:text-xl whitespace-nowrap">
             I accept communication emails & privacy policy
           </span>
+          <p className="text-red-500 text-2xs -mt-2 h-3">
+            {formik.errors?.terms ?? ""}
+          </p>
         </label>
       </InputRadioGroup>
       <div className="flex justify-end">
         <InputButton
           value="Send Message"
           className="px-8"
-          //   onClick={() => {
-          //     console.log(formik.errors);
-          //   }}
+          // onClick={() => {
+          //   console.log(formik.errors);
+          //   console.log(formik.values);
+          // }}
           disabled={!formik.isValid}
         />
       </div>

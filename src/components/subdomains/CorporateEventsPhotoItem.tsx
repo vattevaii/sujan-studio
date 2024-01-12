@@ -29,7 +29,7 @@ const CorporateEventPhotoItem: React.FunctionComponent<
                     height="120"
                     rx="60"
                     fill="#B7B7B7"
-                    fill-opacity="0.21"
+                    fillOpacity="0.21"
                   />
                 </g>
                 <path

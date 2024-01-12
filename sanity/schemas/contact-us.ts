@@ -54,6 +54,11 @@ export default defineType({
       type: "array",
       of: [attachmentSchema],
     }),
+    defineField({
+      name: "captchaData",
+      title: "Captcha Data",
+      type: "string",
+    }),
   ],
   preview: {
     select: {
