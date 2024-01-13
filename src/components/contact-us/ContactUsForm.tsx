@@ -54,7 +54,7 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
     validationSchema: toFormikValidationSchema(ContactFormSchema),
     onSubmit: (values) => {
       if (!executeRecaptcha) return;
-      executeRecaptcha("contact-us-form").then((d) => {
+      executeRecaptcha("contactUs").then((d) => {
         values.gReCaptchaToken = d;
         submitForm(values);
       });
