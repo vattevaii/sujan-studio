@@ -60,7 +60,7 @@ export default function Step3(props: IStep3Props) {
   return (
     <div onChange={() => setError("")}>
       <h3 className="text-xl">Event Details</h3>
-      <div className="grid grid-cols-2 gap-7">
+      <div className="grid md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-7">
         <div className="flex flex-col gap-2">
           <h3 className="text-lg">Your Address Details</h3>
           <div className="flex flex-col justify-between w-full">
