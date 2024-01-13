@@ -18,7 +18,7 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
   const router = useRouter();
   const submitForm = debounce((d) => {
     if (!executeRecaptcha) return;
-    const data = executeRecaptcha("contact-us");
+    const data = executeRecaptcha("contactUs");
     console.log(data.then((d) => d));
     fetch("/api/submitcontactus", {
       method: "POST",

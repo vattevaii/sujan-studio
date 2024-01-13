@@ -40,7 +40,7 @@ export default function Step4(props: IStep4Props) {
         );
         return;
       }
-      executeRecaptcha("book-us-form-submit").then((gReCaptchaToken) => {
+      executeRecaptcha("bookUsForm").then((gReCaptchaToken) => {
         form.setFieldValue("gReCaptchaToken", gReCaptchaToken);
         form.handleSubmit();
       });

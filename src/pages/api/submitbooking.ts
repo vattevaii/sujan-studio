@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../../sanity/lib/client";
 import bookingSchema from "@/utils/schema/bookingSchema";
+import sendMail from "@/utils/sendMail";
 type ResponseData = {
   message: string;
 } & { [x: string]: any };
@@ -28,6 +29,30 @@ export default async function handler(
         ...body,
         captchaData: JSON.stringify(captchaData),
       };
+      await sendMail({
+        email: (data.personal.email ?? "") + "  " + data.personal.phone,
+        name: data.personal.fullName,
+        message: `Get Estimate Form: 
+        Name: ${data.personal.fullName}
+        Phone: ${data.personal.phone}
+        Email: ${data.personal.email}
+        Service Type: ${data.needs}
+        Service Category: ${data.purpose}
+        Service Needed: ${data.exactNeed}
+        Date when service is needed: ${data.prefer.date}
+        Time when service is needed: ${data.prefer.startTime}
+        Estimated Hours: ${data.prefer.hours}
+        
+        See all data in sanity studio 
+        `,
+        action: "booking"
+      })
+        .then(() => {
+          console.log("Sent mail to vattevaii");
+        })
+        .catch((e) => {
+          console.log("Failed to send mail to vattevaii", e);
+        });
       client
         .create(data, {
           token: TOKEN,
