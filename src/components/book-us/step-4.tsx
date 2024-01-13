@@ -60,7 +60,7 @@ export default function Step4(props: IStep4Props) {
               <InputText
                 className="w-full"
                 id="full-name"
-                placeholder="your Full Name here"
+                placeholder="Your Full Name here"
                 {...form.getFieldProps("personal.fullName")}
               />
             </label>
@@ -74,7 +74,7 @@ export default function Step4(props: IStep4Props) {
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="your Email here"
+                placeholder="Your Email here"
                 {...form.getFieldProps("personal.email")}
               />
             </label>
@@ -89,8 +89,8 @@ export default function Step4(props: IStep4Props) {
               </p>
               <InputText
                 className="w-full"
-                id="first-name"
-                placeholder="your First Name here"
+                id="phone"
+                placeholder="Your Phone Number here"
                 {...form.getFieldProps("personal.phone")}
               />
             </label>
