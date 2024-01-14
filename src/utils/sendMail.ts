@@ -13,16 +13,13 @@ export default async function sendMail({
   action: "booking" | "contact";
 }) {
   const transport = nodemailer.createTransport({
-    host: process.env.MAIL_HOST || "ventraip.email",
-    port: process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 465,
+    host: "ventraip.email",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.MY_EMAIL,
       pass: process.env.MY_PASSWORD,
     },
-  });
-  console.log({
-    user: process.env.MY_EMAIL,
-    pass: process.env.MY_PASSWORD,
   });
   const actionString = (() => {
     switch (action) {
@@ -34,6 +31,13 @@ export default async function sendMail({
         return "hello";
     }
   })();
+  console.log({
+    from: process.env.MY_EMAIL,
+    to: process.env.MY_EMAIL,
+    // cc: email, (uncomment this line if you want to send a copy to the sender)
+    subject: `${actionString} from ${name} (${email})`,
+    text: message,
+  });
   const mailOptions: Mail.Options = {
     from: process.env.MY_EMAIL,
     to: process.env.MY_EMAIL,
@@ -47,6 +51,7 @@ export default async function sendMail({
       if (!err) {
         resolve("Email sent");
       } else {
+        console.log("Mail not sent", err);
         reject(err.message);
       }
     });

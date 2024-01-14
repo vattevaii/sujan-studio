@@ -29,7 +29,7 @@ export default async function handler(
         ...body,
         captchaData: JSON.stringify(captchaData),
       };
-      await sendMail({
+      sendMail({
         email: (data.personal.email ?? "") + "  " + data.personal.phone,
         name: data.personal.fullName,
         message: `Get Estimate Form: 

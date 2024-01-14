@@ -16,10 +16,13 @@ interface IContactUsFormProps {}
 const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const router = useRouter();
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const submitForm = debounce((d) => {
     if (!executeRecaptcha) return;
     const data = executeRecaptcha("contactUs");
     console.log(data.then((d) => d));
+    setLoading(true);
     fetch("/api/submitcontactus", {
       method: "POST",
       body: JSON.stringify(d),
@@ -27,6 +30,10 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
       if (d.status === 201) {
         router.push("/contact-us?success=true");
       }
+    }).catch(e => {
+      setError("There was an error when submitting the form. Please try again later.")
+    }).finally(() => {
+      setLoading(false);
     });
   }, 200);
   const formik = useFormik<{
@@ -226,6 +233,7 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
           //   console.log(formik.values);
           // }}
           disabled={!formik.isValid}
+          loading={loading}
         />
       </div>
     </form>

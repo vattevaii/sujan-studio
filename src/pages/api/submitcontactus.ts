@@ -39,19 +39,18 @@ export default async function handler(
         ...restBody,
         captchaData: JSON.stringify(captchaData),
       };
-      await sendMail({
+      sendMail({
         email: (data.email ?? "") + "  " + data.phoneNumber,
         name: data.firstName + " " + data.lastName,
-        message: `Contact Form Submission: 
-        Name: ${data.firstName} ${data.lastName}
-        Message: ${data.message}
-        Subject: ${data.subject}
-        Phone: ${data.phoneNumber}
-        Email: ${data.email}
-        
-        See all data in sanity studio 
-        `,
-        action:"contact"
+        message: "Contact Form Submission:",
+        // `Name: ${data.firstName} ${data.lastName}
+        // Message: ${data.message}
+        // Subject: ${data.subject}
+        // Phone: ${data.phoneNumber}
+        // Email: ${data.email}
+        // See all data in sanity studio
+        // `
+        action: "contact",
       })
         .then(() => {
           console.log("Sent mail to vattevaii");
