@@ -46,9 +46,11 @@ const BookUs: React.FunctionComponent<
     fetch("/api/submitbooking", {
       method: "POST",
       body: JSON.stringify(d),
-    }).then((d) => {
-      if (d.status === 201) {
-        router.push("/book-us?success=true");
+    }).then((res) => {
+      if (res.status === 201) {
+        router.push(
+          `/estimate-request-subbmitted?exactNeed=${d.exactNeed}&need=${d.needs}`
+        );
       }
     });
   }, 100);

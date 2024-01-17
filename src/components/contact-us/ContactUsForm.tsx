@@ -26,15 +26,20 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
     fetch("/api/submitcontactus", {
       method: "POST",
       body: JSON.stringify(d),
-    }).then((d) => {
-      if (d.status === 201) {
-        router.push("/contact-us?success=true");
-      }
-    }).catch(e => {
-      setError("There was an error when submitting the form. Please try again later.")
-    }).finally(() => {
-      setLoading(false);
-    });
+    })
+      .then((d) => {
+        if (d.status === 201) {
+          router.push(`/contact-form-submitted`);
+        }
+      })
+      .catch((e) => {
+        setError(
+          "There was an error when submitting the form. Please try again later."
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, 200);
   const formik = useFormik<{
     gReCaptchaToken: string;

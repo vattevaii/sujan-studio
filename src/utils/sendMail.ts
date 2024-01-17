@@ -36,14 +36,14 @@ export default async function sendMail({
   })();
   console.log({
     from: process.env.MY_EMAIL,
-    to: process.env.MY_EMAIL,
+    to: process.env.MAIL_TO,
     // cc: email, (uncomment this line if you want to send a copy to the sender)
     subject: `${actionString} from ${name} (${email})`,
     text: message,
   });
   const mailOptions: Mail.Options = {
     from: process.env.MY_EMAIL,
-    to: process.env.MY_EMAIL,
+    to: process.env.MAIL_TO,
     // cc: email, (uncomment this line if you want to send a copy to the sender)
     subject: `${actionString} from ${name} (${email})`,
     text: message,

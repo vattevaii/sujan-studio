@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin-studio/
+Disallow: /contact-form-submitted/
+Disallow: /estimate-request-submitted/

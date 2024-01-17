@@ -42,14 +42,14 @@ export default async function handler(
       sendMail({
         email: (data.email ?? "") + "  " + data.phoneNumber,
         name: data.firstName + " " + data.lastName,
-        message: "Contact Form Submission:",
-        // `Name: ${data.firstName} ${data.lastName}
-        // Message: ${data.message}
-        // Subject: ${data.subject}
-        // Phone: ${data.phoneNumber}
-        // Email: ${data.email}
-        // See all data in sanity studio
-        // `
+        message: `Contact Form Submission:
+        Name: ${data.firstName} ${data.lastName}
+        Message: ${data.message}
+        Subject: ${data.subject}
+        Phone: ${data.phoneNumber}
+        Email: ${data.email}
+        See all data in sanity studio
+        `,
         action: "contact",
       })
         .then(() => {
@@ -66,6 +66,7 @@ export default async function handler(
           res
             .status(201)
             .json({ message: "Contact Us Form submitted!", _id: d._id });
+          // res.redirect("/contact-form-submitted");
         })
         .catch((err) => {
           res.status(500).json({ message: err.message });
