@@ -20,6 +20,9 @@ export default async function sendMail({
       user: process.env.MY_EMAIL,
       pass: process.env.MY_PASSWORD,
     },
+    tls: {
+      rejectUnauthorized: true,
+    },
   });
   const actionString = (() => {
     switch (action) {
