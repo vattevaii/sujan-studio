@@ -26,7 +26,8 @@ const EstimateFormSubmitted: React.FunctionComponent<
   console.log(router.query);
   const exactNeed = (router.query.exactNeed ?? "") as string;
   const need = (router.query.need ?? "") as string;
-  const formatText = (text: string) => text[0].toUpperCase() + text.slice(1);
+  const formatText = (text: string | undefined) =>
+    text ? text[0].toUpperCase() + text.slice(1) : "";
   return (
     <>
       <Head>

@@ -23,8 +23,13 @@ export default async function handler(
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
-      );
-      console.log("CaptchaData : ", JSON.stringify(captchaData));
+      ).then(d => {
+        // console.log(d);
+        return d.json()
+      });
+      // console.log("CaptchaData : ", JSON.stringify(captchaData));
+      // res.status(200).send({ message: "Hello", captchaData });
+      // return;
       const { files, ...restBody } = body;
       const data = {
         _type: "contactus",
@@ -39,38 +44,38 @@ export default async function handler(
         ...restBody,
         captchaData: JSON.stringify(captchaData),
       };
-      sendMail({
-        email: (data.email ?? "") + "  " + data.phoneNumber,
-        name: data.firstName + " " + data.lastName,
-        message: `Contact Form Submission:
-        Name: ${data.firstName} ${data.lastName}
-        Message: ${data.message}
-        Subject: ${data.subject}
-        Phone: ${data.phoneNumber}
-        Email: ${data.email}
-        See all data in sanity studio
-        `,
-        action: "contact",
-      })
-        .then(() => {
-          console.log("Sent mail to vattevaii");
-        })
-        .catch((e) => {
-          console.log("Failed to send mail to vattevaii", e);
-        });
       client
-        .create(data, {
-          token: TOKEN,
+      .create(data, {
+        token: TOKEN,
         })
         .then((d) => {
           res
-            .status(201)
-            .json({ message: "Contact Us Form submitted!", _id: d._id });
+          .status(201)
+          .json({ message: "Contact Us Form submitted!", _id: d._id });
           // res.redirect("/contact-form-submitted");
         })
         .catch((err) => {
           res.status(500).json({ message: err.message });
         });
+        sendMail({
+          email: (data.email ?? "") + "  " + data.phoneNumber,
+          name: data.firstName + " " + data.lastName,
+          message: `Contact Form Submission:
+          Name: ${data.firstName} ${data.lastName}
+          Message: ${data.message}
+          Subject: ${data.subject}
+          Phone: ${data.phoneNumber}
+          Email: ${data.email}
+          See all data in sanity studio
+          `,
+          action: "contact",
+        })
+          .then(() => {
+            console.log("Sent mail to vattevaii");
+          })
+          .catch((e) => {
+            console.log("Failed to send mail to vattevaii", e);
+          });
       //   .then(// console.log)
       //   .catch(console.error)
     } catch (err) {
