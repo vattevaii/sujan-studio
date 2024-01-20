@@ -23,6 +23,7 @@ const EstimateFormSubmitted: React.FunctionComponent<
   IEstimateFormSubmittedProps
 > = (props) => {
   const router = useRouter();
+  if(!router.query) return <></>
   console.log(router.query);
   const exactNeed = (router.query.exactNeed ?? "") as string;
   const need = (router.query.need ?? "") as string;
