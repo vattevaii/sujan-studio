@@ -15,6 +15,7 @@ import imageStore from "./schemas/imagestore";
 import textBlock from "./schemas/textBlock";
 import pageContent from "./schemas/pageContent";
 import siteSettings from "./schemas/site-settings";
+import { mailModel } from "./schemas/mailModel";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -33,5 +34,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageContent,
     textBlock,
     imageStore,
+    mailModel
   ],
 };

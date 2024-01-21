@@ -12,7 +12,7 @@ const bookingSchema = z.object({
   exactNeed: z.string().min(1).max(255),
   address: z.object({
     street: z.string().min(1).max(255),
-    zip: z.string().min(3).max(10), // Adjust the min and max length for ZIP code
+    zip: z.string().min(3).max(255), // Adjust the min and max length for ZIP code
     city: z.string().min(1).max(255),
   }),
   prefer: z.object({

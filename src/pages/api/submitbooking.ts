@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../../sanity/lib/client";
 import bookingSchema from "@/utils/schema/bookingSchema";
-import sendMail from "@/utils/sendMail";
+import sendMail, { MailModel } from "@/utils/sendMail";
+import { simpleTemplate } from "@/utils/simpleTemplate";
 type ResponseData = {
   message: string;
 } & { [x: string]: any };
@@ -41,29 +42,45 @@ export default async function handler(
         .catch((err) => {
           res.status(500).json({ message: err.message });
         });
-      sendMail({
-        email: (data.personal.email ?? "") + "  " + data.personal.phone,
-        name: data.personal.fullName,
-        message: `Get Estimate Form: 
-        Name: ${data.personal.fullName}
-        Phone: ${data.personal.phone}
-        Email: ${data.personal.email}
-        Service Type: ${data.needs}
-        Service Category: ${data.purpose}
-        Service Needed: ${data.exactNeed}
-        Date when service is needed: ${data.prefer.date}
-        Time when service is needed: ${data.prefer.startTime}
-        Estimated Hours: ${data.prefer.hours}
-        
-        See all data in sanity studio 
-        `,
-        action: "booking",
-      })
-        .then(() => {
-          console.log("Sent mail to vattevaii");
-        })
-        .catch((e) => {
-          console.log("Failed to send mail to vattevaii", e);
+      client
+        .fetch(
+          `
+          *[_type=="mailModel" && for=="book-us"]
+          `
+        )
+        .then((d: MailModel[]) => {
+          const data = {
+            fullName: `${body.personal.fullName}`,
+            phone: body.personal.phone,
+            email: body.personal.email ?? "",
+            need: body.needs,
+            purpose: body.purpose,
+            exactNeed: body.exactNeed,
+            date: body.prefer.date,
+            time: body.prefer.startTime,
+            streetAddress: body.address.street,
+            postalCode: body.address.zip,
+            city: body.address.city,
+            hours: body.prefer.hours.toString(),
+            checked: "Checked"
+          };
+          d.forEach((item) => {
+            let mail;
+            if (item.to === "admin") mail = process.env.MAIL_TO;
+            else if (!!data.email && data.email !== "") mail = data.email;
+            if (!!mail)
+              sendMail({
+                email: mail,
+                subject: simpleTemplate(item.subject, data),
+                message: simpleTemplate(item.html, data),
+              })
+                .then(() => {
+                  console.log("Sent mail to ", mail!);
+                })
+                .catch((e) => {
+                  console.log("Failed to send mail to ", mail!, e);
+                });
+          });
         });
       //   .then(// console.log)
       //   .catch(console.error)

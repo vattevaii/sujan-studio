@@ -33,6 +33,7 @@ export default function Step3(props: IStep3Props) {
       !form.touched.address ||
       !form.touched.prefer
     ) {
+      console.log(form.errors)
       // const errs = flattenObject({
       //   a: form.errors.address,
       //   b: form.errors.prefer,
@@ -123,7 +124,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="HH:MM AA"
+                placeholder="HH:MM"
                 type="time"
                 {...form.getFieldProps("prefer['startTime']")}
               />

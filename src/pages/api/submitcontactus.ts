@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../../sanity/lib/client";
 import { ContactFormSchema } from "@/utils/schema/contactUsSchema";
-import sendMail from "@/utils/sendMail";
+import sendMail, { MailModel } from "@/utils/sendMail";
+import { simpleTemplate } from "@/utils/simpleTemplate";
 type ResponseData = {
   message: string;
 } & { [x: string]: any };
@@ -23,11 +24,10 @@ export default async function handler(
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
-      ).then(d => {
-        
-        return d.json()
+      ).then((d) => {
+        return d.json();
       });
-      
+
       // res.status(200).send({ message: "Hello", captchaData });
       // return;
       const { files, ...restBody } = body;
@@ -45,37 +45,66 @@ export default async function handler(
         captchaData: JSON.stringify(captchaData),
       };
       client
-      .create(data, {
-        token: TOKEN,
+        .create(data, {
+          token: TOKEN,
         })
         .then((d) => {
           res
-          .status(201)
-          .json({ message: "Contact Us Form submitted!", _id: d._id });
+            .status(201)
+            .json({ message: "Contact Us Form submitted!", _id: d._id });
           // res.redirect("/contact-form-submitted");
         })
         .catch((err) => {
           res.status(500).json({ message: err.message });
         });
-        sendMail({
-          email: (data.email ?? "") + "  " + data.phoneNumber,
-          name: data.firstName + " " + data.lastName,
-          message: `Contact Form Submission:
-          Name: ${data.firstName} ${data.lastName}
-          Message: ${data.message}
-          Subject: ${data.subject}
-          Phone: ${data.phoneNumber}
-          Email: ${data.email}
-          See all data in sanity studio
-          `,
-          action: "contact",
-        })
-          .then(() => {
-            console.log("Sent mail to vattevaii");
-          })
-          .catch((e) => {
-            console.log("Failed to send mail to vattevaii", e);
+      client
+        .fetch(
+          `
+          *[_type=="mailModel" && for=="contact-us"]
+          `
+        )
+        .then((d: MailModel[]) => {
+          const data = {
+            firstName: `${body.firstName}`,
+            lastName: `${body.lastName}`,
+            fullName: `${body.firstName} ${body.lastName}`,
+            phone: body.phoneNumber,
+            email: body.email ?? "",
+            subject: body.subject,
+            message: body.message,
+          };
+          d.forEach((item) => {
+            let mail;
+            if (item.to === "admin") mail = process.env.MAIL_TO;
+            else if (!!body.email && body.email !== "") mail = body.email;
+            if (!!mail)
+              sendMail({
+                email: mail,
+                subject: simpleTemplate(item.subject, data),
+                message: simpleTemplate(item.html, data),
+              })
+                .then(() => {
+                  console.log("Sent mail to ", mail!);
+                })
+                .catch((e) => {
+                  console.log("Failed to send mail to ", mail!, e);
+                });
           });
+        });
+      // sendMail({
+      //   email: (data.email ?? "") + "  " + data.phoneNumber,
+      //   name: data.firstName + " " + data.lastName,
+      //   message: `Contact Form Submission:
+      //     Name: ${data.firstName} ${data.lastName}
+      //     Message: ${data.message}
+      //     Subject: ${data.subject}
+      //     Phone: ${data.phoneNumber}
+      //     Email: ${data.email}
+      //     See all data in sanity studio
+      //     `,
+      //   action: "contact",
+      // })
+
       //   .then(// console.log)
       //   .catch(console.error)
     } catch (err) {
