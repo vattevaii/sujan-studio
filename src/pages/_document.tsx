@@ -8,7 +8,7 @@ export default function Document() {
         <Script id="change-meta-viewport" strategy="beforeInteractive">
           {`
             window.onload = function(){
-              if(screen.width > 430){
+              if(screen.width > 486){
                 var mvp = document.getElementById('my-viewport');
                 mvp.setAttribute('content', 'width=device-width, initial-scale=1.0');
               }

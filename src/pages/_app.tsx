@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="viewport" id="my-viewport" content="width=430" />
+        <meta name="viewport" id="my-viewport" content="width=486" />
         {/* <meta name="viewport" id="my-viewport" content="width=device-width, initial-scale=1.0" /> */}
       </Head>
       <style jsx global>{`

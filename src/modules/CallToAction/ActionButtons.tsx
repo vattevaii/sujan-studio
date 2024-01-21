@@ -19,7 +19,7 @@ export default function ActionButtons({mobileNumber}: Props) {
       <TooltipWrapper>
         <TooltipTrigger>
           <Link
-                href={`tel:${mobileNumber.replace(/\D/g, "")}`} className="rounded-full p-4 bg-light-grey shadow-around">
+                href={`tel:${mobileNumber.replace(/\D/g, "")}`} className="rounded-full p-4 bg-light-grey shadow-around block">
             <Image
               width="35"
               height="35"
