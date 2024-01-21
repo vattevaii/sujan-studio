@@ -18,11 +18,10 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
   const router = useRouter();
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const submitForm = debounce((d) => {
+  const submitForm = debounce(async (d) => {
     if (!executeRecaptcha) return;
     router.prefetch(`/contact-form-submitted`);
-    const data = executeRecaptcha("contactUs");
-    console.log(data.then((d) => d));
+    
     setLoading(true);
     fetch("/api/submitcontactus", {
       method: "POST",
@@ -235,8 +234,8 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
           value="Send Message"
           className="px-8"
           // onClick={() => {
-          //   console.log(formik.errors);
-          //   console.log(formik.values);
+          
+          
           // }}
           disabled={!formik.isValid}
           loading={loading}

@@ -35,7 +35,7 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (context) => {
   //   const res = await fetch("https://api.github.com/repos/vercel/next.js");
   //   const repo = await res.json();
-  // console.log(context);
+  
   const locations = await getAllLocations();
   const pageContent = await getPageContent("sublocation");
   const location = context.params?.location as string;

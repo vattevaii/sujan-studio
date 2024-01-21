@@ -24,7 +24,7 @@ interface IWeddingSubDomainProps {}
 const WeddingSubDomain: React.FunctionComponent<
   IWeddingSubDomainProps & InferGetStaticPropsType<typeof getStaticProps>
 > = (props) => {
-  // console.log(props);
+  
   return (
     <>
       <Head>
@@ -119,8 +119,8 @@ export const getStaticProps = async function () {
   const locations = await getAllLocations();
   const images = await getImages("wedding");
   const pageContent = await getPageContent("subdomain/wedding");
-  // console.log(pageContent);
-  //   console.log(images);
+  
+  
   const blogs = await getAllPosts();
   return {
     props: { blogs, reviews, locations, featured: images, pageContent },

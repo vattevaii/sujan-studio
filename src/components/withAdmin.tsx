@@ -11,7 +11,7 @@ const withAdmin = (WrappedComponent: NextComponentType) => {
       const { status, data } = session;
       const isAuthenticated = status === "authenticated";
       const isLoading = status === "loading";
-      // console.log(data);
+      
       if (!isLoading && !isAuthenticated) {
         Router.push({
           pathname: "/",

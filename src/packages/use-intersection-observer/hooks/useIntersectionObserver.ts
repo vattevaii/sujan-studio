@@ -17,7 +17,7 @@ const useIntersectionObserver = <T extends Element>({
   const { addIntersctionItem, removeIntersctionItem } =
     useIntersectionContext();
   useEffect(() => {
-    // // console.log("Intersection Observer Used in Component. Element:", elementRef.current);
+    // 
     // threshold between 0 and 1
     const th = threshold > 1 ? 1 : threshold < 0 ? 0 : threshold;
     if (elementRef.current)

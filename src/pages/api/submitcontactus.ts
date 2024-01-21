@@ -24,10 +24,10 @@ export default async function handler(
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
       ).then(d => {
-        // console.log(d);
+        
         return d.json()
       });
-      // console.log("CaptchaData : ", JSON.stringify(captchaData));
+      
       // res.status(200).send({ message: "Hello", captchaData });
       // return;
       const { files, ...restBody } = body;

@@ -25,11 +25,11 @@ export default function Step4(props: IStep4Props) {
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     router.prefetch("/estimate-request-submitted");
     e.preventDefault();
-    // console.log(form.errors);
-    // console.log(form.values);
+    
+    
     if (form.errors.personal) {
       // const errs = flattenObject({ a: form.errors.personal });
-      // console.log(errs);
+      
       // setError(Object.values(errs).join(", "));
       setError("Please fill in your correct Contact Information");
       return;

@@ -64,7 +64,7 @@ export default function Step2(props: IStep2Props) {
     setNeed((query.needs as string) ?? "");
     setPurpose((query.purpose as string) ?? "");
     setFetching(true);
-    console.log("start fetch")
+    // console.log("start fetch")
     const fetchD = client
       .fetch(
         `*[_type == 'serviceItem' && '${query.needs}' in services && '${query.purpose}' in serviceScope]{
@@ -73,7 +73,7 @@ export default function Step2(props: IStep2Props) {
         }`
       )
       .then((v: { serviceName: string; icon: string }[]) => {
-        // console.log(v);
+        
         if (
           typeof query["exactNeed"] === "string" &&
           v.findIndex((d) => d.serviceName === query["exactNeed"]) === -1

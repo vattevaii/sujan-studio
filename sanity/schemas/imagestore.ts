@@ -231,7 +231,7 @@ const imageStore = defineType({
       group:"images",
       of: [{ type: "image" }],
       hidden: (context) => {
-        // console.log(context);
+        
         return false;
       }
     }),

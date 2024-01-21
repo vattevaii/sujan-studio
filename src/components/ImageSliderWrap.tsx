@@ -17,7 +17,7 @@ const ImageSliderWrap: React.FunctionComponent<
   return (
     <div
       onClick={() => {
-        console.log("Opening");
+        
         setOpenModal(true);
       }}
     >
@@ -26,7 +26,7 @@ const ImageSliderWrap: React.FunctionComponent<
           options={imageSliderOptions}
           onClose={(e) => {
             e.stopPropagation();
-            console.log("Closing");
+            
             setOpenModal(false);
           }}
         />

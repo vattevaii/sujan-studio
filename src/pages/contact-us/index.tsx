@@ -34,7 +34,7 @@ export default function ContactUsPage(props: IAppProps) {
       setSuccessBanner(true);
     }
   }, [router]);
-  console.log(siteSettings);
+  // console.log(siteSettings);
   return (
     <>
       <Head>

@@ -33,7 +33,7 @@ const NewWebsite = ({
     imgPos: [number, number, number, number]
   ) => {
     const allImgs = portfolioImages.find((img) => img.title === title)!.images;
-    // // console.log(allImgs, portfolioImages, title);
+    // 
     setImgSliderOptions({
       images: allImgs,
       currentCategory: title,
@@ -132,7 +132,7 @@ export const getStaticProps = async () => {
         ...relatedImages[item.title],
         ...item.images,
       ];
-    else console.log(item);
+    // else console.log(item);
   });
   portfolioImages.forEach((item) => {
     item.images = [...item.images, ...relatedImages[item.title]];

@@ -32,12 +32,12 @@ export const parseForm = async (
       maxFiles: 10,
       maxFileSize: 1024 * 1024 * 10, // 10mb
     //   filename: (_name, _ext, part) => {
-    //     console.log("FilePart", part);
+    
     //     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     //     const filename = `${part.name || "unknown"}-${uniqueSuffix}.${
     //       mime.getExtension(part.mimetype || "") || "unknown"
     //     }`;
-    //     console.log("FileNaME:,",filename);
+    
     //     return filename;
     //   },
       //   filter: (part) => {
@@ -50,7 +50,7 @@ export const parseForm = async (
     form.parse(req, function (err, fields, files) {
       if (err) reject(err);
       const file = Object.values(files)[0]?.[0];
-    //   console.log(file);
+    
       if(!file) reject("No File to parse");
       else resolve({ fields, files: file });
     });

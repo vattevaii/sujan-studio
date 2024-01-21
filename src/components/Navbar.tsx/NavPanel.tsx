@@ -44,8 +44,8 @@ export default function NavPanel({
   activeRoute: string;
   settings: siteSettings;
 }) {
-  // console.log(settings);
-  // console.log("Route: ", activeRoute);
+  
+  
   return (
     <aside
       className={

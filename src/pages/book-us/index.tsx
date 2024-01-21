@@ -75,7 +75,7 @@ const BookUs: React.FunctionComponent<
       }
       if (successQ === "false" || !successQ) setSuccess(false);
     } catch (e) {}
-    // console.log(initVal, query);
+    
     setInitVal({ ...initVal, ...query });
   }, [router]);
   React.useEffect(() => {
@@ -124,7 +124,7 @@ const BookUs: React.FunctionComponent<
                 enableReinitialize={true}
                 initialValues={initVal}
                 onSubmit={(d: any) => {
-                  // console.log(d);
+                  
                   submitBooking(d);
                 }}
                 validationSchema={toFormikValidationSchema(bookingSchema)}

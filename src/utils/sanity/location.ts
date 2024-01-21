@@ -34,7 +34,7 @@ export const getAllLocations: () => Promise<{
 };
 export const getAllSubLocations = async function (locationslug?: string) {
   const mainQuery = locationslug ? `&& slug.current=="${locationslug}"` : "";
-  // console.log(mainQuery);
+  
   const data: (LocationItem & {
     sublocations: { sublocationName: string; slug: string }[];
   })[] = await client.fetch(`*[_type=="locationItem"${mainQuery}]{

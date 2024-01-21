@@ -22,9 +22,9 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (context) => {
   //   const res = await fetch("https://api.github.com/repos/vercel/next.js");
   //   const repo = await res.json();
-  // console.log("Location Page",context);
+  
   const location = context.params?.location as string;
-  // console.log(location);
+  
   if (!location)
     return {
       notFound: true,
@@ -34,12 +34,12 @@ export const getStaticProps = (async (context) => {
     return {
       notFound: true,
     };
-  // console.log(locationData);
+  
 
   const locations = await getAllLocations();
 
   // console.log(locationData)
-  // console.log(locationData);
+  
   return {
     props: {
       mainLocation: {

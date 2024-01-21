@@ -37,7 +37,7 @@ export default function Step3(props: IStep3Props) {
       //   a: form.errors.address,
       //   b: form.errors.prefer,
       // });
-      // console.log(errs);
+      
       // const errors = Object.values(errs)
       //   .filter((v) => v)
       //   .join(", ");
@@ -45,7 +45,7 @@ export default function Step3(props: IStep3Props) {
       setError("Please fill in the form above");
       return;
     }
-    // // console.log(form.values);
+    // 
     router.push(
       {
         query: { ...query, step: 4 },
@@ -55,7 +55,7 @@ export default function Step3(props: IStep3Props) {
         shallow: true,
       }
     );
-    // console.log(form.values);
+    
   };
   return (
     <div onChange={() => setError("")}>

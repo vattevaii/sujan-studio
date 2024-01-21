@@ -71,7 +71,6 @@ export default function PostListPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const router = useRouter();
-  console.log(props);
   if (router.isFallback)
     return (
       <>

@@ -50,7 +50,7 @@ const handler = async (
           filename: files.originalFilename!,
         })
         .then((response) => {
-          // console.log(response);
+          
           return response;
         });
       res.status(200).json({

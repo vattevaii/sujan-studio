@@ -107,7 +107,7 @@ export default defineType({
     //     },
     //   ],
     //   hidden: (context) => {
-    //     console.log("Xontext", context);
+    
     //     if (["homepage"].includes(context.parent["pageRoute"])) return false;
     //     return true;
     //   },

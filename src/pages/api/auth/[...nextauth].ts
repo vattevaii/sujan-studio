@@ -7,11 +7,11 @@ export const authOptions: AuthOptions = {
   secret: NEXTAUTH_SECRET,
   callbacks: {
     session: async ({ session, token }) => {
-    //   // console.log(session, token);
+    //   
       return { role: token.role, ...session };
     },
     jwt: async ({ account, user, token }) => {
-    //   // console.log("USER:", user);
+    //   
       if (user && "role" in user) token.role = user.role;
       return token;
     },
@@ -82,8 +82,8 @@ export const authOptions: AuthOptions = {
         console.log(
           "Credentials:" + credentials?.username + " " + credentials?.password
         );
-        // console.log("Username Match:", credentials?.username === "sarthak");
-        // console.log("Password Match:", credentials?.password === "sarthak");
+        
+        
         // If no error and we have user data, return it
         if (
           credentials?.username === "sarthak" &&
