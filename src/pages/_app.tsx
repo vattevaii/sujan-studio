@@ -32,6 +32,7 @@ export type siteSettings = {
   email: string;
   logo: string;
   phoneNumber: string;
+  mobileNumber: string;
   companyName: string;
   location: string;
   locationLink: string;

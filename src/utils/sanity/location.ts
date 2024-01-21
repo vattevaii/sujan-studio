@@ -11,6 +11,7 @@ export const getAllLocations: () => Promise<{
     }`;
   const siteSettingsQ = `*[_type=="siteSettings"]{
       phoneNumber,
+      mobileNumber,
       "logo":logoLight.asset -> url,
       location,
       locationLink,

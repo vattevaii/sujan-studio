@@ -135,7 +135,7 @@ export default function Step3(props: IStep3Props) {
               <InputText
                 className="w-full"
                 id="email"
-                placeholder="Your Email here"
+                placeholder="Hours of shoot"
                 type="number"
                 {...form.getFieldProps("prefer.hours")}
               />

@@ -20,6 +20,7 @@ const ContactUsForm: React.FunctionComponent<IContactUsFormProps> = (props) => {
   const [loading, setLoading] = React.useState(false);
   const submitForm = debounce((d) => {
     if (!executeRecaptcha) return;
+    router.prefetch(`/contact-form-submitted`);
     const data = executeRecaptcha("contactUs");
     console.log(data.then((d) => d));
     setLoading(true);

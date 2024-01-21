@@ -29,7 +29,7 @@ export default function CustomerLayout({
     <>
       <div className="flex relative w-full text-left text-light-grey font-source-sans-3">
         <Navbar settings={siteSetting} route={route} />
-        <ActionButtons />
+        <ActionButtons mobileNumber={siteSetting.mobileNumber} />
         <div className="flex-1 pt-24 lg:pt-0">
           <main className="content relative flex-1">{children}</main>
           <footer id="footer" className="bg-darkbg">

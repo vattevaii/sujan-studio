@@ -22,6 +22,8 @@ const BookUs: React.FunctionComponent<
   const [step, setStep] = React.useState(1);
   const [success, setSuccess] = React.useState(false);
   const router = useRouter();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const [initVal, setInitVal] = React.useState({
     needs: "",
     purpose: "",
@@ -43,16 +45,24 @@ const BookUs: React.FunctionComponent<
     },
   });
   const submitBooking = debounce((d) => {
+    setLoading(true);
     fetch("/api/submitbooking", {
       method: "POST",
       body: JSON.stringify(d),
-    }).then((res) => {
-      if (res.status === 201) {
-        router.push(
-          `/estimate-request-subbmitted?exactNeed=${d.exactNeed}&need=${d.needs}`
-        );
-      }
-    });
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          router.push(
+            `/estimate-request-submitted?exactNeed=${d.exactNeed}&need=${d.needs}`
+          );
+        }
+      })
+      .catch((e) => {
+        setError(JSON.stringify(e));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, 100);
   React.useEffect(() => {
     const { step: stepQ, success: successQ, ...query } = router.query;
@@ -133,7 +143,7 @@ const BookUs: React.FunctionComponent<
                       prevStep={() => setStep((s) => s - 1)}
                     />
                   ) : (
-                    <Step4 prevStep={() => setStep((s) => s - 1)} />
+                    <Step4 prevStep={() => setStep((s) => s - 1)} submitting={loading} error={error} />
                   )}
                 </Form>
               </Formik>

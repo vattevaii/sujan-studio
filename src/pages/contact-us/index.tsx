@@ -34,6 +34,7 @@ export default function ContactUsPage(props: IAppProps) {
       setSuccessBanner(true);
     }
   }, [router]);
+  console.log(siteSettings);
   return (
     <>
       <Head>
@@ -102,6 +103,21 @@ export default function ContactUsPage(props: IAppProps) {
                   />
                 </span>{" "}
                 {siteSettings.phoneNumber}
+              </Link>
+              <Link
+                href={`tel:${siteSettings.mobileNumber.replace(/\D/g, "")}`}
+                className="flex items-center"
+              >
+                <span>
+                  <Image
+                    className="inline-block mr-2 w-5 lg:w-8"
+                    height="40"
+                    width="40"
+                    src={svgs.contactUs.call.src}
+                    alt=""
+                  />
+                </span>{" "}
+                {siteSettings.mobileNumber}
               </Link>
               <Link
                 href={siteSettings.locationLink}

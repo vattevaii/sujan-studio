@@ -23,7 +23,7 @@ export default function SubDomainLayout({
   return (
     <div className="font-source-sans-3">
       <div>
-        <ActionButtons />
+        <ActionButtons mobileNumber={siteSettings.mobileNumber} />
         <div className="flex-1">
           <main className="content relative flex-1">{children}</main>
           <footer id="footer" className="bg-darkbg">

@@ -23,12 +23,24 @@ export default async function handler(
         {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }
-      );
+      )
+        .then((d) => d.json())
+        .catch(() => ({ message: "Couldn't validate captcha token" }));
       const data = {
         _type: "booking",
         ...body,
         captchaData: JSON.stringify(captchaData),
       };
+      client
+        .create(data, {
+          token: TOKEN,
+        })
+        .then((d) => {
+          res.status(201).json({ message: "Booking success!", _id: d._id });
+        })
+        .catch((err) => {
+          res.status(500).json({ message: err.message });
+        });
       sendMail({
         email: (data.personal.email ?? "") + "  " + data.personal.phone,
         name: data.personal.fullName,
@@ -45,23 +57,13 @@ export default async function handler(
         
         See all data in sanity studio 
         `,
-        action: "booking"
+        action: "booking",
       })
         .then(() => {
           console.log("Sent mail to vattevaii");
         })
         .catch((e) => {
           console.log("Failed to send mail to vattevaii", e);
-        });
-      client
-        .create(data, {
-          token: TOKEN,
-        })
-        .then((d) => {
-          res.status(201).json({ message: "Booking success!", _id: d._id });
-        })
-        .catch((err) => {
-          res.status(500).json({ message: err.message });
         });
       //   .then(// console.log)
       //   .catch(console.error)

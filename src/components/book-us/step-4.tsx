@@ -4,8 +4,11 @@ import { useFormikContext } from "formik";
 import InputButton from "../input/inputbutton";
 import flattenObject from "@/utils/flattenObject";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useRouter } from "next/router";
 export interface IStep4Props {
   prevStep: () => void;
+  submitting: boolean;
+  error: string | null;
 }
 
 export default function Step4(props: IStep4Props) {
@@ -18,7 +21,9 @@ export default function Step4(props: IStep4Props) {
     };
   }>();
   const { executeRecaptcha } = useGoogleReCaptcha();
+  const router = useRouter();
   const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    router.prefetch("/estimate-request-submitted");
     e.preventDefault();
     // console.log(form.errors);
     // console.log(form.values);
@@ -115,14 +120,27 @@ export default function Step4(props: IStep4Props) {
         >
           Previous
         </button>
-        <button
-          className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
-          onClick={handleSubmit}
-        >
-          Email My Quote.
-        </button>
+        {props.submitting ? (
+          <button
+            className={
+              " w-28 bg-project-100 disabled:bg-project-200 disabled:cursor-not-allowed text-white p-4 cursor-pointer"
+            }
+          >
+            <span className="loading-btn"></span>
+          </button>
+        ) : (
+          <button
+            className="bg-project-100 border-2 border-project-100  text-light-grey p-2 min-w-[150px]"
+            onClick={handleSubmit}
+          >
+            Email My Quote.
+          </button>
+        )}
       </div>
       <div className="flex justify-end text-red-500">{error}</div>
+      {props.error && (
+        <div className="flex justify-end text-red-500">{props.error}</div>
+      )}
     </div>
   );
 }

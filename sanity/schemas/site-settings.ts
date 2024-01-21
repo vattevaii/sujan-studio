@@ -32,6 +32,11 @@ export default defineType({
       type: "string",
     },
     {
+      name: "mobileNumber",
+      title: "Mobile Number",
+      type: "string",
+    },
+    {
       name: "location",
       title: "Location",
       type: "string",

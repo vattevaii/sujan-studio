@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-const timePattern = /^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$|^((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])$/;
+const timePattern = /^((0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9])$/;
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
