@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin-studio/
 Disallow: /contact-form-submitted/
 Disallow: /estimate-request-submitted/
-sitemap: https://a310090.sitemaphosting6.com/4365905/sitemap_4365905.xml
+sitemap: https://sujanstudio.com/sitemap-index/
